@@ -2,10 +2,10 @@
 - [Introduction](#Introductiomteams)
 - [DNS: Remembering Addresses](#DNS-Remembering-Address)
 - [WHOIS](#WHOIS)
-- [HTTP(S): Accessing the web](#http(S)-accessing-the-web)#
+- [HTTP(S): Accessing the web](#http(S)-accessing-the-web)
 - [FTP: Transferring Files](#tfp-transferring-files)
 - [SMTP: Sending Email](#smtp-sending-email)
-- [POP3: Receiving Email](#smtp-receiving-email)
+- [POP3: Receiving Email](#pop3-receiving-email)
 - [IMAP: Synchronizing Email](#imap-synchronizing-email)
 - [Conclusion](#conclusion)
 
