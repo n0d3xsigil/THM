@@ -6,6 +6,7 @@
 - [SSH](#SSH)
 - [SFTP and FTPS](#SFTP-and-FTPS)
 - [VPN](#VPN)
+- [Closing Notes](#Closing-Notes)
 ## TLS
 ## HTTPS
 ## SMTPS, POP3S, and IMAPS
@@ -40,3 +41,12 @@ SFTP and FTPS are not the same beast.
 > **Question**: _What would youuse to connect the various company sites so that users at a remote office can access resources located within the main branch?_
 
 - **Answer**: `VPN`
+
+
+## Closing Notes
+> **Question**: _One of the packets contains login credentials. What password did the user submit?_
+
+- **Answer**: `THM{B8WM6P}`
+
+I had to use a URL decoder to convert the URL String to ASCII so that THM would accept the answer. 
+> [https://meyerweb.com/eric/tools/dencoder/](https://meyerweb.com/eric/tools/dencoder/)
