@@ -1,5 +1,7 @@
 ## Contents
 [Introduction](#Introductiomteams)
+[DNS: Remembering Addresses](#DNS: Remembering Address)
+[WHOIS](#WHOIS)
 
 ## Introduction
 ## DNS: Remembering Address
