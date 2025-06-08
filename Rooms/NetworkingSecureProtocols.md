@@ -37,3 +37,6 @@ SFTP and FTPS are not the same beast.
 
 
 ## VPN
+> **Question**: _What would youuse to connect the various company sites so that users at a remote office can access resources located within the main branch?_
+
+- **Answer**: `VPN`
