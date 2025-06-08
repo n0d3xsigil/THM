@@ -93,5 +93,55 @@ Accept-Ranges: bytes
 ## FTP: Transferring Files
 ## SMTP: Sending Email
 ## POP3: Receiving Email
+I didn't know it was possible to pull email over telnet. So this is quite interesting to me. I'll have to do more digging on this, can this be done with a secure connection? What about gmail, or outlook if pop is enabled.
+
+```sh
+┌──(root㉿kali)-[~]
+└─# telnet 10.10.128.210 110
+Trying 10.10.128.210...
+Connected to 10.10.128.210.
+Escape character is '^]'.
++OK [XCLIENT] Dovecot (Ubuntu) ready.
+USER linda
++OK
+PASS Pa$$123
++OK Logged in.
+stat
++OK 4 2216
+list
++OK 4 messages:
+1 690
+2 589
+3 483
+4 454
+.
+retr 1
++OK 690 octets
+Return-path: <user@client.thm>
+Envelope-to: linda@server.thm
+Delivery-date: Thu, 12 Sep 2024 20:06:30 +0000
+Received: from [10.11.81.126] (helo=client.thm)
+        by example.thm with smtp (Exim 4.95)
+        (envelope-from <user@client.thm>)
+        id 1soq4J-0007lF-2G
+        for linda@server.thm;
+        Thu, 12 Sep 2024 20:06:30 +0000
+From: user@client.thm
+To: linda@server.thm
+Subject: Cyber Security
+
+Cybersecurity refers to the practices, technologies, and processes designed to protect systems, networks, and data from cyberattacks, damage, or unauthorized access. It is essential for safeguarding sensitive information across various sectors, including personal, corporate, and governmental domains.
+.
+```
+
+The commands that are taught in this room are:
+- `USER` Username
+- `PASS` password
+- `STAT` displays the number and size of messages in the inbox
+- `LIST` Lists the emails and size of each email
+- `RETR` Retrieves the numbered message
+- `DELE` marks the message for deletion. (Applied on next step)
+- `QUIT` Ends session and processes actions such as deletions.
+
 ## IMAP: Synchronizing Email
 ## Conclusion
