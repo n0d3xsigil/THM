@@ -282,7 +282,93 @@ Each layer provides a deeper view into how the packet was constructed and transm
 - `1636` ✅
 
 ## Packet Filtering
+### Packet Filtering in Wireshark
+Wireshark offers two types of filters:
+- **Capture Filters**: Apply before capturing traffic to limit what is recorded.
+- **Display Filters**: Apply after capturing to narrow down what is shown.
+
+This section focuses on Display Filters, which help analysts isolate relevant packets from large captures.
+
+
+### Filtering Methods
+1. **Apply as Filter**
+  - Right-click on a field and choose **“Apply as Filter”**.
+  - Wireshark auto-generates and applies the filter.
+  - Only matching packets are shown; others are hidden.
+2. **Conversation Filter**
+  - Filters all packets involved in a specific conversation (e.g., between two IPs or ports).
+  - Useful for tracking full sessions.
+  - Access via **right-click** or **Analyze → Conversation Filter**.
+3. **Colourise Conversation**
+  - Highlights related packets without filtering them out.
+  - Helps visually track conversations.
+  - Use **View → Colourise Conversation** to apply or reset.
+4. **Prepare as Filter**
+  - Similar to “Apply as Filter” but doesn’t apply it immediately.
+  - Adds the filter to the bar for manual editing or combining with other filters.
+5. **Apply as Column**
+  - Adds a selected field as a new column in the packet list.
+  - Helps compare values across packets.
+  - Use **right-click → Apply as Column**.
+
+
+### Follow Stream
+- Reconstructs and displays full application-level conversations (e.g., HTTP, TCP).
+- Shows client (red) and server (blue) data.
+- Access via **right-click → Follow Stream**.
+- Automatically applies a filter for the stream; use the **X button** to clear it.
+
+
+### Question 1 - See below
+> Use the "Exercise.pcapng" file to answer the questions.
+> Go to packet number 4. Right-click on the "Hypertext Transfer Protocol" and apply it as a filter.
+> Now, look at the filter pane. What is the filter query?
+#### Process
+1. In the _Packet List_ click **Packet 4**
+2. Within the _Packet Details_ of _Packet 4_ right click `Hypertext Transfer Protocol`
+3. In the context menu expand **Apply as Filter** followed by Selected
+4. The filter will be come `http`
+5. Trying this as the answer
+
+#### Answer 1
+- `http` ✅
+
+
+### Question 2 - What is the number of displayed packets?
+#### Process
+1. Notice at the bottom right `Displayed`
+2. The filtered packets shows `1089`
+3. Trying this as the answer
+
+#### Answer 2
+- `1089` ✅
+
+
+### Question 3 - See below
+> Go to packet number 33790, follow the HTTP stream, and look carefully at the responses.
+> Looking at the web server's response, what is the total number of artists?
+#### Process
+1. Clear existing filters
+2. Scroll down to packet **33790**
+3. First thing I notice is that tere is `Line-based text data`
+4. Right click and select **Export Packet Bytes...**
+5. Save to the Desktop as `page.html`
+6. Goto Desktop and open `page.html`
+  - **Disclaimer** not the best option all things considered. But since the box is sandboxed ;)
+7. The formatted HTML page contains 3 artists (`r4w8173`, `Blad3`, and `lyzae`).
+8. Trying this as the answer
+
+#### Answer 3
+- `3` ✅
+
+
+### Question 4 - What is the name of the second artist?
+#### Process
+1. Well we already know the second artist listed above is `Blad3` so....
+2. Trying this as the answer
+
+#### Answer 4
+- `Blad3` ✅
 
 
 ## Conclusion
-
