@@ -372,3 +372,6 @@ This section focuses on Display Filters, which help analysts isolate relevant pa
 
 
 ## Conclusion
+Okay so that was really helpful. My Concern is that actually, it's probably easy to find 'something-you-know', but finding the unknown could be a little more difficult.
+
+Additionally, this focuses on clear text. What about secure data? I guess it's great for identifying the misconfigued stuff still transferrring data in clear text atleast.
