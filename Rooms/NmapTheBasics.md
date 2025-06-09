@@ -24,9 +24,7 @@ A good understanding of the TCP/IP model and protocols is needed. Recommended pr
  - [Networking Core Protocols](Rooms/NetworkingCoreProtocols)
  - [Networking Secure Protocols](Rooms/NetworkingSecureProtocols)
 
-</summary>
-
-
+</details>
 
 <details open>
  <summary><h2>Host Discovery: Who is Online</h2></summary>
