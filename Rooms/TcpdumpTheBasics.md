@@ -189,5 +189,373 @@ The first entry is `mirrors.rockylinux.org`.
 
 
 ## Advanced Filtering
+### Advanced Tcpdump Filtering Summary
+In real-world scenarios with massive traffic, precise filtering is essential. Tcpdump supports advanced filters, including packet size, header content, and TCP flags.
+
+
+### 1. Filter by Packet Size
+- `greater %LENGTH%`: Captures packets larger than or equal to a specified size.
+- `less %LENGTH%`: Captures packets smaller than or equal to a specified size.
+
+
+### 2. Binary Operations Refresher
+Tcpdump uses **bitwise operations** for advanced filtering:
+- `&` (AND): True if both bits are 1.
+- `|` (OR): True if at least one bit is 1.
+- `!` (NOT): Inverts the bit (1 becomes 0, and vice versa).
+
+
+### 3. Filtering by Header Bytes
+Use the format:
+**proto[expr:size]**
+- `proto`: Protocol (e.g., ip, tcp, udp, etc.)
+- `expr`: Byte offset (e.g., 0 is the first byte)
+- `size`: Optional (1 by default); can be 1, 2, or 4 bytes
+
+#### Examples:
+- `ether[0] & 1 != 0`: Filters multicast Ethernet packets.
+- `ip[0] & 0xf != 5`: Filters IP packets with options.
+
+
+### 4. Filtering by TCP Flags
+Use `tcp[tcpflags]` to filter based on TCP control flags:
+#### Common Flags:
+- `tcp-syn`: Synchronize
+- `tcp-ack`: Acknowledge
+- `tcp-fin`: Finish
+- `tcp-rst`: Reset
+- `tcp-push`: Push
+#### Examples:
+- `tcpdump "tcp[tcpflags] == tcp-syn"`: Only SYN flag is set.
+- `tcpdump "tcp[tcpflags] & tcp-syn != 0"`: SYN flag is set (others may be too).
+- `tcpdump "tcp[tcpflags] & (tcp-syn|tcp-ack) != 0"`: SYN or ACK flag is set.
+
+
+### Question 1 - How many packets have only the TCP Reset (RST) flag set?
+#### Process
+First I'll try with the example above `tcpdump "tcp[tcpflags] == tcp-syn"`. Although this is for SYN flag, we can instead use `tcp-rst`
+
+```shell
+user@ip-10-10-99-206:~$ tcpdump -r traffic.pcap "tcp[tcpflags] == tcp-rst"
+reading from file traffic.pcap, link-type EN10MB (Ethernet)
+07:18:24.477352 IP ip-192-168-124-137.eu-west-1.compute.internal.53660 > 199.232.194.132.https: Flags [R], seq 709170445, w
+in 0, length 0
+07:18:24.477372 IP ip-192-168-124-137.eu-west-1.compute.internal.53660 > 199.232.194.132.https: Flags [R], seq 709170445, w
+in 0, length 0
+07:18:24.477381 IP ip-192-168-124-137.eu-west-1.compute.internal.53660 > 199.232.194.132.https: Flags [R], seq 709170445, w
+in 0, length 0
+07:18:24.478912 IP ip-192-168-124-137.eu-west-1.compute.internal.53660 > 199.232.194.132.https: Flags [R], seq 709170446, w
+in 0, length 0
+07:18:30.092983 IP ip-192-168-124-148.eu-west-1.compute.internal.61223 > ip-192-168-124-137.eu-west-1.compute.internal.ssh:
+ Flags [R], seq 1549842178, win 0, length 0
+07:18:30.242611 IP ip-192-168-124-148.eu-west-1.compute.internal.61223 > ip-192-168-124-137.eu-west-1.compute.internal.disc
+ard: Flags [R], seq 1549842178, win 0, length 0
+07:18:30.246377 IP ip-192-168-124-148.eu-west-1.compute.internal.61223 > ip-192-168-124-137.eu-west-1.compute.internal.dayt
+ime: Flags [R], seq 1549842178, win 0, length 0
+07:18:30.519505 IP ip-192-168-124-148.eu-west-1.compute.internal.61223 > ip-192-168-124-137.eu-west-1.compute.internal.qotd
+: Flags [R], seq 1549842178, win 0, length 0
+07:18:30.617113 IP ip-192-168-124-148.eu-west-1.compute.internal.61223 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 1549842178, win 0, length 0
+07:19:49.448665 IP ip-192-168-124-148.eu-west-1.compute.internal.41591 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2160770156, win 0, length 0
+07:19:49.548827 IP ip-192-168-124-148.eu-west-1.compute.internal.41592 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2160770157, win 0, length 0
+07:19:49.649558 IP ip-192-168-124-148.eu-west-1.compute.internal.41593 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2160770158, win 0, length 0
+07:19:49.749928 IP ip-192-168-124-148.eu-west-1.compute.internal.41594 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2160770159, win 0, length 0
+07:19:49.849648 IP ip-192-168-124-148.eu-west-1.compute.internal.41595 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2160770160, win 0, length 0
+07:19:49.949911 IP ip-192-168-124-148.eu-west-1.compute.internal.41596 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2160770161, win 0, length 0
+07:19:50.050454 IP ip-192-168-124-148.eu-west-1.compute.internal.41603 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2160770156, win 0, length 0
+07:19:50.125536 IP ip-192-168-124-137.eu-west-1.compute.internal.echo > ip-192-168-124-148.eu-west-1.compute.internal.41607
+: Flags [R], seq 1892647832, win 0, length 0
+07:19:50.175916 IP ip-192-168-124-137.eu-west-1.compute.internal.tcpmux > ip-192-168-124-148.eu-west-1.compute.internal.416
+09: Flags [R], seq 1892647832, win 0, length 0
+07:19:51.559244 IP ip-192-168-124-148.eu-west-1.compute.internal.41591 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 4163816068, win 0, length 0
+07:19:51.659518 IP ip-192-168-124-148.eu-west-1.compute.internal.41592 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 4163816069, win 0, length 0
+07:19:51.759640 IP ip-192-168-124-148.eu-west-1.compute.internal.41593 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 4163816070, win 0, length 0
+07:19:51.859847 IP ip-192-168-124-148.eu-west-1.compute.internal.41594 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 4163816071, win 0, length 0
+07:19:51.960101 IP ip-192-168-124-148.eu-west-1.compute.internal.41595 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 4163816072, win 0, length 0
+07:19:52.060259 IP ip-192-168-124-148.eu-west-1.compute.internal.41596 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 4163816073, win 0, length 0
+07:19:52.161103 IP ip-192-168-124-148.eu-west-1.compute.internal.41603 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 4163816068, win 0, length 0
+07:19:52.237334 IP ip-192-168-124-137.eu-west-1.compute.internal.echo > ip-192-168-124-148.eu-west-1.compute.internal.41607
+: Flags [R], seq 1479907192, win 0, length 0
+07:19:52.287877 IP ip-192-168-124-137.eu-west-1.compute.internal.tcpmux > ip-192-168-124-148.eu-west-1.compute.internal.416
+09: Flags [R], seq 1479907192, win 0, length 0
+07:19:53.672129 IP ip-192-168-124-148.eu-west-1.compute.internal.41591 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2504347609, win 0, length 0
+07:19:53.771771 IP ip-192-168-124-148.eu-west-1.compute.internal.41592 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2504347610, win 0, length 0
+07:19:53.872483 IP ip-192-168-124-148.eu-west-1.compute.internal.41593 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2504347611, win 0, length 0
+07:19:53.972136 IP ip-192-168-124-148.eu-west-1.compute.internal.41594 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2504347612, win 0, length 0
+07:19:54.072723 IP ip-192-168-124-148.eu-west-1.compute.internal.41595 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2504347613, win 0, length 0
+07:19:54.172954 IP ip-192-168-124-148.eu-west-1.compute.internal.41596 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2504347614, win 0, length 0
+07:19:54.273233 IP ip-192-168-124-148.eu-west-1.compute.internal.41603 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 2504347609, win 0, length 0
+07:19:54.348320 IP ip-192-168-124-137.eu-west-1.compute.internal.echo > ip-192-168-124-148.eu-west-1.compute.internal.41607
+: Flags [R], seq 1238976603, win 0, length 0
+07:19:54.398492 IP ip-192-168-124-137.eu-west-1.compute.internal.tcpmux > ip-192-168-124-148.eu-west-1.compute.internal.416
+09: Flags [R], seq 1238976603, win 0, length 0
+07:19:57.282394 IP ip-192-168-124-148.eu-west-1.compute.internal.41591 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 429594893, win 0, length 0
+07:19:57.382573 IP ip-192-168-124-148.eu-west-1.compute.internal.41592 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 429594894, win 0, length 0
+07:19:57.482649 IP ip-192-168-124-148.eu-west-1.compute.internal.41593 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 429594895, win 0, length 0
+07:19:57.582556 IP ip-192-168-124-148.eu-west-1.compute.internal.41594 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 429594896, win 0, length 0
+07:19:57.682818 IP ip-192-168-124-148.eu-west-1.compute.internal.41595 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 429594897, win 0, length 0
+07:19:57.782673 IP ip-192-168-124-148.eu-west-1.compute.internal.41596 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 429594898, win 0, length 0
+07:19:57.883374 IP ip-192-168-124-148.eu-west-1.compute.internal.41603 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 429594893, win 0, length 0
+07:19:57.959015 IP ip-192-168-124-137.eu-west-1.compute.internal.echo > ip-192-168-124-148.eu-west-1.compute.internal.41607
+: Flags [R], seq 2409701932, win 0, length 0
+07:19:58.009138 IP ip-192-168-124-137.eu-west-1.compute.internal.tcpmux > ip-192-168-124-148.eu-west-1.compute.internal.416
+09: Flags [R], seq 2409701932, win 0, length 0
+07:19:59.393701 IP ip-192-168-124-148.eu-west-1.compute.internal.41591 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 233106153, win 0, length 0
+07:19:59.493697 IP ip-192-168-124-148.eu-west-1.compute.internal.41592 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 233106154, win 0, length 0
+07:19:59.593963 IP ip-192-168-124-148.eu-west-1.compute.internal.41593 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 233106155, win 0, length 0
+07:19:59.694041 IP ip-192-168-124-148.eu-west-1.compute.internal.41594 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 233106156, win 0, length 0
+07:19:59.793918 IP ip-192-168-124-148.eu-west-1.compute.internal.41595 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 233106157, win 0, length 0
+07:19:59.894317 IP ip-192-168-124-148.eu-west-1.compute.internal.41596 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 233106158, win 0, length 0
+07:19:59.995592 IP ip-192-168-124-148.eu-west-1.compute.internal.41603 > ip-192-168-124-137.eu-west-1.compute.internal.echo
+: Flags [R], seq 233106153, win 0, length 0
+07:20:00.070848 IP ip-192-168-124-137.eu-west-1.compute.internal.echo > ip-192-168-124-148.eu-west-1.compute.internal.41607
+: Flags [R], seq 79966600, win 0, length 0
+07:20:00.121718 IP ip-192-168-124-137.eu-west-1.compute.internal.tcpmux > ip-192-168-124-148.eu-west-1.compute.internal.416
+09: Flags [R], seq 79966600, win 0, length 0
+07:20:00.615679 IP ip-192-168-124-137.eu-west-1.compute.internal.daytime > ip-192-168-124-148.eu-west-1.compute.internal.55
+202: Flags [R], seq 2127835777, win 0, length 0
+07:20:00.615699 IP ip-192-168-124-137.eu-west-1.compute.internal.qotd > ip-192-168-124-148.eu-west-1.compute.internal.45844
+: Flags [R], seq 2369614486, win 0, length 0
+07:20:05.626518 IP ip-192-168-124-137.eu-west-1.compute.internal.daytime > ip-192-168-124-148.eu-west-1.compute.internal.59
+1: Flags [R], seq 3000745832, win 0, length 0
+```
+Okay, so perhaps I should run this through `wc` to get the number rather than the actual results. We're aiming for a number ≤ 99 to fit with the expected 2 character answer.
+
+```Shell
+user@ip-10-10-99-206:~$ tcpdump -r traffic.pcap "tcp[tcpflags] == tcp-rst" | wc
+reading from file traffic.pcap, link-type EN10MB (Ethernet)
+     57     741    9457
+```
+
+That looks better to me, so I am going to try `57` as the answer.
+
+#### Answer 1
+- `57` ✅
+
+### Question 2 - What is the IP address of the host that sent packets larger than 15000 bytes?
+#### Process
+So in the room we can see the argument `greater LENGTH` and the description is _Filters packets that have a length greater than or equal to the specified length_
+
+We can try `tcpdump -r traffic.pcap greater 15000` and see what comes back.
+
+```shell
+user@ip-10-10-99-206:~$ tcpdump -r traffic.pcap greater 15000
+reading from file traffic.pcap, link-type EN10MB (Ethernet)
+07:18:24.967023 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 21408760
+81:2140896901, ack 741991605, win 235, options [nop,nop,TS val 2226566282 ecr 3054280184], length 20820: HTTP
+07:18:25.778012 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 1293616:
+1308884, ack 1, win 235, options [nop,nop,TS val 2226567095 ecr 3054280994], length 15268: HTTP
+07:18:25.861724 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 1378284:
+1397716, ack 1, win 235, options [nop,nop,TS val 2226567176 ecr 3054281078], length 19432: HTTP
+07:18:26.457422 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 2356824:
+2373480, ack 1, win 235, options [nop,nop,TS val 2226567777 ecr 3054281682], length 16656: HTTP
+07:18:26.746414 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 96437621
+8:964395650, ack 1034282473, win 235, options [nop,nop,TS val 2226568063 ecr 3054281963], length 19432: HTTP
+07:18:26.978560 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 37860237
+52:3786039020, ack 3169565691, win 235, options [nop,nop,TS val 2226568298 ecr 3054282201], length 15268: HTTP
+07:18:27.195761 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 570468:5
+89900, ack 1, win 235, options [nop,nop,TS val 2226568513 ecr 3054282418], length 19432: HTTP
+07:18:27.391916 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 831412:8
+48068, ack 1, win 235, options [nop,nop,TS val 2226568707 ecr 3054282611], length 16656: HTTP
+07:18:28.010550 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 4778884:
+4798316, ack 1, win 235, options [nop,nop,TS val 2226569330 ecr 3054283233], length 19432: HTTP
+07:18:28.310408 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 5200836:
+5217492, ack 1, win 235, options [nop,nop,TS val 2226569621 ecr 3054283524], length 16656: HTTP
+07:18:28.710415 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 2702436:
+2717704, ack 1, win 235, options [nop,nop,TS val 2226570023 ecr 3054283928], length 15268: HTTP
+07:18:28.896088 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 5844868:
+5862912, ack 1, win 235, options [nop,nop,TS val 2226570211 ecr 3054284115], length 18044: HTTP
+07:18:30.408334 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 5042604:
+5057872, ack 1, win 235, options [nop,nop,TS val 2226571725 ecr 3054285629], length 15268: HTTP
+07:18:30.656265 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 5450676:
+5474272, ack 1, win 235, options [nop,nop,TS val 2226571966 ecr 3054285871], length 23596: HTTP
+07:18:30.964178 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 8409892:
+8434876, ack 1, win 235, options [nop,nop,TS val 2226572277 ecr 3054286180], length 24984: HTTP
+07:18:31.374026 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 8992852:
+9010896, ack 1, win 235, options [nop,nop,TS val 2226572684 ecr 3054286587], length 18044: HTTP
+07:18:31.424145 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 6741516:
+6762336, ack 1, win 235, options [nop,nop,TS val 2226572743 ecr 3054286647], length 20820: HTTP
+07:18:31.496604 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 6855332:
+6873376, ack 1, win 235, options [nop,nop,TS val 2226572813 ecr 3054286718], length 18044: HTTP
+07:18:31.692912 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 9443952:
+9460608, ack 1, win 235, options [nop,nop,TS val 2226573010 ecr 3054286913], length 16656: HTTP
+07:18:31.966553 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 7702012:
+7718668, ack 1, win 235, options [nop,nop,TS val 2226573285 ecr 3054287187], length 16656: HTTP
+07:18:32.088431 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 7235644:
+7255076, ack 1, win 235, options [nop,nop,TS val 2226573406 ecr 3054287311], length 19432: HTTP
+07:18:32.331304 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 7578480:
+7597912, ack 1, win 235, options [nop,nop,TS val 2226573637 ecr 3054287540], length 19432: HTTP
+07:18:32.501675 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 7818604:
+7833872, ack 1, win 235, options [nop,nop,TS val 2226573814 ecr 3054287710], length 15268: HTTP
+07:18:32.716659 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 10898576
+:10915232, ack 1, win 235, options [nop,nop,TS val 2226574036 ecr 3054287940], length 16656: HTTP
+07:18:32.825803 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 9044208:
+9065028, ack 1, win 235, options [nop,nop,TS val 2226574144 ecr 3054288048], length 20820: HTTP
+07:18:34.605726 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 10509936
+:10541860, ack 1, win 235, options [nop,nop,TS val 2226575924 ecr 3054289827], length 31924: HTTP
+07:18:36.146076 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 12246324
+:12262980, ack 1, win 235, options [nop,nop,TS val 2226577460 ecr 3054291365], length 16656: HTTP
+07:18:36.184349 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 14346368
+:14365800, ack 1, win 235, options [nop,nop,TS val 2226577504 ecr 3054291408], length 19432: HTTP
+07:18:37.756320 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 14482392
+:14499048, ack 1, win 235, options [nop,nop,TS val 2226579071 ecr 3054292976], length 16656: HTTP
+07:18:39.601370 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 16903064
+:16919720, ack 1, win 235, options [nop,nop,TS val 2226580919 ecr 3054294822], length 16656: HTTP
+07:18:39.601405 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 18248036
+:18264692, ack 1, win 235, options [nop,nop,TS val 2226580920 ecr 3054294823], length 16656: HTTP
+07:18:39.803749 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 18482608
+:18503428, ack 1, win 235, options [nop,nop,TS val 2226581120 ecr 3054295023], length 20820: HTTP
+07:18:40.793165 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 17504068
+:17519336, ack 1, win 235, options [nop,nop,TS val 2226582110 ecr 3054296012], length 15268: HTTP
+07:18:43.371176 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 20013327
+:20032759, ack 206, win 243, options [nop,nop,TS val 2226584688 ecr 3054298591], length 19432: HTTP
+07:18:44.411963 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 23757008
+:23776440, ack 1, win 235, options [nop,nop,TS val 2226585732 ecr 3054299635], length 19432: HTTP
+07:18:44.966187 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60492: Flags [.], seq 22813168
+:22828436, ack 1, win 235, options [nop,nop,TS val 2226586283 ecr 3054300188], length 15268: HTTP
+07:18:45.117327 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 24705012
+:24728608, ack 1, win 235, options [nop,nop,TS val 2226586429 ecr 3054300333], length 23596: HTTP
+07:18:45.277212 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 24917376
+:24936808, ack 1, win 235, options [nop,nop,TS val 2226586595 ecr 3054300499], length 19432: HTTP
+07:18:45.828885 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 25529484
+:25546140, ack 1, win 235, options [nop,nop,TS val 2226587143 ecr 3054301046], length 16656: HTTP
+07:18:46.579453 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 26445564
+:26467772, ack 1, win 235, options [nop,nop,TS val 2226587897 ecr 3054301801], length 22208: HTTP
+07:18:47.231571 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 27289468
+:27313064, ack 1, win 235, options [nop,nop,TS val 2226588539 ecr 3054302443], length 23596: HTTP
+07:18:47.233482 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 27320004
+:27342212, ack 1, win 235, options [nop,nop,TS val 2226588544 ecr 3054302447], length 22208: HTTP
+07:18:47.244223 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 23412784
+:23434992, ack 412, win 252, options [nop,nop,TS val 2226588561 ecr 3054302463], length 22208: HTTP
+07:18:48.436664 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 28565040
+:28581696, ack 1, win 235, options [nop,nop,TS val 2226589755 ecr 3054303658], length 16656: HTTP
+07:18:51.200951 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 26325468
+:26347676, ack 824, win 269, options [nop,nop,TS val 2226592521 ecr 3054306424], length 22208: HTTP
+07:18:52.964080 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 28272832
+:28288100, ack 824, win 269, options [nop,nop,TS val 2226594283 ecr 3054308187], length 15268: HTTP
+07:18:55.767225 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 34540015
+:34555283, ack 217, win 243, options [nop,nop,TS val 2226597086 ecr 3054310989], length 15268: HTTP
+07:18:55.769967 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 34563611
+:34583043, ack 217, win 243, options [nop,nop,TS val 2226597086 ecr 3054310989], length 19432: HTTP
+07:18:57.631742 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 36445739
+:36461007, ack 217, win 243, options [nop,nop,TS val 2226598949 ecr 3054312853], length 15268: HTTP
+07:18:59.225696 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60518: Flags [.], seq 37557527
+:37579735, ack 217, win 243, options [nop,nop,TS val 2226600544 ecr 3054314448], length 22208: HTTP
+07:19:01.274785 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 38252634
+:38272066, ack 1240, win 285, options [nop,nop,TS val 2226602588 ecr 3054316492], length 19432: HTTP
+07:19:01.276871 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 38284558
+:38306766, ack 1240, win 285, options [nop,nop,TS val 2226602592 ecr 3054316496], length 22208: HTTP
+07:19:01.432873 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [P.], seq 3847193
+8:38488594, ack 1240, win 285, options [nop,nop,TS val 2226602750 ecr 3054316654], length 16656: HTTP
+07:19:02.923067 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 40484538
+:40499806, ack 1240, win 285, options [nop,nop,TS val 2226604239 ecr 3054318144], length 15268: HTTP
+07:19:03.321925 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 40992546
+:41011978, ack 1240, win 285, options [nop,nop,TS val 2226604636 ecr 3054318540], length 19432: HTTP
+07:19:04.561931 IP mirrors.storpool.com.http > ip-192-168-124-137.eu-west-1.compute.internal.60502: Flags [.], seq 42717830
+:42737262, ack 1240, win 285, options [nop,nop,TS val 2226605871 ecr 3054319774], length 19432: HTTP
+```
+
+Okay so again that is alot of responses. There seems to be a common host which is `mirrors.storpool.com.http`. We can of course use `-n` to drop the DNS resolution.
+
+```Shell
+
+user@ip-10-10-99-206:~$ tcpdump -r traffic.pcap greater 15000 -n
+reading from file traffic.pcap, link-type EN10MB (Ethernet)
+07:18:24.967023 IP 185.117.80.53.80 > 192.168.124.137.60518: Flags [.], seq 2140876081:2140896901, ack 741991605, win 235, 
+options [nop,nop,TS val 2226566282 ecr 3054280184], length 20820: HTTP
+07:18:25.778012 IP 185.117.80.53.80 > 192.168.124.137.60518: Flags [.], seq 1293616:1308884, ack 1, win 235, options [nop,n
+op,TS val 2226567095 ecr 3054280994], length 15268: HTTP
+07:18:25.861724 IP 185.117.80.53.80 > 192.168.124.137.60518: Flags [.], seq 1378284:1397716, ack 1, win 235, options [nop,n
+op,TS val 2226567176 ecr 3054281078], length 19432: HTTP
+07:18:26.457422 IP 185.117.80.53.80 > 192.168.124.137.60518: Flags [.], seq 2356824:2373480, ack 1, win 235, options [nop,n
+op,TS val 2226567777 ecr 3054281682], length 16656: HTTP
+07:18:26.746414 IP 185.117.80.53.80 > 192.168.124.137.60492: Flags [.], seq 964376218:964395650, ack 1034282473, win 235, o
+ptions [nop,nop,TS val 2226568063 ecr 3054281963], length 19432: HTTP
+07:18:26.978560 IP 185.117.80.53.80 > 192.168.124.137.60502: Flags [.], seq 3786023752:3786039020, ack 3169565691, win 235,
+ options [nop,nop,TS val 2226568298 ecr 3054282201], length 15268: HTTP
+07:18:27.195761 IP 185.117.80.53.80 > 192.168.124.137.60492: Flags [.], seq 570468:589900, ack 1, win 235, options [nop,nop
+,TS val 2226568513 ecr 3054282418], length 19432: HTTP
+07:18:27.391916 IP 185.117.80.53.80 > 192.168.124.137.60492: Flags [.], seq 831412:848068, ack 1, win 235, options [nop,nop
+,TS val 2226568707 ecr 3054282611], length 16656: HTTP
+07:18:28.010550 IP 185.117.80.53.80 > 192.168.124.137.60518: Flags [.], seq 4778884:4798316, ack 1, win 235, options [nop,n
+op,TS val 2226569330 ecr 3054283233], length 19432: HTTP
+[truncated to save space]
+```
+
+Going by the common sender of `185.117.80.53.80` I'm tempted to suggest this is the answer.
+#### Answer 2
+- `185.117.80.53.80` ✅
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Displaying Packets
 ## Conclusion
