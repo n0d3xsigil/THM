@@ -6,7 +6,7 @@ My discoveries from THM
 - Network Concepts
 - Network Essentials
 - [Networking Core Protocols](Rooms/NetworkingCoreProtocols.md)
-- Networking Secure Protocols
-- Wireshark: The Basics
+- [Networking Secure Protocols](Rooms/NetworkingSecureProtocols.md)
+- [Wireshark: The Basics](Rooms/WiresharkTheBasics.md)
 - Tcpdump: The Basics
 - Nmap: The Basics
