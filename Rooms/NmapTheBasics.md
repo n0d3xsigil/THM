@@ -1,6 +1,7 @@
 | [Home](../README.md) | Cyber Security 101 | **NMAP: The Basics** |
 <details>
 <summary open><h2>Contents</h2></summary>
+
 - [Introduction](#introduction)
 - [Host Discovery: Who is Online](#host-discovery-Who-is-online)
 - [Port Scanning: Who is Listening](#port-scanning-who-is-listening)
@@ -8,6 +9,7 @@
 - [Timing: How Fast is Fast](#timing-how-fast-is-fast)
 - [Output: Controlling What You See](#output-controlling-what-you-see)
 - [Conclusion and Summary](#conclusion-and-summary)
+
 </details>
 
 ## Introduction
