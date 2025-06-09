@@ -147,7 +147,44 @@ This one is made a little easier by the fact we have already scanned for ports i
 <details open>
 <summary><h2>Version Detection: Extract More Information</h2></summary>
 
-Something
+ Once you know which ports are open, you can learn more about the operating system and services using these options:
+### Nmap Options
+| Option | 	                                            Description                                                           |
+|--------|--------------------------------------------------------------------------------------------------------------------|
+|   `-O` | 	**OS Detection** – makes an educated guess based on system responses (e.g., Linux 4.x–5.x)                        |
+|  `-sV` | 	**Service & Version Detection** – identifies the software and version running on open ports                       |
+|   `-A` | 	**Aggressive Scan** – combines `-O`, `-sV`, traceroute, and more                                                  |
+|  `-Pn` |  **No Ping** – treats all targets as alive, even if they don’t respond to ICMP; ensures scanning of "silent" hosts |
+
+### Key Concepts
+- **OS Detection (`-O`)**: Useful for identifying the OS, but not always 100% accurate.
+- **Version Detection (`-sV`)**: Adds a “VERSION” column to results to show exact software (e.g., OpenSSH 8.9p1).
+- **Aggressive Scan (`-A`)**: A powerful one-liner to gather comprehensive info, including OS, services, and traceroute.
+- **No Ping (`-Pn`)**: Useful when hosts don’t respond to pings or when scanning hardened/filtered systems.
+
+
+### Question 1 - What is the name and detected version of the web server running on `10.10.226.155`?
+#### Process
+As mentioned in the options above we can use -Sv to detect the service and version. So lets try `nmap -p8008 -sV`.
+
+```Shell
+┌──(root㉿kali)-[~]
+└─# nmap -p8008 10.10.226.155 -sV
+Starting Nmap 7.93 ( https://nmap.org ) at 2025-06-09 20:42 UTC
+Nmap scan report for ip-10-10-226-155.eu-west-1.compute.internal (10.10.226.155)
+Host is up (0.00016s latency).
+
+PORT     STATE SERVICE VERSION
+8008/tcp open  http    lighttpd 1.4.74
+MAC Address: 02:85:FF:2C:27:8D (Unknown)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 7.24 seconds
+```
+The result we see i nthis list is `lighttpd 1.4.74`. Let's plug this into the answer and hope for the best.
+
+#### Answer 1
+- `lighttpd 1.4.74` ✅
 
 </details>
 
