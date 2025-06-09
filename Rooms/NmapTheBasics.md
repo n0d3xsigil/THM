@@ -1,6 +1,6 @@
 | [Home](../README.md) | Cyber Security 101 | **NMAP: The Basics** |
-
-## Contents
+<details>
+<summary open><h2>Contents</h2></summary>
 - [Introduction](#introduction)
 - [Host Discovery: Who is Online](#host-discovery-Who-is-online)
 - [Port Scanning: Who is Listening](#port-scanning-who-is-listening)
@@ -8,7 +8,7 @@
 - [Timing: How Fast is Fast](#timing-how-fast-is-fast)
 - [Output: Controlling What You See](#output-controlling-what-you-see)
 - [Conclusion and Summary](#conclusion-and-summary)
-
+</details>
 
 ## Introduction
 Nmap (Network Mapper) is a powerful open-source tool used for network discovery, security auditing, and vulnerability assessment. It helps identify live hosts, open ports, running services, operating systems, and potential security issues across local or remote networks. With features like stealth scanning, service version detection, and the Nmap Scripting Engine (NSE), it’s widely used by system administrators and cybersecurity professionals for everything from routine audits to penetration testing. Nmap runs on Linux, Windows, and macOS, and also includes a graphical interface called Zenmap for users who prefer a GUI.
