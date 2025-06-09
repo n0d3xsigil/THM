@@ -1,6 +1,6 @@
 <details>
 
-<summary>Tips for collapsed sections</summary>
+<summary><h1>for collapsed sections</h1></summary>
 
 ### You can add a header
 
