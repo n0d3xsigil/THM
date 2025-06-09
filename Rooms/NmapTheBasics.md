@@ -1,4 +1,4 @@
-|[Home](../README.md)|Cyber Security 101|**NMAP: The Basics**|
+| [Home](../README.md) | Cyber Security 101 | **NMAP: The Basics** |
 
 ## Contents
 - [Introduction](#introduction)
