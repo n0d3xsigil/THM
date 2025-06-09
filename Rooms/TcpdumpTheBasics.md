@@ -581,3 +581,4 @@ We can test the MAC address `52:54:00:7c:d3:5b` to see if this is the answer.
 
 
 ## Conclusion
+This is no wireshark for usability, but it does give you the raw data. I'd be keen do dig deeper on this at a later date.
