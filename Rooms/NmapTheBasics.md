@@ -1,6 +1,6 @@
 | [Home](../README.md) | Cyber Security 101 | **NMAP: The Basics** |
-<details>
-<summary open><h2>Contents</h2></summary>
+<details open>
+<summary><h2>Contents</h2></summary>
 
 - [Introduction](#introduction)
 - [Host Discovery: Who is Online](#host-discovery-Who-is-online)
