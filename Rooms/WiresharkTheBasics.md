@@ -170,7 +170,116 @@ Each layer provides a deeper view into how the packet was constructed and transm
 
 
 ## Packet Navigation
+### Packet Numbers and Navigation
+- **Unique Packet Numbers**: Wireshark assigns a unique number to each packet, making it easier to track and revisit specific events in large captures.
+- **Go to Packet**: Navigate directly to a packet using the "Go" menu or toolbar. This includes tracking packets within conversations.
 
+
+### Finding Packets
+- Use **Edit → Find Packet** to search for specific content.
+- Supports four input types:
+  - **Display filter**
+  - **Hex**
+  - **String**
+  - **Regex**
+- Searches can be done in:
+  - **Packet List**
+  - **Packet Details**
+  - **Packet Bytes**
+- Be sure to match the search type with the correct pane.
+
+
+### Marking and Commenting Packets
+- **Mark Packets**: Highlight packets for later review (shown in black). Marks are session-based and not saved.
+- **Packet Comments**: Add persistent notes to packets. Comments are saved with the capture file and useful for collaboration or future analysis.
+
+
+### Exporting Packets and Objects
+- **Export Packets**: Save selected packets to a new file for focused analysis or sharing.
+- **Export Objects**: Extract files transferred over protocols like HTTP, SMB, TFTP, etc., for deeper investigation.
+
+
+### Time Display Format
+- Default time format is **"Seconds Since Beginning of Capture"**.
+- You can switch to **UTC** or other formats via **View → Time Display Format** for better context.
+
+
+### Expert Info
+- Wireshark flags potential issues using **Expert Info**, categorized by severity:
+  - **Chat (Blue)** – Normal workflow info
+  - **Note (Cyan)** – Notable events
+  - **Warn (Yellow)** – Warnings
+  - **Error (Red)** – Serious issues like malformed packets
+  - View via **Analyze → Expert Information** or the **status bar**.
+
+
+### Question 1 - Search the "r4w" string in packet details. What is the name of artist 1?
+#### Process
+1. Press Ctrl+F on the keybaord to show find field
+2. Leave type as string and enter `r4w`
+3. Click **Find**
+4. Right click the packet within Packet List
+5. In the context menu click **Follow**
+6. Click HTTP Stream (Or press and hold Ctrl+Alt+Shift and press H)
+7. Within the follow HTTP stream search `artist`
+8. Keep clicking **Find Next** until something interesting arrives
+9. Perhaps worth trying `r4w8173`?
+10. Trying this as the answer
+
+#### Answer 1
+- `r4w8173` ✅
+
+
+### Question 2 - Go to packet 12 and read the packet comments. What is the answer? _Note: use md5sum <filename> terminal command to get MD5 hash_
+#### Process
+1. Go to packet 12 as advised.
+2. Press **Ctrl+Alt+C** on the keyboard.
+3. `This_is_Not_a _Flag`. Very helpful. Notice the scroll bar though...
+4. Go to packet number 39765
+5. Look at the "packet details pane".
+6. Right-click on the JPEG section and "Export packet bytes".
+7. Save the file to the desktop
+8. Open terminal
+9. Navigate to ~/Desktop/
+10. Type command `md5sum filename.jpg`
+11. My result was `911cd574a42865a956ccde2d04495ebf  funtimes.jpg`
+12. Trying this as the answer
+
+#### Answer 2
+- `911cd574a42865a956ccde2d04495ebf` ✅
+
+### Question 3 - There is a ".txt" file inside the capture file. Find the file and read it; what is the alien's name?
+#### Process
+1. Clear any filters
+2. Press Ctrl+F to show the find toolbar
+3. Search for .txt and click **Find**
+4. In Info you will see `GET /note.text HTTP/1.1`
+5. Below this you shoudl see `HTTP/1.0 200 OK` to signify the request was OK
+6. Select this packet
+7. Right click `Line-based text data:`
+8. Click `Export Packet Bytes...` within the context menu
+9. Save the file as `alient.txt` on the Desktop
+10. Navigate to the file downloaded and double click it.
+11. What is PACKETMASTER?
+12. Trying this as the answer
+
+#### Answer 3
+- `PACKETMASTER` ✅
+
+
+### Question 4 - Look at the expert info section. What is the number of warnings?
+#### Process
+1. Ensure filters are cleared to show all packets
+2. Click **Analyze** → **Expert Information**
+3. Since we're looking for Warning, expand Warning
+4. Count each individual packets to get the count.
+5. Okay, that can't be right.
+6. Expand the window to show all fields
+7. Ah, Warnings `1636`
+8. Trying this as the answer
+
+#### Answer 4
+- `1636` ✅
 
 ## Packet Filtering
 
