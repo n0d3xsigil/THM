@@ -521,41 +521,63 @@ Going by the common sender of `185.117.80.53.80` I'm tempted to suggest this is 
 - `185.117.80.53.80` ✅
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Displaying Packets
+### Tcpdump Output Display Options Summary
+Tcpdump offers several options to customize how packet data is displayed, helping you analyze traffic more effectively depending on your needs.
+#### 1. -q: Quick Output
+- Displays **brief packet** info (e.g., IPs, ports, and protocol).
+- Useful for a **clean, minimal view**.
+#### 2. -e: Include Link-Level Header
+- Adds **MAC** addresses and Ethernet details.
+- Helpful for analyzing **ARP, DHCP**, or tracking devices on a LAN.
+#### 3. -A: ASCII Output
+- Displays **packet contents as ASCII text.**
+- Best for inspecting **plain-text protocols** like HTTP.
+#### 4. -xx: Hexadecimal Output
+- Shows **raw packet data in hex** (octet by octet).
+- Useful for analyzing **binary or encrypted data**.
+#### 5. -X: Hex + ASCII Output
+- Combines **hexadecimal and ASCII** views.
+- Ideal for **deep inspection** of both structure and readable content.
+#### Example Commands:
+
+|    Command    |	       Description        |
+|---------------|---------------------------|
+| `tcpdump -q`  |	Quick, minimal output     |
+| `tcpdump -e`  |	Show MAC addresses        |
+| `tcpdump -A`  |	Show ASCII content        |
+| `tcpdump -xx` |	Show hex content          |
+| `tcpdump -X`  |	Show both hex and ASCII   |
+
+
+
+### Question 1 - What is the MAC address of the host that sent an ARP request?
+#### Process
+The examples above shows that if we want to show **MAC addresses** we should use the `-e` argument. We are also looking for the source of the ARP request. 
+
+With this in mind I want to see what that looks like before proceeding too far by running `tcpdump -r traffic.pcap -e`.
+
+I won't dump the contents in here, it was gnarly. 
+
+After some digging I have noticed that I could just filter by `arp` after having tried `proto[arp:...]` and various other perminations.
+
+So lets try again with `tcpdump -r traffic.pcap arp -q -n -e`
+
+```Shell
+user@ip-10-10-99-206:~$ tcpdump -r traffic.pcap arp -q -n -e
+reading from file traffic.pcap, link-type EN10MB (Ethernet)
+07:18:29.940761 52:54:00:7c:d3:5b > ff:ff:ff:ff:ff:ff, ARP, length 42: Request who-has 192.168.124.137 tell 192.168.124.148
+, length 28
+07:18:29.940776 52:54:00:23:60:2b > 52:54:00:7c:d3:5b, ARP, length 42: Reply 192.168.124.137 is-at 52:54:00:23:60:2b, lengt
+h 28
+```
+Here we can see `52:54:00:7c:d3:5b > ff:ff:ff:ff:ff:ff` which is the equivelent of `192.168.124.137 > 255.255.255.255` or otherwise a broadcast. We can assume this is the host reaching out for an answer.
+
+We can test the MAC address `52:54:00:7c:d3:5b` to see if this is the answer.
+
+
+#### Answer 1
+- `52:54:00:7c:d3:5b` ✅
+
+
 ## Conclusion
