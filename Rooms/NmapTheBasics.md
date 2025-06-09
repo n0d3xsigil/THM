@@ -12,7 +12,9 @@
 
 </details>
 
-## Introduction
+<details open>
+<summary><h2>Introduction</h2>
+
 Nmap (Network Mapper) is a powerful open-source tool used for network discovery, security auditing, and vulnerability assessment. It helps identify live hosts, open ports, running services, operating systems, and potential security issues across local or remote networks. With features like stealth scanning, service version detection, and the Nmap Scripting Engine (NSE), it’s widely used by system administrators and cybersecurity professionals for everything from routine audits to penetration testing. Nmap runs on Linux, Windows, and macOS, and also includes a graphical interface called Zenmap for users who prefer a GUI.
 
 ### Prerequisites:
@@ -22,7 +24,13 @@ A good understanding of the TCP/IP model and protocols is needed. Recommended pr
  - [Networking Core Protocols](Rooms/NetworkingCoreProtocols)
  - [Networking Secure Protocols](Rooms/NetworkingSecureProtocols)
 
-## Host Discovery: Who is Online
+</summary>
+
+
+
+<details open>
+ <summary><h2>Host Discovery: Who is Online</h2></summary>
+
 The task focuses on identifying online devices using Nmap's ping scan (-sn), which detects live hosts without probing for open ports or services.
 ### Target Specification Methods in Nmap
 - IP Range: `192.168.0.1-10`
@@ -68,8 +76,11 @@ It turns out that `*.30` was not the answer, thus it must be the broadcast addre
 - `192.168.1.30` ❌
 - `192.168.1.31` ✅
 
+</details>
 
-## Port Scanning: Who is Listening
+<details open>
+<summary><h2>Port Scanning: Who is Listening</h2></summary>
+
 After identifying live hosts with `-sn`, the next step is to find out **which network services are listening** on those hosts, services running on TCP or UDP ports (e.g., web servers, DNS, etc.).
 
 ### Types of Nmap Scans
@@ -133,8 +144,35 @@ This one is made a little easier by the fact we have already scanned for ports i
 #### Answer 2
 - `THM{SECRET_PAGE_38B9P6}` ✅
 
+</details>
 
-## Version Detection: Extract More Information
-## Timing: How Fast is Fast
-## Output: Controlling What You See
-## Conclusion and Summary
+<details open>
+<summary><h2>Version Detection: Extract More Information</h2></summary>
+
+Something
+
+</details>
+
+<details open>
+<summary><h2>Timing: How Fast is Fast</h2></summary>
+
+something
+
+</details>
+
+<details open>
+
+<summary><h2>Output: Controlling What You See</h2></summary>
+
+something
+
+</details>
+
+
+<details open>
+<summary><h2>Conclusion and Summary</h2></summary>
+
+something
+
+</details>
+
