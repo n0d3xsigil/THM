@@ -102,11 +102,86 @@ As per the summary you would make `8` the power of `2` so it would become $\text
 Trying this as the answer
 #### Answer 3
 - `256` ✅
+
+
 ## Using Hashing for Secure Password Storage
+### Hashing in Cyber Security: Password Storage & Data Integrity
+Hashing plays a crucial role in cyber security, particularly in:
+- **Password Storage** (for authentication)
+- **Data Integrity**
 
+> ⚠️ Note: This does **not** apply to password managers, which require password retrieval in plaintext. Authentication systems only need to verify knowledge of the password, not retrieve it.
 
+### Insecure Password Storage Practices
+Many data breaches stem from poor password storage methods. Here are three common insecure practices:
+#### 1. Storing Passwords in Plaintext
+- **Example**: RockYou data breach
+- **Impact**: Over 14 million plaintext passwords leaked
+- **Tool**: `rockyou.txt` is now a common wordlist in Kali Linux
+- **Location**: `/usr/share/wordlists/rockyou.txt`
 
+```Shell
+wc -l rockyou.txt
+# 14344392 rockyou.txt
+
+head rockyou.txt
+# 123456
+# 12345
+# 123456789
+# password
+# iloveyou
+# ...
+```
+
+#### 2. Using Deprecated Encryption
+- **Example**: Adobe breach
+- **Issue**: Used outdated encryption instead of hashing
+- **Additional Risk**: Password hints stored in plaintext, often revealing the password
+#### 3. Using Insecure Hashing Algorithms
+- **Example**: LinkedIn breach (2012)
+- **Issue**: Used SHA-1 without salting
+- **Why it's bad**: SHA-1 is vulnerable to collision attacks; lack of salting makes hashes easier to crack
+### What is Salting?
+**Salting** is the process of adding a random value to a password before hashing it. This prevents attackers from using precomputed hash tables (like rainbow tables) to crack passwords.
+### Key Takeaways
+- Never store passwords in plaintext.
+- Avoid deprecated encryption methods.
+- Use strong, modern hashing algorithms (e.g., bcrypt, Argon2) with salting.
+
+### Question 1 - 
+#### Process
+We can grap the list using `head`. See the process below.
+```Shell
+user@ip-10-10-253-143:~/Hashing-Basics/Task-2$ head -n20 /usr/share/wordlists/rockyou.txt 
+123456
+12345
+123456789
+password
+iloveyou
+princess
+1234567
+rockyou
+12345678
+abc123
+nicole
+daniel
+babygirl
+monkey
+lovely
+jessica
+654321
+michael
+ashley
+qwerty
+```
+
+Since we issued the `-n20` argument we know there are 20 lines or results. The last entry in the list is `qwerty`.
+
+Trying this as the answer
+#### Answer 1
+- `qwerty` ✅
 ## Recognising Password Hashes
+
 
 
 
