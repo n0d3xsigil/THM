@@ -80,6 +80,8 @@ Trying this as the answer
 - **Product**: `166764499494295486767649` or `166,764,499,494,295,486,767,649`
 - Factoring this product is much harder than multiplying the primes.
 ### RSA Key Generation & Usage
+![image](https://github.com/user-attachments/assets/9905c6a4-ff2b-4c19-ae28-19603b7c4a22)
+
 #### 1. Key Generation:
 - Choose two primes: $\text{p = 157,q = 199}$
 - Compute $\text{n = p × q = 31243}$
