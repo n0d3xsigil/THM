@@ -186,28 +186,181 @@ The result we see i nthis list is `lighttpd 1.4.74`. Let's plug this into the an
 #### Answer 1
 - `lighttpd 1.4.74` ✅
 
-</details>
 
-<details open>
-<summary><h2>Timing: How Fast is Fast</h2></summary>
+## Timing: How Fast is Fast
+### Nmap Timing and Performance Options Summary
+Nmap allows you to control scan speed and behavior to balance stealth, speed, and reliability.
 
-something
+### 1. Timing Templates (-T0 to -T5)
+Control how fast Nmap scans:
 
-</details>
+| Template |	   Name    |	   Behavior    |  	Example Duration (100 ports)   |
+|----------|------------|----------------|----------------------------------|
+|  `-T0`   |	Paranoid	  | Very slow	     | ~9.8 hours                       |
+|  `-T1`   |	Sneaky	    | Slow	          | ~27.5 minutes                    |
+|  `-T2`   |	Polite	    | Moderate       |	~40.5 seconds                    |
+|  `-T3`   |	Normal	    | Default speed  |	~0.15 seconds                    |
+|  `-T4`   |	Aggressive	| Fast	          | ~0.13 seconds                    |
+|  `-T5`   |	Insane	    | Very fast	     | (not shown, but faster than T4)  |
 
-<details open>
+Use `-T<number>` or `-T name` (e.g., `-T4` or `-T aggressive`).
 
-<summary><h2>Output: Controlling What You See</h2></summary>
+### 2. Parallelism Options
+Control how many probes are sent at once:
+- `--min-parallelism <num>`: Minimum number of parallel probes.
+- `--max-parallelism <num>`: Maximum number of parallel probes.
 
-something
+Nmap adjusts this automatically based on network performance.
 
-</details>
+### 3. Packet Rate Control
+Set how fast packets are sent:
+- `--min-rate <number>`: Minimum packets per second.
+- `--max-rate <number>`: Maximum packets per second.
+Applies to the entire scan, not per host.
+
+### 4. Host Timeout
+- `--host-timeout <time>`: Maximum time to wait for a host before skipping it.
+ - Useful for slow or unresponsive hosts.
+
+### Quick Reference Table
+|                   Option                   | Description                           |
+|--------------------------------------------|---------------------------------------|
+| `-T<0-5>`                                  | Timing template (paranoid to insane)  |
+| `--min-parallelism` / `--max-parallelism`  | Control number of simultaneous probes |
+| `--min-rate` / `--max-rate`                | Control packet sending rate           |
+| `--host-timeout`                           | Set max wait time per host            |
+
+### Question 1 - What is the non-numeric equivalent of `-T4`?
+#### Process
+For this question, there is not much of a process. we can just glance at the detail above and see that the name `-T4` is `Aggressive`. 
+
+- Trying this as the answer ❌. I should have read the answer format before suggesting that.
+
+The spaceing is `__ _________` I still think it is agressive, I need to check the arguments. you wouldn't directly replace `t4` with agressive. 
+
+The answer is actually above. When using the name we use the `-T` then the profile name `agressive`
+
+- Trying this as the answer
+
+#### Answer 1
+- `Aggressive` ❌
+- `-T agressive` ✅
 
 
-<details open>
-<summary><h2>Conclusion and Summary</h2></summary>
+## Output: Controlling What You See
+### Nmap: Verbosity, Debugging, and Output Formats
+This section focuses on two key areas:
+- Getting more feedback during scans
+- Saving scan results in different formats
 
-something
+### 1. Verbosity and Debugging
+#### Verbosity (-v)
+- Use `-v` to get **real-time updates** during a scan.
+ - Shows scan stages like ARP ping, DNS resolution, and port scanning.
+- Increase detail with more vs (e.g., `-vv`, `-vvvv`) or use `-v2`, `-v4`.
+ - You can even press v during a scan to increase verbosity on the fly.
 
-</details>
+#### Debugging (-d)
+- Use `-d` for **debug-level output**.
+ - Add more ds (e.g., -`dd`, `-ddd`) or use `-d9` for **maximum detail**.
+- Useful for troubleshooting or understanding Nmap’s internal behavior.
+- _**Be cautious**_: high debug levels produce very large outputs.
 
+### 2. Saving Scan Reports
+Nmap supports multiple output formats:
+
+
+|      Option      | Format Type |                    Description                    |
+|------------------|-------------|---------------------------------------------------|
+| `-oN <file>`     |	Normal	     | Human-readable output                             |
+| `-oX <file>`     |	XML	        | Structured XML format                             |
+| `-oG <file>`     |	Grepable	   | Easy to parse with grep or awk                    |
+| `-oA <basename>` |	All	        | Saves in all three formats (.nmap, .xml, .gnmap)  |
+
+Example:
+```Shell
+nmap -sS 192.168.139.1/24 -oA scan_results
+```
+This creates:
+- `scan_results.nmap` (normal)
+- `scan_results.xml` (XML)
+- `scan_results.gnmap` (grepable)
+
+
+### Question 1 - What option must you add to your nmap command to enable debugging?
+#### Process
+I was rather hopeing for a more complicated question here. This time we will read the answer format which is `__`. Since we are referring to debugging. It looks like we just need the most basic debugging level.
+
+Let's go with `-d`
+
+- Trying this as the answer
+
+#### Answer 1
+- `-d` ✅
+
+
+## Conclusion and Summary
+### Nmap Summary: Key Features and Arguments
+This room covered essential Nmap capabilities for discovering hosts, scanning ports, detecting services, controlling scan speed, and saving results.
+
+### Privileges
+- **Run with sudo** to unlock full functionality (e.g., SYN scans).
+- Without root, Nmap defaults to **TCP connect scan** (`-sT`) instead of **SYN scan** (`-sS`).
+
+### Key Nmap Arguments
+#### Target Listing & Host Discovery
+|                   Option                   |                      Description                      |
+|--------------------------------------------|-------------------------------------------------------|
+| `-sL`                                      |	List scan (no packets sent)                           |
+| `-sn`                                      |	Ping scan (host discovery only)                       |
+
+#### Port Scanning
+|                   Option                   |                      Description                      |
+|--------------------------------------------|-------------------------------------------------------|
+| `-sT`                                      |	TCP Connect scan                                      |
+| `-sS`                                      |	TCP SYN scan (stealthy)                               |
+| `-sU`                                      |	UDP scan                                              |
+| `-F`                                       |	Fast scan (top 100 ports)                             |
+| `-p-`                                      |	Scan all 65535 ports                                  |
+| `-Pn`                                      |	Treat all hosts as online (skip ping)                 |
+
+#### Service & OS Detection
+|                   Option                   |                      Description                      |
+|--------------------------------------------|-------------------------------------------------------|
+| `-sV`                                      |	Detect service versions                               |
+| `-O`                                       |	OS detection                                          |
+| `-A`                                       |	Aggressive scan (includes -O, -sV, traceroute, etc.)  |
+
+#### Timing & Performance
+|                   Option                   |                      Description                      |
+|--------------------------------------------|-------------------------------------------------------|
+| `-T0` to `-T5`                             |	Timing templates (from paranoid to insane)            |
+| `--min-parallelism` / `--max-parallelism`  |	Control number of parallel probes                     |
+| `--min-rate` / `--max-rate`                |	Control packet send rate (packets/sec)                |
+| `--host-timeout`                           |	Max time to wait per host                             |
+
+#### Output Control
+|                   Option                   |                      Description                      |
+|--------------------------------------------|-------------------------------------------------------|
+| `-v`, `-vv`, `-v4`                         |	Verbosity levels                                      |
+| `-d`, `-d9`                                | Debugging levels                                      |
+
+#### Saving Scan Results
+|                   Option                   |                      Description                      |
+|--------------------------------------------|-------------------------------------------------------|
+| `-oN <file>`                               |	Normal (human-readable) output                        |
+| `-oX <file>`                               |	XML output                                            |
+| `-oG <file>`                               |	Grepable output                                       |
+| `-oA <basename>`                           |	Save in all formats (.nmap, .xml, .gnmap)             |
+
+
+### Question 1 - What kind of scan will Nmap use if you run `nmap 10.10.89.108` with local user privileges?
+#### Process
+When we run nmap with user priviliges we can only use the _TCP Connect Scan_ as the user is not allowed access to the full network stack. 
+
+The answer format is `_______ ____`, it looks as through `Connect Scan` will fit this answer. 
+
+- Trying this as the answer 
+
+#### Answer 1
+- `Connect Scan` ✅
