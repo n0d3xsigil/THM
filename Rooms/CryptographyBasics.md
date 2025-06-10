@@ -1,3 +1,5 @@
+| [Home](../README.md) | Cyber Security 101 | **Cryptography Basics** |
+
 ## Contents
 - [Introduction](#introduction)
 - [Importance of Cryptography](#importance-of-cryptography)
