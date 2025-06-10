@@ -1,3 +1,5 @@
+| [Home](../README.md) | [Cyber Security 101](../README.md#cyber-security-101) | **Hashing Basics** |
+
 ## Contents
 - [Introduction](#introduction)
 - [Hash Functions](#hash-functions)
