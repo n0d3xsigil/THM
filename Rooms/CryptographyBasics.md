@@ -144,39 +144,8 @@ Asymmetric encryption relies on mathematical problems that are easy to compute i
 
 
 ## Basic Math
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Mathematical Foundations of Cryptography
 Modern cryptography relies heavily on mathematical operations. Two fundamental operations used in many cryptographic algorithms are:
-
 ### 1. XOR Operation (Exclusive OR)
 - **Definition**: A binary operation that returns:
   - `1` if the bits are different
@@ -195,91 +164,40 @@ Modern cryptography relies heavily on mathematical operations. Two fundamental o
   - `A` ⊕ `0` = `A`
   - **Commutative**: `A` ⊕ `B` = `B` ⊕ `A`
   - **Associative**: (`A` ⊕ `B`) ⊕ `C` = `A` ⊕ (`B` ⊕ `C`)
-- Use in Cryptography:
-
-Simple symmetric encryption:
-Encryption: C = P ⊕ K
-Decryption: P = C ⊕ K
-Requires the key (K) to be as long as the plaintext (P) for security.
-2. ➗ Modulo Operation
-Definition: The remainder after division.
-
-Written as % or mod
-Example: 23 % 6 = 5 because 23 = 3 × 6 + 5
-Key Points:
-
-Not reversible: Many values can satisfy the same modulo result.
-Always returns a non-negative result in the range 0 to n - 1 for a % n.
-Importance in Cryptography:
-
-Used in key generation, hashing, and asymmetric encryption.
-Essential for working with large numbers and cyclic structures.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- **Use in Cryptography**:
+  - Simple symmetric encryption:
+    - **Encryption**: `C = P ⊕ K`
+    - **Decryption**: `P = C ⊕ K`
+  - Requires the **key (**`K`**)** to be as long as the **plaintext (**`P`**)** for security.
+### 2. Modulo Operation
+- **Definition**: The remainder after division.
+  - Written as % or mod
+  - Example: 23 % 6 = 5 because 23 = 3 × 6 + 5
+- **Key Points**:
+  - **Not reversible**: Many values can satisfy the same modulo result.
+  - **Always returns a non-negative** result in the range 0 to n - 1 for a % n.
+- **Importance in Cryptography**:
+  - Used in **key generation**, **hashing**, and **asymmetric encryption**.
+  - Essential for working with **large numbers** and **cyclic structures**.
+### Question 1 - What’s 1001 ⊕ 1010?
+#### Process
+#### Answer 1
+### Question 2 - What’s 118613842%9091?
+#### Process
+#### Answer 2
+### Question 3 - What’s 60%12?
+#### Process
+#### Answer 3
 
 
 ## Summary
+### Room Recap: Cryptography Basics
+In this room, we learned:
+- **Why cryptography is essential** for secure digital communication.
+- The difference between **symmetric** and **asymmetric encryption**.
+- How **XOR** and **modulo operations** serve as foundational tools in cryptographic algorithms.
+### Next Step:
+In the upcoming room, **Public Key Cryptography Basics**, you'll explore real-world **asymmetric cryptosystems** and how they address modern digital security challenges.
+### Question 1 - Before proceeding to the next room, make sure you have taken note of all the key terms and concepts introduced in this room.
+#### Process
+#### Answer 1
