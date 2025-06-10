@@ -16,7 +16,7 @@ My discoveries from THM
 - ✅ [Tcpdump: The Basics](Rooms/TcpdumpTheBasics.md)
 - ✅ [Nmap: The Basics](Rooms/NmapTheBasics.md)
 ### Cryptography
-- ⚠️ [Cryptography Basics](Rooms/CryptographyBasics.md)
+- ✅ [Cryptography Basics](Rooms/CryptographyBasics.md)
 - ⚠️ [Public Key Cryptography Basics](Rooms/PublicKeyCryptographyBasics.md)
 - ⚠️ [Hashing Basics](Rooms/HashingBasics.md)
 - ⚠️ [John the Ripper: The Basics](Rooms/JohntheRipperTheBasics.md)
