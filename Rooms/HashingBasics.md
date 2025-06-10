@@ -102,9 +102,7 @@ As per the summary you would make `8` the power of `2` so it would become $\text
 Trying this as the answer
 #### Answer 3
 - `256` ✅
-
-
-## Using Hashing for Secure Password Storage
+## Insecure Password Storage for Authentication
 ### Hashing in Cyber Security: Password Storage & Data Integrity
 Hashing plays a crucial role in cyber security, particularly in:
 - **Password Storage** (for authentication)
@@ -180,6 +178,84 @@ Since we issued the `-n20` argument we know there are 20 lines or results. The l
 Trying this as the answer
 #### Answer 1
 - `qwerty` ✅
+
+
+## Using Hashing for Secure Password Storage
+### Using Hashing to Store Passwords
+### Why Use Hashing?
+Instead of storing passwords directly, we store their **hash values** using a secure hashing function. This ensures:
+- Passwords are never stored in plaintext.
+- If the database is leaked, attackers must **crack each hash** individually.
+### The Problem with Identical Passwords
+- Hash functions produce the same output for the same input.
+- If two users have the same password, they will have the **same hash**.
+- This allows attackers to:
+  - Reuse cracked hashes across accounts.
+  - Use **Rainbow Tables** to reverse hashes.
+### What is a Rainbow Table?
+A **Rainbow Table** is a precomputed lookup table of hashes and their corresponding plaintext passwords.
+
+| Hash                                 | Password     |
+|--------------------------------------|--------------|
+| 02c75fb22c75b23dc963c7eb91a062cc     | zxcvbnm      |
+| b0baee9d279d34fa1dfd71aadb908c3f     | 11111        |
+| c44a471bd78cc6c2fea32b9fe028d30a     | asdfghjkl    |
+| d0199f51d2728db6011945145a1b607a     | basketball   |
+| dcddb75469b4b4875094e14561e573d8     | 000000       |
+| e10adc3949ba59abbe56e057f20f883e     | 123456       |
+| e19d5cd5af0378da05f63f891c7467af     | abcd1234     |
+| e99a18c428cb38d5f260853678922e03     | abc123       |
+| fcea920f7412b5da7be0cf42b8c93759     | 1234567      |
+| 4c5923b6a6fac7b7355f53bfe2b8f8c1     | inS3CyourP4$$|
+
+> Tools like **CrackStation** and **Hashes.com** use massive rainbow tables for fast hash cracking.
+
+### Protecting Against Rainbow Tables: Salting
+**Salting** is the process of adding a unique, random value to each password before hashing.
+- Ensures even identical passwords produce **different hashes**.
+- Salts are stored in the database but **do not need to be secret**.
+- Modern hashing algorithms like **Bcrypt**, **Scrypt**, and **Argon2** handle salting automatically.
+### Example: Secure Password Storage
+1. Choose a secure hashing algorithm: `Argon2`, `Scrypt`, `Bcrypt`, or `PBKDF2`.
+2. Generate a unique salt: `Y4UV*^(=go_!`
+3. Concatenate password + salt: `AL4RMc10kY4UV*^(=go_!`
+4. Hash the result using the chosen algorithm.
+5. Store:
+   - The resulting hash
+   - The salt used
+### Why Not Use Encryption?
+- Encryption requires storing a **decryption key**.
+- If the key is compromised, **all passwords can be decrypted**.
+- Hashing is **one-way** and does not require a key, making it more secure for password storage.
+### Key Takeaways
+- Always hash passwords using a secure algorithm.
+- Use a **unique salt** for each user.
+- Avoid encryption for password storage due to key management risks.
+
+
+
+### Question 1 - Manually check the hash “4c5923b6a6fac7b7355f53bfe2b8f8c1” using the rainbow table above.
+#### Process
+I was getting ready to search the sites but as stated it was already provided. `4c5923b6a6fac7b7355f53bfe2b8f8c1` = `inS3CyourP4$$`
+
+Trying this as the answer
+#### Answer 1
+- `inS3CyourP4$$` ✅
+### Question 2 - Crack the hash “5b31f93c09ad1d065c0491b764d04933” using an online tool.
+#### Process
+Okay I'm going to use [https://hashes.com/en/decrypt/hash] to 'crack the hash'
+
+Result is `tryhackme`.
+
+Trying this as the answer
+#### Answer 2
+- `tryhackme` ✅
+### Question 3 - Should you encrypt passwords in password-verification systems? `Yea`/`Nay`
+#### Process
+#### Answer
+- `Nay` ✅
+
+
 ## Recognising Password Hashes
 
 
