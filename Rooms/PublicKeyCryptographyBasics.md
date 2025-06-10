@@ -220,43 +220,63 @@ Trying this as the answer
 
 
 ## SSH
+### SSH Authentication: Server and Client
+#### Authenticating the Server
+- When you connect to a server via SSH, your client checks the server’s **public key fingerprint**.
+- If it’s unknown, you’re prompted to confirm the connection.
+- This protects against **man-in-the-middle attacks**.
+- Once accepted, the key is saved and trusted for future connections.
+#### Authenticating the Client
+- After verifying the server, the client must authenticate.
+- This is often done with **usernames and passwords**, but **SSH key authentication** is more secure.
+- SSH keys use **public/private key pairs**. The private key stays on your machine; the public key is shared with the server.
+### Generating SSH Keys
+- Use `ssh-keygen` to create key pairs.
+- Supported algorithms include:
+  - RSA
+  - DSA
+  - ECDSA
+  - Ed25519
+  - Variants with hardware security keys (e.g., -sk)
 
+Example:
+```Shell
+ssh-keygen -t ed25519
+```
+- You can add a passphrase to encrypt the private key for extra protection.
 
+### SSH Key Files
+- **Public key**: `id_ed25519.pub` — shared with the server.
+- **Private key**: `id_ed25519` — must be kept secret.
+- Never share your private key. It’s like a password that grants access to any server that trusts it.
+### Security Practices
+- The **passphrase** protects the private key but is never sent to the server.
+- Tools like **John the Ripper** can attempt to crack weak passphrases.
+- Always generate keys on your own machine and use `ssh-copy-id` to transfer the public key.
+- Set correct permissions: private keys should be readable only by the owner (`chmod 600`).
+### Key Storage and Usage
+- Keys are stored in `~/.ssh/`
+- The server stores trusted public keys in `~/.ssh/authorized_keys`
+- Use `ssh -i privateKeyFile user@host` to specify a key manually.
+### CTFs and Reverse Shells
+- SSH keys can be used to **upgrade reverse shells** during CTFs or red teaming.
+- Adding a key to `authorized_keys` can act as a **backdoor** for persistent access.
+- This avoids unstable shells and gives full terminal features.
+### Question 1 - Check the SSH Private Key in `~/Public-Crypto-Basics/Task-5`. What algorithm does the key use?
+#### Process
+I'm lazy I just ran `ls -la  Public-Crypto-Basics/Task-5/` from `~`. The results are below:
+```Shell
+user@ip-10-10-237-255:~$ ls -la  Public-Crypto-Basics/Task-5/
+total 12
+drwxrwxr-x 2 user user 4096 Sep  1  2024 .
+drwxrwxr-x 4 user user 4096 Sep  2  2024 ..
+-rw-r--r-- 1 user user 1767 Sep  1  2024 id_rsa_1593558668558.id_rsa
+```
+It's quite clear that the rsa's are here. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### Answer 1
+- `RSA` ✅
 
 
 ## Digital Signatures and Certificates
