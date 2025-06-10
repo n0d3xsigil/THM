@@ -8,6 +8,7 @@
 - [Summary](#summary)
 
 ## Introduction
+
 ### Introduction to Cryptography
 This is the first of three beginner-friendly lessons on cryptography, requiring only basic Linux command line skills. It explores how cryptography ensures secure communication by preventing unauthorized access and verifying the identity of servers.
 ### Topics Covered in This Room:
@@ -23,10 +24,13 @@ To help you understand how cryptography builds trust in digital communication an
 #### Process
 Nothing to do here. 
 #### Answer 1
+ - **Click** 😉
 
 
 ## Importance of Cryptography
 ### Purpose of Cryptography
+> Cryptography’s ultimate purpose is to ensure _secure communication in the presence of adversaries_.
+
 Cryptography ensures secure communication even when adversaries are present. It protects:
 - **Confidentiality** – keeping data private
 - **Integrity** – ensuring data isn’t altered
@@ -46,7 +50,10 @@ Cryptography ensures secure communication even when adversaries are present. It 
 These laws highlight that cryptography is essential but often invisible in digital systems.
 ### Question 1 - What is the standard required for handling credit card information?
 #### Process
+We already know that the PCI DSS is the payment regulation in the US. The answer calls for `___ ___` so is the only answer possible.
+Trying this as the answer
 #### Answer 1
+- `PCI DSS` ✅
 
 
 ## Plaintext to Ciphertext
@@ -56,8 +63,10 @@ This section introduces the basic flow of encryption and decryption using key te
 - **Plaintext** – The original, readable data (e.g., text, images, files).
 - **Encryption Function** – Uses a key and a cipher to convert plaintext into:
 - **Ciphertext** – The scrambled, unreadable version of the message.
+![image](https://github.com/user-attachments/assets/b5b1ab97-16c5-4a66-92a8-87d78aef6a68)
 To reverse the process:
 - **Decryption Function** – Uses the **same key** (or a related one) and the cipher to convert ciphertext back into plaintext.
+![image](https://github.com/user-attachments/assets/551ad1e0-5607-4c66-9e06-c14f35ea53b2)
 ### Key Terms Defined:
 - **Plaintext**: Original, readable data before encryption.
 - **Ciphertext**: Encrypted, unreadable data.
@@ -68,18 +77,22 @@ To reverse the process:
 **Note**: The cipher is usually public, but the key must remain secret (unless it's a public key in asymmetric encryption, which will be covered later).
 ### Question 1 - What do you call the encrypted plaintext?
 #### Process
+Plain Text when it has been encrypted becomes `ciphertext`.
+Trying this as the anser
 #### Answer 1
+-`Ciphertext` ✅
 ### Question 2 - What do you call the process that returns the plaintext?
 #### Process
+The reverse of encryption is `decryption`.
+Trying this as the answer
 #### Answer 2
+- `Decryption`✅
 
 
 ## Historical Ciphers
 ### Historical Cryptography & the Caesar Cipher
 - Cryptography dates back to **ancient Egypt (1900 BCE)**, but one of the earliest and simplest ciphers is the Caesar Cipher, used in the 1st century BCE.
 - **Caesar Cipher** works by **shifting each letter** in the plaintext by a fixed number of positions in the alphabet.
-
-
 #### Example:
 **Plaintext**: `TRYHACKME`
 **Key**: `3` (right shift)
@@ -98,7 +111,17 @@ To **decrypt**, shift letters left by the same key.
 These ciphers appear in **movies**, **books**, and are foundational to understanding modern cryptography.
 ### Question 1 - Knowing that `XRPCTCRGNEI` was encrypted using Caesar Cipher, what is the original plaintext?
 #### Process
+Initially I had made the assumtion because it was specified previously in the section that the _encrypt_ was +3 so the _decrypt_ would be -3. I spent way too long looking at that.
+
+I tried multiple things but in the end I ended up hitting the hint. It gave me two options
+> You can use an online tool such as the ones available at
+> https://cryptii.com/pipes/caesar-cipher and
+> https://www.dcode.fr/caesar-cipher
+
+After multiple revisions I ended up with +11 `ICANENCRYPT`.
+Trying this as the answer
 #### Answer 1
+- `ICANENCRYPT` ✅
 
 
 ## Types of Encryption
@@ -137,10 +160,16 @@ Asymmetric encryption relies on mathematical problems that are easy to compute i
 - Asymmetric Encryption: Public key for encryption, private key for decryption.
 ### Question 1 - Should you trust DES? (Yea/Nay)
 #### Process
+`Nay`. The DES standard was created back in 1977 and only had a 56-bit key. It is easy to break with modern hardware. 
+Trying this as the answer
 #### Answer 1
+- `Nay` ✅
 ### Question 2 - When was AES adopted as an encryption standard?
 #### Process
+Way back in 2001
+Trying this as the answer
 #### Answer 2
+- `2001` ✅
 
 
 ## Basic Math
@@ -181,13 +210,44 @@ Modern cryptography relies heavily on mathematical operations. Two fundamental o
   - Essential for working with **large numbers** and **cyclic structures**.
 ### Question 1 - What’s 1001 ⊕ 1010?
 #### Process
+I had to YouTube this one. After searching just `xor` I found the following video:
+- [The power of XOR - Gary Explains](https://www.youtube.com/watch?v=3Kvv7VEM3uc)
+
+Essentially you can only have 1 line being true otherwise it is false. as mentioned before, 0,0 would be 0 because neither are exclusive, 1,0 would be 1 because `a` is exclusive, 0,1 would be 1 because `b` is exclusive and finally 1,1 would be 0 because again neither are exclusive.
+
+So the answer for the question `1001 ⊕ 1010` can be calculated as follows:
+
+|      A: | 1 | 0 | 0 | 1 |
+|      B: | 1 | 0 | 1 | 0 |
+| Result: | 0 | 0 | 1 | 1 |
+
+Trying This as the answer
 #### Answer 1
+- `0011` ✅
 ### Question 2 - What’s 118613842%9091?
 #### Process
+I could use `PowerShell`, `Bash` or even a calculator to give me the answer but I really would like to step through it. 
+
+divisor:        9,091
+dividend: 118,613,842
+
+`9,091` will fit in `118,613,842` just  `13,047` times. 
+`9,091` multipled by `13,047` is `118,610,277`
+
+To find the remainder we subtract `118,610,277` from `118,613,842` to get a reminader of `3,565`
+
+The answer calls for the format `____` which matches the number of characters the answer has.
+
+Trying this as the answer
 #### Answer 2
+- `3565` ✅
 ### Question 3 - What’s 60%12?
 #### Process
+Well `60` is divisable by `12`.  The answer is `0`
+
+Trying this as the answer
 #### Answer 3
+- `0` ✅
 
 
 ## Summary
@@ -198,6 +258,3 @@ In this room, we learned:
 - How **XOR** and **modulo operations** serve as foundational tools in cryptographic algorithms.
 ### Next Step:
 In the upcoming room, **Public Key Cryptography Basics**, you'll explore real-world **asymmetric cryptosystems** and how they address modern digital security challenges.
-### Question 1 - Before proceeding to the next room, make sure you have taken note of all the key terms and concepts introduced in this room.
-#### Process
-#### Answer 1
