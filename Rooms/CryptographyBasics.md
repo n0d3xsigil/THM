@@ -1,4 +1,4 @@
-| [Home](../README.md) | Cyber Security 101 | **Cryptography Basics** |
+| [Home](../README.md) | [Cyber Security 101](../README.md#cyber-security-101) | **Cryptography Basics** |
 
 ## Contents
 - [Introduction](#introduction)
