@@ -280,43 +280,57 @@ Trying this as the answer
 
 
 ## Digital Signatures and Certificates
+### Digital Signatures: The Online Equivalent of Signing a Document
+In the physical world, we sign documents to confirm identity, agreement, or receipt. In the digital world, we use digital signatures to do the same.
+### What Is a Digital Signature?
+- A **digital signature** verifies:
+  - **Authenticity**: Who signed or created the file.
+  - **Integrity**: That the file hasn’t been altered.
+- It uses **asymmetric cryptography**:
+  - You sign with your **private key**.
+  - Others verify it using your **public key**.
+- This is legally recognized in many countries.
 
+> Example: Bob signs a message with his private key. Alice verifies it using Bob’s public key.
 
+### Not the Same as an Electronic Signature
+- Pasting an image of a signature ≠ digital signature.
+- Only cryptographic signatures can prove integrity and authenticity.
+### How It Works (Simplified)
+- Bob creates a **hash** of his document.
+- He encrypts the hash with his **private key** (this is the signature).
+- He sends the document + encrypted hash to Alice.
+- Alice:
+  - Hashes the document herself.
+  - Decrypts Bob’s hash using his **public key**.
+  - Compares both hashes to verify the document.
+### Certificates: Proving Identity Online
+- Certificates are used to prove a server’s identity (e.g., for HTTPS).
+- They are issued by **Certificate Authorities (CAs)**.
+- Your browser trusts a certificate if:
+  - It’s signed by a trusted CA.
+  - The CA is in your browser’s list of trusted authorities.
 
+> This forms a chain of trust:
+> Website → Signed by Org → Trusted by CA → Trusted by Browser
 
+### Getting a Certificate
+- You can buy one from a CA or get a free one from **Let’s Encrypt**.
+- Required for enabling **HTTPS** on website
+### Question 1 - What does a remote web server use to prove itself to the client?
+#### Process
+Well this is just a `Certificate`
 
+Trying this as the answer
+#### Answer 1
+- `Certificate` ✅
+### Question 2 - What would you use to get a free TLS certificate for your website?
+#### Process 
+The free in my mind points to `Lets Encrypt` however I'm a character short. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### Answer 2
+- `Let's Encrypt` ✅
 
 
 ## PGP and GPG
