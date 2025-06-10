@@ -334,82 +334,72 @@ Trying this as the answer
 
 
 ## PGP and GPG
+### PGP & GPG: Encrypting and Signing with Confidence
+#### What Are PGP and GPG?
+- **PGP** (**Pretty Good Privacy**) is software for encrypting files, signing documents, and more.
+- **GPG** (**GnuPG**) is the open-source implementation of the **OpenPGP** standard.
+- Commonly used for **email encryption** and **digital signatures**.
+### Generating a GPG Key
+Using the command:
+```Shell
+gpg --full-gen-key
+```
 
+You’ll be prompted to:
+- Choose the purpose (signing, encrypting, or both)
+- Select a cryptographic algorithm (e.g., ECC with Curve25519)
+- Set an expiration date (or none)
+- Provide your name, email, and an optional comment
 
+This creates:
+- A public key (shared with others)
+- A private key (kept secret and optionally protected with a passphrase)
+#### Practical Use in Communication
+- Share your public key with contacts.
+- They encrypt messages using your public key.
+- You decrypt them using your private key.
 
+To decrypt:
+```Shell
+gpg --decrypt confidential_message.gpg
+```
 
+To import your key on a new machine:
+```Shell
+gpg --import backup.key
+```
 
+### Security Notes
+- GPG private keys can be **passphrase-protected**, like SSH keys.
+- Tools like **John the Ripper** can attempt to crack weak passphrases.
+- Always **back up your keys** securely.
 
+### Question 1 - Use GPG to decrypt the message in `~/Public-Crypto-Basics/Task-7`. What secret word does the message hold?
+#### Process
+1. First navigate to the `Task-7`
+2. Import the key by typing `gpg --import tryhackme.key`
+3. Decrypt the message by typing `gpg --decrypt message.gpg`
+4. Look for the secret word...
 
+> The secret word is `Pineapple`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### Answer 1
+- `Pineapple` ✅
 
 ## Conclusion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### Cryptography vs. Cryptanalysis
+- **Cryptography**: The science of securing communication and data using codes and ciphers.
+- **Cryptanalysis**: The science of breaking or bypassing cryptographic systems without knowing the key.
+### Common Attack Methods
+- **Brute-Force Attack**: Tries every possible key or password until the correct one is found.
+- **Dictionary Attack**: Tries likely passwords from a dictionary or wordlist, often faster than brute-force.
+### What You’ve Learned in This Room
+This module focused on **public key cryptography** and key exchange, covering:
+- **RSA**: Asymmetric encryption based on factoring large primes.
+- **Diffie-Hellman**: Secure key exchange over insecure channels.
+- **SSH Key Pairs**: Secure login and authentication.
+- **Digital Signatures & Certificates**: Proving identity and integrity.
+- **OpenPGP/GPG**: Encrypting and signing files and emails.
+### Next Up: Hashing
+You’re now ready to explore hashing, which plays a crucial role in verifying data integrity and supporting digital signatures.
