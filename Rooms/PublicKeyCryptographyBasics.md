@@ -197,7 +197,7 @@ Let's try first
 Where B = 9
 1. $\text{K = B}^\text{a}\text{ mod p}$
 2. $\text{K = 9}^\text{12}\text{ mod 29}$
-3. $\text{K = 282,429,536,481 mod 29}
+3. $\text{K = 282,429,536,481 mod 29}$
 4. $\text{K = 24}$
 
 Trying this as the answer
@@ -209,7 +209,7 @@ I think we're almost there...
 Where A = 7
 1. $\text{K = A}^\text{b}\text{ mod p}$
 2. $\text{K = 7}^\text{17}\text{ mod 29}$
-3. $\text{K = 232,630,513,987,207 mod 29}
+3. $\text{K = 232,630,513,987,207 mod 29}$
 4. $\text{K = 24}$
 
 That is amazing, so K is also `24` as it should be.
