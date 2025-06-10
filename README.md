@@ -8,9 +8,9 @@ My discoveries from THM
 ### Windows and AD Fundamentals
 ### Command Line
 ### Networking
-- ⚠️ Network Concepts
-- ⚠️ Network Essentials
-- ⚠️ [Networking Core Protocols](Rooms/NetworkingCoreProtocols.md)
+- ❌ Network Concepts
+- ❌ Network Essentials
+- ❌ [Networking Core Protocols](Rooms/NetworkingCoreProtocols.md)
 - ✅ [Networking Secure Protocols](Rooms/NetworkingSecureProtocols.md)
 - ✅ [Wireshark: The Basics](Rooms/WiresharkTheBasics.md)
 - ✅ [Tcpdump: The Basics](Rooms/TcpdumpTheBasics.md)
@@ -18,8 +18,8 @@ My discoveries from THM
 ### Cryptography
 - ✅ [Cryptography Basics](Rooms/CryptographyBasics.md)
 - ⚠️ [Public Key Cryptography Basics](Rooms/PublicKeyCryptographyBasics.md)
-- ⚠️ [Hashing Basics](Rooms/HashingBasics.md)
-- ⚠️ [John the Ripper: The Basics](Rooms/JohntheRipperTheBasics.md)
+- ❌ [Hashing Basics](Rooms/HashingBasics.md)
+- ❌ [John the Ripper: The Basics](Rooms/JohntheRipperTheBasics.md)
 ### Exploitation Basics
 ### Web Hacking
 ### Offensive Seucrity Tooling
