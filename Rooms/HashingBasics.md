@@ -148,7 +148,7 @@ head rockyou.txt
 - Avoid deprecated encryption methods.
 - Use strong, modern hashing algorithms (e.g., bcrypt, Argon2) with salting.
 
-### Question 1 - 
+### Question 1 - What is the 20th password in `rockyou.txt`?
 #### Process
 We can grap the list using `head`. See the process below.
 ```Shell
