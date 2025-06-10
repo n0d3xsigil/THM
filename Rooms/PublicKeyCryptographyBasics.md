@@ -97,7 +97,6 @@ Trying this as the answer
 #### 4. Decryption:
 - $\text{ x = y^d mod n = 16341^379 mod 31243 = 13}$
 > RSA uses modular arithmetic, which is essential for its functionality.
-
 ### RSA in CTFs (Capture The Flag Challenges)
 - RSA is common in cryptography-based CTFs.
 - You may be given variables like:
@@ -111,8 +110,6 @@ Trying this as the answer
 ### Tools:
 - **RsaCtfTool**: Automates attacks on weak RSA setups.
 - **rsatool**: Helps generate or analyze RSA keys.
-
-
 ### Question 1 - Knowing that p = 4391 and q = 6659. What is n?
 #### Process
 1. $\text{p = 4391}$ and $\text{q = 6659}$
@@ -139,43 +136,87 @@ Trying this as the answer
 
 
 ## Diffie-Hellman Key Exchange
+### The Challenge of Symmetric Encryption
+When using **symmetric encryption**, both parties need to share the same secret key. But how do you share that key securely over an insecure channel?
+### Diffie-Hellman Key Exchange: A Solution
+Diffie-Hellman allows two people to **create a shared secret key** over an insecure channel, **without ever sending the key itself**.
+### How It Works (Simplified):
+- **Public Setup**: Alice and Bob agree on two public numbers:
+  - A large **prime number** $\text{p}$
+  - A **generator** $\text{g, where 0 < g < p}$
+- **Private Secrets**:
+  - Alice picks a secret number $\text{a}$
+  - Bob picks a secret number $\text{b}$
+- **Public Keys**:
+  - Alice computes $\text{A = g}^\text{a}\text{ mod p}$
+  - Bob computes  $\text{B = g}^\text{b}\text{ mod p}$
+- **Exchange**:
+  - Alice sends $\text{A}$ to Bob
+  - Bob sends $\text{B}$ to Alice
+- **Shared Secret**:
+  - Alice computes $\text{B}^\text{a}\text{ mod p}$
+  - Bob computes $\text{A}^\text{b}\text{ mod p}$
+  - Both get the same result: $\text{g}^\text{ab}\text{ mod p}$
 
+![image](https://github.com/user-attachments/assets/e1661b65-940a-4158-bc6f-f3db6e810b0b)
 
+This shared value becomes the symmetric key for secure communication.
 
+### Real-World Use
+- In practice, **much larger numbers** are used for security.
+- **Diffie-Hellman** is often combined with **RSA**:
+  - **Diffie-Hellman**: for secure key exchange
+  - **RSA**: for authentication and digital signatures
 
+Together, they help prevent attacks like **man-in-the-middle** and are used in many modern security protocols.
+### Question 1 - Consider p = 29, g = 5, a = 12. What is A?
+#### Process
+I had to do some digging on this. Even after reading the page several times it wasn't clicking. The calcualtion is actually fairly straight forward.
+1. $\text{A = g}^\text{a}\text{ mod p}$
+2. $\text{A = 5}^\text{12}\text{ mod 29}$
+3. $\text{A = 244,140,625 mod 29}$
+5. $\text{A = 7}$
 
+Trying this as the answer
+#### Answer 1
+- `7` ✅
+### Question 2 - Consider p = 29, g = 5, b = 17. What is B?
+#### Process
+I'm hoping we can use the same process as before
+1. $\text{B = g}^\text{b}\text{ mod p}$
+2. $\text{B = 5}^\text{17}\text{ mod 29}$
+3. $\text{B = 762,939,453,125 mod 29}$
+4. $\text{B = 9}$
 
+Trying this as the answer
+#### Answer 2
+- `9` ✅
+### Question 3 - Knowing that p = 29, a = 12, and you have B from the second question, what is the key calculated by Bob? (key = Ba mod p)
+#### Process
+Let's try first
+Where B = 9
+1. $\text{K = B}^\text{a}\text{ mod p}$
+2. $\text{K = 9}^\text{12}\text{ mod 29}$
+3. $\text{K = 282,429,536,481 mod 29}
+4. $\text{K = 24}$
 
+Trying this as the answer
+#### Answer 3
+- `24` ✅
+### Question 4 - Knowing that p = 29, b = 17, and you have A from the first question, what is the key calculated by Alice? (key = Ab mod p)
+#### Process
+I think we're almost there...
+Where A = 7
+1. $\text{K = A}^\text{b}\text{ mod p}$
+2. $\text{K = 7}^\text{17}\text{ mod 29}$
+3. $\text{K = 232,630,513,987,207 mod 29}
+4. $\text{K = 24}$
 
+That is amazing, so K is also `24` as it should be.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### Answer 4
+- `24` ✅
 
 
 ## SSH
