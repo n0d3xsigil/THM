@@ -3,10 +3,10 @@ My discoveries from THM
 
 | Key  | Description                 |
 |------|-----------------------------|
-|  ❓  | Complete but not documented |
 |  ❌  | Not started                 |
 |  ⚠️  | In Progress                 |
 |  ✅  | Complete and documented     |
+|  ❓  | Complete but not documented |
 
 ## Pre Security
 ### Introduction to Cyber Security
