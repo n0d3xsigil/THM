@@ -901,6 +901,44 @@ Trying this as the answer
 #### Answer 2
 - `1750` ✅
 ## Conclusion
-
-
-
+### Hashing vs Encoding vs Encryption
+- **Hashing**:
+  - Converts input data into a fixed-size string (digest).
+  - One-way process: cannot retrieve original data from the hash.
+  - Any change in input results in a completely different hash.
+  - Used for data integrity verification.
+- **Encoding**:
+  - Converts data into a different format for compatibility or transmission.
+  - Common encodings: ASCII, UTF-8, UTF-16, UTF-32, ISO-8859-1, Windows-1252.
+  - Unicode encodings (UTF-8, UTF-16, UTF-32) support multiple languages.
+  - Other encodings: Base32, Base64 (used for data transmission/storage).
+  - **Reversible**: anyone can decode with the right tools.
+  - **Not secure**: does not protect confidentiality.
+- **Example (Base64)**:
+  ```Shell
+  echo "TryHackMe" | base64
+  # Output: VHJ5SGFja01lCg==
+  
+  echo "VHJ5SGFja01lCg==" | base64 -d
+  # Output: TryHackMe
+  ```
+- **Encryption**:
+  - Protects data confidentiality using a cipher and a key.
+  - **Reversible**: only with the correct key and algorithm.
+  - Covered in previous modules.
+### Question 1 - Use `base64` to decode `RU5jb2RlREVjb2RlCg==`, saved as `decode-this.txt` in `~/Hashing-Basics/Task-8`. What is the original word?
+#### Process
+Since you can pipe into `base64` I just called an `echo "RU5jb2RlREVjb2RlCg=="` and piped it to `base64 -d`. The output is below
+```Shell
+user@ip-10-10-150-202:~$ echo "RU5jb2RlREVjb2RlCg==" | base64 -d
+ENcodeDEcode
+```
+Oh crap, whilst that worked. That wasn't what the question asked! Lets do it properly...
+```Shell
+user@ip-10-10-150-202:~$ base64 -d Hashing-Basics/Task-8/decode-this.txt 
+ENcodeDEcode
+```
+So same result, but instead using the hash saved within the file.
+Trying this as the answer
+#### Answer 1
+- `ENcodeDEcode` ✅
