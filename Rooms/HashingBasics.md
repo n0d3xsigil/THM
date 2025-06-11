@@ -371,12 +371,472 @@ Trying this as the answer
 
 
 ## Password Cracking
+### Cracking Password Hashes with Salt
+- **Hash Cracking Basics**:
+  - Hashes are not encrypted and cannot be decrypted.
+  - Cracking involves hashing many inputs (e.g., from `rockyou.txt`) and comparing them to the target hash.
+  - If a salt is used, it must be included in the hashing process.
+  - Common tools: **Hashcat** and **John the Ripper**.
+### GPU Acceleration
+- **GPU Advantages**:
+  - GPUs have thousands of cores ideal for hash computations.
+  - Greatly accelerate cracking for many hash types.
+- **GPU-Resistant Algorithms**:
+  - Some algorithms (e.g., **Bcrypt**) are designed to resist GPU acceleration.
+### Cracking on Virtual Machines (VMs)
+- **Limitations**:
+  - VMs typically lack direct access to host GPUs.
+  - GPU passthrough is possible but complex and performance-degrading.
+  - CPU performance is also reduced in VMs.
+- **Recommendations**:
+  - Run **Hashcat** on the host OS to utilize GPU.
+  - **Windows users** can run Hashcat via PowerShell.
+  - **John the Ripper** works well in VMs using CPU but performs better on the host OS.
+### Practical Cracking Instructions
+- **Avoid Online Rainbow Tables**:
+  - Use local tools for a better learning experience.
+- **Hashcat Syntax**:
+  ```Shell
+  hashcat -m <hash_type> -a <attack_mode> hashfile wordlist
+  ```
+  - `-m <hash_type>`: Numeric code for the hash type (e.g., `-m 1000` for NTLM).
+  - `-a <attack_mode>`: Attack mode (e.g., `-a 0` for straight wordlist attack).
+  - `hashfile`: File containing the hash to crack.
+  - `wordlist`: File with potential passwords (e.g., `rockyou.txt`).
 
+- **Example**:
+  ```Shell
+  hashcat -m 3200 -a 0 hash.txt /usr/share/wordlists/rockyou.txt
+  ```
+  - Treats the hash as **Bcrypt** and uses `rockyou.txt` for cracking.
 
+### Question 1 - Use `hashcat` to crack the hash, `$2a$06$7yoU3Ng8dHTXphAg913cyO6Bjs3K5lBnwq5FJyA6d01pMSrddr1ZG`, saved in `~/Hashing-Basics/Task-6/hash1.txt`.
+#### Process
+Found $2a$ was bcyrpt. Mode 3200
+
+Used example in page `hashcat -m 3200 -a 0 hash1.txt`. Ran for 10 minutes, kept getting warnings about std input too slow/
+
+Crap
+
+Used example in page correctly `hashcat -m 3200 -a 0 hash1.txt /usr/share/wordlists/rockyou.txt`
+
+Cracked `85208520`
+
+Trying this as the answer
+#### Answer 1
+- `85208520` ✅
+### Question 2 - Use `hashcat` to crack the SHA2-256 hash, `9eb7ee7f551d2f0ac684981bd1f1e2fa4a37590199636753efe614d4db30e8e1`, saved in saved in `~/Hashing-Basics/Task-6/hash2.txt`.
+#### Process
+Find Hash-mode for SHA2-256
+
+| Hash-Mode	| Hash-Name |
+|-----------|-----------|
+|    `1400` | SHA2-256  |
+
+-m 1400.
+
+Build command `hashcat -m 1400 -a 0 hash2.txt /usr/share/wordlists/rockyou.txt`
+
+full output below
+
+```Shell
+user@ip-10-10-173-238:~/Hashing-Basics/Task-6$ hashcat -m 1400 -a 0 hash2.txt /usr/share/wordlists/rockyou.txt 
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 5.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 16.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platfor
+m #1 [The pocl project]
+===========================================================================================================================
+=======================
+* Device #1: cpu-haswell-AMD EPYC 7571, 1418/2901 MB (512 MB allocatable), 2MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+ATTENTION! Pure (unoptimized) backend kernels selected.
+Pure kernels can crack longer passwords, but drastically reduce performance.
+If you want to switch to optimized kernels, append -O to your commandline.
+See the above message to find out about the exact limits.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Host memory required for this attack: 0 MB
+
+Dictionary cache hit:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344384
+* Bytes.....: 139921497
+* Keyspace..: 14344384
+
+9eb7ee7f551d2f0ac684981bd1f1e2fa4a37590199636753efe614d4db30e8e1:halloween
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 1400 (SHA2-256)
+Hash.Target......: 9eb7ee7f551d2f0ac684981bd1f1e2fa4a37590199636753efe...30e8e1
+Time.Started.....: Wed Jun 11 12:06:30 2025 (0 secs)
+Time.Estimated...: Wed Jun 11 12:06:30 2025 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:    38589 H/s (0.21ms) @ Accel:256 Loops:1 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 3072/14344384 (0.02%)
+Rejected.........: 0/3072 (0.00%)
+Restore.Point....: 2560/14344384 (0.02%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidate.Engine.: Device Generator
+Candidates.#1....: gators -> dangerous
+Hardware.Mon.#1..: Util: 50%
+
+Started: Wed Jun 11 12:05:39 2025
+Stopped: Wed Jun 11 12:06:31 2025
+user@ip-10-10-173-238:~/Hashing-Basics/Task-6$ 
+```
+
+The line we are interested in is `9eb7ee7f551d2f0ac684981bd1f1e2fa4a37590199636753efe614d4db30e8e1:halloween`
+
+Specifically `halloween`
+
+Trying this as the answer
+
+#### Answer 2
+- `halloween` ✅
+### Question 3 - Use `hashcat` to crack the hash, `$6$GQXVvW4EuM$ehD6jWiMsfNorxy5SINsgdlxmAEl3.yif0/c3NqzGLa0P.S7KRDYjycw5bnYkF5ZtB8wQy8KnskuWQS3Yr1wQ0`, saved in `~/Hashing-Basics/Task-6/hash3.txt`.
+#### Process
+Searching for `$6$` within the GitHub hashes
+
+Found:
+| Hash-Mode	|             Hash-Name             |
+|-----------|-----------------------------------|
+|    `1800` | sha512crypt 6, SHA512 (Unix) [^2] |
+
+So lets try mode `1800` by issuing `hashcat -m 1800  -a 0 hash3.txt /usr/share/wordlists/rockyou.txt`
+
+Results below:
+```Shell
+user@ip-10-10-173-238:~/Hashing-Basics/Task-6$ hashcat -m 1800 -a 0 hash3.txt /usr/share/wordlists/rockyou.txt 
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 5.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 16.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platfor
+m #1 [The pocl project]
+===========================================================================================================================
+=======================
+* Device #1: cpu-haswell-AMD EPYC 7571, 1418/2901 MB (512 MB allocatable), 2MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+* Uses-64-Bit
+
+ATTENTION! Pure (unoptimized) backend kernels selected.
+Pure kernels can crack longer passwords, but drastically reduce performance.
+If you want to switch to optimized kernels, append -O to your commandline.
+See the above message to find out about the exact limits.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Host memory required for this attack: 0 MB
+
+Dictionary cache hit:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344384
+* Bytes.....: 139921497
+* Keyspace..: 14344384
+
+Cracking performance lower than expected?                 
+
+* Append -O to the commandline.
+  This lowers the maximum supported password/salt length (usually down to 32).
+
+* Append -w 3 to the commandline.
+  This can cause your screen to lag.
+
+* Append -S to the commandline.
+  This has a drastic speed impact but can be better for specific attacks.
+  Typical scenarios are a small wordlist but a large ruleset.
+
+* Update your backend API runtime / driver the right way:
+  https://hashcat.net/faq/wrongdriver
+
+* Create more work items to make use of your parallelization power:
+  https://hashcat.net/faq/morework
+
+$6$GQXVvW4EuM$ehD6jWiMsfNorxy5SINsgdlxmAEl3.yif0/c3NqzGLa0P.S7KRDYjycw5bnYkF5ZtB8wQy8KnskuWQS3Yr1wQ0:spaceman
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 1800 (sha512crypt $6$, SHA512 (Unix))
+Hash.Target......: $6$GQXVvW4EuM$ehD6jWiMsfNorxy5SINsgdlxmAEl3.yif0/c3...Yr1wQ0
+Time.Started.....: Wed Jun 11 13:16:53 2025 (54 secs)
+Time.Estimated...: Wed Jun 11 13:17:47 2025 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:      347 H/s (9.05ms) @ Accel:64 Loops:256 Thr:1 Vec:4
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 18496/14344384 (0.13%)
+Rejected.........: 0/18496 (0.00%)
+Restore.Point....: 18432/14344384 (0.13%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:4864-5000
+Candidate.Engine.: Device Generator
+Candidates.#1....: sunshine13 -> mandingo
+Hardware.Mon.#1..: Util: 93%
+
+Started: Wed Jun 11 13:15:51 2025
+Stopped: Wed Jun 11 13:17:48 2025
+user@ip-10-10-173-238:~/Hashing-Basics/Task-6$ 
+```
+Again our magic result is `$6$GQXVvW4EuM$ehD6jWiMsfNorxy5SINsgdlxmAEl3.yif0/c3NqzGLa0P.S7KRDYjycw5bnYkF5ZtB8wQy8KnskuWQS3Yr1wQ0:spaceman`.
+Specifically `spaceman`.
+- [x] Trying this as the anwer
+#### Answer 3
+- `spaceman` ✅
+### Question 4 - Crack the hash, `b6b0d451bbf6fed658659a9e7e5598fe`, saved in `~/Hashing-Basics/Task-6/hash4.txt`.
+#### Process
+My gut says MD5. Which is _Hash-Mode_ `0`. Lets try that (`hashcat -m 0 -a 0 hash4.txt /user/share/wordlists/rockyoutxt`)first and see if it works...
+
+Well, that didn't work (see below). So let's do a little digging and go from there
+```Shell
+user@ip-10-10-173-238:~/Hashing-Basics/Task-6$ hashcat -m 0 -a 0 hash4.txt /usr/share/wordlists/rockyou.txt 
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 5.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 16.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platfor
+m #1 [The pocl project]
+===========================================================================================================================
+=======================
+* Device #1: cpu-haswell-AMD EPYC 7571, 1418/2901 MB (512 MB allocatable), 2MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+ATTENTION! Pure (unoptimized) backend kernels selected.
+Pure kernels can crack longer passwords, but drastically reduce performance.
+If you want to switch to optimized kernels, append -O to your commandline.
+See the above message to find out about the exact limits.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Host memory required for this attack: 0 MB
+
+Dictionary cache hit:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344384
+* Bytes.....: 139921497
+* Keyspace..: 14344384
+
+Cracking performance lower than expected?                 
+
+* Append -O to the commandline.
+  This lowers the maximum supported password/salt length (usually down to 32).
+
+* Append -w 3 to the commandline.
+  This can cause your screen to lag.
+
+* Append -S to the commandline.
+  This has a drastic speed impact but can be better for specific attacks.
+  Typical scenarios are a small wordlist but a large ruleset.
+
+* Update your backend API runtime / driver the right way:
+  https://hashcat.net/faq/wrongdriver
+
+* Create more work items to make use of your parallelization power:
+  https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.           
+
+Session..........: hashcat                                
+Status...........: Exhausted
+Hash.Mode........: 0 (MD5)
+Hash.Target......: b6b0d451bbf6fed658659a9e7e5598fe
+Time.Started.....: Wed Jun 11 13:23:44 2025 (11 secs)
+Time.Estimated...: Wed Jun 11 13:23:55 2025 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:  1161.3 kH/s (0.17ms) @ Accel:256 Loops:1 Thr:1 Vec:8
+Recovered........: 0/1 (0.00%) Digests (total), 0/1 (0.00%) Digests (new)
+Progress.........: 14344384/14344384 (100.00%)
+Rejected.........: 0/14344384 (0.00%)
+Restore.Point....: 14344384/14344384 (100.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidate.Engine.: Device Generator
+Candidates.#1....: $HEX[206b6d3831303838] -> $HEX[042a0337c2a156616d6f732103]
+Hardware.Mon.#1..: Util: 50%
+
+Started: Wed Jun 11 13:23:11 2025
+Stopped: Wed Jun 11 13:23:56 2025
+user@ip-10-10-173-238:~/Hashing-Basics/Task-6$ 
+```
+
+So the hash starts with `b6b` so let's check that against the hash examples.
+
+Curious, NTLM is 32bit, the start is `b#b` so may work. Lets try (hashcat -m 1000 -a 0 hash4.txt /usr/share/wordlists/rockyou.txt) next, the results are below
+```Shell
+user@ip-10-10-173-238:~/Hashing-Basics/Task-6$ ^C
+user@ip-10-10-173-238:~/Hashing-Basics/Task-6$ hashcat -m 1000 -a 0 hash4.txt /usr/share/wordlists/rockyou.txt 
+hashcat (v6.2.6) starting
+
+OpenCL API (OpenCL 3.0 PoCL 5.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 16.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platfor
+m #1 [The pocl project]
+===========================================================================================================================
+=======================
+* Device #1: cpu-haswell-AMD EPYC 7571, 1418/2901 MB (512 MB allocatable), 2MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+
+ATTENTION! Pure (unoptimized) backend kernels selected.
+Pure kernels can crack longer passwords, but drastically reduce performance.
+If you want to switch to optimized kernels, append -O to your commandline.
+See the above message to find out about the exact limits.
+
+Watchdog: Temperature abort trigger set to 90c
+
+Host memory required for this attack: 0 MB
+
+Dictionary cache hit:
+* Filename..: /usr/share/wordlists/rockyou.txt
+* Passwords.: 14344384
+* Bytes.....: 139921497
+* Keyspace..: 14344384
+
+Cracking performance lower than expected?                 
+
+* Append -O to the commandline.
+  This lowers the maximum supported password/salt length (usually down to 32).
+
+* Append -w 3 to the commandline.
+  This can cause your screen to lag.
+
+* Append -S to the commandline.
+  This has a drastic speed impact but can be better for specific attacks.
+  Typical scenarios are a small wordlist but a large ruleset.
+
+* Update your backend API runtime / driver the right way:
+  https://hashcat.net/faq/wrongdriver
+
+* Create more work items to make use of your parallelization power:
+  https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.           
+
+Session..........: hashcat                                
+Status...........: Exhausted
+Hash.Mode........: 1000 (NTLM)
+Hash.Target......: b6b0d451bbf6fed658659a9e7e5598fe
+Time.Started.....: Wed Jun 11 13:29:47 2025 (9 secs)
+Time.Estimated...: Wed Jun 11 13:29:56 2025 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:  1596.1 kH/s (0.10ms) @ Accel:256 Loops:1 Thr:1 Vec:8
+Recovered........: 0/1 (0.00%) Digests (total), 0/1 (0.00%) Digests (new)
+Progress.........: 14344384/14344384 (100.00%)
+Rejected.........: 0/14344384 (0.00%)
+Restore.Point....: 14344384/14344384 (100.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:0-1
+Candidate.Engine.: Device Generator
+Candidates.#1....: $HEX[206b6d3831303838] -> $HEX[042a0337c2a156616d6f732103]
+Hardware.Mon.#1..: Util: 33%
+
+Started: Wed Jun 11 13:29:17 2025
+Stopped: Wed Jun 11 13:29:58 2025
+```
+Nothing to see here. Okay no worries, onward and upwards So in the previous segment, we mentioned that NTLM hashes re visually identical to MD4 and MD5 hashes. Is that something to bear in mind?
+
+So I tried to run **hashcat** without a mode. It did the following:
+```Shell
+user@ip-10-10-173-238:~/Hashing-Basics/Task-6$ hashcat -a 0 hash4.txt /usr/share/wordlists/rockyou.txt 
+hashcat (v6.2.6) starting in autodetect mode
+
+OpenCL API (OpenCL 3.0 PoCL 5.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 16.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platfor
+m #1 [The pocl project]
+===========================================================================================================================
+=======================
+* Device #1: cpu-haswell-AMD EPYC 7571, 1418/2901 MB (512 MB allocatable), 2MCU
+
+The following 11 hash-modes match the structure of your input hash:
+
+      # | Name                                                       | Category
+  ======+============================================================+======================================
+    900 | MD4                                                        | Raw Hash
+      0 | MD5                                                        | Raw Hash
+     70 | md5(utf16le($pass))                                        | Raw Hash
+   2600 | md5(md5($pass))                                            | Raw Hash salted and/or iterated
+   3500 | md5(md5(md5($pass)))                                       | Raw Hash salted and/or iterated
+   4400 | md5(sha1($pass))                                           | Raw Hash salted and/or iterated
+  20900 | md5(sha1($pass).md5($pass).sha1($pass))                    | Raw Hash salted and/or iterated
+   4300 | md5(strtoupper(md5($pass)))                                | Raw Hash salted and/or iterated
+   1000 | NTLM                                                       | Operating System
+   9900 | Radmin2                                                    | Operating System
+   8600 | Lotus Notes/Domino 5                                       | Enterprise Application Software (EAS)
+
+Please specify the hash-mode with -m [hash-mode].
+
+Started: Wed Jun 11 13:35:04 2025
+Stopped: Wed Jun 11 13:35:09 2025
+```
+Which is good, this has given me a breakdown of the potential hash modes to look at. I don't think it is any of the salted hashes. 
+
+Rather than spend too much more time I decided to just google the hash (`b6b0d451bbf6fed658659a9e7e5598fe`).
+
+First link [md5hashing.net](https://md5hashing.net/hash/md5/b6b0d451bbf6fed658659a9e7e5598fe) gave me what I was after. 
+![image](https://github.com/user-attachments/assets/08c340f4-7d9b-42e2-8c3e-c66628c403e7)
+
+Let's see if my initial gut instinct was right by calling it MD5 and try `funforyou`
+
+Trying that as the answer
+#### Answer 4
+- `funforyou` ✅
 
 ## Hashing for Integrity Checking
-
-
 
 ## Conclusion
 
