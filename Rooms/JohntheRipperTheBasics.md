@@ -1,5 +1,10 @@
 | [Home](../README.md) | [Cyber Security 101](../README.md#cyber-security-101) | **John the Ripper: The Basics** |
 
+# !!!! R E M O V E 　 O N C E 　 C O M P L E T E !!!!
+### ❓ Question
+#### 🧪 Process
+#### ✅ Answer
+
 ## Contents
 - [Introduction](#introduction)
 - [Basic Terms](#basic-terms)
@@ -14,7 +19,7 @@
 - [Cracking SSH Keys with John](#cracking-ssh-keys-with-john)
 - [Further Reading](#further-reading)
 
-Page Section
+
 ## 📘 Introduction
 ### Hashing vs Encoding vs Encryption
 - **Hashing**:
@@ -84,100 +89,52 @@ Trying this as the answer
 - `Jumbo John` ✅
 
 
-## Setting Up Your System
-Certainly! Here's the **functional summary** of the installation and setup text, formatted with `###` indentation:
-
----
-
+## 📘Setting Up Your System
 ### Tools Used in This Room
-
 - **Primary Tools**:
   - **Jumbo John** (extended version of John the Ripper)
   - **rockyou.txt** password wordlist
-
 - **Pre-installed Environments**:
   - **AttackBox** and **Kali Linux** already include Jumbo John.
   - No installation needed if using these environments.
-
 ### Installation Instructions
-
 - **Linux Distributions**:
   - **Fedora**:  
-    ```bash
+    ```Shell
     sudo dnf install john
     ```
   - **Ubuntu**:  
-    ```bash
+    ```Shell
     sudo apt install john
     ```
   - These may install the core version, which lacks tools like `zip2john` and `rar2john`.
-
 - **To Access Full Features**:
-  - Build **Jumbo John** from source using the official installation guide.
-
+  - Build **Jumbo John** from source using the [official installation guide](https://github.com/openwall/john/blob/bleeding-jumbo/doc/INSTALL).
 - **Windows**:
   - Download the appropriate zipped binary (64-bit or 32-bit).
   - Extract and install manually.
-
 ### Wordlists
-
 - **Purpose**:
   - Used in dictionary attacks to compare hashed words against target hashes.
-
 - **Common Sources**:
   - **/usr/share/wordlists/** on AttackBox and Kali Linux.
-  - **SecLists repository** for a wide variety of wordlists.
-
+  - **[SecLists repository](https://github.com/danielmiessler/SecLists)** for a wide variety of wordlists.
 - **rockyou.txt**:
-  - Used throughout this room.
   - Originated from a 2009 data breach (rockyou.com).
-  - If not pre-installed, download from SecLists under `/Passwords/Leaked-Databases/`.
+  - If not pre-installed, download from SecLists under [/Passwords/Leaked-Databases/](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases).
   - Extract with:
-    ```bash
+    ```Shell
     tar xvzf rockyou.txt.tar.gz
     ```
+### ❓ Question - Which website’s breach was the `rockyou.txt` wordlist created from?
+#### 🧪 Process
+> a very large common password wordlist obtained from a data breach on a website called rockyou.com in 2009
 
----
+So I guess it comes from `rockyou.com` :)
 
-Would you like me to now compile all the summaries into a single document or export them as a file for you?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as an answer
+#### ✅ Answer
+- `rockyou.com` ✅
 
 
 ## Cracking Basic Hashes
