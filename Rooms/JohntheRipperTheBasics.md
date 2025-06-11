@@ -56,7 +56,6 @@
   - Example:
     - `"polo"` → MD5 → `b53759f3ce692de7aff1b5779d3964da`
     - `"polomints"` → MD5 → `584b6e4f4586e136bc280f27f9c64f3b`
-
 ### What Makes Hashes Secure?
 - **One-Way Function**:
   - Easy to compute a hash from input.
@@ -79,7 +78,6 @@
   - **[Cryptography Basics](/CryptographyBasics.md)** (✅ Done)
   - **[Public Key Cryptography Basics](#PublicKeyCryptographyBasics.md)** (✅ Done)
   - **[Hashing Basics](#HashingBasics.md)** (✅ Done)
-
 ### ❓ - Question - What is the most popular extended version of John the Ripper?
 #### 🧪 - Process
 This is too easy, the answer is literally on the last line before the question, "Jumbo John".
@@ -137,25 +135,18 @@ Trying this as an answer
 - `rockyou.com` ✅
 
 
-## Cracking Basic Hashes
-Certainly! Here's the **functional summary** of the John the Ripper usage guide, formatted with `###` indentation:
-
----
-
+## 📘Cracking Basic Hashes
 ### Using John the Ripper to Crack Hashes
-
 - **Basic Syntax**:
-  ```bash
+  ```Shell
   john [options] [file path]
   ```
   - `john`: Launches the tool.
   - `[options]`: Flags and parameters for the cracking process.
   - `[file path]`: File containing the hash(es) to crack.
-
 ### Automatic Cracking
-
 - **Syntax**:
-  ```bash
+  ```Shell
   john --wordlist=[path to wordlist] [path to file]
   ```
   - `--wordlist=`: Enables wordlist mode using the specified file.
@@ -163,87 +154,495 @@ Certainly! Here's the **functional summary** of the John the Ripper usage guide,
     ```bash
     john --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
     ```
-
 - **Note**: Automatic hash detection is convenient but not always reliable.
-
 ### Identifying Hash Types
-
 - **When Automatic Detection Fails**:
   - Use external tools like:
     - Online hash identifiers.
     - `hash-identifier` (Python-based tool).
-
 - **Using hash-identifier**:
   ```bash
   wget https://gitlab.com/kalilinux/packages/hash-identifier/-/raw/kali/master/hash-id.py
   python3 hash-id.py
   ```
   - Enter the hash to get a list of likely formats.
-
 ### Format-Specific Cracking
-
 - **Syntax**:
-  ```bash
+  ```Shell
   john --format=[format] --wordlist=[path to wordlist] [path to file]
   ```
   - `--format=`: Specifies the hash format explicitly.
   - Example:
-    ```bash
+    ```Shell
     john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
     ```
-
 - **Note on Formats**:
   - Prefix standard hash types with `raw-` (e.g., `raw-md5`).
   - To list all supported formats:
-    ```bash
+    ```Shell
     john --list=formats
     ```
   - To search for a specific format:
-    ```bash
+    ```Shell
     john --list=formats | grep -iF "md5"
     ```
+### ❓ Question 1 - What type of hash is hash1.txt?
+#### 🧪 Process
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ python3 hash-id.py hash1.txt 
+/home/user/John-the-Ripper-The-Basics/Task04/hash-id.py:13: SyntaxWarning: invalid escape sequence '\ '
+  logo='''   #########################################################################
+   #########################################################################
+   #     __  __                     __           ______    _____           #
+   #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+   #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+   #     \ \  _  \  /'__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+   #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+   #       \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/      #
+   #        \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.2 #
+   #                                                             By Zion3R #
+   #                                                    www.Blackploit.com #
+   #                                                   Root@Blackploit.com #
+   #########################################################################
+--------------------------------------------------
 
----
+ Not Found.
+--------------------------------------------------
+ HASH: ^C
 
-Would you like me to now compile all the summaries into a single document or export them as a file for you?
+        Bye!
+```
+Trying again with `./`
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ python3 hash-id.py ./hash1.txt 
+/home/user/John-the-Ripper-The-Basics/Task04/hash-id.py:13: SyntaxWarning: invalid escape sequence '\ '
+  logo='''   #########################################################################
+   #########################################################################
+   #     __  __                     __           ______    _____           #
+   #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+   #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+   #     \ \  _  \  /'__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+   #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+   #       \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/      #
+   #        \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.2 #
+   #                                                             By Zion3R #
+   #                                                    www.Blackploit.com #
+   #                                                   Root@Blackploit.com #
+   #########################################################################
+--------------------------------------------------
 
+ Not Found.
+--------------------------------------------------
+ HASH: 2e728dd31fb5949bc39cac5a9f066498
 
+Possible Hashs:
+[+] MD5
+[+] Domain Cached Credentials - MD4(MD4(($pass)).(strtolower($username)))
 
+Least Possible Hashs:
+[+] RAdmin v2.x
+[+] NTLM
+[+] MD4
+[+] MD2
+[+] MD5(HMAC)
+[+] MD4(HMAC)
+[+] MD2(HMAC)
+[+] MD5(HMAC(Wordpress))
+[+] Haval-128
+[+] Haval-128(HMAC)
+[+] RipeMD-128
+[+] RipeMD-128(HMAC)
+[+] SNEFRU-128
+[+] SNEFRU-128(HMAC)
+[+] Tiger-128
+[+] Tiger-128(HMAC)
+[+] md5($pass.$salt)
+[+] md5($salt.$pass)
+[+] md5($salt.$pass.$salt)
+[+] md5($salt.$pass.$username)
+[+] md5($salt.md5($pass))
+[+] md5($salt.md5($pass))
+[+] md5($salt.md5($pass.$salt))
+[+] md5($salt.md5($pass.$salt))
+[+] md5($salt.md5($salt.$pass))
+[+] md5($salt.md5(md5($pass).$salt))
+[+] md5($username.0.$pass)
+[+] md5($username.LF.$pass)
+[+] md5($username.md5($pass).$salt)
+[+] md5(md5($pass))
+[+] md5(md5($pass).$salt)
+[+] md5(md5($pass).md5($salt))
+[+] md5(md5($salt).$pass)
+[+] md5(md5($salt).md5($pass))
+[+] md5(md5($username.$pass).$salt)
+[+] md5(md5(md5($pass)))
+[+] md5(md5(md5(md5($pass))))
+[+] md5(md5(md5(md5(md5($pass)))))
+[+] md5(sha1($pass))
+[+] md5(sha1(md5($pass)))
+[+] md5(sha1(md5(sha1($pass))))
+[+] md5(strtoupper(md5($pass)))
+--------------------------------------------------
+ HASH: 
+```
+I'm gonna just assume `MD5`
 
+Trying that as the answer
+#### ✅ Answer 1
+- `MD5` ✅
+### ❓ Question 2 - What is the cracked value of hash1.txt?
+#### 🧪 Process
+First going to list the formats to see what they meant by `raw-md5`
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --list=formats
+descrypt, bsdicrypt, md5crypt, md5crypt-long, bcrypt, scrypt, LM, AFS, 
+tripcode, AndroidBackup, adxcrypt, agilekeychain, aix-ssha1, aix-ssha256, 
+aix-ssha512, andOTP, ansible, argon2, armory, as400-des, as400-ssha1, 
+asa-md5, AxCrypt, AzureAD, BestCrypt, BestCryptVE4, bfegg, Bitcoin, 
+BitLocker, bitshares, Bitwarden, BKS, Blackberry-ES10, WoWSRP, Blockchain, 
+cardano, chap, Clipperz, cloudkeychain, dynamic_n, cq, CRC32, cryptoSafe, 
+sha1crypt, sha256crypt, sha512crypt, Citrix_NS10, dahua, dashlane, 
+diskcryptor, Django, django-scrypt, dmd5, dmg, dominosec, dominosec8, 
+DPAPImk, dragonfly3-32, dragonfly3-64, dragonfly4-32, dragonfly4-64, Drupal7, 
+eCryptfs, eigrp, electrum, ENCDataVault-MD5, ENCDataVault-PBKDF2, EncFS, 
+enpass, EPI, EPiServer, ethereum, fde, Fortigate256, Fortigate, FormSpring, 
+FVDE, geli, gost, streebog256crypt, streebog512crypt, gost94crypt, gpg, 
+HAVAL-128-4, HAVAL-256-3, hdaa, hMailServer, hsrp, IKE, ipb2, itunes-backup, 
+iwork, KeePass, keplr, keychain, keyring, keystore, known_hosts, krb4, krb5, 
+krb5asrep, krb5pa-sha1, krb5pa-md5, krb5tgs, krb5tgs-sha1, krb5-17, krb5-18, 
+krb5-3, kwallet, lp, lpcli, leet, lotus5, lotus85, LUKS, MD2, mdc2, 
+MediaWiki, monero, money, MongoDB, scram, Mozilla, mscash, mscash2, MSCHAPv2, 
+mschapv2-naive, mssql, mssql05, mssql12, multibit, mysqlna, mysql-sha1, 
+mysql, net-ah, nethalflm, netlm, netlmv2, net-md5, netntlmv2, netntlm, 
+netntlm-naive, net-sha1, nk, notes, md5ns, nsec3, NT, NT-long, o10glogon, 
+o3logon, o5logon, ODF, Office, oldoffice, OpenBSD-SoftRAID, openssl-enc, 
+oracle, oracle11, Oracle12C, osc, ospf, Padlock, Palshop, Panama, 
+PBKDF2-HMAC-MD4, PBKDF2-HMAC-MD5, PBKDF2-HMAC-SHA1, PBKDF2-HMAC-SHA256, 
+PBKDF2-HMAC-SHA512, PDF, PEM, pfx, pgpdisk, pgpsda, pgpwde, phpass, PHPS, 
+PHPS2, pix-md5, PKZIP, po, postgres, PST, PuTTY, pwsafe, qnx, RACF, 
+RACF-KDFAES, radius, RAdmin, RAKP, rar, RAR5, Raw-SHA512, Raw-Blake2, 
+Raw-Keccak, Raw-Keccak-256, Raw-MD4, Raw-MD5, Raw-MD5u, Raw-SHA1, 
+Raw-SHA1-AxCrypt, Raw-SHA1-Linkedin, Raw-SHA224, Raw-SHA256, Raw-SHA3, 
+Raw-SHA384, restic, ripemd-128, ripemd-160, rsvp, RVARY, Siemens-S7, 
+Salted-SHA1, SSHA512, sapb, sapg, saph, sappse, securezip, 7z, Signal, SIP, 
+skein-256, skein-512, skey, SL3, SM3, Snefru-128, Snefru-256, LastPass, SNMP, 
+solarwinds, SSH, sspr, Stribog-256, Stribog-512, STRIP, SunMD5, SybaseASE, 
+Sybase-PROP, tacacs-plus, tcp-md5, telegram, tezos, Tiger, timeroast, 
+tc_aes_xts, tc_ripemd160, tc_ripemd160boot, tc_sha512, tc_whirlpool, vdi, 
+OpenVMS, vmx, VNC, vtp, wbb3, whirlpool, whirlpool0, whirlpool1, wpapsk, 
+wpapsk-pmk, xmpp-scram, xsha, xsha512, zed, ZIP, ZipMonster, plaintext, 
+has-160, HMAC-MD5, HMAC-SHA1, HMAC-SHA224, HMAC-SHA256, HMAC-SHA384, 
+HMAC-SHA512, dummy, crypt
+430 formats (151 dynamic formats shown as just "dynamic_n" here)
+```
+Oh yeah,grep for filtering
 
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --list=formats | grep -iF "md5"
+descrypt, bsdicrypt, md5crypt, md5crypt-long, bcrypt, scrypt, LM, AFS, 
+asa-md5, AxCrypt, AzureAD, BestCrypt, BestCryptVE4, bfegg, Bitcoin, 
+diskcryptor, Django, django-scrypt, dmd5, dmg, dominosec, dominosec8, 
+eCryptfs, eigrp, electrum, ENCDataVault-MD5, ENCDataVault-PBKDF2, EncFS, 
+krb5asrep, krb5pa-sha1, krb5pa-md5, krb5tgs, krb5tgs-sha1, krb5-17, krb5-18, 
+mysql, net-ah, nethalflm, netlm, netlmv2, net-md5, netntlmv2, netntlm, 
+netntlm-naive, net-sha1, nk, notes, md5ns, nsec3, NT, NT-long, o10glogon, 
+PBKDF2-HMAC-MD4, PBKDF2-HMAC-MD5, PBKDF2-HMAC-SHA1, PBKDF2-HMAC-SHA256, 
+PHPS2, pix-md5, PKZIP, po, postgres, PST, PuTTY, pwsafe, qnx, RACF, 
+Raw-Keccak, Raw-Keccak-256, Raw-MD4, Raw-MD5, Raw-MD5u, Raw-SHA1, 
+solarwinds, SSH, sspr, Stribog-256, Stribog-512, STRIP, SunMD5, SybaseASE, 
+Sybase-PROP, tacacs-plus, tcp-md5, telegram, tezos, Tiger, timeroast, 
+430 formats (151 dynamic formats shown as just "dynamic_n" here)                                                                                                                                                        
+has-160, HMAC-MD5, HMAC-SHA1, HMAC-SHA224, HMAC-SHA256, HMAC-SHA384,
+```
+Let's try with `--format=raw-md5`
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash1.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (Raw-MD5 [MD5 256/256 AVX2 8x3])
+Warning: no OpenMP support for this hash type, consider --fork=2
+Note: Passwords longer than 18 [worst case UTF-8] to 55 [ASCII] rejected
+Press 'q' or Ctrl-C to abort, 'h' for help, almost any other key for status
+biscuit          (?)     
+1g 0:00:00:00 DONE (2025-06-11 18:33) 33.33g/s 89600p/s 89600c/s 89600C/s skyblue..nugget
+Use the "--show --format=Raw-MD5" options to display all of the cracked passwords reliably
+Session completed. 
+```
+Crap that was quick! We have a result of `biscuit`. 
 
+Trying that as the answer
+#### ✅ Answer 2
+- `biscuit` ✅
+### ❓ Question 3 - What type of hash is hash2.txt?
+#### 🧪 Process
+First lets `cat` the hash from `hash2.txt` and copy it to the clipboard.
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ cat hash2.txt 
+1A732667F3917C0F4AA98BB13011B9090C6F8065
+```
+Next lets fire up `hash-id.py` and paste the hash (`1A732667F3917C0F4AA98BB13011B9090C6F8065`) in.
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ python3 hash-id.py             
+/home/user/John-the-Ripper-The-Basics/Task04/hash-id.py:13: SyntaxWarning: invalid escape sequence '\ '
+  logo='''   #########################################################################
+   #########################################################################
+   #     __  __                     __           ______    _____           #
+   #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+   #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+   #     \ \  _  \  /'__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+   #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+   #       \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/      #
+   #        \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.2 #
+   #                                                             By Zion3R #
+   #                                                    www.Blackploit.com #
+   #                                                   Root@Blackploit.com #
+   #########################################################################
+--------------------------------------------------
+ HASH: 1A732667F3917C0F4AA98BB13011B9090C6F8065
 
+Possible Hashs:
+[+] SHA-1
+[+] MySQL5 - SHA-1(SHA-1($pass))
 
+Least Possible Hashs:
+[+] Tiger-160
+[+] Haval-160
+[+] RipeMD-160
+[+] SHA-1(HMAC)
+[+] Tiger-160(HMAC)
+[+] RipeMD-160(HMAC)
+[+] Haval-160(HMAC)
+[+] SHA-1(MaNGOS)
+[+] SHA-1(MaNGOS2)
+[+] sha1($pass.$salt)
+[+] sha1($salt.$pass)
+[+] sha1($salt.md5($pass))
+[+] sha1($salt.md5($pass).$salt)
+[+] sha1($salt.sha1($pass))
+[+] sha1($salt.sha1($salt.sha1($pass)))
+[+] sha1($username.$pass)
+[+] sha1($username.$pass.$salt)
+[+] sha1(md5($pass))
+[+] sha1(md5($pass).$salt)
+[+] sha1(md5(sha1($pass)))
+[+] sha1(sha1($pass))
+[+] sha1(sha1($pass).$salt)
+[+] sha1(sha1($pass).substr($pass,0,3))
+[+] sha1(sha1($salt.$pass))
+[+] sha1(sha1(sha1($pass)))
+[+] sha1(strtolower($username).$pass)
+--------------------------------------------------
+ HASH: 
+```
+Let's go with `[+] SHA-1`
 
+Trying that as an answer
+#### ✅ Answer 3
+- `SHA1` ✅
+### ❓ Question 4- What is the cracked value of hash2.txt?
+#### 🧪 Process
+Lets try without spending a second to check the formats...
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --format=SHA-1 --wordlist=/usr/share/wordlists/rockyou.txt hash2.txt 
+Error: No format matched requested name 'sha-1'
+```
+Shite... Okay lets list the formats
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --list=formats | grep -iF "sha"
+tripcode, AndroidBackup, adxcrypt, agilekeychain, aix-ssha1, aix-ssha256, 
+aix-ssha512, andOTP, ansible, argon2, armory, as400-des, as400-ssha1, 
+BitLocker, bitshares, Bitwarden, BKS, Blackberry-ES10, WoWSRP, Blockchain, 
+sha1crypt, sha256crypt, sha512crypt, Citrix_NS10, dahua, dashlane, 
+krb5asrep, krb5pa-sha1, krb5pa-md5, krb5tgs, krb5tgs-sha1, krb5-17, krb5-18, 
+430 formats (151 dynamic formats shown as just "dynamic_n" here)
+mschapv2-naive, mssql, mssql05, mssql12, multibit, mysqlna, mysql-sha1, 
+netntlm-naive, net-sha1, nk, notes, md5ns, nsec3, NT, NT-long, o10glogon, 
+PBKDF2-HMAC-MD4, PBKDF2-HMAC-MD5, PBKDF2-HMAC-SHA1, PBKDF2-HMAC-SHA256, 
+PBKDF2-HMAC-SHA512, PDF, PEM, pfx, pgpdisk, pgpsda, pgpwde, phpass, PHPS, 
+RACF-KDFAES, radius, RAdmin, RAKP, rar, RAR5, Raw-SHA512, Raw-Blake2, 
+Raw-Keccak, Raw-Keccak-256, Raw-MD4, Raw-MD5, Raw-MD5u, Raw-SHA1, 
+Raw-SHA1-AxCrypt, Raw-SHA1-Linkedin, Raw-SHA224, Raw-SHA256, Raw-SHA3, 
+Raw-SHA384, restic, ripemd-128, ripemd-160, rsvp, RVARY, Siemens-S7, 
+Salted-SHA1, SSHA512, sapb, sapg, saph, sappse, securezip, 7z, Signal, SIP, 
+tc_aes_xts, tc_ripemd160, tc_ripemd160boot, tc_sha512, tc_whirlpool, vdi, 
+wpapsk-pmk, xmpp-scram, xsha, xsha512, zed, ZIP, ZipMonster, plaintext, 
+has-160, HMAC-MD5, HMAC-SHA1, HMAC-SHA224, HMAC-SHA256, HMAC-SHA384, 
+HMAC-SHA512, dummy, crypt
+```
+Better still lets filter to `raw-sha1`
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --list=formats | grep -iF "raw-sha1"
+430 formats (151 dynamic formats shown as just "dynamic_n" here)
+Raw-Keccak, Raw-Keccak-256, Raw-MD4, Raw-MD5, Raw-MD5u, Raw-SHA1, 
+Raw-SHA1-AxCrypt, Raw-SHA1-Linkedin, Raw-SHA224, Raw-SHA256, Raw-SHA3, 
+```
+So we do have `Raw-SHA1`, first line of formats last on the right.
 
+Let's try again with `Raw-SHA1` as the format
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --format=Raw-SHA1 --wordlist=/usr/share/wordlists/rockyou.txt hash2.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (Raw-SHA1 [SHA1 256/256 AVX2 8x])
+Warning: no OpenMP support for this hash type, consider --fork=2
+Note: Passwords longer than 18 [worst case UTF-8] to 55 [ASCII] rejected
+Press 'q' or Ctrl-C to abort, 'h' for help, almost any other key for status
+kangeroo         (?)     
+1g 0:00:00:00 DONE (2025-06-11 18:47) 33.33g/s 3904Kp/s 3904Kc/s 3904KC/s karakara..kalinda
+Use the "--show --format=Raw-SHA1" options to display all of the cracked passwords reliably
+Session completed. 
+```
+Again, very quick. We have our answer `kangeroo`.
 
+Trying this as the answer
+#### ✅ Answer 4
+- `kangeroo`
+### ❓ Question 5 - What type of hash is hash3.txt?
+#### 🧪 Process
+We'll `cat` the file `hash3.txt` and copy the hash to the clipboard
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ cat hash3.txt 
+D7F4D3CCEE7ACD3DD7FAD3AC2BE2AAE9C44F4E9B7FB802D73136D4C53920140A
+```
+We'll identify potential hash id's
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ python3 hash-id.py 
+/home/user/John-the-Ripper-The-Basics/Task04/hash-id.py:13: SyntaxWarning: invalid escape sequence '\ '
+  logo='''   #########################################################################
+   #########################################################################
+   #     __  __                     __           ______    _____           #
+   #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+   #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+   #     \ \  _  \  /'__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+   #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+   #       \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/      #
+   #        \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.2 #
+   #                                                             By Zion3R #
+   #                                                    www.Blackploit.com #
+   #                                                   Root@Blackploit.com #
+   #########################################################################
+--------------------------------------------------
+ HASH: D7F4D3CCEE7ACD3DD7FAD3AC2BE2AAE9C44F4E9B7FB802D73136D4C53920140A
 
+Possible Hashs:
+[+] SHA-256
+[+] Haval-256
 
+Least Possible Hashs:
+[+] GOST R 34.11-94
+[+] RipeMD-256
+[+] SNEFRU-256
+[+] SHA-256(HMAC)
+[+] Haval-256(HMAC)
+[+] RipeMD-256(HMAC)
+[+] SNEFRU-256(HMAC)
+[+] SHA-256(md5($pass))
+[+] SHA-256(sha1($pass))
+--------------------------------------------------
+ HASH: 
+```
+I'm assuming the first possible hash of `[+] SHA-256`
 
+Trying that as the answer
+#### ✅ Answer 5
+- `SHA256` ✅
+### ❓ Question 6 - What is the cracked value of hash3.txt?
+#### 🧪 Process
+So we know the format is `SHA-256. I'm going to go ahead and assume that the format will be `Raw-SHA256` 
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --list=formats | grep -iF "Raw-SHA256"
+430 formats (151 dynamic formats shown as just "dynamic_n" here)
+Raw-SHA1-AxCrypt, Raw-SHA1-Linkedin, Raw-SHA224, Raw-SHA256, Raw-SHA3, 
+```
+Finally we'll run John with the correct format this time `Raw-SHA256`
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --format=Raw-SHA256 --wordlist=/usr/share/wordlists/rockyou.txt hash3.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (Raw-SHA256 [SHA256 256/256 AVX2 8x])
+Warning: poor OpenMP scalability for this hash type, consider --fork=2
+Will run 2 OpenMP threads
+Note: Passwords longer than 18 [worst case UTF-8] to 55 [ASCII] rejected
+Press 'q' or Ctrl-C to abort, 'h' for help, almost any other key for status
+microphone       (?)     
+1g 0:00:00:00 DONE (2025-06-11 19:54) 20.00g/s 1966Kp/s 1966Kc/s 1966KC/s rozalia..Dominic1
+Use the "--show --format=Raw-SHA256" options to display all of the cracked passwords reliably
+Session completed. 
+```
+It looks like we have found `microphone`.
 
+Trying this as the answer
+#### ✅ Answer 6
+- `microphone` ✅
+### ❓ Question 7 - What type of hash is hash4.txt?
+#### 🧪 Process
+`cat` file `hash4.txt` and copy the resulting hash to the clipboard.
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ cat hash4.txt 
+c5a60cc6bbba781c601c5402755ae1044bbf45b78d1183cbf2ca1c865b6c792cf3c6b87791344986c8a832a0f9ca8d0b4afd3d9421a149d57075e1b4e93f90bf
+```
+Kick off `hash-id.py` and paste in the hash `c5a60cc6bbba781c601c5402755ae1044bbf45b78d1183cbf2ca1c865b6c792cf3c6b87791344986c8a832a0f9ca8d0b4afd3d9421a149d57075e1b4e93f90bf`
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ python3 hash-id.py 
+/home/user/John-the-Ripper-The-Basics/Task04/hash-id.py:13: SyntaxWarning: invalid escape sequence '\ '
+  logo='''   #########################################################################
+   #########################################################################
+   #     __  __                     __           ______    _____           #
+   #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+   #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+   #     \ \  _  \  /'__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+   #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+   #       \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/      #
+   #        \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.2 #
+   #                                                             By Zion3R #
+   #                                                    www.Blackploit.com #
+   #                                                   Root@Blackploit.com #
+   #########################################################################
+--------------------------------------------------
+ HASH: c5a60cc6bbba781c601c5402755ae1044bbf45b78d1183cbf2ca1c865b6c792cf3c6b87791344986c8a832a0f9ca8d0b4afd3d9421a149d57075e1b4e93f90bf
 
+Possible Hashs:
+[+] SHA-512
+[+] Whirlpool
 
+Least Possible Hashs:
+[+] SHA-512(HMAC)
+[+] Whirlpool(HMAC)
+--------------------------------------------------
+ HASH: 
+```
+Now we have the hash format (`SHA512`) we can answer this question and then proceed with cracking the hash in Q8.
 
+Trying this as the answer
+#### ✅ Answer 7
+- `SHA512` ❌
+Assumptions, assumptions, assumptions.
+The other option was `Whirlpool` so let's try that as the answer...
+- `Whirlpool`
+### ❓ Question 8 - What is the cracked value of hash4.txt?
+#### 🧪 Process
+So now we can search the formats for `whirlpool`
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --list=formats | grep -iF "whirlpool"
+430 formats (151 dynamic formats shown as just "dynamic_n" here)
+tc_aes_xts, tc_ripemd160, tc_ripemd160boot, tc_sha512, tc_whirlpool, vdi, 
+OpenVMS, vmx, VNC, vtp, wbb3, whirlpool, whirlpool0, whirlpool1, wpapsk, 
+```
+There are a couple `whirlpool`'s in the list. Let's stick the default one.
+```Shell
+user@ip-10-10-175-3:~/John-the-Ripper-The-Basics/Task04$ john --format=whirlpool --wordlist=/usr/share/wordlists/rockyou.txt hash4.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (whirlpool [WHIRLPOOL 32/64])
+Warning: poor OpenMP scalability for this hash type, consider --fork=2
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, 'h' for help, almost any other key for status
+colossal         (?)     
+1g 0:00:00:00 DONE (2025-06-11 20:09) 2.083g/s 1416Kp/s 1416Kc/s 1416KC/s cooldog12..chata1994
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
+We have a result! `colossal`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### ✅ Answer 8
+- `colossal` ✅
 
 
 ## Cracking Windows Authentication Hashes
