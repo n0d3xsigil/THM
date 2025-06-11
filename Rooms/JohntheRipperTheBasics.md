@@ -6,7 +6,7 @@
 - [Setting Up Your System](#setting-up-your-system)
 - [Cracking Basic Hashes](#cracking-basic-hashes)
 - [Cracking Windows Authentication Hashes](#cracking-windows-authentication-hashes)
-- [Cracking /etc/shadow Hashes](#cracking-etc-shadow-hashes)
+- [Cracking /etc/shadow Hashes](#cracking-etcshadow-hashes)
 - [Single Crack Mode](#single-crack-mode)
 - [Custom Rules](#custom-rules)
 - [Cracking Password Protected Zip Files](#cracking-password-protected-zip-files)
