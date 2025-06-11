@@ -835,9 +835,71 @@ Let's see if my initial gut instinct was right by calling it MD5 and try `funfor
 Trying that as the answer
 #### Answer 4
 - `funforyou` ✅
-
 ## Hashing for Integrity Checking
+### Integrity Checking with Hashing
+- **Purpose**:
+  - Hashing verifies that files haven’t been altered.
+  - Even a 1-bit change results in a completely different hash.
+  - Useful for confirming file integrity after downloads.
+- **Example**:
+  - A SHA256 checksum file lists official hashes for Fedora ISO files.
+  - If your computed hash matches the listed one, the file is unmodified.
+- **Command Example**:
+  ```bash
+  sha256sum <filename>
+  ```
+  - Compare the output with the official hash to verify integrity.
+- **Duplicate Detection**:
+  - Identical hashes indicate identical files.
+  - Useful for identifying and removing duplicate files.
+### HMACs (Keyed-Hash Message Authentication Codes)
+- **Purpose**:
+  - Ensures both **authenticity** (sender is verified) and **integrity** (message is unaltered).
+  - Combines a cryptographic hash function with a **secret key**.
+- **How HMAC Works**:
 
+![image](https://github.com/user-attachments/assets/ab7f6381-9e48-4426-9d78-4e1eab9e7a30)
+  1. Pad the secret key to the hash function’s block size.
+  2. XOR the padded key with a constant (e.g., `ipad` or `opad`).
+  3. Hash the message with the XORed key.
+  4. Hash the result again with the other XORed key.
+  5. Output is the final HMAC value.
+- **Formula**:
+  ```
+  HMAC(K, M) = H((K ⊕ opad) || H((K ⊕ ipad) || M))
+  ```
+  - `K`: secret key  
+  - `M`: message  
+  - `H`: hash function  
+  - `⊕`: XOR  
+  - `||`: concatenation
+### Question 1 - What is SHA256 hash of `libgcrypt-1.11.0.tar.bz2` found in `~/Hashing-Basics/Task-7`?
+#### Process
+Should be straight forward, we'll use `sha256sum <filename>` and that should give us our answer.
+
+<Just waiting for machine to start...>
+```Shell
+user@ip-10-10-150-202:~$ sha256sum Hashing-Basics/Task-7/libgcrypt-1.11.0.tar.bz2 
+09120c9867ce7f2081d6aaa1775386b98c2f2f246135761aae47d81f58685b9c  Hashing-Basics/Task-7/libgcrypt-1.11.0.tar.bz2
+```
+
+We have a sum of `09120c9867ce7f2081d6aaa1775386b98c2f2f246135761aae47d81f58685b9c`
+
+Trying that as the answer
+#### Answer 1
+- `09120c9867ce7f2081d6aaa1775386b98c2f2f246135761aae47d81f58685b9c` ✅
+### Question 2 - What’s the hashcat mode number for `HMAC-SHA512 (key = $pass)`?
+#### Process
+Again, fairly straight forward, this is the salted hash. I'll use the GitHub hash examples as I can't access Hastcat at the moment.
+
+| Hash-Mode	|         Hash-Name         |
+|-----------|---------------------------|
+|    `1750` | HMAC-SHA512 (key = $pass) |
+
+
+Trying this as the answer
+#### Answer 2
+- `1750` ✅
 ## Conclusion
 
 
