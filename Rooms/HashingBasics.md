@@ -257,8 +257,117 @@ Trying this as the answer
 
 
 ## Recognising Password Hashes
+### Offensive Security: Hash Identification and Cracking
+- **Hash Recognition**:
+  - Tools like `hashID` can identify hash types but are unreliable for many formats.
+  - Prefixes in hashes improve recognition accuracy.
+  - Use context (e.g., source of the hash) alongside tools for better identification.
+### Linux Password Hashes
+- **Storage Location**:
+  - Password hashes are stored in `/etc/shadow` (readable only by root).
+  - Previously stored in `/etc/passwd` (readable by all).
+- **Shadow File Format**:
+  - Each line has 9 colon-separated fields.
+  - The second field contains the hashed password in the format:  
+    `$prefix$options$salt$hash`.
+- **Common Prefixes and Algorithms**:
+  | Prefix | Algorithm |
+  |--------|-----------|
+  | `$y$`  | yescrypt (default, recommended) |
+  | `$gy$` | gost-yescrypt |
+  | `$7$`  | scrypt |
+  | `$2b$`, `$2y$`, `$2a$`, `$2x$` | bcrypt |
+  | `$6$`  | sha512crypt |
+  | `$md5` | SunMD5 |
+  | `$1$`  | md5crypt |
+- **Example**:
+  - Hash: `$y$j9T$76UzfgEM5PnymhQ7TlJey1$/OOSg64dhfF.TigVPdzqiFang6uZA4QA1pzzegKdVm4`
+  - Components:
+    - `y`: yescrypt algorithm
+    - `j9T`: algorithm parameter
+    - `76UzfgEM5PnymhQ7TlJey1`: salt
+    - `/OOSg64dhf...`: hash value
+### Windows Password Hashes
+- **Hash Type**:
+  - NTLM (variant of MD4), visually similar to MD4/MD5.
+  - Context is essential for correct identification.
+- **Storage Location**:
+  - Stored in the SAM (Security Accounts Manager).
+  - Tools like `mimikatz` can extract them.
+- **Hash Types**:
+  - NT hashes
+  - LM hashes
+### Additional Resources
+- **Hashcat Example Hashes**:
+  - Useful for identifying various hash formats and prefixes.
+- **Research**:
+  - Critical for identifying unknown or custom hash formats.
+### Question 1 - What is the hash size in yescrypt?
+#### Process
+Initially I looked on the segment for `yescrypt`, there where 5 results, none of which related to the _hash size_. So time to look at the big wide world web.
 
+I did try to take a  look at the [Hashcat Example Hashes](https://hashcat.net/wiki/doku.php?id=example_hashes) but this page is blocked by my employeer.
 
+Google is our friend here. Some results of interest searching for `yescrypt`
+- [yescrypt: large-scale password hashing](https://www.openwall.com/presentations/BSidesLjubljana2017-Yescrypt-Large-scale-Password-Hashing/)
+  - Loads of good information about how _yescypt_ works, but honestly I didn't have the drive to review all 84 slides to find what I was after
+- [Github: openwall / yescrypt](https://github.com/openwall/yescrypt)
+  - some references to sha256
+Time for a new search, let's go straight for `yescrypt hash size`
+- Of course AI Search is trying to tell me the answer, but I'd really like to find it myself.
+- [Arch Man pages: crypt.5.en](https://man.archlinux.org/man/crypt.5.en#yescrypt)
+ - Result. There is a section on _yescrypt_.
+
+> While yescrypt's strength against password guessing attacks comes from its algorithm design, its cryptographic security is guaranteed by its use of SHA-256 on the outer layer
+
+The hash size for _SHA-256_ is `256`-bits. 
+
+Trying this as the answer
+#### Answer 1
+- `256` ✅
+### Question 2 - What’s the Hash-Mode listed for Cisco-ASA MD5?
+#### Process
+I've googled, I've looked at loads of pages. Nothing firm. Resolved to look at the hint.
+😭 look at [Hashcat Example Hashes](https://hashcat.net/wiki/doku.php?id=example_hashes) but this page is blocked by my employeer 😭.
+
+Github to the rescue [GitHub CalfCrusher / has_examples.md](https://gist.github.com/CalfCrusher/6b87a738d0fe7b88e04f4a36eb6d722d).
+
+`Ctrl+F` and search for _Cisco-ASA_ and found:
+| Hash-Mode |   Hash-Name   |       Example       |
+|-----------|---------------|---------------------|
+| `2410`    | Cisco-ASA MD5 | 02dMBMYkTdC5Ziyp:36 |
+
+Trying this as the answer
+
+#### Answer 2
+- `2410` ✅
+### Question 3 - What hashing algorithm is used in Cisco-IOS if it starts with $9$?
+#### Process
+I'm just going to search the same page for `$9$`, although I think this might be in this segment...
+... Okay it's not. Back to my new GitHub friend.
+
+There was the following entry:
+
+| Hash-Mode |       Hash-Name       |                            Example                            |
+|-----------|-----------------------|---------------------------------------------------------------|
+| `9300`    | Cisco-IOS 9 (scrypt)  | $9$2MJBozw/9R3UsU$2lFhcKvpghcyw8deP25GOfyZaagyUOGBymkryvOdfo6 |
+
+`scrypt` could work, it would fit the answer of `_ _ _ _ _ _`. Let's see if we can find anything else on google to help.
+
+This has potential [Understanding the differences between the Cisco password \ secret Types](https://community.cisco.com/t5/networking-knowledge-base/understanding-the-differences-between-the-cisco-password-secret/ta-p/3163238)
+
+Specifically **Type 9**
+
+> Type 9
+> These use the SCRYPT hashing algorithm defined in the informational RFC 7914. SCRYPT uses 80-bit salt, 16384 iterations. It’s very memory expensive to run the algorithm and therefore difficult to crack. Running it once occasionally on a Cisco device is fine though, this is currently the Best Practice Type password to use. I have not proven it but I believe it is possible that the popular tool HashCat is able to decrypt these.
+>
+> In the running config standard Type 9 start with $9$.
+>
+> In the running config convoluted Type 9 start with $14$.
+
+Trying this as the answer
+#### Answer 3
+- `scrypt`
 
 
 ## Password Cracking
