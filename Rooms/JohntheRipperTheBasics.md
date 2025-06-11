@@ -20,7 +20,7 @@
 - [Further Reading](#further-reading)
 
 
-## 📘 Introduction
+## 📘Introduction
 ### Hashing vs Encoding vs Encryption
 - **Hashing**:
   - Converts input data into a fixed-size string (digest).
@@ -48,7 +48,7 @@
   - Covered in previous modules.
 
 
-## 📘 Basic Terms
+## 📘Basic Terms
 ### Cryptography Concepts Refresher
 - **What Are Hashes?**
   - A hash converts data of any length into a fixed-length string (digest).
