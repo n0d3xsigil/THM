@@ -738,26 +738,44 @@ Would you like me to now compile all the summaries into a single document or exp
 
 
 ## Cracking Password Protected Zip Files
+Here’s the functional summary for the **Zip File Cracking** section:
 
-Zip2John
-Similarly to the unshadow tool we used previously, we will use the zip2john tool to convert the Zip file into a hash format that John can understand and hopefully crack. The primary usage is like this:
+---
 
-zip2john [options] [zip file] > [output file]
+### Cracking Zip Files
 
-[options]: Allows you to pass specific checksum options to zip2john; this shouldn’t often be necessary
-[zip file]: The path to the Zip file you wish to get the hash of
->: This redirects the output from this command to another file
-[output file]: This is the file that will store the output
-Example Usage
+#### Overview
 
-zip2john zipfile.zip > zip_hash.txt
+John the Ripper can crack password-protected Zip files by first converting them into a compatible hash format using a helper tool. This process allows John to attempt brute-force or dictionary-based attacks on the extracted hash.
 
-Cracking
-We’re then able to take the file we output from zip2john in our example use case, zip_hash.txt, and, as we did with unshadow, feed it directly into John as we have made the input specifically for it.
+#### Tool: `zip2john`
 
-john --wordlist=/usr/share/wordlists/rockyou.txt zip_hash.txt
+* Converts a `.zip` file into a format that John the Ripper can process.
 
+* Syntax:
 
+  ```
+  zip2john [options] [zip file] > [output file]
+  ```
+
+  * **\[options]**: Optional checksum parameters (rarely needed).
+  * **\[zip file]**: Target archive to extract the hash from.
+  * **> \[output file]**: Redirects the hash output to a file.
+
+* **Example**:
+
+  ```bash
+  zip2john zipfile.zip > zip_hash.txt
+  ```
+
+#### Cracking with John
+
+* Once the hash is extracted, it can be cracked using John with a wordlist.
+* **Example**:
+
+  ```bash
+  john --wordlist=/usr/share/wordlists/rockyou.txt zip_hash.txt
+  ```
 
 
 
@@ -797,5 +815,178 @@ john --wordlist=/usr/share/wordlists/rockyou.txt zip_hash.txt
 
 
 ## Cracking Password-Protected RAR Archives
+Here’s your functional summary for the **RAR File Cracking** section:
+
+---
+
+### Cracking RAR Files
+
+#### Overview
+
+RAR archives, like Zip files, can be password-protected. John the Ripper can crack these passwords by converting the archive into a hash format it understands using a helper tool.
+
+#### Tool: `rar2john`
+
+* Converts a `.rar` archive into a John-compatible hash format.
+
+* Syntax:
+
+  ```
+  rar2john [rar file] > [output file]
+  ```
+
+  * **rar2john**: Calls the hash extraction tool.
+  * **\[rar file]**: Path to the target RAR archive.
+  * **> \[output file]**: Redirects hash output to a specified file.
+
+* **Example**:
+
+  ```bash
+  /opt/john/rar2john rarfile.rar > rar_hash.txt
+  ```
+
+#### Cracking with John
+
+* The generated hash file can then be cracked using a wordlist in John.
+* **Example**:
+
+  ```bash
+  john --wordlist=/usr/share/wordlists/rockyou.txt rar_hash.txt
+  ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Cracking SSH Keys with John
+Here’s the functional summary for the **SSH Key Cracking** section:
+
+---
+
+### Cracking SSH Key Passwords
+
+#### Overview
+
+SSH private keys (`id_rsa`) can be password-protected. John the Ripper can be used to crack these passwords, which may allow access to remote machines if key-based authentication is enabled.
+
+#### Tool: `ssh2john`
+
+* Converts an SSH private key file into a John-compatible hash format.
+
+* Syntax:
+
+  ```
+  ssh2john [id_rsa private key file] > [output file]
+  ```
+
+  * **ssh2john**: Invokes the conversion tool.
+  * **\[id\_rsa private key file]**: Path to the target SSH key file.
+  * **> \[output file]**: Redirects hash output to a file.
+
+* **Alternative usage** (if `ssh2john` is not directly available):
+
+  * On **AttackBox**:
+
+    ```bash
+    python3 /opt/john/ssh2john.py id_rsa > id_rsa_hash.txt
+    ```
+  * On **Kali**:
+
+    ```bash
+    python /usr/share/john/ssh2john.py id_rsa > id_rsa_hash.txt
+    ```
+
+#### Cracking with John
+
+* Use the generated hash file with a wordlist to attempt cracking the SSH key password.
+* **Example**:
+
+  ```bash
+  john --wordlist=/usr/share/wordlists/rockyou.txt id_rsa_hash.txt
+  ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Further Reading
+Here’s the final functional summary for the **Conclusion** section:
+
+---
+
+### Conclusion
+
+#### Summary
+
+This room has introduced the core principles of using John the Ripper, including:
+
+* Converting protected files into hash formats
+* Cracking those hashes using a wordlist
+
+The consistent workflow can now be applied to a wide range of supported hash types.
+
+#### Further Learning
+
+For continued learning, updates, and in-depth usage tips, refer to the official John the Ripper wiki:
+
+* **Openwall Wiki**: [https://openwall.info/wiki/john](https://openwall.info/wiki/john)
