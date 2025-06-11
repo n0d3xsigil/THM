@@ -15,27 +15,13 @@
 - [Further Reading](#further-reading)
 
 Page Section
-## Introduction
-
-
-
-
-
-
-
-
-Absolutely! Here's the **functional summary** of the final text, formatted with `###` indentation:
-
----
-
+## 📘 Introduction
 ### Hashing vs Encoding vs Encryption
-
 - **Hashing**:
   - Converts input data into a fixed-size string (digest).
   - One-way process: cannot retrieve original data from the hash.
   - Any change in input results in a completely different hash.
   - Used for data integrity verification.
-
 - **Encoding**:
   - Converts data into a different format for compatibility or transmission.
   - Common encodings: ASCII, UTF-8, UTF-16, UTF-32, ISO-8859-1, Windows-1252.
@@ -43,68 +29,22 @@ Absolutely! Here's the **functional summary** of the final text, formatted with 
   - Other encodings: Base32, Base64 (used for data transmission/storage).
   - **Reversible**: anyone can decode with the right tools.
   - **Not secure**: does not protect confidentiality.
-
 - **Example (Base64)**:
-  ```bash
+  ```Shell
   echo "TryHackMe" | base64
   # Output: VHJ5SGFja01lCg==
   
   echo "VHJ5SGFja01lCg==" | base64 -d
   # Output: TryHackMe
   ```
-
 - **Encryption**:
   - Protects data confidentiality using a cipher and a key.
   - **Reversible**: only with the correct key and algorithm.
   - Covered in previous modules.
 
-### Next Steps
 
-- Continue with **John the Ripper** for practical password cracking.
-- For deeper cryptography knowledge, explore the recommended cryptography-focused room.
-
----
-
-Would you like me to now compile all these summaries into a single document or export them as a file for you?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Basic Terms
-
-Certainly! Here's the **functional summary** of the final text, formatted with `###` indentation:
-
----
-
+## 📘 Basic Terms
 ### Cryptography Concepts Refresher
-
 - **What Are Hashes?**
   - A hash converts data of any length into a fixed-length string (digest).
   - Common algorithms: **MD4**, **MD5**, **SHA1**, **NTLM**.
@@ -113,44 +53,35 @@ Certainly! Here's the **functional summary** of the final text, formatted with `
     - `"polomints"` → MD5 → `584b6e4f4586e136bc280f27f9c64f3b`
 
 ### What Makes Hashes Secure?
-
 - **One-Way Function**:
   - Easy to compute a hash from input.
   - Hard (computationally infeasible) to reverse a hash to its original input.
-
 - **P vs NP (Simplified)**:
   - **P**: Problems solvable in polynomial time (e.g., hashing).
+    - _Polynomial Time_
   - **NP**: Problems where solutions can be verified quickly, but not easily found (e.g., reversing a hash).
-
+    - _Non-deterministic Polynomial Time_
 ### Cracking Hashes with John the Ripper
-
 - **Dictionary Attack**:
   - Hash a large list of words (dictionary).
   - Compare each hash to the target hash.
   - If a match is found, the original word is discovered.
-
 - **Tool**: **John the Ripper (John)**
   - Performs fast brute-force and dictionary attacks on various hash types.
   - This room focuses on **Jumbo John**, an extended version with more features.
-
 ### Further Learning
-
 - For deeper understanding:
-  - **Cryptography Basics**
-  - **Public Key Cryptography Basics**
-  - **Hashing Basics**
+  - **[Cryptography Basics](/CryptographyBasics.md)** (✅ Done)
+  - **[Public Key Cryptography Basics](#PublicKeyCryptographyBasics.md)** (✅ Done)
+  - **[Hashing Basics](#HashingBasics.md)** (✅ Done)
 
----
+### ❓ - Question - What is the most popular extended version of John the Ripper?
+#### 🧪 - Process
+This is too easy, the answer is literally on the last line before the question, "Jumbo John".
 
-Would you like me to now compile all the summaries into a single document or export them as a file for you?
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### ✅ - Answer
+- `Jumbo John` ✅
 
 
 ## Setting Up Your System
