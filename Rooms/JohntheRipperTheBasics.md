@@ -1397,45 +1397,79 @@ Trying this as the answer
 - `THM{w3ll_d0n3_h4sh_r0y4l} ✅`
 
 
-## Cracking Password-Protected RAR Archives
-Here’s your functional summary for the **RAR File Cracking** section:
-
----
-
+## 📘Cracking Password-Protected RAR Archives
 ### Cracking RAR Files
-
 #### Overview
-
 RAR archives, like Zip files, can be password-protected. John the Ripper can crack these passwords by converting the archive into a hash format it understands using a helper tool.
-
 #### Tool: `rar2john`
-
 * Converts a `.rar` archive into a John-compatible hash format.
-
 * Syntax:
-
-  ```
+  ```Shell
   rar2john [rar file] > [output file]
   ```
-
   * **rar2john**: Calls the hash extraction tool.
   * **\[rar file]**: Path to the target RAR archive.
   * **> \[output file]**: Redirects hash output to a specified file.
-
 * **Example**:
-
-  ```bash
+  ```Shell
   /opt/john/rar2john rarfile.rar > rar_hash.txt
   ```
 
 #### Cracking with John
-
 * The generated hash file can then be cracked using a wordlist in John.
 * **Example**:
-
-  ```bash
+  ```Shell
   john --wordlist=/usr/share/wordlists/rockyou.txt rar_hash.txt
   ```
+### ❓ Question 1 - What is the password for the secure.rar file?
+#### 🧪 Process
+Lets start by changing into the `Task10` directory and listing its contents.
+```Shell
+user@ip-10-10-197-123:~$ cd John-the-Ripper-The-Basics/Task10
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task10$ ls -la
+total 12
+drwxr-xr-x 2 user user 4096 Oct 10  2024 .
+drwxr-xr-x 9 user user 4096 Oct 10  2024 ..
+-rw-r--r-- 1 user user  270 Oct 10  2024 secure.rar
+```
+
+Okay, just the `secure.rar` file.  Next we want to get our hash by using `rar2john`.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task10$ rar2john secure.rar > hash.txt
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task10$ ls -la
+total 16
+drwxr-xr-x 2 user user 4096 Jun 12 15:12 .
+drwxr-xr-x 9 user user 4096 Oct 10  2024 ..
+-rw-rw-r-- 1 user user  108 Jun 12 15:12 hash.txt
+-rw-r--r-- 1 user user  270 Oct 10  2024 secure.rar
+```
+
+The output file `hash.txt` has been created, great. Lets `cat` the contents, just out of curiosity of course.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task10$ cat hash.txt 
+secure.rar:$rar5$16$b7b0ffc959b2bc55ffb712fc0293159b$15$4f7de6eb8d17078f4b3c0ce650de32ff$8$ebd10bb79dbfb9f8
+```
+
+Lets John it up
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task10$ john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (RAR5 [PBKDF2-SHA256 256/256 AVX2 8x])
+Cost 1 (iteration count) is 32768 for all loaded hashes
+Will run 2 OpenMP threads
+Note: Passwords longer than 10 [worst case UTF-8] to 32 [ASCII] rejected
+Press 'q' or Ctrl-C to abort, 'h' for help, almost any other key for status
+password         (secure.rar)     
+1g 0:00:00:00 DONE (2025-06-12 15:14) 1.667g/s 106.7p/s 106.7c/s 106.7C/s 123456..charlie
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
+
+_in a dodgy french accent_ "Not long later".
+
+Trying this as the answer
+#### ✅ Answer 1
+- `password` ✅
 
 
 
@@ -1443,32 +1477,102 @@ RAR archives, like Zip files, can be password-protected. John the Ripper can cra
 
 
 
+### ❓ Question 2 - What are the contents of the flag inside the zip file?
+#### 🧪 Process
+We know our password is super secret `password` now. We can unrar the rar file. `unrar` maybe?
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task10$ unrar
+
+UNRAR 7.00 freeware      Copyright (c) 1993-2024 Alexander Roshal
+
+Usage:     unrar <command> -<switch 1> -<switch N> <archive> <files...>
+               <@listfiles...> <path_to_extract/>
+
+<Commands>
+  e             Extract files without archived paths
+  l[t[a],b]     List archive contents [technical[all], bare]
+  p             Print file to stdout
+  t             Test archive files
+  v[t[a],b]     Verbosely list archive contents [technical[all],bare]
+  x             Extract files with full path
+
+<Switches>
+  -             Stop switches scanning
+  @[+]          Disable [enable] file lists
+  ad[1,2]       Alternate destination path
+  ag[format]    Generate archive name using the current date
+  ai            Ignore file attributes
+  ap<path>      Set path inside archive
+  c-            Disable comments show
+  cfg-          Disable read configuration
+  cl            Convert names to lower case
+  cu            Convert names to upper case
+  dh            Open shared files
+  ep            Exclude paths from names
+  ep3           Expand paths to full including the drive letter
+  ep4<path>     Exclude the path prefix from names
+  f             Freshen files
+  id[c,d,n,p,q] Display or disable messages
+  ierr          Send all messages to stderr
+  inul          Disable all messages
+  kb            Keep broken extracted files
+  me[par]       Set encryption parameters
+  n<file>       Additionally filter included files
+  n@            Read additional filter masks from stdin
+  n@<list>      Read additional filter masks from list file
+  o[+|-]        Set the overwrite mode
+  ol[a,-]       Process symbolic links as the link [absolute paths, skip]
+  op<path>      Set the output path for extracted files
+  or            Rename files automatically
+  ow            Save or restore file owner and group
+  p[password]   Set password
+  r             Recurse subdirectories
+  sc<chr>[obj]  Specify the character set
+  si[name]      Read data from standard input (stdin)
+  sl<size>[u]   Process files with size less than specified
+  sm<size>[u]   Process files with size more than specified
+  ta[mcao]<d>   Process files modified after <d> YYYYMMDDHHMMSS date
+  tb[mcao]<d>   Process files modified before <d> YYYYMMDDHHMMSS date
+  tn[mcao]<t>   Process files newer than <t> time
+  to[mcao]<t>   Process files older than <t> time
+  ts[m,c,a,p]   Save or restore time (modification, creation, access, preserve)
+  u             Update files
+  v             List all volumes
+  ver[n]        File version control
+  vp            Pause before each volume
+  x<file>       Exclude specified file
+  x@            Read file names to exclude from stdin
+  x@<list>      Exclude files listed in specified list file
+  y             Assume Yes on all queries
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task10$ 
+```
+
+Oh wow, lots of options. The first under `<Commands>` is `e`. Worth a try maybe?
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task10$ unrar e secure.rar 
+
+UNRAR 7.00 freeware      Copyright (c) 1993-2024 Alexander Roshal
+
+Enter password (will not be echoed) for secure.rar: 
 
 
+Extracting from secure.rar
 
+Extracting  flag.txt                                                  OK 
+All OK
+```
 
+Okay we can cat `flag.txt` now to get our answer.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task10$ cat flag.txt 
+THM{r4r_4rch1ve5_th15_t1m3}
+```
 
+And there is our actual flag. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### ✅ Answer 2
+- `THM{r4r_4rch1ve5_th15_t1m3}` ✅
 
 
 ## Cracking SSH Keys with John
