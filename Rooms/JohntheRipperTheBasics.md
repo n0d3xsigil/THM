@@ -1575,85 +1575,87 @@ Trying this as the answer
 - `THM{r4r_4rch1ve5_th15_t1m3}` ✅
 
 
-## Cracking SSH Keys with John
-Here’s the functional summary for the **SSH Key Cracking** section:
-
----
-
+## 📘Cracking SSH Keys with John
 ### Cracking SSH Key Passwords
-
 #### Overview
-
 SSH private keys (`id_rsa`) can be password-protected. John the Ripper can be used to crack these passwords, which may allow access to remote machines if key-based authentication is enabled.
-
 #### Tool: `ssh2john`
-
 * Converts an SSH private key file into a John-compatible hash format.
-
 * Syntax:
-
-  ```
+  ```Shell
   ssh2john [id_rsa private key file] > [output file]
   ```
-
   * **ssh2john**: Invokes the conversion tool.
   * **\[id\_rsa private key file]**: Path to the target SSH key file.
   * **> \[output file]**: Redirects hash output to a file.
-
 * **Alternative usage** (if `ssh2john` is not directly available):
-
   * On **AttackBox**:
-
-    ```bash
+    ```Shell
     python3 /opt/john/ssh2john.py id_rsa > id_rsa_hash.txt
     ```
   * On **Kali**:
-
-    ```bash
+    ```Shell
     python /usr/share/john/ssh2john.py id_rsa > id_rsa_hash.txt
     ```
 
 #### Cracking with John
-
 * Use the generated hash file with a wordlist to attempt cracking the SSH key password.
 * **Example**:
-
-  ```bash
+  ```Shell
   john --wordlist=/usr/share/wordlists/rockyou.txt id_rsa_hash.txt
   ```
 
+### ❓ Question - What is the SSH private key password?
+#### 🧪 Process
+We'll use the `ssh2john` tool to convert the hash
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task11$ python3 /opt/john/ssh2john.py id_rsa > hash.txt
+```
 
+Now we can cat the hash.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task11$ cat hash.txt 
+id_rsa:$sshng$1$16$3A98F468854BB3836BF689310D864CE9$1200$08ca19b68bc606b07875701174131b9220d23ef968befc1230eeff0d7c0f904e6734765fe562e8671972e409091f32c80b
+754ab248976228a5f2c38e8ac63572d7452e75669aeda932275989ce4c077d43287ed227b8f9053e53f2b1c9bb9dfe876378a32e87e7be4e91a845ae8ee4073bf7ac5aad8414253c97cfb73b083
+107712907da8c704678f46d0b006f7a77b13a04305a988c8e17d83abd2449ed5c3defc8203d7c5f70cef3470b0bbe3fa5a2e957ac55a57ea08b1de4d3fa5436c6160a14b461ac7bc4a3052ddf85
+8de657ecb210989507beb96f7219ac3c3790e89f3af71f7f61ebe23570284a482b1504b067fb1e03ed62201c6db71dab65e5f1577751ddb006fe14ceed4525965fce19f8141373094d1aedbb58c
+b903f58f6d80695be0382c31e61baaf366d4f2e722316e91ff4dcb3df15702008b5be3c0b2a81b3f452ef3257c425dd26119324b4de3652e90b91afd87ca2bc41c70abd0d97557d4037952b63c0
+a0d7c7ab6ed538c3d76bdf488683213e8d8e897ab51c4990b137d04e5044ccbf8cadbdce9eeec5e50f3d487b1f21e86a2b2785caedbf9503d2d8585b2138d82b35e70d1da03c9c574962cdb6e4d
+2de761a594ab8c082d88b43a027649012feb28b6a022c0ab49cf05e8b91e36bda935f188c1bb05925da2168dd15af917ba20a8532010892853da5cb1a8ff80cc5d3aa1dd3fe66543bf14d9b44d0
+82261fd61976718bb5eea1d911ddb7fb0cc0505b39cec36ef7bd8e8d9d826eda5f7e1a5a51067ead2f78cf69f85de97be5a8f371174356788554b6bf134072b93bf6728ec26fe19c2485be9e742
+8208a66cc1e79329ac16f3034605c63550a424ed8cac39f965b6ffe83240c6709607eaef99b189100ef33e000b4195e07ec5c67bdaf2ca1acbd08327f0c4dcfae322883f7be964cb22393541e88
+3c8c5b748237a900aab709b6286cea66a214a9fe4e3a1203f999fd995aa049767355e2658828c4a82d58ca15343f0abe6b2779e880ed2682b4730103a84a3410e6c822098d82b04d665b8bf98bc
+3b69cae0c8d8c9d140dc99056279d5f330bc439bfdceaf38a56fd1362ce78e96deb49a9f6756ec9b64eeba8f4725ec056ab206e37823d052d539d38016abf792858a169cbbe0f6f0d0049c6d492
+28833aa8ec10ede0c183ac737e54346949485e5ffc1bc3105e5686c8b1f6fb8cdb14949aa97b833757d02b970e96cb1281c472a5cb26cfa7cfda0be5bd45cf14d4bc28ccd2be4dd09c6a2ce0cf6
+68035d2aa39a8345ea154543491436bf8f5e605d86e266d40227f48684e696a225877624ddddf0afe05d0aeec29ad28edb0f8cda0f341ddbbd454bd3c238d1c499effa6bf6f796dae0983182f36
+fae4781552cb8d9426fc57132c27a735c5365a5d355a4c4f21d5d7ed2ea11bb2ed856156390673545418f47359fd1092767f6dfb3321ee14a0043352fdbaa5cb0e75fde2ec5909c0533251f30bd
+56ad7e34a8a31b009b53c64e9f2de9fd57a0f561564e6a961158cc0b54fcfc43046d9641788ac5e25b89bdb7890c4e6532d1bfabd4d49ae7d3740506c4ecb6bc5cb6a12bc24ed2e0f913338c7df
+a08ada66a6128e7de56794d1d2170d6324af0cd72bc8abcff177f0942d9df5d99d48c8f946fd856d9ccb424966835aa06c94996abcc169aef6f246bbbd7489ec026a
+```
 
+Not quite what I was expecting...
 
+We can try `John` quickly, but I suspect this won't work
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task11$ john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (SSH, SSH private key [RSA/DSA/EC/OPENSSH 32/64])
+Cost 1 (KDF/cipher [0=MD5/AES 1=MD5/3DES 2=Bcrypt/AES]) is 0 for all loaded hashes
+Cost 2 (iteration count) is 1 for all loaded hashes
+Will run 2 OpenMP threads
+Note: Passwords longer than 10 [worst case UTF-8] to 32 [ASCII] rejected
+Press 'q' or Ctrl-C to abort, 'h' for help, almost any other key for status
+mango            (id_rsa)     
+1g 0:00:00:00 DONE (2025-06-12 15:59) 50.00g/s 214400p/s 214400c/s 214400C/s praise..mango
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
 
+I'm blown away it was that easy. Okay we have our password (`mango`).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### ✅ Answer
+- `mango` ✅
 
 
 ## Further Reading
