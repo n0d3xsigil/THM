@@ -271,6 +271,7 @@ Trying this as the answer
   - The second field contains the hashed password in the format:  
     `$prefix$options$salt$hash`.
 - **Common Prefixes and Algorithms**:
+
   | Prefix | Algorithm |
   |--------|-----------|
   | `$y$`  | yescrypt (default, recommended) |
@@ -280,6 +281,7 @@ Trying this as the answer
   | `$6$`  | sha512crypt |
   | `$md5` | SunMD5 |
   | `$1$`  | md5crypt |
+
 - **Example**:
   - Hash: `$y$j9T$76UzfgEM5PnymhQ7TlJey1$/OOSg64dhfF.TigVPdzqiFang6uZA4QA1pzzegKdVm4`
   - Components:
@@ -333,6 +335,7 @@ I've googled, I've looked at loads of pages. Nothing firm. Resolved to look at t
 Github to the rescue [GitHub CalfCrusher / has_examples.md](https://gist.github.com/CalfCrusher/6b87a738d0fe7b88e04f4a36eb6d722d).
 
 `Ctrl+F` and search for _Cisco-ASA_ and found:
+
 | Hash-Mode |   Hash-Name   |       Example       |
 |-----------|---------------|---------------------|
 | `2410`    | Cisco-ASA MD5 | 02dMBMYkTdC5Ziyp:36 |
@@ -519,6 +522,7 @@ Trying this as the answer
 Searching for `$6$` within the GitHub hashes
 
 Found:
+
 | Hash-Mode	|             Hash-Name             |
 |-----------|-----------------------------------|
 |    `1800` | sha512crypt 6, SHA512 (Unix) [^2] |
