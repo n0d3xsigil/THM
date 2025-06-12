@@ -49,7 +49,7 @@ My discoveries from THM
 - ✅ [Cryptography Basics](Rooms/CryptographyBasics.md)
 - ✅ [Public Key Cryptography Basics](Rooms/PublicKeyCryptographyBasics.md)
 - ✅ [Hashing Basics](Rooms/HashingBasics.md)
-- ⚠️ [John the Ripper: The Basics](Rooms/JohntheRipperTheBasics.md)
+- ✅ [John the Ripper: The Basics](Rooms/JohntheRipperTheBasics.md)
 ### Exploitation Basics
 ### Web Hacking
 ### Offensive Seucrity Tooling
