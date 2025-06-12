@@ -13,3 +13,5 @@ You can add an image or a code block, too.
 ```
 
 </details>
+
+![](Images/Pasted%20image%2020250612134012.png)
