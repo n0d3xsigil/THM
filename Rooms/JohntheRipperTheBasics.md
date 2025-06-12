@@ -1184,19 +1184,12 @@ Trying this as the answer
 - `Jok3r` ✅
 
 
-## Custom Rules
-Absolutely! Here's the **functional summary** of the section on custom rules in John the Ripper, formatted with `###` indentation:
-
----
-
+## 📘Custom Rules
 ### Custom Rules in John the Ripper
-
 - **Purpose**:
   - Define personalized mangling patterns to generate password guesses.
   - Useful when you know likely password structures or complexity requirements.
-
 ### Why Use Custom Rules?
-
 - **Password Complexity Requirements**:
   - Many systems require:
     - Lowercase letters
@@ -1204,35 +1197,28 @@ Absolutely! Here's the **functional summary** of the section on custom rules in 
     - Numbers
     - Symbols
   - Users often follow predictable patterns (e.g., `Polopassword1!`).
-
 - **Exploiting Predictability**:
   - Attackers can define rules to mimic common user behavior (e.g., capitalizing the first letter, appending numbers and symbols).
-
 ### Creating Custom Rules
-
 - **Location**:
   - Typically found in:
     - `/opt/john/john.conf` (TryHackMe AttackBox)
     - `/etc/john/john.conf` (standard installations)
-
 - **Syntax Overview**:
   ```plaintext
   [List.Rules:RuleName]
   rule_definition
   ```
-
 - **Common Modifiers**:
   - `Az`: Append characters
   - `A0`: Prepend characters
   - `c`: Capitalize character(s)
-
 - **Character Sets**:
   - `[0-9]`: Digits
   - `[A-Z]`: Uppercase letters
   - `[a-z]`: Lowercase letters
   - `[!£$%@]`: Symbols
   - `[a]`: Specific character
-
 - **Example Rule**:
   ```plaintext
   [List.Rules:PoloPassword]
@@ -1240,59 +1226,47 @@ Absolutely! Here's the **functional summary** of the section on custom rules in 
   ```
   - Capitalizes the first letter
   - Appends a digit and a symbol
-
 ### Using Custom Rules
-
 - **Command Syntax**:
   ```bash
   john --wordlist=[path to wordlist] --rule=PoloPassword [path to file]
   ```
-
 - **Tips**:
   - Talk through the pattern like writing a RegEx.
   - Refer to existing rules in `john.conf` (around line 678) for more examples and troubleshooting.
 
----
 
-Would you like me to now compile all the summaries into a single document or export them as a file for you?
+### ❓ Question - What do custom rules allow us to exploit?
+#### 🧪 Process
+> This pattern can let us exploit **password complexity predictability**.
 
+Trying this as the answer
+#### ✅ Answer
+- `password complexity predictability` ✅
+### ❓ Question - What rule would we use to add all capital letters to the end of the word?
+#### 🧪 Process
+There are a few bits here that can help.
 
+* Add **all capitals**: `[A-Z]`
+	* `[A-Z]`: Will include only uppercase letters
+* to the **End** of the word: `Az`
+	* `Az`: Appends to the end of the word
+* The pattern needs to be quoted `" "`.
 
+So putting this together we have `Az"[A-Z]"`
 
+Trying this as the answer
+#### ✅ Answer
+- `Az"[A-Z]"` ✅
+### ❓ Question - What flag would we use to call a custom rule called `THMRules`?
+#### 🧪 Process
+> We could then call this custom rule a John argument using the  `--rule=PoloPassword` flag.
 
+So if we swap out `PoloPassword` for `THMRules` we get `--rule=THMRules`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### ✅ Answer
+- `--rule=THMRules` ✅
 
 
 ## Cracking Password Protected Zip Files
