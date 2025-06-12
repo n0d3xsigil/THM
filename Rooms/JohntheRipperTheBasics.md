@@ -976,32 +976,21 @@ Trying this as the answer
 - `1234` ✅
 
 
-## Single Crack Mode
-Certainly! Here's the **functional summary** of the section on John the Ripper's Single Crack mode, formatted with `###` indentation:
-
----
-
+## 📘Single Crack Mode
 ### John the Ripper: Single Crack Mode
-
 - **Overview**:
   - Single Crack mode uses usernames and related metadata to generate password guesses.
   - Applies **word mangling** techniques to mutate usernames into likely passwords.
-
 ### Word Mangling
-
 - **Example (Username: Markus)**:
   - Variants: `Markus1`, `MArkus`, `MARKus`, `Markus!`, etc.
   - John uses **mangling rules** to generate these variants heuristically.
-
 ### GECOS Field Usage
-
 - **GECOS**: General Electric Comprehensive Operating System
   - Found in the 5th field of `/etc/passwd`.
   - Stores user info like full name, office number, etc.
   - John can use this data to enhance wordlist generation in Single Crack mode.
-
 ### Using Single Crack Mode
-
 - **Syntax**:
   ```bash
   john --single --format=[format] [path to file]
@@ -1015,7 +1004,6 @@ Certainly! Here's the **functional summary** of the section on John the Ripper's
   ```
 
 ### File Format Requirements
-
 - **Input Format**:
   - Must include the username and hash in the format:
     ```
@@ -1031,48 +1019,169 @@ Certainly! Here's the **functional summary** of the section on John the Ripper's
       mike:1efee03cdcb96d90ad48ccc7b8666033
       ```
 
----
+### ❓ Question - What is Joker’s password?
+#### 🧪 Process
+So this is new to me, lets just try, for fun, `john --single --format=raw-sha256 hashes.txt`
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ john --single --format=raw-sha256 hash07.txt 
+Using default input encoding: UTF-8
+No password hashes loaded (see FAQ)
+```
 
-Would you like me to now compile all the summaries into a single document or export them as a file for you?
+Let's create a new file where the contents are `user:hash`. First I'll just copy `hash07.txt` to `joker.txt`
+```Shell user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ cp hash07.txt joker.txt
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ ls -la
+total 16
+drwxr-xr-x 2 user user 4096 Jun 12 14:06 .
+drwxr-xr-x 9 user user 4096 Oct 10  2024 ..
+-rw-r--r-- 1 user user   33 Oct 10  2024 hash07.txt
+-rw-r--r-- 1 user user   33 Jun 12 14:06 joker.txt
+```
 
+Next I'll open `joker.txt` in vim, pop in `joker:` before the hash and `:x` out.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ ls -la; cat joker.txt 
+total 16
+drwxr-xr-x 2 user user 4096 Jun 12 14:07 .
+drwxr-xr-x 9 user user 4096 Oct 10  2024 ..
+-rw-r--r-- 1 user user   33 Oct 10  2024 hash07.txt
+-rw-r--r-- 1 user user   39 Jun 12 14:07 joker.txt
+joker:7bf6d9bb82bed1302f331fc6b816aada
+```
 
+Lets try `John` again...
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ john --single --format=raw-sha256 joker.txt 
+Using default input encoding: UTF-8
+No password hashes loaded (see FAQ)
+```
 
+No change, however I've just noticed that the user is `Joker` not `joker`, not really sure this will make a difference, but lets try anyway. 
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ cat joker.txt 
+Joker:7bf6d9bb82bed1302f331fc6b816aada
+```
 
+Trying again with the correct username
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ john --single --format=raw-sha256 joker.txt 
+Using default input encoding: UTF-8
+No password hashes loaded (see FAQ)
+```
 
+Okay, as expected. Maybe we need to go back to basics and understand the hash. Lets run `hash-id.py` and verify what looks like an `MD5` hash.
 
+Let's cat and copy the hash
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ cat hash07.txt               
+7bf6d9bb82bed1302f331fc6b816aada
+```
 
+Then run the `hash-id.py` script from the `../Task04`, pasting in the has we copied above.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ python3 ../Task04/hash-id.py 
+/home/user/John-the-Ripper-The-Basics/Task07/../Task04/hash-id.py:13: SyntaxWarning: invalid escape sequence '\ '
+  logo=''''   #########################################################################
+   #########################################################################
+   #     __  __                     __           ______    _____           #
+   #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+   #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+   #     \ \  _  \  /'__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+   #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+   #       \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/      #
+   #        \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.2 #
+   #                                                             By Zion3R #
+   #                                                    www.Blackploit.com #
+   #                                                   Root@Blackploit.com #
+   #########################################################################
+--------------------------------------------------
+ HASH: 7bf6d9bb82bed1302f331fc6b816aada
 
+Possible Hashs:
+[+] MD5
+[+] Domain Cached Credentials - MD4(MD4(($pass)).(strtolower($username)))
 
+Least Possible Hashs:
+[+] RAdmin v2.x
+[+] NTLM
+[+] MD4
+[+] MD2
+[+] MD5(HMAC)
+[+] MD4(HMAC)
+[+] MD2(HMAC)
+[+] MD5(HMAC(Wordpress))
+[+] Haval-128
+[+] Haval-128(HMAC)
+[+] RipeMD-128
+[+] RipeMD-128(HMAC)
+[+] SNEFRU-128
+[+] SNEFRU-128(HMAC)
+[+] Tiger-128
+[+] Tiger-128(HMAC)
+[+] md5($pass.$salt)
+[+] md5($salt.$pass)
+[+] md5($salt.$pass.$salt)
+[+] md5($salt.$pass.$username)
+[+] md5($salt.md5($pass))
+[+] md5($salt.md5($pass))
+[+] md5($salt.md5($pass.$salt))
+[+] md5($salt.md5($pass.$salt))
+[+] md5($salt.md5($salt.$pass))
+[+] md5($salt.md5(md5($pass).$salt))
+[+] md5($username.0.$pass)
+[+] md5($username.LF.$pass)
+[+] md5($username.md5($pass).$salt)
+[+] md5(md5($pass))
+[+] md5(md5($pass).$salt)
+[+] md5(md5($pass).md5($salt))
+[+] md5(md5($salt).$pass)
+[+] md5(md5($salt).md5($pass))
+[+] md5(md5($username.$pass).$salt)
+[+] md5(md5(md5($pass)))
+[+] md5(md5(md5(md5($pass))))
+[+] md5(md5(md5(md5(md5($pass)))))
+[+] md5(sha1($pass))
+[+] md5(sha1(md5($pass)))
+[+] md5(sha1(md5(sha1($pass))))
+[+] md5(strtoupper(md5($pass)))
+--------------------------------------------------
+ HASH:
 
+Bye!
+```
 
+Okay, so this says MD5. Humm, lets try that shall we. If I remember correctly the hash mode for md5 is `0`.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ john --single --format=0 joker.txt 
+Error: No format matched requested name '0'
+```
 
+Nothing named `0`. I'm sure I used 0 previously. Related to `--single` maybe?! Okay lets try `md5` instead.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ john --single --format=md5 joker.txt 
+Error: No format matched requested name 'md5'
+```
 
+Oh, yeah, it needs to be `raw-md5` doesn't it.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task07$ john --single --format=raw-md5 joker.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (Raw-MD5 [MD5 256/256 AVX2 8x3])
+Warning: no OpenMP support for this hash type, consider --fork=2
+Note: Passwords longer than 18 [worst case UTF-8] to 55 [ASCII] rejected
+Press 'q' or Ctrl-C to abort, 'h' for help, almost any other key for status
+Warning: Only 18 candidates buffered for the current salt, minimum 24 needed for performance.
+Jok3r            (Joker)     
+1g 0:00:00:00 DONE (2025-06-12 14:13) 50.00g/s 9750p/s 9750c/s 9750C/s Joker!!..J0ker
+Use the "--show --format=Raw-MD5" options to display all of the cracked passwords reliably
+Session completed. 
+```
 
+Ah hah! There we are, `Jok3r`.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### ✅ Answer
+- `Jok3r` ✅
 
 
 ## Custom Rules
