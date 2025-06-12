@@ -1,9 +1,5 @@
 | [Home](../README.md) | [Cyber Security 101](../README.md#cyber-security-101) | **John the Ripper: The Basics** |
 
-# !!!! R E M O V E 　 O N C E 　 C O M P L E T E !!!!
-### ❓ Question
-#### 🧪 Process
-#### ✅ Answer
 
 ## Contents
 - [Introduction](#introduction)
@@ -1658,24 +1654,14 @@ Trying this as the answer
 - `mango` ✅
 
 
-## Further Reading
-Here’s the final functional summary for the **Conclusion** section:
-
----
-
+## 📘Further Reading
 ### Conclusion
-
 #### Summary
-
 This room has introduced the core principles of using John the Ripper, including:
-
 * Converting protected files into hash formats
 * Cracking those hashes using a wordlist
-
 The consistent workflow can now be applied to a wide range of supported hash types.
 
 #### Further Learning
-
 For continued learning, updates, and in-depth usage tips, refer to the official John the Ripper wiki:
-
 * **Openwall Wiki**: [https://openwall.info/wiki/john](https://openwall.info/wiki/john)
