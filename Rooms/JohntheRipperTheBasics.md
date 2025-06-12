@@ -863,20 +863,13 @@ Trying this as the answer
 - `mushroom` ✅
 
 
-## Cracking /etc/shadow Hashes
-Certainly! Here's the **functional summary** of the section on cracking hashes from `/etc/shadow`, formatted with `###` indentation:
-
----
-
+## 📘Cracking /etc/shadow Hashes
 ### Cracking Hashes from `/etc/shadow`
-
 - **Purpose**:
   - The `/etc/shadow` file on Linux stores password hashes and related metadata.
   - Access requires root privileges.
   - Cracking is possible if hashes are weak and accessible.
-
 ### Unshadowing
-
 - **Why It’s Needed**:
   - John the Ripper requires a specific format.
   - Combine `/etc/passwd` and `/etc/shadow` using the `unshadow` tool.
@@ -902,7 +895,6 @@ Certainly! Here's the **functional summary** of the section on cracking hashes f
     ```
 
 ### Cracking the Hashes
-
 - **Command**:
   ```bash
   john --wordlist=/usr/share/wordlists/rockyou.txt --format=sha512crypt unshadowed.txt
@@ -912,47 +904,76 @@ Certainly! Here's the **functional summary** of the section on cracking hashes f
   - Format flag (`--format=sha512crypt`) may be required depending on the hash type.
   - If the input is correctly formatted, John may auto-detect the format.
 
----
+### ❓ Question - What is the root password?
+#### 🧪 Process
+- Folder: `~/John-the-Ripper-The-Basics/Task06/`
+- File: `etchashes.txt`
 
-Would you like me to now compile all the summaries into a single document or export them as a file for you?
+Let's see what we are working with. I'll cat the `etchashes.txt` file
+```Shell
+user@ip-10-10-197-123:~$ cat ~/John-the-Ripper-The-Basics/Task06/etc_hashes.txt 
+This is everything I managed to recover from the target machine before my computer crashed... See if you can crack the hash so we can at least salvage a pa
+ssword to try and get back in.
 
+root:x:0:0::/root:/bin/bash
+root:$6$Ha.d5nGupBm29pYr$yugXSk24ZljLTAZZagtGwpSQhb3F2DOJtnHrvk7HI2ma4GsuioHp8sm3LJiRJpKfIf7lZQ29qgtH17Q/JDpYM/:18576::::::
+```
 
+I had a quick `ls` in the folder to see what was in there
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task06$ ls -la
+total 20
+drwxr-xr-x 2 user user 4096 Oct 10  2024 .
+drwxr-xr-x 9 user user 4096 Oct 10  2024 ..
+-rw-r--r-- 1 user user  340 Oct 10  2024 etc_hashes.txt
+-rw-r--r-- 1 user user   28 Oct 10  2024 local_passwd
+-rw-r--r-- 1 user user  124 Oct 10  2024 local_shadow
+```
 
+As expected `local_passwd` has the user info and `local_shadow` has the hash.
 
+copied the `local_passwd > passwd` and `local_shadow > shadow` for simplicity for in a minute
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task06$ cp local_passwd passwd
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task06$ cp local_shadow shadow
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task06$ ls -la
+total 28
+drwxr-xr-x 2 user user 4096 Jun 12 13:46 .
+drwxr-xr-x 9 user user 4096 Oct 10  2024 ..
+-rw-r--r-- 1 user user  340 Oct 10  2024 etc_hashes.txt
+-rw-r--r-- 1 user user   28 Oct 10  2024 local_passwd
+-rw-r--r-- 1 user user  124 Oct 10  2024 local_shadow
+-rw-r--r-- 1 user user   28 Jun 12 13:46 passwd
+-rw-r--r-- 1 user user  124 Jun 12 13:46 shadow
+```
 
+Next lets try `unshadow`.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task06$ unshadow passwd shadow > unshadowed.txt
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task06$ cat unshadowed.txt 
+root:$6$Ha.d5nGupBm29pYr$yugXSk24ZljLTAZZagtGwpSQhb3F2DOJtnHrvk7HI2ma4GsuioHp8sm3LJiRJpKfIf7lZQ29qgtH17Q/JDpYM/:0:0::/root:/bin/bash
+```
 
+Finally I think we're ready to give this a try. Assuming `--format=sha512crypt`
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task06$ john --wordlist=/usr/share/wordlists/rockyou.txt --format=sha512crypt unshadowed.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (sha512crypt, crypt(3) $6$ [SHA512 256/256 AVX2 4x])
+Cost 1 (iteration count) is 5000 for all loaded hashes
+Will run 2 OpenMP threads
+Note: Passwords longer than 26 [worst case UTF-8] to 79 [ASCII] rejected
+Press 'q' or Ctrl-C to abort, 'h' for help, almost any other key for status
+1234             (root)     
+1g 0:00:00:02 DONE (2025-06-12 13:53) 0.4274g/s 547.0p/s 547.0c/s 547.0C/s kucing..poohbear1
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
 
+Oh, the ol' `1234` password huh.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### ✅ Answer
+- `1234` ✅
 
 
 ## Single Crack Mode
