@@ -645,81 +645,222 @@ Trying this as the answer
 - `colossal` ✅
 
 
-## Cracking Windows Authentication Hashes
-Certainly! Here's the **functional summary** of the section on cracking authentication hashes, formatted with `###` indentation:
-
----
-
+## 📘Cracking Windows Authentication Hashes
 ### Cracking Authentication Hashes
-
 - **Context**:
   - Authentication hashes are hashed versions of passwords stored by operating systems.
   - Cracking these hashes is a common task in penetration testing or red team engagements.
   - Access to these hashes typically requires privileged access.
-
 ### NTHash / NTLM
-
 - **Definition**:
   - **NTHash** (also known as **NTLM**) is the format used by modern Windows systems to store password hashes.
   - NTLM is a successor to the older **LM (LAN Manager)** hash format.
-
 - **Historical Note**:
   - "NT" originally stood for **New Technology**, used in early Windows versions.
   - Though the name was dropped, it persists in technologies like NTLM.
-
 - **Storage Location**:
   - Password hashes are stored in the **SAM (Security Account Manager)** database on Windows.
   - Can also be found in **NTDS.dit** (Active Directory database).
-
 - **Hash Acquisition Tools**:
   - Tools like **Mimikatz** can be used to dump hashes from SAM or NTDS.dit.
-
 - **Cracking vs. Pass-the-Hash**:
   - Cracking may not always be necessary.
   - **Pass-the-hash** attacks can be used to authenticate using the hash directly.
   - Cracking is useful when weak passwords are suspected or required for further escalation.
+### ❓ Question 1 - What do we need to set the `--format` flag to in order to crack this hash?
+#### 🧪 Process
+I'm trying to refresh my memory quickly. It is the next day now so starting from scratch kinda.
 
----
+We where talking about `ntlm` so I want to get get the list of formats from john.
+```Shell
+user@ip-10-10-197-123:~$ john --list=formats
+descrypt, bsdicrypt, md5crypt, md5crypt-long, bcrypt, scrypt, LM, AFS, 
+tripcode, AndroidBackup, adxcrypt, agilekeychain, aix-ssha1, aix-ssha256, 
+aix-ssha512, andOTP, ansible, argon2, armory, as400-des, as400-ssha1, 
+asa-md5, AxCrypt, AzureAD, BestCrypt, BestCryptVE4, bfegg, Bitcoin, 
+BitLocker, bitshares, Bitwarden, BKS, Blackberry-ES10, WoWSRP, Blockchain, 
+cardano, chap, Clipperz, cloudkeychain, dynamic_n, cq, CRC32, cryptoSafe, 
+sha1crypt, sha256crypt, sha512crypt, Citrix_NS10, dahua, dashlane, 
+diskcryptor, Django, django-scrypt, dmd5, dmg, dominosec, dominosec8, 
+DPAPImk, dragonfly3-32, dragonfly3-64, dragonfly4-32, dragonfly4-64, Drupal7, 
+eCryptfs, eigrp, electrum, ENCDataVault-MD5, ENCDataVault-PBKDF2, EncFS, 
+enpass, EPI, EPiServer, ethereum, fde, Fortigate256, Fortigate, FormSpring, 
+FVDE, geli, gost, streebog256crypt, streebog512crypt, gost94crypt, gpg, 
+HAVAL-128-4, HAVAL-256-3, hdaa, hMailServer, hsrp, IKE, ipb2, itunes-backup, 
+iwork, KeePass, keplr, keychain, keyring, keystore, known_hosts, krb4, krb5, 
+krb5asrep, krb5pa-sha1, krb5pa-md5, krb5tgs, krb5tgs-sha1, krb5-17, krb5-18, 
+krb5-3, kwallet, lp, lpcli, leet, lotus5, lotus85, LUKS, MD2, mdc2, 
+MediaWiki, monero, money, MongoDB, scram, Mozilla, mscash, mscash2, MSCHAPv2, 
+mschapv2-naive, mssql, mssql05, mssql12, multibit, mysqlna, mysql-sha1, 
+mysql, net-ah, nethalflm, netlm, netlmv2, net-md5, netntlmv2, netntlm, 
+netntlm-naive, net-sha1, nk, notes, md5ns, nsec3, NT, NT-long, o10glogon, 
+o3logon, o5logon, ODF, Office, oldoffice, OpenBSD-SoftRAID, openssl-enc, 
+oracle, oracle11, Oracle12C, osc, ospf, Padlock, Palshop, Panama, 
+PBKDF2-HMAC-MD4, PBKDF2-HMAC-MD5, PBKDF2-HMAC-SHA1, PBKDF2-HMAC-SHA256, 
+PBKDF2-HMAC-SHA512, PDF, PEM, pfx, pgpdisk, pgpsda, pgpwde, phpass, PHPS, 
+PHPS2, pix-md5, PKZIP, po, postgres, PST, PuTTY, pwsafe, qnx, RACF, 
+RACF-KDFAES, radius, RAdmin, RAKP, rar, RAR5, Raw-SHA512, Raw-Blake2, 
+Raw-Keccak, Raw-Keccak-256, Raw-MD4, Raw-MD5, Raw-MD5u, Raw-SHA1, 
+Raw-SHA1-AxCrypt, Raw-SHA1-Linkedin, Raw-SHA224, Raw-SHA256, Raw-SHA3, 
+Raw-SHA384, restic, ripemd-128, ripemd-160, rsvp, RVARY, Siemens-S7, 
+Salted-SHA1, SSHA512, sapb, sapg, saph, sappse, securezip, 7z, Signal, SIP, 
+skein-256, skein-512, skey, SL3, SM3, Snefru-128, Snefru-256, LastPass, SNMP, 
+solarwinds, SSH, sspr, Stribog-256, Stribog-512, STRIP, SunMD5, SybaseASE, 
+Sybase-PROP, tacacs-plus, tcp-md5, telegram, tezos, Tiger, timeroast, 
+tc_aes_xts, tc_ripemd160, tc_ripemd160boot, tc_sha512, tc_whirlpool, vdi, 
+OpenVMS, vmx, VNC, vtp, wbb3, whirlpool, whirlpool0, whirlpool1, wpapsk, 
+wpapsk-pmk, xmpp-scram, xsha, xsha512, zed, ZIP, ZipMonster, plaintext, 
+has-160, HMAC-MD5, HMAC-SHA1, HMAC-SHA224, HMAC-SHA256, HMAC-SHA384, 
+HMAC-SHA512, dummy, crypt
+430 formats (151 dynamic formats shown as just "dynamic_n" here)
+```
 
-Would you like me to compile all the summaries into a single document or export them as a file now?
+Actually, we wanna filter this, lets throw in a `grep -iF <something>`.
+```Shell
+user@ip-10-10-197-123:~$ john --list=formats | grep -iF "ntlm"
+mysql, net-ah, nethalflm, netlm, netlmv2, net-md5, netntlmv2, netntlm, 
+netntlm-naive, net-sha1, nk, notes, md5ns, nsec3, NT, NT-long, o10glogon, 
+430 formats (151 dynamic formats shown as just "dynamic_n" here)
+user@ip-10-10-197-123:~$ 
+```
 
+Okay so we've got a few options here. However, we need to take stock a moment. the practical is referring to `~/John-the-Ripper-The-Basics/Task05/`. Lets have a look at the `ntlm.txt` file withing this folder.
+```Shell
+user@ip-10-10-197-123:~$ cd John-the-Ripper-The-Basics/Task05/
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task05$ cat ntlm.txt 
+5460C85BD858A11475115D2DD3A82333
+```
 
+Okay, so we've got our hash (`5460C85BD858A11475115D2DD3A82333`). We could quickly pass this through the `hash-id.py` script.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task04$ python3 hash-id.py 
+/home/user/John-the-Ripper-The-Basics/Task04/hash-id.py:13: SyntaxWarning: invalid escape sequence '\ '
+  logo=''''`   #########################################################################
+   #########################################################################
+   #     __  __                     __           ______    _____           #
+   #    /\ \/\ \                   /\ \         /\__  _\  /\  _ `\         #
+   #    \ \ \_\ \     __      ____ \ \ \___     \/_/\ \/  \ \ \/\ \        #
+   #     \ \  _  \  /'__`\   / ,__\ \ \  _ `\      \ \ \   \ \ \ \ \       #
+   #      \ \ \ \ \/\ \_\ \_/\__, `\ \ \ \ \ \      \_\ \__ \ \ \_\ \      #
+   #       \ \_\ \_\ \___ \_\/\____/  \ \_\ \_\     /\_____\ \ \____/      #
+   #        \/_/\/_/\/__/\/_/\/___/    \/_/\/_/     \/_____/  \/___/  v1.2 #
+   #                                                             By Zion3R #
+   #                                                    www.Blackploit.com #
+   #                                                   Root@Blackploit.com #
+   #########################################################################
+--------------------------------------------------
+ HASH: 5460C85BD858A11475115D2DD3A82333
 
+Possible Hashs:
+[+] MD5
+[+] Domain Cached Credentials - MD4(MD4(($pass)).(strtolower($username)))
 
+Least Possible Hashs:
+[+] RAdmin v2.x
+[+] NTLM
+[+] MD4
+[+] MD2
+[+] MD5(HMAC)
+[+] MD4(HMAC)
+[+] MD2(HMAC)
+[+] MD5(HMAC(Wordpress))
+[+] Haval-128
+[+] Haval-128(HMAC)
+[+] RipeMD-128
+[+] RipeMD-128(HMAC)
+[+] SNEFRU-128
+[+] SNEFRU-128(HMAC)
+[+] Tiger-128
+[+] Tiger-128(HMAC)
+[+] md5($pass.$salt)
+[+] md5($salt.$pass)
+[+] md5($salt.$pass.$salt)
+[+] md5($salt.$pass.$username)
+[+] md5($salt.md5($pass))
+[+] md5($salt.md5($pass))
+[+] md5($salt.md5($pass.$salt))
+[+] md5($salt.md5($pass.$salt))
+[+] md5($salt.md5($salt.$pass))
+[+] md5($salt.md5(md5($pass).$salt))
+[+] md5($username.0.$pass)
+[+] md5($username.LF.$pass)
+[+] md5($username.md5($pass).$salt)
+[+] md5(md5($pass))
+[+] md5(md5($pass).$salt)
+[+] md5(md5($pass).md5($salt))
+[+] md5(md5($salt).$pass)
+[+] md5(md5($salt).md5($pass))
+[+] md5(md5($username.$pass).$salt)
+[+] md5(md5(md5($pass)))
+[+] md5(md5(md5(md5($pass))))
+[+] md5(md5(md5(md5(md5($pass)))))
+[+] md5(sha1($pass))
+[+] md5(sha1(md5($pass)))
+[+] md5(sha1(md5(sha1($pass))))
+[+] md5(strtoupper(md5($pass)))
+--------------------------------------------------
+ HASH: 
+```
 
+Honestly, not that helpful. I guess we already know its ntlm considering the file is `ntlm.txt` so lets go with `NTLM`. Yesterday I was using my work laptop so couldn't look at the hashcat site. 
 
+So `ntlm` is hash-mode 1000. But the answer is `_ _`, or 2 characters. All of the 2 character modes are MD5 related.
 
+I tried 10 to see if I got an extra 'hint'. and I did 
 
+> Your answer is incorrect. Please ensure it follows the answer format represented by underscores, check for typos, and try again.
 
+So lets look at what John expects when passing the `--format` argument.
 
+```Shell
+user@ip-10-10-197-123:~$ john --help
+John the Ripper 1.9.0-jumbo-1+bleeding-ffd18e6b5d 2024-09-29 04:20:54 +0200 OMP [linux-gnu 64-bit x86_64 AVX2 AC]
+Copyright (c) 1996-2024 by Solar Designer and others
+Homepage: https://www.openwall.com/john/
 
+Usage: john [OPTIONS] [PASSWORD-FILES]
 
+[ Truncated ]
 
+--format=[NAME|CLASS][,..] Force hash of type NAME. The supported formats can
+                           be seen with --list=formats and --list=subformats.
+                           See also doc/OPTIONS for more advanced selection of
+                           format(s), including using classes and wildcards.
+```
 
+Interesting, so I made the assumption that we could only use the numbered format, however it looks like you can use `<NAME>` instead. Given that this is a 2 character answer I'm going to assume one of `NT` or `LM`. Since NTLM is the successor of Lan Manager (LM) I'm going to try that first.
+#### ✅ Answer
+- `LM` ❌
 
+Okay I should have guessed as much. So let's go with `NT` instead.
+- `NT` ✅
 
+On to question 2...
+### ❓ Question 2 - What is the cracked value of this password?
+#### 🧪 Process
+So we have worked out we need to use `--format=nt` let's now give it a try.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task05$ john --format=nt --wordlist /usr/share/wordlists/rockyou.txt ntlm.txt          
+Warning: invalid UTF-8 seen reading /usr/share/wordlists/rockyou.txt
+Using default input encoding: UTF-8
+Loaded 52 password hashes with no different salts (NT [MD4 256/256 AVX2 8x3])
+Warning: no OpenMP support for this hash type, consider --fork=2
+Note: Passwords longer than 27 rejected
+Proceeding with wordlist:/home/user/src/john/run/password.lst
+Press 'q' or Ctrl-C to abort, 'h' for help, almost any other key for status
+mushroom         (?)     
+1g 0:00:00:00 DONE (2025-06-12 13:34) 3.846g/s 6906Kp/s 6906Kc/s 352254KC/s Dontrell..sambarock
+Warning: passwords printed above might not be all those cracked
+Use the "--show --format=NT" options to display all of the cracked passwords reliably
+Session completed. 
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task05$ 
+```
 
+And there we are, a suspected result of `mushroom`.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### ✅ Answer
+- `mushroom` ✅
 
 
 ## Cracking /etc/shadow Hashes
