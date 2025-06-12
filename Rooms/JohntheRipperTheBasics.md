@@ -1269,81 +1269,132 @@ Trying this as the answer
 - `--rule=THMRules` ✅
 
 
-## Cracking Password Protected Zip Files
-Here’s the functional summary for the **Zip File Cracking** section:
-
----
-
+## 📘Cracking Password Protected Zip Files
 ### Cracking Zip Files
-
 #### Overview
-
 John the Ripper can crack password-protected Zip files by first converting them into a compatible hash format using a helper tool. This process allows John to attempt brute-force or dictionary-based attacks on the extracted hash.
-
 #### Tool: `zip2john`
-
 * Converts a `.zip` file into a format that John the Ripper can process.
-
 * Syntax:
-
   ```
   zip2john [options] [zip file] > [output file]
   ```
-
   * **\[options]**: Optional checksum parameters (rarely needed).
   * **\[zip file]**: Target archive to extract the hash from.
   * **> \[output file]**: Redirects the hash output to a file.
-
 * **Example**:
-
   ```bash
   zip2john zipfile.zip > zip_hash.txt
   ```
-
 #### Cracking with John
-
 * Once the hash is extracted, it can be cracked using John with a wordlist.
 * **Example**:
-
   ```bash
   john --wordlist=/usr/share/wordlists/rockyou.txt zip_hash.txt
   ```
 
+### ❓ Question 1 - What is the password for the secure.zip file?
+#### 🧪 Process
+Okay, context, we're working in `Task09` now.
 
+Let's move into `Task09` and `ls` the contents.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task09$ ls -la
+total 12
+drwxr-xr-x 2 user user 4096 Oct 10  2024 .
+drwxr-xr-x 9 user user 4096 Oct 10  2024 ..
+-rw-r--r-- 1 user user  232 Oct 10  2024 secure.zip
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task09$ 
+```
 
+We just have the `secure.zip` file. We're going to need to enlist `zip2john` to get the has. 
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task09$ zip2john secure.zip > hash.txt
+ver 1.0 efh 5455 efh 7875 secure.zip/zippy/flag.txt PKZIP Encr: 2b chk, TS_chk, cmplen=38, decmplen=26, crc=849AB5A6 ts=B689 cs=b689 type=0
+```
 
+I don't see any errors, if we cat the `hash.txt` we can see what was created.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task09$ cat hash.txt 
+secure.zip/zippy/flag.txt:$pkzip$1*2*2*0*26*1a*849ab5a6*0*48*0*26*b689*964fa5a31f8cefe8e6b3456b578d66a08489def78128450ccf07c28dfa6c197fd148f696e3a2*$/pkzip
+$:zippy/flag.txt:secure.zip::secure.zip
+```
 
+Going by the guide, we don't need to do anything with this and can pass it directly to John
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task09$ john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt 
+Using default input encoding: UTF-8
+Loaded 1 password hash (PKZIP [32/64])
+Will run 2 OpenMP threads
+Note: Passwords longer than 21 [worst case UTF-8] to 63 [ASCII] rejected
+Press 'q' or Ctrl-C to abort, 'h' for help, almost any other key for status
+pass123          (secure.zip/zippy/flag.txt)     
+1g 0:00:00:00 DONE (2025-06-12 14:57) 50.00g/s 409600p/s 409600c/s 409600C/s newzealand..total90
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
 
+We have our password (`pass123`).
 
+Trying this as the answer
+#### ✅ Answer
+- `pass123` ✅
+### ❓ Question 2 - What is the contents of the flag inside the zip file?
+#### 🧪 Process
+We now have a password (`pass123`). We need to work out how to unzip an `zip` archive. Not something I've ever done in linux. 
 
+I wonder if I could just `unzip`?
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task09$ unzip
+UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP.
 
+Usage: unzip [-Z] [-opts[modifiers]] file[.zip] [list] [-x xlist] [-d exdir]
+  Default action is to extract files in list, except those in xlist, to exdir;
+  file[.zip] may be a wildcard.  -Z => ZipInfo mode ("unzip -Z" for usage).
 
+  -p  extract files to pipe, no messages     -l  list files (short format)
+  -f  freshen existing files, create none    -t  test compressed archive data
+  -u  update files, create if necessary      -z  display archive comment only
+  -v  list verbosely/show version info       -T  timestamp archive to latest
+  -x  exclude files that follow (in xlist)   -d  extract files into exdir
+modifiers:
+  -n  never overwrite existing files         -q  quiet mode (-qq => quieter)
+  -o  overwrite files WITHOUT prompting      -a  auto-convert any text files
+  -j  junk paths (do not make directories)   -aa treat ALL files as text
+  -U  use escapes for all non-ASCII Unicode  -UU ignore any Unicode fields
+  -C  match filenames case-insensitively     -L  make (some) names lowercase
+  -X  restore UID/GID info                   -V  retain VMS version numbers
+  -K  keep setuid/setgid/tacky permissions   -M  pipe through "more" pager
+  -O CHARSET  specify a character encoding for DOS, Windows and OS/2 archives
+  -I CHARSET  specify a character encoding for UNIX and other archives
 
+See "unzip -hh" or unzip.txt for more help.  Examples:
+  unzip data1 -x joe   => extract all files except joe from zipfile data1.zip
+  unzip -p foo | more  => send contents of foo.zip via pipe into program more
+  unzip -fo foo ReadMe => quietly replace existing ReadMe if archive file newer
+```
 
+Okay, magic. What happens if we just `unzip secure.zip`
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task09$ unzip secure.zip 
+Archive:  secure.zip
+[secure.zip] zippy/flag.txt password: 
+ extracting: zippy/flag.txt
+```
 
+After providing the cracked password it worked. 
 
+We should be able to just `cat` the flag file.
+```Shell
+user@ip-10-10-197-123:~/John-the-Ripper-The-Basics/Task09$ cat zippy/flag.txt 
+THM{w3ll_d0n3_h4sh_r0y4l}
+```
 
+And, there, we, are. The flag (`THM{w3ll_d0n3_h4sh_r0y4l}`) has been discovered.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Trying this as the answer
+#### ✅ Answer
+- `THM{w3ll_d0n3_h4sh_r0y4l} ✅`
 
 
 ## Cracking Password-Protected RAR Archives
