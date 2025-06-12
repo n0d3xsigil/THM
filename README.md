@@ -51,6 +51,11 @@ My discoveries from THM
 - ✅ [Hashing Basics](Rooms/HashingBasics.md)
 - ✅ [John the Ripper: The Basics](Rooms/JohntheRipperTheBasics.md)
 ### Exploitation Basics
+- ❌ [Moniker Link (CVE-2024-21413)](Rooms/MonikerLink(CVE-2024-21413).md)
+- ❓ Metasploit: Introduction
+- ❓ Metasploit: Exploitation
+- ❓ Metasploit: Meterpreter
+- ❓ Blue
 ### Web Hacking
 ### Offensive Seucrity Tooling
 ### Defensive Security
