@@ -7,6 +7,7 @@
 - [HTTP Messages](#http-messages)
 - [HTTP Request: Request Line and Methods](#http-request-request-line-and-methods)
 - [HTTP Request: Headers and Body](#http-request-headers-and-body)
+- [HTTP Response: Status Line and Status Codes](#http-response-status-line and Status Codes)
 
 
 ## 📘Introduction
@@ -362,4 +363,71 @@ Trying this as the answer
 - `Request headers` ✅
 
 
+## 📘HTTP Response: Status Line and Status Codes
+### HTTP Responses
+- When a client interacts with a web application, the **server replies with an HTTP response**.
+- This response confirms whether the request succeeded or failed, using a **status code** and a **reason phrase**.
+
+### Status Line
+- The first line of every HTTP response, it contains:
+	- **HTTP Version**: Indicates which version of the protocol is used
+	- **Status Code**: A 3-digit number showing the result of the request
+	- **Reason Phrase**: A short, human-readable message explaining the status
+
+### Status Codes and Reason Phrases
+- Status codes fall into **five categories**, based on the first digit:
+	- **1xx – Informational Responses**:
+		- The request is being processed, and the server expects more information
+		- **Example**: `100 Continue`
+	- **2xx – Successful Responses**:
+		- The request was successfully received and processed
+		- **Example**: `200 OK`
+	- **3xx – Redirection Messages**:
+		- The requested resource has moved; a new location is provided
+		- **Example**: `301 Moved Permanently`
+	- **4xx – Client Error Responses**:
+		- There was an issue with the request (e.g., missing info, bad URL)
+		- **Example**: `404 Not Found`
+	- **5xx – Server Error Responses**:
+		- The server failed to fulfil the request due to internal issue
+		- **Example**: `500 Internal Server Error`
+### Common Status Codes
+- **100 Continue**:
+	- Server received part of the request and is waiting for the rest
+- **200 OK**:
+	- The request was successful; the server returned the desired data
+- **301 Moved Permanently**:
+	- Resource has moved permanently; update your links/bookmarks
+- **404 Not Found**:
+	- The server couldn't locate the requested resource
+- **500 Internal Server Error**:
+	- An unexpected error occurred on the server side
+- Understanding status codes is vital for **troubleshooting**, **debugging**, and **building secure, responsive applications**.
+
+### ❓ Question 1 - What part of an HTTP response provides the HTTP version, status code, and a brief explanation of the response's outcome?
+#### 🧪 Process
+The `Status Line` provides the http version, status code and outcome
+
+Trying this as the answer
+#### ✅ Answer 1
+- `Status Line` ✅
+
+### ❓ Question 2 - Which category of HTTP response codes indicates that the web server encountered an internal issue or is unable to fulfil the client's request?
+#### 🧪 Process
+This would be the internal server error. Or `Server Error Responses`.
+
+Trying this as the answer
+#### ✅ Answer 2
+- `Server Error Responses` ✅
+
+### ❓ Question 3 - Which HTTP status code indicates that the requested resource could not be found on the web server?
+#### 🧪 Process
+The worst status ever `Error 404 - Page not found`.
+
+Trying this as the answer
+#### ✅ Answer 3
+- `404` ✅
+
+
 ## .
+
