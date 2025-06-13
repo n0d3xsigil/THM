@@ -34,9 +34,22 @@ My discoveries from THM
 - ❓ Windows Fundamentals 3
 ## Cyber Security 101
 ### Start Your Cyber Security Journey
+- ❓Offensive Security Intro
+- ❓Defensive Security Intro
+- ❓Search Skills
 ### Linux Fundamentals
+- ❓Linux Fundamentals Part 1
+- ❓Linux Fundamentals Part 2
+- ❓Linux Fundamentals Part 3
 ### Windows and AD Fundamentals
+- ❓Windows Fundamentals 1
+- ❓Windows Fundamentals 2
+- ❓Windows Fundamentals 3
+- ❓Active Directory Basics
 ### Command Line
+- ❓Windows Command Line
+- ❓Windows PowerShell
+- ❓Linux Shells
 ### Networking
 - ❌ Network Concepts
 - ❌ Network Essentials
@@ -51,12 +64,17 @@ My discoveries from THM
 - ✅ [Hashing Basics](Rooms/HashingBasics.md)
 - ✅ [John the Ripper: The Basics](Rooms/JohntheRipperTheBasics.md)
 ### Exploitation Basics
-- ❌ [Moniker Link (CVE-2024-21413)](Rooms/MonikerLink(CVE-2024-21413).md)
+- ✅ [Moniker Link (CVE-2024-21413)](Rooms/MonikerLink(CVE-2024-21413).md)
 - ❓ Metasploit: Introduction
 - ❓ Metasploit: Exploitation
 - ❓ Metasploit: Meterpreter
 - ❓ Blue
 ### Web Hacking
+- ⚠️ [Web Application Basics](Rooms/WebApplicationBasics.md)
+- ❌ JavaScript Essentials
+- ❌ SQL Fundamentals
+- ❌ Burp Suite: The Basics
+- ❓ OWASP Top 10 - 2021
 ### Offensive Seucrity Tooling
 ### Defensive Security
 ### Security Solutions
