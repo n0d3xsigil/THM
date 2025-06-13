@@ -5,6 +5,8 @@
 - [Web Application Overview](#web-application-overview)
 - [Uniform Resource Locator](#uniform-resource-locator)
 - [HTTP Messages](#http-messages)
+- [HTTP Request: Request Line and Methods](#http-request-request-line-and-methods)
+- [](#)
 
 
 ## 📘Introduction
@@ -186,3 +188,99 @@ Trying this as the answer
 Trying this as the answer
 #### ✅ Answer 2
 - `Empty line` ✅
+
+## 📘HTTP Request: Request Line and Methods
+### HTTP Requests
+![](Images/Pasted%20image%2020250613171008.png)
+- An HTTP request is how a **user interacts** with a web server, triggering actions within a web application.
+- These are often the **first point of contact**, making them crucial for both functionality and security.
+
+### Request Line
+- The first line of an HTTP request includes:
+	- **HTTP Method** (e.g. `GET`, `POST`)
+	- **URL Path** (e.g. `/login`)
+	- **HTTP Version** (e.g. `HTTP/1.1`)
+- **Example**: `METHOD /path HTTP/version`
+
+### Common HTTP Methods and Security Considerations
+- **GET**:
+	- Retrieves data without making changes
+	- Avoid exposing sensitive info (tokens, passwords) in the URL
+- **POST**:
+	- Sends data to the server (form submission)
+	- Validate and sanitise inputs to prevent SQL injection, XSS
+- **PUT**:
+	- Replaces or updates resources
+	- Require proper authorisation checks
+- **DELETE**:
+	- Removes resources
+	- Also requires strict access controls
+
+### Other HTTP Methods
+- **PATCH**:
+	- Partial updates to resources
+	- Validate input to maintain data integrity
+- **HEAD**:
+	- Like GET but retrieves only headers
+- **OPTIONS**:
+	- Lists allowed methods for a resource
+	- Can assist in method discovery
+- **TRACE**:
+	- Echoes the received request
+	- Often disabled due to security risks
+- **CONNECT**:
+	- Used to establish encrypted (HTTPS) connections
+
+### URL Path
+- Specifies the **resource location** on the server.
+	- Example: `/api/users/123` identifies a user by ID
+- Security best practices:
+	- **Validate** inputs to avoid unauthorised access
+	- **Sanitise** paths to prevent injection attacks
+	- **Protect** sensitive endpoints through proper access control
+
+### HTTP Versions
+- **HTTP/0.9** (1991):
+	- Basic, only supported GET
+- **HTTP/1.0** (1996):
+	- Introduced headers and MIME support
+- **HTTP/1.1** (1997):
+	- Persistent connections, chunked encoding, better caching
+	- Still widely used
+- **HTTP/2** (2015):
+	- Improved performance with multiplexing and header compression
+- **HTTP/3** (2022):
+	- Built on QUIC, focuses on speed and encryption
+
+- While HTTP/1.1 remains the standard, upgrading to **HTTP/2 or HTTP/3** improves speed and security where supported.
+
+### ❓ Question 1
+Which HTTP protocol version became widely adopted and remains the most commonly used version for web communication, known for introducing features like persistent connections and chunked transfer encoding?
+#### 🧪 Process
+HTTP/1.1 remains the predominant version due to support and compatibility
+
+Trying this as the answer
+#### ✅ Answer 1 - 
+- `http/1.1` ✅
+
+
+### ❓ Question 2
+Which HTTP request method describes the communication options for the target resource, allowing clients to determine which HTTP methods are supported by the web server?
+#### 🧪 Process
+Options allows listing of allowed methods for a resource
+
+Trying this as the answer
+#### ✅ Answer 2
+- `Options` ✅
+
+
+### ❓ Question 3
+In an HTTP request, which component specifies the specific resource or endpoint on the web server that the client is requesting, typically appearing after the domain name in the URL?
+#### 🧪 Process
+> The **URL path** tells the server where to find the resource the user is asking for
+
+Trying this as the answer
+#### ✅ Answer 3
+- `URL Path` ✅
+
+## 
