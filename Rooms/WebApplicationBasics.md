@@ -4,6 +4,7 @@
 - [Introduction](#introduction)
 - [Web Application Overview](#web-application-overview)
 - [Uniform Resource Locator](#uniform-resource-locator)
+- [HTTP Messages](#http-messages)
 
 
 ## 📘Introduction
@@ -139,4 +140,49 @@ Trying this as the answer
 - `query string` ✅
 
 
-## 
+## 📘HTTP Messages
+### HTTP Messages
+- HTTP messages are **data packets** sent between a **client** (user) and a **web server** (host).
+- They are key to understanding how web applications communicate.
+
+### Two Types of HTTP Messages
+- **HTTP Requests**:
+	- Sent by the client to initiate actions (e.g., logging in, fetching data)
+- **HTTP Responses**:
+	- Sent by the server in reply to the client’s request (e.g., confirmation, webpage content)
+
+### Structure of an HTTP Message
+- **Start Line**:
+	- Indicates the message type (request or response)
+	- Provides essential context like HTTP method (e.g., `GET`, `POST`) or status code (`200 OK`, `404 Not Found`)
+- **Headers**:
+	- Key-value pairs that carry metadata (content type, cookies, security policies)
+	- Guide both client and server in processing the message
+- **Empty Line**:
+	- Separates the headers from the body
+	- Acts as a required delimiter to avoid misinterpretation
+- **Body**:
+	- Contains the main data
+	- In a request: may include form inputs or file uploads
+	- In a response: includes the requested content like HTML, JSON, etc.
+
+### Why HTTP Messages Matter
+- **Foundation** of client-server communication in web applications
+- Helps with **diagnosing issues**, ensuring smoother performance
+- Crucial for **security**—understanding structure helps protect data in transit
+
+### ❓ Question 1 - Which HTTP message is returned by the web server after processing a client's request?
+#### 🧪 Process
+ When you perform a request you get a response. So the answer would be `HTTP Response`
+
+Trying this as the answer
+#### ✅ Answer 1
+- `HTTP Response` ✅
+
+### ❓ Question 2 - What follows the headers in an HTTP message?
+#### 🧪 Process
+ After the headers the response leaves an empty line to delineate misinterpretation 
+
+Trying this as the answer
+#### ✅ Answer 2
+- `Empty line` ✅
