@@ -8,7 +8,7 @@
 - [HTTP Request: Request Line and Methods](#http-request-request-line-and-methods)
 - [HTTP Request: Headers and Body](#http-request-headers-and-body)
 - [HTTP Response: Status Line and Status Codes](#http-response-status-line and Status Codes)
-
+- [HTTP Response: Headers and Body](#http-response-headers-and-body)
 
 ## 📘Introduction
 
@@ -429,5 +429,64 @@ Trying this as the answer
 - `404` ✅
 
 
-## .
+## 📘HTTP Response: Headers and Body
+### Response Headers
+- HTTP **response headers** are key-value pairs sent from the server to the client.
+- They contain important metadata about the response, helping the client understand how to process it.
 
+### Required Response Headers
+- **Date**: (`Date: Fri, 23 Aug 2024 10:43:21 GMT`)
+	- Indicates when the response was generated
+- **Content-Type**: (`Content-Type: text/html; charset=utf-8`)
+	- Specifies the type of content (e.g., HTML, JSON) and the character encoding (e.g., UTF-8)
+- **Server**: (`Server: nginx`)
+	- Identifies the server software
+	- Useful for debugging, but may expose details attackers can use—consider hiding or modifying it
+
+### Other Common Response Headers
+- **Set-Cookie**: (`Set-Cookie: sessionId=38af1337es7a8`)
+	- Sends a cookie to the client to be stored and reused
+	- For security, apply:
+		- `HttpOnly` to block JavaScript access
+		- `Secure` to enforce HTTPS-only transmission
+- **Cache-Control**: (`Cache-Control: max-age=600`)
+	- Defines how long the client can cache the response
+	- Use `no-cache` for sensitive data to prevent unintended storage
+- **Location**: (`Location: /index.html`)
+	- Used with 3xx redirect responses to tell the client where to go
+	- Must be **validated and sanitised** to prevent open redirect vulnerabilities
+
+### Response Body
+- Contains the **actual content** the server sends back, such as:
+	- HTML pages
+	- JSON data
+	- Images or files
+- To maintain **security**, especially when handling user-generated content:
+	- **Sanitise** and **escape** all output
+	- Helps prevent attacks like **Cross-Site Scripting (XSS)**
+- Overall, headers and body work together to ensure secure, reliable communication between server and client.
+
+### ❓ Question 1 - Which HTTP response header can reveal information about the web server's software and version, potentially exposing it to security risks if not removed?
+#### 🧪 Process
+No process on this one, its server.
+#### ✅ Answer 1
+- `Server` ✅
+
+### ❓ Question 2 - Which flag should be added to cookies in the Set-Cookie HTTP response header to ensure they are only transmitted over HTTPS, protecting them from being exposed during unencrypted transmissions?
+#### 🧪 Process
+This one is the set-cookie `secure`.
+#### ✅ Answer 2
+- `Secure` ✅
+
+### ❓ Question 3 - Which flag should be added to cookies in the Set-Cookie HTTP response header to prevent them from being accessed via JavaScript, thereby enhancing security against XSS attacks?
+#### 🧪 Process
+Under _Set-Cookie_ 
+
+> For security, apply `HttpOnly` to block JavaScript access
+
+Trying this as the answer
+#### ✅ Answer 3
+- `HttpOnly` ✅
+
+
+## .
