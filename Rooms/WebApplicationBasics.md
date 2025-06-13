@@ -10,6 +10,7 @@
 - [HTTP Response: Status Line and Status Codes](#http-response-status-line and Status Codes)
 - [HTTP Response: Headers and Body](#http-response-headers-and-body)
 - [Security Headers](#security-headers)
+- [Practical Task: Making HTTP Requests](#practical-task-making-http-requests)
 
 ## 📘Introduction
 
@@ -586,6 +587,105 @@ Trying this as the answer
 > `nosniff`: Instructs browsers to strictly follow the declared `Content-Type` without guessing
 #### ✅ Answer 3
 - `nosniff` ✅
+
+
+## 📘Practical Task: Making HTTP Requests
+
+### ❓ Question 1
+> Make a **GET** request to `/api/users`. What is the flag?
+#### 🧪 Process
+##### Get
+```html
+GET api/users HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0 Firefox/87.0
+Content-Length: 0
+```
+##### Response
+```html
+HTTP/1.1 200 Ok
+Server: nginx/1.15.8
+Fri, 13 Jun 2025 22 17 18 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 633
+Last-Modified: Fri, 13 Jun 2025 22 17 18 GMT
+
+<html>
+<head>
+    <title>TryHackMe</title>
+</head>
+<body>
+    <table class="table-auto"><thead><tr class="bg-gray text-white"><th class="w-20">Name</th><th class="w-20">Age</th><th class="w-20">Country</th><th>Flag</th></tr></thead><tbody><tr><td class="text-center">Alice</td><td class="text-center">28</td><td class="text-center">US</td><td class="text-center"></td></tr><tr><td class="text-center">Bob</td><td class="text-center">34</td><td class="text-center">UK</td><td class="text-center"></td></tr><tr><td class="text-center">Charlie</td><td class="text-center">25</td><td class="text-center">CA</td><td class="text-center">THM{YOU_HAVE_JUST_FOUND_THE_USER_LIST}</td></tr></tbody></table>
+</body>
+</html>
+```
+#### ✅ Answer
+- `THM{YOU_HAVE_JUST_FOUND_THE_USER_LIST}` ✅
+
+### ❓ Question 2
+> Make a **POST** request to `/api/user/2` and update the **country** of Bob from **UK** to **US**. What is the flag?
+#### 🧪 Process
+##### Get
+```html
+POST api/user/2 HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0 Firefox/87.0
+Content-Length: 9
+country=US
+```
+##### Response
+```HTML
+HTTP/1.1 200 Ok
+Server: nginx/1.15.8
+Fri, 13 Jun 2025 22 30 48 GMT
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Content-Length: 68
+Last-Modified: Fri, 13 Jun 2025 22 30 48 GMT
+  
+<html>  
+<head>  
+    <title>TryHackMe</title>  
+</head>  
+<body>  
+    <p>User #<!-- -->2<!-- --> successfully <!-- -->updated<!-- -->.</p>  
+</body>  
+</html>
+```
+
+#### ✅ Answer
+- `THM{YOU_HAVE_MODIFIED_THE_USER_DATA}` ✅
+
+### ❓ Question 3
+> Make a **DELETE** request to `/api/user/1` to delete the user. What is the flag?
+#### 🧪 Process
+##### Get
+```html
+DELETE api/user/1 HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0 Firefox/87.0
+Content-Length: 0
+```
+##### Response
+```html
+HTTP/1.1 200 Ok
+Server: nginx/1.15.8
+Fri, 13 Jun 2025 22 33 11 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 68
+Last-Modified: Fri, 13 Jun 2025 22 33 11 GMT
+
+<html>
+<head>
+    <title>TryHackMe</title>
+</head>
+<body>
+    <p>User #<!-- -->1<!-- --> successfully <!-- -->deleted<!-- -->.</p>
+</body>
+</html>
+```
+
+#### ✅ Answer
+- `THM{YOU_HAVE_JUST_DELETED_A_USER}` ✅
 
 
 ## .
