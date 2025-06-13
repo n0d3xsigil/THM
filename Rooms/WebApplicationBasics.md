@@ -6,7 +6,7 @@
 - [Uniform Resource Locator](#uniform-resource-locator)
 - [HTTP Messages](#http-messages)
 - [HTTP Request: Request Line and Methods](#http-request-request-line-and-methods)
-- [](#)
+- [HTTP Request: Headers and Body](#http-request-headers-and-body)
 
 
 ## 📘Introduction
@@ -283,4 +283,83 @@ Trying this as the answer
 #### ✅ Answer 3
 - `URL Path` ✅
 
-## 
+## 📘HTTP Request: Headers and Body
+### Request Headers
+- HTTP **request headers** send additional information from the client to the server.
+- They provide context about the request, such as the source, data type, or user preferences.
+
+### Common Request Headers
+- **Host**: (`Host: tryhackme.com`)
+	- Specifies the destination web server
+- **User-Agent**: (`User-Agent: Mozilla/5.0`)
+	- Identifies the client’s browser or tool making the request
+- **Referer**: (`Referer: https://www.google.com/`)
+	- Indicates the page where the request originated
+- **Cookie**: (`Cookie: user_type=student; room=introtowebapplication; room_status=in_progress`)
+	- Stores data set by the server, such as session information or user preferences
+- **Content-Type**: (`Content-Type: application/json`)
+	- Describes the format of the data in the body of the request
+
+### Request Body
+- Used in methods like **POST** and **PUT** to send data to the server.
+- Several common data formats are used:
+
+- **URL Encoded** (`application/x-www-form-urlencoded`):
+	- Data is sent as `key=value` pairs, joined by `&`
+	- Spaces and special characters are percent-encoded
+	- **Example**: `name=Aleksandra&age=27&country=US`
+- **Form Data** (`multipart/form-data`):
+	- Data is sent in separate blocks, each separated by a boundary string
+	- Suitable for **file uploads** or binary data
+		- Example:
+			- Username in plain text
+			- Profile picture sent as binary image data
+- **JSON** (`application/json`):
+	- Data is structured using JavaScript Object Notation
+	- Readable, widely used in APIs
+	- Example:
+	    ```json
+	    {
+		    "name": "Aleksandra",
+		    "age": 27,
+		    "country": "US"
+		}
+		```
+- **XML** (`application/xml`):
+	- Uses nested **tags** to define and organise data
+	- Example:
+		```xml
+		<user>
+			<name>Aleksandra</name>
+			<age>27</age>
+			<country>US</country>
+		</user>
+		```
+- Choosing the correct format depends on the use case and what the server expects to receive.
+
+### ❓ Question 1 - Which HTTP request header specifies the domain name of the web server to which the request is being sent?
+#### 🧪 Process
+`Host` specifies the destination web server
+
+Trying this as the answer
+#### ✅ Answer 1
+- `Host` ✅
+
+### ❓ Question 2 - What is the default content type for form submissions in an HTTP request where the data is encoded as key=value pairs in a query string format?
+#### 🧪 Process
+This would be URL encoded or `application/x-www-form-urlencoded`
+
+Trying this as the answer
+#### ✅ Answer 2
+- `application/x-www-form-urlencoded` ✅
+
+### ❓ Question 3 - Which part of an HTTP request contains additional information like host, user agent, and content type, guiding how the web server should process the request?
+#### 🧪 Process
+> **Request Headers** allow extra information to be conveyed to the web server about the request.
+
+Trying this as the answer
+#### ✅ Answer 3
+- `Request headers` ✅
+
+
+## .
