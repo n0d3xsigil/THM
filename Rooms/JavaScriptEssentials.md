@@ -3,6 +3,7 @@
 ## Contents
 - [Introduction](#introduction)
 - [Essential Concepts](#essential-concepts)
+- [JavaScript Overview](#javascript-overview)
 
 
 ## 📘Introduction
@@ -65,3 +66,71 @@
 It's a loop, you would loop through a block of code multiple times until a condition is met.
 #### ✅ Answer
 - `loop`
+
+
+## 📘JavaScript Overview
+### Writing our first JavaScript program
+- **JavaScript is an interpreted language**, meaning it runs directly in the browser without needing compilation.
+- The first sample program introduces several foundational concepts:
+    ```javascript
+    // Hello, World! program
+    console.log("Hello, World!");
+    
+    // Variable and Data Type
+    let age = 25;
+    
+    // Control Flow Statement
+    if (age >= 18) {
+        console.log("You are an adult.");
+    } else {
+        console.log("You are a minor.");
+    }
+    
+    // Function
+    function greet(name) {
+        console.log("Hello, " + name + "!");
+    }
+    
+    // Calling the function
+    greet("Bob");
+    ```
+- **Concepts demonstrated:**
+	- Logging output with `console.log`
+	- Defining variables (`let age = 25`)
+	- Using conditional statements (`if...else`)
+	- Creating and invoking functions
+- **Client-side Execution:**
+	- JavaScript primarily runs in the browser, making it easy to interact with and inspect via developer tools.
+- **Running JavaScript in Chrome Console:**
+	- Launch Google Chrome from the VM Desktop.
+	- Press `Ctrl + Shift + I` or right-click and choose **Inspect**.
+	- Navigate to the **Console** tab to begin writing JavaScript directly.
+- **Example: Adding Two Numbers in Console**
+    ```javascript
+    let x = 5;
+    let y = 10;
+    let result = x + y;
+    console.log("The result is: " + result);
+    ```
+    - Paste the code into the Console with `Ctrl + V`, then press `Enter`.
+    - You should see: `The result is: 15`
+
+### ❓ Question 1
+> What is the code output if the value of x is changed to 10?
+#### 🧪 Process
+I don't need to run the app to see that if you change `5 + 10 = 15` to 10 + 10 the answer would change to 20
+
+The output would then be `The result is: 20`
+
+Trying this as the answer
+#### ✅ Answer
+- `The result is: 20` ✅
+
+### ❓ Question 2
+> Is JavaScript a compiled or interpreted language?
+#### 🧪 Process
+This is the first line, it is not compiled as it is run as it is. So you don't use a compiler to generate a binary. Therefore it is an interpreted language.
+
+Trying this as my answer.
+#### ✅ Answer
+- `interpreted` ✅
