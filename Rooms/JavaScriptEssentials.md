@@ -5,6 +5,7 @@
 - [Essential Concepts](#essential-concepts)
 - [JavaScript Overview](#javascript-overview)
 - [Integrating JavaScript in HTML](#integrating-javascript-in-html)
+- [Abusing Dialogue Functions](#abusing-dialogue-functions)
 
 
 ## 📘Introduction
@@ -248,3 +249,110 @@ To include an external script you would use `<script src=...>` so lets assume th
 Trying this as the answer
 #### ✅ Answer
 - `src` ✅
+
+
+## 📘Abusing Dialogue Functions
+### Dialogue Functions & Malicious Use
+- JavaScript enables **user interaction** through dialogue boxes using built-in functions like `alert()`, `prompt()`, and `confirm()`.
+- These functions enhance interactivity but can also be **abused by attackers** if not handled securely.
+
+#### `alert()`
+- Displays a simple message with an **“OK”** button.
+- Often used for alerts or notifications.
+**Example:**
+```javascript
+alert("Hello THM");
+```
+- Executing this in the Chrome Console shows a pop-up with the message.
+	![](Images/Pasted%20image%2020250614103314.png)
+#### `prompt()`
+- Asks the user for input and returns the value.
+- Returns `null` if the user clicks **Cancel**.
+
+**Example:**
+```javascript
+name = prompt("What is your name?");
+alert("Hello " + name);
+```
+- Prompts the user for their name and then greets them in a second dialog.
+	![](Images/Pasted%20image%2020250614103443.png)
+	![](Images/Pasted%20image%2020250614103619.png)
+#### `confirm()`
+- Displays a message with **“OK”** and **“Cancel”** buttons.
+- Returns `true` if the user clicks OK, `false` otherwise.
+
+**Example:**
+```javascript
+confirm("Do you want to proceed?");
+```
+- Use it to get confirmation from the user before proceeding with actions.
+	![](Images/Pasted%20image%2020250614103718.png)
+
+#### Malicious Use Example
+- An attacker could send you an HTML file with embedded JavaScript that runs as soon as the page loads.
+- These scripts may annoy or trap users by repeatedly displaying dialogue boxes.
+
+**Example:**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hacked</title>
+</head>
+<body>
+    <script>
+        for (let i = 0; i < 3; i++) {
+            alert("Hacked");
+        }
+    </script>
+</body>
+</html>
+```
+- When opened, this script triggers 3 alert boxes in succession.
+    
+- Changing `i < 3` to `i < 500` would flood the user with alert pop-ups, making the browser unusable until all are dismissed.
+- 1 / 3:
+  ![](Images/Pasted%20image%2020250614103914.png)
+- 2 / 3:
+  ![](Images/Pasted%20image%2020250614104034.png)
+- 3 / 3:
+  ![](Images/Pasted%20image%2020250614104037.png)
+- Done:
+  ![](Images/Pasted%20image%2020250614104049.png)
+
+#### Key Takeaway
+- These dialogue functions are **legitimate features** but can be **easily abused**.
+- Always verify the **source** of any HTML or JavaScript file before opening it, especially if it's sent via email or comes from an unknown location.
+- This example sets the stage for understanding **client-side attacks** like XSS in later tasks.
+
+### ❓ Question 1
+> In the file **invoice.html**, how many times does the code show the alert Hacked?
+#### 🧪 Process
+I've learned my lesson on this one. Check the exercise files!
+
+Viewing the code, because we wouldn't just want to blindly run any code. I can see the for loop is < 5. Because it starts at 0 there would be 5 increments (`0`, `1`,`2`,`3`, and `4`).
+
+Trying this as the answer
+#### ✅ Answer
+- `5` ✅
+
+### ❓ Question 2
+> Which of the JS interactive elements should be used to display a dialogue box that asks the user for input?
+#### 🧪 Process
+This function is 'confirm'.
+
+Trying this as the answer
+#### ✅ Answer
+- `confirm` ❌
+
+Oops! No, too many letters. Prompt!
+- `prompt` ✅
+
+### ❓ Question 3
+> If the user enters Tesla, what value is stored in the carName= prompt("What is your car name?")? in the carName variable?
+#### 🧪 Process
+I don't understand, if you enter `Testla` that is what is stored right?
+
+Trying that as the answer
+#### ✅ Answer
+- `Tesla` ✅
