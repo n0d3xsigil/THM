@@ -71,7 +71,7 @@ My discoveries from THM
 - ❓ Blue
 ### Web Hacking
 - ✅ [Web Application Basics](Rooms/WebApplicationBasics.md)
-- ❌ JavaScript Essentials
+- ⚠️ [JavaScript Essentials](Rooms/JavaScriptEssentials.md)
 - ❌ SQL Fundamentals
 - ❌ Burp Suite: The Basics
 - ❓ OWASP Top 10 - 2021
