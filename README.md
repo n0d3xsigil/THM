@@ -70,7 +70,7 @@ My discoveries from THM
 - ❓ Metasploit: Meterpreter
 - ❓ Blue
 ### Web Hacking
-- ⚠️ [Web Application Basics](Rooms/WebApplicationBasics.md)
+- ✅ [Web Application Basics](Rooms/WebApplicationBasics.md)
 - ❌ JavaScript Essentials
 - ❌ SQL Fundamentals
 - ❌ Burp Suite: The Basics
