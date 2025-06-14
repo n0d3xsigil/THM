@@ -4,6 +4,7 @@
 - [Introduction](#introduction)
 - [Essential Concepts](#essential-concepts)
 - [JavaScript Overview](#javascript-overview)
+- [Integrating JavaScript in HTML](#integrating-javascript-in-html)
 
 
 ## 📘Introduction
@@ -134,3 +135,116 @@ This is the first line, it is not compiled as it is run as it is. So you don't u
 Trying this as my answer.
 #### ✅ Answer
 - `interpreted` ✅
+
+
+
+## 📘Integrating JavaScript in HTML
+### Integrating JavaScript
+- JavaScript is used alongside HTML and CSS to create dynamic, interactive websites.
+- JavaScript does not render content by itself, it manipulates and enhances what’s already defined in HTML.
+- **Two primary methods to integrate JavaScript into HTML:**
+	- **Internal JavaScript**
+	- **External JavaScript**
+
+#### Internal JavaScript
+- Internal JS is written **within** the HTML file using `<script>` tags.
+- It can be placed in the `<head>` (loaded before content) or `<body>` (executed with content).
+- Ideal for beginners and small projects.
+
+**Example:**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Internal JS</title>
+</head>
+<body>
+    <h1>Addition of Two Numbers</h1>
+    <p id="result"></p>
+
+    <script>
+        let x = 5;
+        let y = 10;
+        let result = x + y;
+        document.getElementById("result").innerHTML = "The result is: " + result;
+    </script>
+</body>
+</html>
+```
+- This script:
+	- Declares two variables
+	- Adds them
+	- Updates the `<p>` element with the result using `document.getElementById().innerHTML`
+![](Images/Pasted%20image%2020250614095443.png)
+
+#### External JavaScript
+- External JS separates the script from HTML for **better readability and maintainability**.
+- The JS code is stored in a `.js` file and loaded into HTML via the `src` attribute in the `<script>` tag.
+**Example:**
+1. Create `script.js` and save file on the Desktop
+```javascript
+let x = 5;
+let y = 10;
+let result = x + y;
+document.getElementById("result").innerHTML = "The result is: " + result;
+```
+2. Create `external.html` and save file on the Desktop
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External JS</title>
+</head>
+<body>
+    <h1>Addition of Two Numbers</h1>
+    <p id="result"></p>
+
+    <script src="script.js"></script>
+</body>
+</html>
+```
+- The output is the **same** as the internal version, but the JS logic is now cleanly separated.
+	![](Images/Pasted%20image%2020250614095912.png)
+
+#### Verifying Internal vs. External JavaScript
+- Right-click on a webpage and choose **View Page Source** in Chrome.
+	- **Internal JS**: Code appears between `<script>` tags _without_ a `src` attribute.
+	- **External JS**: `<script>` tag uses the `src` attribute to link a `.js` file.
+
+### ❓ Question 1
+> Which type of JavaScript integration places the code directly within the HTML document?
+#### 🧪 Process
+Directly in the HTML document would be `internal`
+
+Trying this as the answer
+#### ✅ Answer
+- `internal` ✅
+
+### ❓ Question 2
+> Which method is better for reusing JS across multiple web pages?
+#### 🧪 Process
+If using across multiple pages then surly `external`.
+
+Trying this as the answer
+#### ✅ Answer
+- `external` ✅
+
+### ❓ Question 3
+> What is the name of the external JS file that is being called by **external_test.html**?
+#### 🧪 Process
+I had to actually look at the exercise files on the desktop. Turns out there is a file called `thme_external.js`.
+
+Trying this as the answer
+#### ✅ Answer
+- `thm_external.js` ✅
+
+### ❓ Question 4
+> What attribute links an external JS file in the `<script>` tag?
+#### 🧪 Process
+To include an external script you would use `<script src=...>` so lets assume that we just want `src` as our answer. 
+
+Trying this as the answer
+#### ✅ Answer
+- `src` ✅
