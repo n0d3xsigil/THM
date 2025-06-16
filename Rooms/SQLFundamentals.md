@@ -3,9 +3,10 @@
 ## Contents
 - [Introduction](#introduction)
 - [Databases 101](#databases-101)
+- [SQL](#sql)
 
 
-## Introduction
+## 📘Introduction
 Databases, the bread and butter of applications the world over. It doesn't matter if it is a HR system, Web application, file scanner, SOC, or any other data driven tool, You will be using a database.
 
 On the offensive side understanding databases can help us with SQL vulnerabilities such as SQL injections which can help us craft queries that will tamper or retrieve data or on the defensive side understanding how to navigate databases to find suspicious activity or implement a more secure database.
@@ -18,7 +19,7 @@ No Microsoft Access here ;)
 - [Linux Fundamentals](Rooms/LinuxFundamentals.md)
 
 
-## Databases 101
+## 📘Databases 101
 ### Introducing Databases
 > Okay, so you’ve been told just how important they are. Now, it's time to understand what they are in the first place. As mentioned in the introduction, databases are so ubiquitous that you very likely interact with systems that are using them. Databases are an organised collection of structured information or data that is easily accessible and can be manipulated or analysed. That data can take many forms, such as user authentication data (such as usernames and passwords), which are stored and checked against when authenticating into an application or site (like TryHackMe, for example), user-generated data on social media (Like Instagram and Facebook) where data such as user posts, comments, likes etc are collected and stored, as well as information such as watch history which is stored by streaming services such as Netflix and used to generate recommendations. 
 
@@ -118,3 +119,45 @@ A primary key ensures records are unique.
 Trying this as the answer
 #### ✅ Answer
 - `primary key` ✅
+
+
+## 📘SQL
+### What is SQL?
+![](Images/Pasted%20image%2020250616191408.png)
+- Usually controlled by DMBS (**D**ata**b**ase **M**anagement **S**ystem)
+	- Acts as link between user and database
+- Examples of DBMS
+	- MySQL
+	- MongoDB
+	- Oracle Database
+	- Maria DB
+- SQL (**S**tructured **Q**uery **L**anguage)
+	- A Programming Language
+	- Used to Query, define and manipulate data stored in a relational database.
+
+### The Benefits of SQL and Relational Databases
+- Fast
+- Easy to learn
+- Reliable
+- Flexible
+### Getting Hands ON
+No need. I'm happy with this.
+
+### ❓ Question 1
+> What serves as an interface between a database and an end user?
+#### 🧪 Process
+A DBMS acts as an interface between user and DB.
+
+Trying this as the answer.
+#### ✅ Answer
+- `DBMS` ✅
+
+### ❓ Question 2
+> What query language can be used to interact with a relational database?
+#### 🧪 Process
+Structured Query Language or SQL.
+
+Trying this as the answer
+#### ✅ Answer
+- `SQL` ✅
+
