@@ -569,4 +569,13 @@ Trying this as the answer
 - `nay`
 
 
-##
+## 📘Conclusion
+We’ve covered the fundamentals such as writing JavaScript, integrating it into HTML, and creating basic programs.
+
+We then explored user interaction like alert, prompt, and confirm, and how these can be abused by attackers.
+
+We looked at control flow (decisions and repetition), and how some of these behaviours can be bypassed.
+
+We also touched on minifying and obfuscating code, both to improve performance and to make it harder for attackers to understand your logic.
+
+To wrap up, we learned some simple but important best practices to help keep your web apps safe.
