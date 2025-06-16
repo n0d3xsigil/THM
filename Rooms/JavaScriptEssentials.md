@@ -8,6 +8,7 @@
 - [Abusing Dialogue Functions](#abusing-dialogue-functions)
 - [Bypassing Control Flow Statements](#bypassing-control-flow-statements)
 - [Best Practices](#best-practices)
+- [Conclusion](#conclusion)
 
 ## 📘Introduction
 ### JavaScript Essentials
