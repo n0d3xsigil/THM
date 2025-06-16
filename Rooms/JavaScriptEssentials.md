@@ -471,4 +471,60 @@ Trying this as the answer
 
 
 ## 📘Exploring Minified Files
+**Minified** (minification) means to reduce the size of the Java Script by removing all unnecessary characters, such as _spaces_, _line breaks_, _comments_, _etc._
 
+This is done to compact the file and improve loading times. however it is harder to read. It is important to note, the code remains functionally the same.
+
+> Similarly, **obfuscation** is often used to make JS harder to understand by adding undesired code, renaming variables and functions to meaningless names, and even inserting dummy code.
+
+On the topic of making things harder to read, another technique is **obfuscation**, this changes code to an unreadable by changing function names, variables to random names. Sometimes dummy obsfuscated code is also inserted.
+
+**Example - Original**
+```javascript
+function lemonaid(){
+    alert("Hello World!")
+}
+```
+
+**Example - Obfuscated**
+Using the _[JavaScript Obfuscator](https://codebeautify.org/javascript-obfuscator)_ page on _[codebeautify.org](https://codebeautify.org)_ we can see the obfuscated code looks nothing like the original above.
+```javascript
+(function(_0xd05e8,_0x3c8510){var _0x1821e4=_0x3548,_0x419d7a=_0xd05e8();while(!![]){try{var _0x72f47c=parseInt(_0x1821e4(0x165))/(0x1*0x2213+0x35a+-0x256c)+-parseInt(_0x1821e4(0x15f))/(-0x23d9+-0x31+0x240c)+parseInt(_0x1821e4(0x167))/(0x801*-0x2+-0x714+-0x9*-0x291)*(parseInt(_0x1821e4(0x166))/(-0x13d6+-0x221b+-0x1*-0x35f5))+parseInt(_0x1821e4(0x162))/(-0x1757+0x173d+-0x1f*-0x1)*(parseInt(_0x1821e4(0x160))/(-0x43*0x6e+-0x1*-0x1352+0x6*0x195))+parseInt(_0x1821e4(0x164))/(-0xf6d*-0x1+-0x1d15+0xdaf)+parseInt(_0x1821e4(0x15d))/(-0x1598*0x1+-0xe17*-0x1+0x789)+-parseInt(_0x1821e4(0x161))/(-0x1dcb+0x237e+-0x1*0x5aa);if(_0x72f47c===_0x3c8510)break;else _0x419d7a['push'](_0x419d7a['shift']());}catch(_0x4e228e){_0x419d7a['push'](_0x419d7a['shift']());}}}(_0x148a,0x29b76+-0x9*-0x1217f+-0x1c380));function _0x3548(_0x4e9324,_0x4ff1fc){var _0x489c27=_0x148a();return _0x3548=function(_0x12d235,_0x2ca0ae){_0x12d235=_0x12d235-(-0x1462+-0x263*-0xd+0x129*-0x8);var _0x102866=_0x489c27[_0x12d235];return _0x102866;},_0x3548(_0x4e9324,_0x4ff1fc);}function lemonaid(){var _0x1b8d73=_0x3548,_0x1c57ae={'UCbka':function(_0x4b7d8a,_0x300096){return _0x4b7d8a(_0x300096);},'KuJmC':_0x1b8d73(0x15e)+'d!'};_0x1c57ae[_0x1b8d73(0x163)](alert,_0x1c57ae[_0x1b8d73(0x168)]);}function _0x148a(){var _0x4456cc=['Hello\x20Worl','980242uLTZQZ','1524voFQSf','25667190zZShbR','21940wSHmCn','UCbka','1904455kAVUVH','1443525ThvTpN','753388Egidzk','15HkXdjN','KuJmC','2339512YEqKIk'];_0x148a=function(){return _0x4456cc;};return _0x148a();}
+```
+
+After updating the files in the exercise directory on the THM box we can see that the page renders fine, but the code is obfuscated:
+![](Images/Pasted%20image%2020250616152712.png)
+
+
+### Deobfuscating Code
+The room recommends the [Obfuscator.io Deobfuscator](https://obf-io.deobfuscate.io/) website to obfuscate the code.
+
+The process is very much the same as obfsucating the code. 
+![](Images/Pasted%20image%2020250616153407.png)
+
+
+
+
+### ❓ Question
+> What is the alert message shown after running the file **hello.html**?
+#### 🧪 Process
+![](Images/Pasted%20image%2020250616153500.png)
+
+As you load the page the answer is provided, also in the deobfuscated code above.
+
+Trying this as the answer
+
+#### ✅ Answer
+- `Welcome to THM`
+
+### ❓ Question
+> What is the value of the **age** variable in the following obfuscated code snippet?
+> 
+> age=0x1*0x247e+0x35*-0x2e+-0x1ae3;
+#### 🧪 Process
+I used the Deobfuscator to get the age. 
+![](Images/Pasted%20image%2020250616153624.png)
+
+Trying this as the answer
+#### ✅ Answer
+- `21`
