@@ -6,7 +6,7 @@
 - [JavaScript Overview](#javascript-overview)
 - [Integrating JavaScript in HTML](#integrating-javascript-in-html)
 - [Abusing Dialogue Functions](#abusing-dialogue-functions)
-
+- [Bypassing Control Flow Statements](#Bypassing Control Flow Statements)
 
 ## 📘Introduction
 ### JavaScript Essentials
@@ -356,3 +356,126 @@ I don't understand, if you enter `Testla` that is what is stored right?
 Trying that as the answer
 #### ✅ Answer
 - `Tesla` ✅
+
+
+## 📘Bypassing Control Flow Statements
+> Control flow in JS refers to the order in which statements and code blocks are executed based on certain conditions. JS provides several control flow structures such as `if-else`, `switch` statements to make decisions, and loops like `for`, `while`, and `do...while` to repeat actions. Proper use of control flow ensures that a program can handle various conditions effectively.
+
+JavaScript like many programming languages uses control flow to determine the order in which instructions are executed. 
+
+> JS provides several control flow structures such as `if-else`, `switch` statements to make decisions, and loops like `for`, `while`, and `do...while` to repeat actions.
+
+Control flow can be thought of as two behaviours: _Decisions_ and _Repetition_
+- **Decisions**
+	- `if`, `else if`, `else`, `switch`
+- **Repetition**
+	- `for`, `while`, `do...while`
+
+### Conditional Statements in Action
+> One of the most used conditional statements is the `if-else` statements, which allows you to execute different blocks of code depending on whether a condition evaluates to `true` or `false`.
+
+The most common conditional statement is `if-else`. They allow execution based on a `true` or `false` result.
+
+#### Example
+Code example
+```html
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+	    <title>Age Verification</title>
+	</head>
+	<body>
+	    <h1>Age Verification</h1>
+	    <p id="message"></p>
+	
+	    <script>
+	        age = prompt("What is your age")
+	        if (age >= 18) {
+	            document.getElementById("message").innerHTML = "You are an adult.";
+	        } else {
+	            document.getElementById("message").innerHTML = "You are a minor.";
+	        }
+	    </script>
+	</body>
+	</html>
+```
+
+**First run**
+![](Images/Pasted%20image%2020250616132010.png)
+
+**Enter 69**
+If you where to enter `69` as your input you would receive the confirmation that "You are an adult.". Congratulations. 
+![](Images/Pasted%20image%2020250616131541.png)
+
+**Enter 16**
+However, if you where to enter `16`, "You are a minor." You have your whole life ahead of you.
+![](Images/Pasted%20image%2020250616131712.png)
+
+**Null value**
+If for example you cancelled the _prompt_ you would have a null response. Null could be considered 0, 0 is less than 18, there for you would be a minor.
+![](Images/Pasted%20image%2020250616131828.png)
+
+### Bypassing Login Forms
+> Suppose a developer has implemented authentication functionality in JS, where only users with the username "`admin`" and passwords matching a specific value are allowed to log in.
+
+> When you double-click the file and open it in your browser, it will prompt you for a username and password. If the correct credentials are entered, it will display a message confirming that you are logged in, as shown below:
+
+In this example we are given a pre-made file in the exercise folder called `login.html`. Shockingly, but not unseen, the credentials are 'hard-coded' in the html file. 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+    <h2>Login Authentication</h2>
+
+    <script>
+        let username = prompt("Enter your username:");
+        let password = prompt("Enter your password:");
+
+        if (username === "admin" && password === "ComplexPassword") {
+            document.write("You are successfully authenticated!");
+        } else {
+            document.write("Authentication failed. Incorrect username or password.");
+        }
+    </script>
+</body>
+</html>
+```
+
+We can see from the code if the `username`/`password` is correct the text "You are successfully authenticated!" will be shown.
+![](Images/Pasted%20image%2020250616134146.png)
+
+Otherwise you will see "Authentication failed. Incorrect username or password."
+![](Images/Pasted%20image%2020250616134200.png)
+
+### ❓ Question
+> What is the message displayed if you enter the age less than 18?
+#### 🧪 Process
+Not much of a process. 
+```javascript
+if (age >= 18) {
+	            // [redacted]
+	        } else {
+	            document.getElementById("message").innerHTML = "You are a minor.";
+	        }
+```
+Trying this as the answer
+#### ✅ Answer
+- `You are a minor` ✅
+
+### ❓ Question
+> What is the password for the user admin?
+#### 🧪 Process
+For this we can quickly look at the code above for the answer
+```javascript
+if (username === "admin" && password === "ComplexPassword"){
+	//[redacted]
+}
+```
+Trying this as the answer
+#### ✅ Answer
+- `ComplexPassword`✅
+
