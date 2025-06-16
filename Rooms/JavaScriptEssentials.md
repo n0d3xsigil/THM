@@ -359,11 +359,7 @@ Trying that as the answer
 
 
 ## 📘Bypassing Control Flow Statements
-> Control flow in JS refers to the order in which statements and code blocks are executed based on certain conditions. JS provides several control flow structures such as `if-else`, `switch` statements to make decisions, and loops like `for`, `while`, and `do...while` to repeat actions. Proper use of control flow ensures that a program can handle various conditions effectively.
-
 JavaScript like many programming languages uses control flow to determine the order in which instructions are executed. 
-
-> JS provides several control flow structures such as `if-else`, `switch` statements to make decisions, and loops like `for`, `while`, and `do...while` to repeat actions.
 
 Control flow can be thought of as two behaviours: _Decisions_ and _Repetition_
 - **Decisions**
@@ -372,8 +368,6 @@ Control flow can be thought of as two behaviours: _Decisions_ and _Repetition_
 	- `for`, `while`, `do...while`
 
 ### Conditional Statements in Action
-> One of the most used conditional statements is the `if-else` statements, which allows you to execute different blocks of code depending on whether a condition evaluates to `true` or `false`.
-
 The most common conditional statement is `if-else`. They allow execution based on a `true` or `false` result.
 
 #### Example
@@ -416,10 +410,6 @@ If for example you cancelled the _prompt_ you would have a null response. Null c
 ![](Images/Pasted%20image%2020250616131828.png)
 
 ### Bypassing Login Forms
-> Suppose a developer has implemented authentication functionality in JS, where only users with the username "`admin`" and passwords matching a specific value are allowed to log in.
-
-> When you double-click the file and open it in your browser, it will prompt you for a username and password. If the correct credentials are entered, it will display a message confirming that you are logged in, as shown below:
-
 In this example we are given a pre-made file in the exercise folder called `login.html`. Shockingly, but not unseen, the credentials are 'hard-coded' in the html file. 
 
 ```html
@@ -478,4 +468,7 @@ if (username === "admin" && password === "ComplexPassword"){
 Trying this as the answer
 #### ✅ Answer
 - `ComplexPassword`✅
+
+
+## 📘Exploring Minified Files
 
