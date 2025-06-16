@@ -4,6 +4,7 @@
 - [Introduction](#introduction)
 - [Databases 101](#databases-101)
 - [SQL](#sql)
+- [Database and Table Statements](#database-and-table-statements)
 
 
 ## 📘Introduction
@@ -161,3 +162,160 @@ Trying this as the answer
 #### ✅ Answer
 - `SQL` ✅
 
+
+## 📘Database and Table Statements
+### Time to Learn
+
+
+### Database Statements
+#### `CREATE DATABASE`
+```sql
+mysql> CREATE DATABASE thm_bookmarket_db;
+Query OK, 1 row affected (0.01 sec)
+```
+
+#### `SHOW DATABASES`
+```sql
+mysql> SHOW DATABASES;
++-----------------------------------------------+
+| Database                                      |
++-----------------------------------------------+
+| THM{575a947132312f97b30ee5aeebba629b723d30f9} |
+| information_schema                            |
+| mysql                                         |
+| performance_schema                            |
+| sys                                           |
+| task_4_db                                     |
+| thm_bookmarket_db                             |
+| thm_books                                     |
+| thm_books2                                    |
+| tools_db                                      |
++-----------------------------------------------+
+10 rows in set (0.01 sec)
+```
+
+#### `USE DATABASE`
+```sql
+mysql> USE thm_bookmarket_db;
+Database changed
+```
+
+#### `DROP DATABASE`
+```sql
+mysql> DROP database thm_bookmarket_db;
+Query OK, 0 rows affected (0.02 sec)
+```
+
+### Table Statements
+### `CREATE TABLE`
+```sql
+mysql> CREATE TABLE book_inventory (
+    -> book_id INT AUTO_INCREMENT PRIMARY KEY,
+    -> book_name VARCHAR(255) NOT NULL,
+    -> publication_date DATE
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+```
+- **Table Name**: `book_inventory`
+- **Columns**:
+	- `book_id`
+	- `book_name`
+	- `book_id`
+- `INT` - Only numbers
+- `AUTO_INCREMENT` means increment the number, 1 at a time starting at 1
+- `PRIMARY KEY` sets this column as the primary key. The number will be unique
+- `VARCHAR(255)` sets the limit of characters to 255.
+- `NOT NULL` Can't be empty
+- `DATE` sets the field to date format.
+
+### `SHOW TABLES `
+```sql
+mysql> SHOW TABLES;
++-----------------------------+
+| Tables_in_thm_bookmarket_db |
++-----------------------------+
+| book_inventory              |
++-----------------------------+
+1 row in set (0.00 sec)
+```
+
+### `DESCRIBE `
+```sql
+mysql> DESCRIBE book_inventory;
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| book_id          | int          | NO   | PRI | NULL    | auto_increment |
+| book_name        | varchar(255) | NO   |     | NULL    |                |
+| publication_date | date         | YES  |     | NULL    |                |
++------------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+```
+
+### `ALTER`
+```sql
+mysql> ALTER TABLE book_inventory
+    -> ADD page_count INT;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+```
+
+### `DROP`
+```sql
+mysql> DROP TABLE table_name;
+```
+
+
+### ❓ Question
+> Using the statement you've learned to list all databases, it should reveal a database with a flag for a name; what is it?
+#### 🧪 Process
+```sql
+mysql> SHOW DATABASES;
++-----------------------------------------------+
+| Database                                      |
++-----------------------------------------------+
+| THM{575a947132312f97b30ee5aeebba629b723d30f9} |
+```
+
+Trying this as the answer
+#### ✅ Answer
+- `THM{575a947132312f97b30ee5aeebba629b723d30f9}` ✅
+
+### ❓ Question
+> In the list of available databases, you should also see the  `task_4_db` database. Set this as your active database and list all tables in this database; what is the flag present here?
+#### 🧪 Process
+```sql
+mysql> SHOW DATABASES;
++-----------------------------------------------+
+| Database                                      |
++-----------------------------------------------+
+| THM{575a947132312f97b30ee5aeebba629b723d30f9} |
+| information_schema                            |
+| mysql                                         |
+| performance_schema                            |
+| sys                                           |
+| task_4_db                                     |
+| thm_bookmarket_db                             |
+| thm_books                                     |
+| thm_books2                                    |
+| tools_db                                      |
++-----------------------------------------------+
+10 rows in set (0.00 sec)
+
+mysql> USE task_4_db;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++-----------------------------------------------+
+| Tables_in_task_4_db                           |
++-----------------------------------------------+
+| THM{692aa7eaec2a2a827f4d1a8bed1f90e5e49d2410} |
++-----------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Trying this as the answer
+#### ✅ Answer
+- `THM{692aa7eaec2a2a827f4d1a8bed1f90e5e49d2410} ` ✅
