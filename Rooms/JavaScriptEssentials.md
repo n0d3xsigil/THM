@@ -6,7 +6,8 @@
 - [JavaScript Overview](#javascript-overview)
 - [Integrating JavaScript in HTML](#integrating-javascript-in-html)
 - [Abusing Dialogue Functions](#abusing-dialogue-functions)
-- [Bypassing Control Flow Statements](#Bypassing Control Flow Statements)
+- [Bypassing Control Flow Statements](#bypassing-control-flow-statements)
+- [Best Practices](#best-practices)
 
 ## 📘Introduction
 ### JavaScript Essentials
@@ -475,8 +476,6 @@ Trying this as the answer
 
 This is done to compact the file and improve loading times. however it is harder to read. It is important to note, the code remains functionally the same.
 
-> Similarly, **obfuscation** is often used to make JS harder to understand by adding undesired code, renaming variables and functions to meaningless names, and even inserting dummy code.
-
 On the topic of making things harder to read, another technique is **obfuscation**, this changes code to an unreadable by changing function names, variables to random names. Sometimes dummy obsfuscated code is also inserted.
 
 **Example - Original**
@@ -505,7 +504,7 @@ The process is very much the same as obfsucating the code.
 
 
 
-### ❓ Question
+### ❓ Question 1
 > What is the alert message shown after running the file **hello.html**?
 #### 🧪 Process
 ![](Images/Pasted%20image%2020250616153500.png)
@@ -517,7 +516,7 @@ Trying this as the answer
 #### ✅ Answer
 - `Welcome to THM`
 
-### ❓ Question
+### ❓ Question 2
 > What is the value of the **age** variable in the following obfuscated code snippet?
 > 
 > age=0x1*0x247e+0x35*-0x2e+-0x1ae3;
@@ -528,3 +527,46 @@ I used the Deobfuscator to get the age.
 Trying this as the answer
 #### ✅ Answer
 - `21`
+
+
+## 📘Best Practices
+### No client side validation
+Client-side validation is a primary function of Java Script
+
+Some developers have used Java Script to validate form input.
+
+Since a user can manipulate their environment, this is bad practice. The user could disable validation or manipulate it to accept dangerous inputs.
+
+### Prefer trusted libraries
+As previously mentioned, you can include external JavaScript files using the `<script src>` tag. It’s important to verify the trustworthiness of any external library you use. Attackers may upload fake libraries with names similar to legitimate ones. Including these untrusted libraries could expose your web application to malicious code.
+
+### No hardcoded secrets
+**You should never hardcode sensitive data in the JavaScript code**. Again, the user has entire control of their own environment. Meaning sensitive data is exposed.
+
+**Sensitive data means**
+- API Keys
+- access tokens
+- credentials 
+- server specific data
+
+**Example**:
+```javascript
+const privateAPIKey = "pk_TryNotToHackMe_1337"
+```
+
+### Minify and Obfuscate code
+Reducing the file size (Minifying) and making the script harder to understand (obfuscating) will make it harder for attackers to understand.
+
+Whilst the obfuscation can be reversed it will at least slow the attacker down.
+
+### ❓ Question
+> Is it a good practice to blindly include JS in your code from any source (yea/nay)?
+#### 🧪 Process
+> Including these untrusted libraries could expose your web application to malicious code
+
+Trying this as the answer
+#### ✅ Answer
+- `nay`
+
+
+##
