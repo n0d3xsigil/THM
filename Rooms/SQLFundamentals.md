@@ -7,6 +7,7 @@
 - [Database and Table Statements](#database-and-table-statements)
 - [CRUD Operations](#crud-operations)
 - [Clauses](#clauses)
+- [Operators](#operators)
 
 
 ## 📘Introduction
@@ -863,3 +864,315 @@ The first result is now `Wi-Fi Pineapple`
 Trying this as the answer
 #### ✅ Answer
 - `Wi-Fi Pineapple` ✅
+
+
+## Operators
+We will use `thm_books2` this time. So lets `USE` that one.
+```sql
+mysql> SHOW DATABASES;
++-----------------------------------------------+
+| Database                                      |
++-----------------------------------------------+
+| THM{575a947132312f97b30ee5aeebba629b723d30f9} |
+| information_schema                            |
+| mysql                                         |
+| performance_schema                            |
+| sys                                           |
+| task_4_db                                     |
+| thm_books                                     |
+| thm_books2                                    |
+| tools_db                                      |
++-----------------------------------------------+
+9 rows in set (0.00 sec)
+
+mysql> USE thm_books2;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++----------------------+
+| Tables_in_thm_books2 |
++----------------------+
+| books                |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM books;
++----+----------------------------+----------------+--------------------------------------------------------+--------------------+
+| id | name                       | published_date | description                                            | category           |
++----+----------------------------+----------------+--------------------------------------------------------+--------------------+
+|  1 | Android Security Internals | 2014-10-14     | An In-Depth Guide to Android's Security Architecture   | Defensive Security |
+|  2 | Bug Bounty Bootcamp        | 2021-11-16     | The Guide to Finding and Reporting Web Vulnerabilities | Offensive Security |
+|  3 | Car Hacker's Handbook      | 2016-02-25     | A Guide for the Penetration Tester                     | Offensive Security |
+|  4 | Designing Secure Software  | 2021-12-21     | A Guide for Developers                                 | Defensive Security |
+|  5 | Ethical Hacking            | 2021-11-02     | A Hands-on Introduction to Breaking In                 | Offensive Security |
++----+----------------------------+----------------+--------------------------------------------------------+--------------------+
+5 rows in set (0.00 sec)
+```
+
+### Logical Operators
+- Result in `TRUE` or `FALSE`
+#### LIKE Operator
+Often used in conjunction with `WHERE`
+```sql
+mysql> SELECT *
+    -> FROM books
+    -> WHERE description LIKE '%guide%';
++----+----------------------------+----------------+--------------------------------------------------------+--------------------+
+| id | name                       | published_date | description                                            | category           |
++----+----------------------------+----------------+--------------------------------------------------------+--------------------+
+|  1 | Android Security Internals | 2014-10-14     | An In-Depth Guide to Android's Security Architecture   | Defensive Security |
+|  2 | Bug Bounty Bootcamp        | 2021-11-16     | The Guide to Finding and Reporting Web Vulnerabilities | Offensive Security |
+|  3 | Car Hacker's Handbook      | 2016-02-25     | A Guide for the Penetration Tester                     | Offensive Security |
+|  4 | Designing Secure Software  | 2021-12-21     | A Guide for Developers                                 | Defensive Security |
++----+----------------------------+----------------+--------------------------------------------------------+--------------------+
+4 rows in set (0.00 sec)
+```
+
+#### AND Operator
+Tying multiple conditions together to filter furhter.
+```sql
+mysql> SELECT * 
+    -> FROM books
+    -> WHERE category = "Offensive Security" AND name = "Bug Bounty Bootcamp";
++----+---------------------+----------------+--------------------------------------------------------+--------------------+
+| id | name                | published_date | description                                            | category           |
++----+---------------------+----------------+--------------------------------------------------------+--------------------+
+|  2 | Bug Bounty Bootcamp | 2021-11-16     | The Guide to Finding and Reporting Web Vulnerabilities | Offensive Security |
++----+---------------------+----------------+--------------------------------------------------------+--------------------+
+1 row in set (0.00 sec)
+```
+
+#### OR Operator
+Check for `This` or `That`
+```sql
+mysql> SELECT * 
+    -> FROM books
+    -> WHERE name LIKE '%Android%' OR name LIKE '%iOS%';
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+| id | name                       | published_date | description                                          | category           |
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+|  1 | Android Security Internals | 2014-10-14     | An In-Depth Guide to Android's Security Architecture | Defensive Security |
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+1 row in set (0.00 sec)
+```
+
+#### NOT Operator
+Excludes specific results
+```sql
+mysql> SELECT * 
+    -> FROM books
+    -> WHERE NOT description LIKE '%guide%';
++----+-----------------+----------------+----------------------------------------+--------------------+
+| id | name            | published_date | description                            | category           |
++----+-----------------+----------------+----------------------------------------+--------------------+
+|  5 | Ethical Hacking | 2021-11-02     | A Hands-on Introduction to Breaking In | Offensive Security |
++----+-----------------+----------------+----------------------------------------+--------------------+
+1 row in set (0.00 sec)
+```
+
+#### BETWEEN Operator
+Filter a result between two numbers
+```sql
+mysql> SELECT * 
+    -> FROM books
+    -> WHERE id BETWEEN 2 AND 4;
++----+---------------------------+----------------+--------------------------------------------------------+--------------------+
+| id | name                      | published_date | description                                            | category           |
++----+---------------------------+----------------+--------------------------------------------------------+--------------------+
+|  2 | Bug Bounty Bootcamp       | 2021-11-16     | The Guide to Finding and Reporting Web Vulnerabilities | Offensive Security |
+|  3 | Car Hacker's Handbook     | 2016-02-25     | A Guide for the Penetration Tester                     | Offensive Security |
+|  4 | Designing Secure Software | 2021-12-21     | A Guide for Developers                                 | Defensive Security |
++----+---------------------------+----------------+--------------------------------------------------------+--------------------+
+3 rows in set (0.00 sec)
+```
+
+### Comparison Operators
+#### Equal To Operator
+- `=`
+
+Checks a value is `=`
+```sql
+mysql> SELECT * 
+    -> FROM books
+    -> WHERE name = "Designing Secure Software";
++----+---------------------------+----------------+------------------------+--------------------+
+| id | name                      | published_date | description            | category           |
++----+---------------------------+----------------+------------------------+--------------------+
+|  4 | Designing Secure Software | 2021-12-21     | A Guide for Developers | Defensive Security |
++----+---------------------------+----------------+------------------------+--------------------+
+1 row in set (0.00 sec)
+```
+
+#### Not Equal To Operator
+- `!=`
+
+When you want to filter out a particular value
+```sql
+mysql> SELECT * 
+    -> FROM books
+    -> WHERE category != "Offensive Security";
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+| id | name                       | published_date | description                                          | category           |
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+|  1 | Android Security Internals | 2014-10-14     | An In-Depth Guide to Android's Security Architecture | Defensive Security |
+|  4 | Designing Secure Software  | 2021-12-21     | A Guide for Developers                               | Defensive Security |
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+2 rows in set (0.00 sec)
+```
+
+#### Less Than Operator
+- `<`
+
+Filter on a record less than a given value
+```sql
+mysql> SELECT *
+    -> FROM books
+    -> WHERE published_date < "2020-01-01";
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+| id | name                       | published_date | description                                          | category           |
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+|  1 | Android Security Internals | 2014-10-14     | An In-Depth Guide to Android's Security Architecture | Defensive Security |
+|  3 | Car Hacker's Handbook      | 2016-02-25     | A Guide for the Penetration Tester                   | Offensive Security |
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+2 rows in set (0.01 sec)
+```
+
+#### Greater Than Operator
+- `>`
+
+Finding a value greater than a given value
+```sql
+mysql> SELECT * 
+    -> FROM books
+    -> WHERE published_date > "2020-01-01";
++----+---------------------------+----------------+--------------------------------------------------------+--------------------+
+| id | name                      | published_date | description                                            | category           |
++----+---------------------------+----------------+--------------------------------------------------------+--------------------+
+|  2 | Bug Bounty Bootcamp       | 2021-11-16     | The Guide to Finding and Reporting Web Vulnerabilities | Offensive Security |
+|  4 | Designing Secure Software | 2021-12-21     | A Guide for Developers                                 | Defensive Security |
+|  5 | Ethical Hacking           | 2021-11-02     | A Hands-on Introduction to Breaking In                 | Offensive Security |
++----+---------------------------+----------------+--------------------------------------------------------+--------------------+
+3 rows in set (0.00 sec)
+```
+
+#### Less Than or Equal To and Greater  Than or Equal To Operators
+- `<=`
+- `>=`
+
+Less than or Equal
+```sql
+mysql> SELECT * 
+    -> FROM books
+    -> WHERE published_date <= "2021-11-15";
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+| id | name                       | published_date | description                                          | category           |
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+|  1 | Android Security Internals | 2014-10-14     | An In-Depth Guide to Android's Security Architecture | Defensive Security |
+|  3 | Car Hacker's Handbook      | 2016-02-25     | A Guide for the Penetration Tester                   | Offensive Security |
+|  5 | Ethical Hacking            | 2021-11-02     | A Hands-on Introduction to Breaking In               | Offensive Security |
++----+----------------------------+----------------+------------------------------------------------------+--------------------+
+3 rows in set (0.00 sec)
+```
+
+Greater or Equal
+```sql
+mysql> SELECT *
+    -> FROM books
+    -> WHERE published_date >= "2021-11-02";
++----+---------------------------+----------------+--------------------------------------------------------+--------------------+
+| id | name                      | published_date | description                                            | category           |
++----+---------------------------+----------------+--------------------------------------------------------+--------------------+
+|  2 | Bug Bounty Bootcamp       | 2021-11-16     | The Guide to Finding and Reporting Web Vulnerabilities | Offensive Security |
+|  4 | Designing Secure Software | 2021-12-21     | A Guide for Developers                                 | Defensive Security |
+|  5 | Ethical Hacking           | 2021-11-02     | A Hands-on Introduction to Breaking In                 | Offensive Security |
++----+---------------------------+----------------+--------------------------------------------------------+--------------------+
+3 rows in set (0.00 sec)
+```
+
+### ❓ Question
+> Using the `tools_db` database, which tool falls under the **Multi-tool** category and is useful for **pentesters** and **geeks**?
+#### 🧪 Process
+First, we need to change to the `tools_db` database
+```sql
+mysql> USE tools_db;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+```
+
+We can find this by combining `WHERE` with `AND`, and `LIKE`.
+```sql
+mysql> SELECT *
+    -> FROM hacking_tools
+    -> WHERE category = "Multi-Tool" AND description LIKE '%pentesters%' AND description LIKE '%geeks%';
++----+--------------+------------+-------------------------------------------------------------------+--------+
+| id | name         | category   | description                                                       | amount |
++----+--------------+------------+-------------------------------------------------------------------+--------+
+|  1 | Flipper Zero | Multi-tool | A portable multi-tool for pentesters and geeks in a toy-like form |    169 |
++----+--------------+------------+-------------------------------------------------------------------+--------+
+1 row in set (0.00 sec)
+```
+
+We have ourselves a `Flipper Zero`.
+
+Trying this as the answer
+
+#### ✅ Answer
+- `Flipper Zero` ✅
+
+### ❓ Question
+> Using the `tools_db` database, what is the category of tools with an amount **greater than** or **equal** to **300**?
+#### 🧪 Process
+We can combined `WHERE` and `>=` fo this sone.
+
+```sql
+mysql> SELECT * 
+    -> FROM hacking_tools
+    -> WHERE amount >=300;
++----+-----------------+--------------+---------------------------------------------------------------------+--------+
+| id | name            | category     | description                                                         | amount |
++----+-----------------+--------------+---------------------------------------------------------------------+--------+
+|  5 | iCopy-XS        | RFID cloning | A tool used for reading and cloning RFID cards for security testing |    375 |
+|  8 | Proxmark 3 RDV4 | RFID cloning | A powerful RFID tool for reading, writing, and analyzing RFID tags  |    300 |
++----+-----------------+--------------+---------------------------------------------------------------------+--------+
+2 rows in set (0.00 sec)
+```
+
+Only one cateogry results, which is `RFID cloning`
+
+Trying this as the answer
+
+#### ✅ Answer
+- `RFID cloning` ✅
+
+  ### ❓ Question
+> Using the `tools_db` database, which tool falls under the **Network intelligence** category with an amount **less than 100**?
+#### 🧪 Process
+We can combine `WHERE` with `<=` for the result.
+```sql
+mysql> SELECT *
+    -> FROM hacking_tools
+    -> WHERE category = "Network Intelligence" AND amount <= 100;
++----+------------+----------------------+--------------------------------------------------------------------+--------+
+| id | name       | category             | description                                                        | amount |
++----+------------+----------------------+--------------------------------------------------------------------+--------+
+|  6 | Lan Turtle | Network intelligence | A covert tool for remote access and network intelligence gathering |     80 |
++----+------------+----------------------+--------------------------------------------------------------------+--------+
+1 row in set (0.00 sec)
+```
+
+The result is `Lan Turtle`.
+
+Trying this as the answer
+#### ✅ Answer
+- `Lan Turtle` ✅
+
+
+
+
+
+
+
