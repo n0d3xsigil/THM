@@ -6,6 +6,7 @@
 - [SQL](#sql)
 - [Database and Table Statements](#database-and-table-statements)
 - [CRUD Operations](#crud-operations)
+- [Clauses](#clauses)
 
 
 ## 📘Introduction
@@ -564,4 +565,301 @@ Trying this as the answer
 - `USB Attacks` ✅
 
 
+## Clauses
+A clasue is a way of refining how we search for data. It is used in conjunction with a statment.
 
+Focusing on:
+- `DISTINCT`
+- `GROUP BY`
+- `ORDER BY`
+- `HAVING`
+
+First we should log in to sql and enter our password
+
+```shell
+ubuntu@tryhackme:~$ mysql -u root -p
+Enter password: tryhackme
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.39-0ubuntu0.20.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+```
+
+We want to `USE` the database `thm_books`.
+```sql
+mysql> USE thm_books;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+```
+
+### DISTINCT Clause
+Before distinct clause
+```sql
+mysql> SELECT * FROM books;
++----+----------------------------+----------------+--------------------------------------------------------+
+| id | name                       | published_date | description                                            |
++----+----------------------------+----------------+--------------------------------------------------------+
+|  1 | Android Security Internals | 2014-10-14     | An In-Depth Guide to Android's Security Architecture   |
+|  2 | Bug Bounty Bootcamp        | 2021-11-16     | The Guide to Finding and Reporting Web Vulnerabilities |
+|  3 | Car Hacker's Handbook      | 2016-02-25     | A Guide for the Penetration Tester                     |
+|  4 | Designing Secure Software  | 2021-12-21     | A Guide for Developers                                 |
+|  5 | Ethical Hacking            | 2021-11-02     | A Hands-on Introduction to Breaking In                 |
+|  6 | Ethical Hacking            | 2021-11-02     |                                                        |
++----+----------------------------+----------------+--------------------------------------------------------+
+6 rows in set (0.00 sec)
+```
+
+Using distinct clause
+```sql
+mysql> SELECT DISTINCT name FROM books;
++----------------------------+
+| name                       |
++----------------------------+
+| Android Security Internals |
+| Bug Bounty Bootcamp        |
+| Car Hacker's Handbook      |
+| Designing Secure Software  |
+| Ethical Hacking            |
++----------------------------+
+5 rows in set (0.01 sec)
+```
+
+### GROUP BY Clause
+Group allows us to group results
+```sql
+mysql> SELECT name, COUNT(*) 
+    -> FROM books
+    -> GROUP BY name;
++----------------------------+----------+
+| name                       | COUNT(*) |
++----------------------------+----------+
+| Android Security Internals |        1 |
+| Bug Bounty Bootcamp        |        1 |
+| Car Hacker's Handbook      |        1 |
+| Designing Secure Software  |        1 |
+| Ethical Hacking            |        2 |
++----------------------------+----------+
+5 rows in set (0.00 sec)
+```
+
+### ORDER BY Clause
+Using `ORDER BY` allows you to sort on a specific field.
+Before sort
+```sql
+mysql> SELECT * FROM books;
++----+----------------------------+----------------+--------------------------------------------------------+
+| id | name                       | published_date | description                                            |
++----+----------------------------+----------------+--------------------------------------------------------+
+|  1 | Android Security Internals | 2014-10-14     | An In-Depth Guide to Android's Security Architecture   |
+|  2 | Bug Bounty Bootcamp        | 2021-11-16     | The Guide to Finding and Reporting Web Vulnerabilities |
+|  3 | Car Hacker's Handbook      | 2016-02-25     | A Guide for the Penetration Tester                     |
+|  4 | Designing Secure Software  | 2021-12-21     | A Guide for Developers                                 |
+|  5 | Ethical Hacking            | 2021-11-02     | A Hands-on Introduction to Breaking In                 |
+|  6 | Ethical Hacking            | 2021-11-02     |                                                        |
++----+----------------------------+----------------+--------------------------------------------------------+
+6 rows in set (0.00 sec)
+```
+
+`ORDER BY` name in Ascending order
+```sql
+mysql> SELECT *
+    -> FROM books
+    -> ORDER BY name ASC;
++----+----------------------------+----------------+--------------------------------------------------------+
+| id | name                       | published_date | description                                            |
++----+----------------------------+----------------+--------------------------------------------------------+
+|  1 | Android Security Internals | 2014-10-14     | An In-Depth Guide to Android's Security Architecture   |
+|  2 | Bug Bounty Bootcamp        | 2021-11-16     | The Guide to Finding and Reporting Web Vulnerabilities |
+|  3 | Car Hacker's Handbook      | 2016-02-25     | A Guide for the Penetration Tester                     |
+|  4 | Designing Secure Software  | 2021-12-21     | A Guide for Developers                                 |
+|  5 | Ethical Hacking            | 2021-11-02     | A Hands-on Introduction to Breaking In                 |
+|  6 | Ethical Hacking            | 2021-11-02     |                                                        |
++----+----------------------------+----------------+--------------------------------------------------------+
+6 rows in set (0.00 sec)
+```
+
+Or by Descending order
+```sql
+mysql> SELECT *
+    -> FROM books
+    -> ORDER BY name DESC;
++----+----------------------------+----------------+--------------------------------------------------------+
+| id | name                       | published_date | description                                            |
++----+----------------------------+----------------+--------------------------------------------------------+
+|  5 | Ethical Hacking            | 2021-11-02     | A Hands-on Introduction to Breaking In                 |
+|  6 | Ethical Hacking            | 2021-11-02     |                                                        |
+|  4 | Designing Secure Software  | 2021-12-21     | A Guide for Developers                                 |
+|  3 | Car Hacker's Handbook      | 2016-02-25     | A Guide for the Penetration Tester                     |
+|  2 | Bug Bounty Bootcamp        | 2021-11-16     | The Guide to Finding and Reporting Web Vulnerabilities |
+|  1 | Android Security Internals | 2014-10-14     | An In-Depth Guide to Android's Security Architecture   |
++----+----------------------------+----------------+--------------------------------------------------------+
+6 rows in set (0.00 sec)
+```
+
+### HAVING Clause
+The `HAVING` clause is a bit like an if statment.
+```sql
+mysql> SELECT name, COUNT(*)
+    -> FROM books
+    -> GROUP BY name
+    -> HAVING name LIKE '%Hack%';
++-----------------------+----------+
+| name                  | COUNT(*) |
++-----------------------+----------+
+| Car Hacker's Handbook |        1 |
+| Ethical Hacking       |        2 |
++-----------------------+----------+
+2 rows in set (0.00 sec)
+```
+
+### ❓ Question
+> Using the `tools_db` database, what is the total number of distinct categories in the `hacking_tools` table?
+#### 🧪 Process
+First Change the DB to `tools_db`
+```sql
+mysql> USE tools_db
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+```
+
+Then get a list of tables withing `tools_db`
+```sql
+mysql> SHOW TABLES; 
++--------------------+
+| Tables_in_tools_db |
++--------------------+
+| hacking_tools      |
++--------------------+
+1 row in set (0.00 sec)
+```
+
+Next, get the contents to idenfity the fields.
+```sql
+mysql> SELECT * FROM hacking_tools;
++----+------------------+----------------------+-------------------------------------------------------------------------+--------+
+| id | name             | category             | description                                                             | amount |
++----+------------------+----------------------+-------------------------------------------------------------------------+--------+
+|  1 | Flipper Zero     | Multi-tool           | A portable multi-tool for pentesters and geeks in a toy-like form       |    169 |
+|  2 | O.MG cables      | Cable-based attacks  | Malicious USB cables that can be used for remote attacks and testing    |    180 |
+|  3 | Wi-Fi Pineapple  | Wi-Fi hacking        | A device used to perform man-in-the-middle attacks on wireless networks |    140 |
+|  4 | USB Rubber Ducky | USB attacks          | A USB keystroke injection tool disguised as a flash drive               |     80 |
+|  5 | iCopy-XS         | RFID cloning         | A tool used for reading and cloning RFID cards for security testing     |    375 |
+|  6 | Lan Turtle       | Network intelligence | A covert tool for remote access and network intelligence gathering      |     80 |
+|  7 | Bash Bunny       | USB attacks          | A multi-function USB attack device for penetration testers              |    120 |
+|  8 | Proxmark 3 RDV4  | RFID cloning         | A powerful RFID tool for reading, writing, and analyzing RFID tags      |    300 |
++----+------------------+----------------------+-------------------------------------------------------------------------+--------+
+8 rows in set (0.00 sec)
+```
+
+Let's get a distinct list of records within `category`
+```sql
+mysql> SELECT DISTINCT name FROM hacking_tools;
++------------------+
+| name             |
++------------------+
+| Flipper Zero     |
+| O.MG cables      |
+| Wi-Fi Pineapple  |
+| USB Rubber Ducky |
+| iCopy-XS         |
+| Lan Turtle       |
+| Bash Bunny       |
+| Proxmark 3 RDV4  |
++------------------+
+8 rows in set (0.00 sec)
+```
+
+Since there `8` rows, that will mean there are 8 distinct categories in the `hacking_tools` table.
+
+Trying this as the answer
+
+#### ✅ Answer
+- `8` ❌
+
+Oh, I see, I used the field `name` rather than `category`. Lets try that again...
+
+```sql
+mysql> SELECT DISTINCT category FROM hacking_tools;
++----------------------+
+| category             |
++----------------------+
+| Multi-tool           |
+| Cable-based attacks  |
+| Wi-Fi hacking        |
+| USB attacks          |
+| RFID cloning         |
+| Network intelligence |
++----------------------+
+6 rows in set (0.00 sec)
+```
+
+This time we have 6 rows / results. That must be the answer right ;)
+
+Trying this as the correct answer
+- `6`✅
+
+### ❓ Question
+> Using the `tools_db` database, what is the first tool (by name) in ascending order from the `hacking_tools` table?
+#### 🧪 Process
+We can use `ORDER BY` to sort the results from the `SELECT` statement.
+```sql
+mysql> SELECT * FROM hacking_tools
+    -> ORDER BY name;
++----+------------------+----------------------+-------------------------------------------------------------------------+--------+
+| id | name             | category             | description                                                             | amount |
++----+------------------+----------------------+-------------------------------------------------------------------------+--------+
+|  7 | Bash Bunny       | USB attacks          | A multi-function USB attack device for penetration testers              |    120 |
+|  1 | Flipper Zero     | Multi-tool           | A portable multi-tool for pentesters and geeks in a toy-like form       |    169 |
+|  5 | iCopy-XS         | RFID cloning         | A tool used for reading and cloning RFID cards for security testing     |    375 |
+|  6 | Lan Turtle       | Network intelligence | A covert tool for remote access and network intelligence gathering      |     80 |
+|  2 | O.MG cables      | Cable-based attacks  | Malicious USB cables that can be used for remote attacks and testing    |    180 |
+|  8 | Proxmark 3 RDV4  | RFID cloning         | A powerful RFID tool for reading, writing, and analyzing RFID tags      |    300 |
+|  4 | USB Rubber Ducky | USB attacks          | A USB keystroke injection tool disguised as a flash drive               |     80 |
+|  3 | Wi-Fi Pineapple  | Wi-Fi hacking        | A device used to perform man-in-the-middle attacks on wireless networks |    140 |
++----+------------------+----------------------+-------------------------------------------------------------------------+--------+
+8 rows in set (0.00 sec)
+```
+
+The first result when sorted is `Bash Bunny`.
+
+Trying this as the answer
+#### ✅ Answer
+- `Bash Bunny` ✅
+
+### ❓ Question
+> Using the `tools_db` database, what is the first tool (by name) in descending order from the `hacking_tools` table?
+#### 🧪 Process
+We can use `ORDER BY` again, this time suffixing the statement with `DESC`
+```sql
+mysql> SELECT * FROM hacking_tools
+    -> ORDER BY name DESC;
++----+------------------+----------------------+-------------------------------------------------------------------------+--------+
+| id | name             | category             | description                                                             | amount |
++----+------------------+----------------------+-------------------------------------------------------------------------+--------+
+|  3 | Wi-Fi Pineapple  | Wi-Fi hacking        | A device used to perform man-in-the-middle attacks on wireless networks |    140 |
+|  4 | USB Rubber Ducky | USB attacks          | A USB keystroke injection tool disguised as a flash drive               |     80 |
+|  8 | Proxmark 3 RDV4  | RFID cloning         | A powerful RFID tool for reading, writing, and analyzing RFID tags      |    300 |
+|  2 | O.MG cables      | Cable-based attacks  | Malicious USB cables that can be used for remote attacks and testing    |    180 |
+|  6 | Lan Turtle       | Network intelligence | A covert tool for remote access and network intelligence gathering      |     80 |
+|  5 | iCopy-XS         | RFID cloning         | A tool used for reading and cloning RFID cards for security testing     |    375 |
+|  1 | Flipper Zero     | Multi-tool           | A portable multi-tool for pentesters and geeks in a toy-like form       |    169 |
+|  7 | Bash Bunny       | USB attacks          | A multi-function USB attack device for penetration testers              |    120 |
++----+------------------+----------------------+-------------------------------------------------------------------------+--------+
+8 rows in set (0.00 sec)
+```
+The first result is now `Wi-Fi Pineapple`
+
+Trying this as the answer
+#### ✅ Answer
+- `Wi-Fi Pineapple` ✅
