@@ -1376,24 +1376,3 @@ mysql> SELECT GROUP_CONCAT(name SEPARATOR " & ") as result
 Trying this as the answer
 #### ✅ Answer
 - `Flipper Zero & iCopy-XS` ✅
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
