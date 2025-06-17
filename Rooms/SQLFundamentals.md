@@ -8,6 +8,7 @@
 - [CRUD Operations](#crud-operations)
 - [Clauses](#clauses)
 - [Operators](#operators)
+- [Functions](#functions)
 
 
 ## 📘Introduction
@@ -1169,6 +1170,226 @@ The result is `Lan Turtle`.
 Trying this as the answer
 #### ✅ Answer
 - `Lan Turtle` ✅
+
+
+## Functions
+Don't forget to change DB
+```sql
+mysql> use thm_books2;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+```
+
+### String Functions
+Allows us to perform operatins on strings
+#### CONCAT() Function
+Allows us to pull data from differnt columns to build query.
+```sql
+mysql> SELECT CONCAT(name, " is a type of ", category, " book.") AS book_info FROM books;
++------------------------------------------------------------------+
+| book_info                                                        |
++------------------------------------------------------------------+
+| Android Security Internals is a type of Defensive Security book. |
+| Bug Bounty Bootcamp is a type of Offensive Security book.        |
+| Car Hacker's Handbook is a type of Offensive Security book.      |
+| Designing Secure Software is a type of Defensive Security book.  |
+| Ethical Hacking is a type of Offensive Security book.            |
++------------------------------------------------------------------+
+5 rows in set (0.00 sec)
+```
+
+#### GROUP_CONCAT() Function
+Allows us to concatenate the book titles based on the category
+```sql
+mysql> SELECT category, GROUP_CONCAT(name SEPARATOR ", ") AS books
+    -> FROM books
+    -> GROUP BY category;
++--------------------+-------------------------------------------------------------+
+| category           | books                                                       |
++--------------------+-------------------------------------------------------------+
+| Defensive Security | Android Security Internals, Designing Secure Software       |
+| Offensive Security | Bug Bounty Bootcamp, Car Hacker's Handbook, Ethical Hacking |
++--------------------+-------------------------------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+#### SUBSTRING() Function
+Allows us to return a section of text rather thanthe whole value
+Year of release:
+
+```sql
+mysql> SELECT SUBSTRING(published_date, 1, 4) AS year FROM books;
++------+
+| year |
++------+
+| 2014 |
+| 2021 |
+| 2016 |
+| 2021 |
+| 2021 |
++------+
+5 rows in set (0.00 sec)
+```
+
+Or month of release:
+```sql
+mysql> SELECT SUBSTRING(published_date, 6, 2) AS month FROM books;
++-------+
+| month |
++-------+
+| 10    |
+| 11    |
+| 02    |
+| 12    |
+| 11    |
++-------+
+5 rows in set (0.00 sec)
+```
+
+#### LENGTH() Function
+Returns the number of characters within a string
+```sql
+mysql> SELECT LENGTH(name) AS length FROM books;
++--------+
+| length |
++--------+
+|     26 |
+|     19 |
+|     21 |
+|     25 |
+|     15 |
++--------+
+5 rows in set (0.00 sec)
+```
+
+### Aggregate Functions
+#### COUNT() Function
+Count the number of rows
+```sql
+mysql> SELECT COUNT(*) as total FROM books;
++-------+
+| total |
++-------+
+|     5 |
++-------+
+1 row in set (0.00 sec)
+```
+
+#### SUM() Function
+Gets total from all values
+```sql
+mysql> SELECT SUM(amount) as total_cost FROM hacking_tools;
++------------+
+| total_cost |
++------------+
+|       1444 |
++------------+
+1 row in set (0.01 sec)
+```
+
+#### MAX() Function
+Find the largest result
+```sql
+mysql> SELECT MAX(amount) AS most_expensive FROM hacking_tools;
++----------------+
+| most_expensive |
++----------------+
+|            375 |
++----------------+
+1 row in set (0.00 sec)
+```
+
+#### MIN() Function
+Find the lowest value
+```sql
+mysql> SELECT MIN(amount) AS least_expensive FROM hacking_tools;
++-----------------+
+| least_expensive |
++-----------------+
+|              80 |
++-----------------+
+1 row in set (0.00 sec)
+```
+
+
+### ❓ Question
+> Using the `tools_db` database, what is the tool with the longest name based on character length?
+#### 🧪 Process
+This one was a bit harder and I had to look up how I would do this.
+
+I found  you can run 'sub queries'
+```sql
+mysql> SELECT name
+    -> from hacking_tools
+    -> WHERE LENGTH(name) =(
+    ->     SELECT MAX(LENGTH(name)) from hacking_tools);
++------------------+
+| name             |
++------------------+
+| USB Rubber Ducky |
++------------------+
+1 row in set (0.00 sec)
+```
+
+Trying this as the answer
+
+#### ✅ Answer
+- `USB Rubber Ducky` ✅
+
+### ❓ Question
+> Using the `tools_db` database, what is the total sum of all tools?
+#### 🧪 Process
+Actually, I did this in an example already when we looked at [SUM](#sum-function).
+```sql
+mysql> SELECT SUM(amount) as total_cost FROM hacking_tools;
++------------+
+| total_cost |
++------------+
+|       1444 |
++------------+
+1 row in set (0.01 sec)
+```
+
+Trying this as the answer
+
+#### ✅ Answer
+- `1444` ✅
+
+### ❓ Question
+> Using the `tools_db` database, what are the tool names where the amount does not end in **0**, and **group** the tool names **concatenated** by " & ".
+#### 🧪 Process
+Again this one was a bit of a tough one. I kept getting the order wrong. 
+```sql
+mysql> SELECT GROUP_CONCAT(name SEPARATOR " & ") as result
+    -> FROM hacking_tools
+    -> WHERE SUBSTRING(amount, 3, 1) != 0;
++-------------------------+
+| result                  |
++-------------------------+
+| Flipper Zero & iCopy-XS |
++-------------------------+
+1 row in set (0.00 sec)
+```
+
+Trying this as the answer
+#### ✅ Answer
+- `Flipper Zero & iCopy-XS` ✅
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
