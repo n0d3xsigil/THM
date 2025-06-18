@@ -5,6 +5,7 @@
 - [What is Burp Suite](#what-is-burp-suite)
 - [Features of Burp Community](#features-of-burp-community)
 - [Installation](#installation)
+- [The Dashboard](#the-dashboard)
 
 
 ## 📘Introduction
@@ -55,6 +56,8 @@ There are 3 editions of Burpsuite
 
 
 ## 📘Features of Burp Community
+![image](https://github.com/user-attachments/assets/d463eb8d-c23b-496b-acf2-ba127cb43977)
+
 **Burp Suite Community Edition** - The basic one. But still a very valid option for your toolkit.
 - **Price**: £0.00/$0.00 (for not profit organisations)
  - Great for learning etc.
@@ -101,3 +104,28 @@ Trying this as the answer
 
 ## 📘Installation
 Honestly I'm not going to go through the process of installing burp suite. It is fairly straight forward on Windows, Linux, and Mac. The main thing to remember is to install the Burp root cert to allow decription of https traffic and to either configure the client to use a proxy or use something like Foxy Proxy.
+
+
+## 📘The Dashboard
+The following is my experience and not that documented on the TryHackMe room.
+
+![image](https://github.com/user-attachments/assets/63ec1b77-1ad2-46f5-b2b9-d309c0711d49)
+
+When first openeing Burp Suite you will be presented with two windows. **Tasks** on the left and **Live passive crawl** on the right. The TryHackMe room suggests that _Event log_ and _Advisory_. To open the **Event log** click the _Event log_ button on the bottom right of the screen.
+![image](https://github.com/user-attachments/assets/7cba47f2-979e-4796-bbc3-05281d449b6d)
+
+1. The **Tasks** pane allows you to define tasks that will run whilst using the application.
+2. The **Event log** pane provides a view of what actions have been performed by Burp Suite
+
+In addition to these two the room mentiones
+1. **Issue Activity** (Burp Suite Professional) displays vulnerabilities idnetified by scanning.
+2. **Advisory** provides more details about the vulnerabilities mentioned in the _Issue Activity_. Also not a part of Burp Suite Community Edition
+
+### ❓ Question
+> What menu provides information about the actions performed by Burp Suite, such as starting the proxy, and details about connections made through Burp?
+#### 🧪 Process
+The event log captures information about the activites of Burp Suite
+
+Trying this as the answer
+#### ✅ Answer
+- `Event log` ✅
