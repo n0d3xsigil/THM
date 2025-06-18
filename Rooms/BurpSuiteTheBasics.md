@@ -6,6 +6,7 @@
 - [Features of Burp Community](#features-of-burp-community)
 - [Installation](#installation)
 - [The Dashboard](#the-dashboard)
+- [Navigation](#navigation)
 
 
 ## 📘Introduction
@@ -129,3 +130,44 @@ The event log captures information about the activites of Burp Suite
 Trying this as the answer
 #### ✅ Answer
 - `Event log` ✅
+
+
+## Navigation
+The initial navigation is done via the top menu. You can select select an alternative view by clicking on the tab name. 
+
+Some functions have a sub menu such as:
+**Target**
+![image](https://github.com/user-attachments/assets/b0e7c79f-d88a-454c-bafc-036e2f117ed5)
+**Proxy**
+![image](https://github.com/user-attachments/assets/6d5e049d-f151-414f-860d-f1daa64a39e7)
+**Sequencer**
+![image](https://github.com/user-attachments/assets/06fe400b-9221-488b-9845-50aa8d428399)
+**Extensions**
+![image](https://github.com/user-attachments/assets/09f52b4b-883d-4afc-af8f-edf0e41f5e80)
+
+You can detach the funcion by clicking and holding the function name and dragging it away from the menu, this will open a new window just for that function
+![image](https://github.com/user-attachments/assets/43bfc5b4-df0e-4805-af8e-648335cac394)
+![image](https://github.com/user-attachments/assets/a0ff8d14-bfad-46fd-82de-07c656e26809)
+
+**Shortcuts**
+There are also some useful shortcuts to help efficency.
+- `Ctrl+Shift+D` will take you to the **Dashboard**
+- `Ctrl+Shift+T` will take you to the **Target** tab
+- `Ctrl+Shift+P` will take you to the **Proxy** tab
+- `Ctrl+Shift+I` will take you to the **Intruder** tab
+- `Ctrl+Shift+R` will take you to the **Repeater** tab
+
+### ❓ Question
+> Which tab **Ctrl + Shift + P** will switch us to?
+#### 🧪 Process
+As above:- `Ctrl+Shift+P` will take you to the **Proxy** tab 
+
+Trying this as the answer
+#### ✅ Answer
+- `Proxy tab` ✅
+
+
+
+
+
+
