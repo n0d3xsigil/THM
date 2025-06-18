@@ -7,6 +7,7 @@
 - [Installation](#installation)
 - [The Dashboard](#the-dashboard)
 - [Navigation](#navigation)
+- [Options](#options)
 
 
 ## 📘Introduction
@@ -104,7 +105,7 @@ Trying this as the answer
 
 
 ## 📘Installation
-Honestly I'm not going to go through the process of installing burp suite. It is fairly straight forward on Windows, Linux, and Mac. The main thing to remember is to install the Burp root cert to allow decription of https traffic and to either configure the client to use a proxy or use something like Foxy Proxy.
+Honestly I'm not going to go through the process of installing burp suite. It is fairly straight forward on Windows, Linux, and Mac. The main thing to remember is to install the Burp CA cert to allow decription of https traffic and to either configure the client to use a proxy or use something like Foxy Proxy.
 
 
 ## 📘The Dashboard
@@ -167,7 +168,76 @@ Trying this as the answer
 - `Proxy tab` ✅
 
 
+## 📘Options
+Within Burp Suite, there are two types of options
+- Global Settings (user)
+- Project Settings
+
+**Global settings** are basically application settings, they effect how the application runs
+
+**Project settings** are specific to the project that is in session. Think of _Project Settings_ as the active document
+
+If you are running _Burp Suite Community Edition_ you don't have to worry about _Project Settings_ since this edition doesn't support it.
+
+You can get to the **Global settings** by clicking **Burp** followed by **Settings**, or by clicking the **Settings** cog on the right hand side.
+
+![image](https://github.com/user-attachments/assets/ecf54ba1-4e3b-450b-83b7-a29cb7071ba4)
+
+![image](https://github.com/user-attachments/assets/2044405a-f3d4-4160-895f-aeff8ec11ed8)
 
 
+On the left you have **Search** to fnid a specific tool (`Cookie Jar`)
 
+![image](https://github.com/user-attachments/assets/e3beadeb-c71f-4a34-a345-23fead41f4ad)
 
+You can filter the searches on _User_ or _Project_ results.
+
+Clicking a specific settings within a function is a shortcut to the settings to that specific function. Such as `Sequencer settings`
+
+![image](https://github.com/user-attachments/assets/f19d9489-fc3f-4ff8-9f33-07f41097c6a6)
+
+It is very much worth going through the settings to famaliarise yourself.
+
+### ❓ Question
+> In which category can you find a reference to a "Cookie jar"?
+#### 🧪 Process
+We can either look through the categories for the "Cookie Jar", perform a search for "Cookie Jar" as per the above search example, or take a wild guess that cookies store session data. 
+
+Either way, it is Sessions.
+
+Trying this as the answer
+#### ✅ Answer
+- `Sessions` ✅
+
+### ❓ Question
+> In which base category can you find the "Updates" sub-category, which controls the Burp Suite update behaviour?
+#### 🧪 Process
+You can find updates under Suite → Updates.
+
+Trying this as the answer
+#### ✅ Answer
+- `Suite` ✅
+
+### ❓ Question
+> What is the name of the sub-category which allows you to change the keybindings for shortcuts in Burp Suite?
+#### 🧪 Process
+I'm assuming we're calling Hotkeys keybindings. If so this can be found under User Interface → Hotkeys.
+
+Trying this as the answer
+#### ✅ Answer
+- `Hotkeys` ✅
+
+### ❓ Question
+> If we have uploaded Client-Side TLS certificates, can we override these on a per-project basis (yea/nay)?
+#### 🧪 Process
+Under Tools → Proxy you can see a description of the CA certificate. It states "Each installation of Burp generates its own CA certificate". It doesn't mention project.
+
+I'm going to to with Nay
+
+Trying this as the answer
+#### ✅ Answer
+- `Nay` ❌
+
+Well, it must be a Yea then.
+
+- `Yea` ✅
