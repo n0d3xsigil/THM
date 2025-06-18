@@ -8,6 +8,7 @@
 - [The Dashboard](#the-dashboard)
 - [Navigation](#navigation)
 - [Options](#options)
+- [Introduction to the Burp Proxy](#introduction-to-the-burp-proxy)
 
 
 ## 📘Introduction
@@ -241,3 +242,14 @@ Trying this as the answer
 Well, it must be a Yea then.
 
 - `Yea` ✅
+
+
+## 📘Introduction to the Burp Proxy
+The proxy is the crucial function of Burp, when enabled, it captures requests and resposes. Once intercepted we can forward the traffic to the modules for processing.
+
+Click Intercept to enable interception
+
+![image](https://github.com/user-attachments/assets/46784ea1-c2be-4dc7-8801-3d8dd211634c)
+
+
+
