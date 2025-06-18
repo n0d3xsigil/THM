@@ -4,6 +4,7 @@
 - [Introduction](#introduction)
 - [What is Burp Suite](#what-is-burp-suite)
 - [Features of Burp Community](#features-of-burp-community)
+- [Installation](#installation)
 
 
 ## 📘Introduction
@@ -96,3 +97,7 @@ The process of brute-force attacks can be done using the Intruder module.
 Trying this as the answer
 #### ✅ Answer
 - `Intruder` ✅
+
+
+## 📘Installation
+Honestly I'm not going to go through the process of installing burp suite. It is fairly straight forward on Windows, Linux, and Mac. The main thing to remember is to install the Burp root cert to allow decription of https traffic and to either configure the client to use a proxy or use something like Foxy Proxy.
