@@ -251,5 +251,15 @@ Click Intercept to enable interception
 
 ![image](https://github.com/user-attachments/assets/46784ea1-c2be-4dc7-8801-3d8dd211634c)
 
+With the Burp Proxy enabled testers can take **control** of the traffic to enable testing, the proxy will capture and log traffic where you can decide how to proceed with each request. 
 
+All requests are logged regardless of if the interception is enabled or not. 
+![](Images/Pasted%20image%2020250619171156.png)
 
+In addition to that, both **HTTP** and **WebSockets** history is saved providing additional investigation data.
+
+![](Images/Pasted%20image%2020250619171654.png)
+
+![](Images/Pasted%20image%2020250619171711.png)
+
+We can use the **Match and Replace** feature to to modify requests, including dynamic manipulation
