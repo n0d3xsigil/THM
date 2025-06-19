@@ -9,6 +9,7 @@
 - [Navigation](#navigation)
 - [Options](#options)
 - [Introduction to the Burp Proxy](#introduction-to-the-burp-proxy)
+- [Connecting through the Proxy (FoxyProxy)](#connecting-through-the-proxy-foxyproxy)
 
 
 ## 📘Introduction
@@ -263,3 +264,10 @@ In addition to that, both **HTTP** and **WebSockets** history is saved providing
 ![](Images/Pasted%20image%2020250619171711.png)
 
 We can use the **Match and Replace** feature to to modify requests, including dynamic manipulation
+
+
+## Connecting through the Proxy (FoxyProxy)
+We mentioned FoxyProxy earlier. FoxyProxy is an extenesion that allows easy enabling and disabling of a proxy. 
+
+
+
