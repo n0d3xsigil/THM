@@ -7,6 +7,7 @@
 - [Use Case: Directory and File Enumeration](#use-case-directory-and-file-enumeration)
 - [Use Case: Subdomain Enumeration](#use-case-subdomain-enumeration)
 - [Use Case: Vhost Enumeration](#use-case-vhost-enumeration)
+- [Conclusion](#conclusion)
 
 
 ## Introduction
@@ -479,3 +480,7 @@ Finished
 
 #### ✅ Answer
 - `4`
+
+
+## Conclusion
+We covered `dns`, `dir`, and `vhost`. Good stuff.
