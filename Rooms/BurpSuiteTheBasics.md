@@ -269,5 +269,51 @@ We can use the **Match and Replace** feature to to modify requests, including dy
 ## Connecting through the Proxy (FoxyProxy)
 We mentioned FoxyProxy earlier. FoxyProxy is an extenesion that allows easy enabling and disabling of a proxy. 
 
+## NOTE:
+Going forward I am going to reduce what I log to just the Q&A unless I feel I need the content as a reminder in future. It is taking far too long to progress through the course and I'm going to miss my deadling of the end of June for Cyber Seurity 101. 
 
 
+## Site Map and Issue Definitions
+**Site Map**
+Creates a map of the site being investigated by logging the pages visited and their connection between other pages. Also allows mapping API's accessed by the site.
+
+**Issue definitions**
+Not a part of Burp Suite Community Edition, allows vulnerability scanning of the site being tested. 
+
+**Scope Settings**
+Sets the scope of targets for the proxy thus avoids capturing everything!
+
+
+### ❓ Question
+> What is the flag you receive after visiting the unusual endpoint?
+#### 🧪 Process
+1. Fired up Burp Suite Community Edition.
+2. Enabled Browser without sand box
+3. Enabled Proxy tab
+4. Disabled interception
+5. Clicked Open Browser
+6. Switched to Proxy - Interception to Proxy - HTTP History
+7. Switched to Browser
+8. Navigated to http://10.10.60.224
+9. Nothing special in History
+10. Looked at page for links
+11. Like the look of **Submit a ticket**.
+12. Clicked it
+13. Interested in `GET /5yjR2GLcoGoij2ZK`
+14. CLicked to see _Response_
+15. Response
+    ``` html
+    HTTP/1.1 200 OK
+    Server: nginx/1.18.0 (Ubuntu)
+    Date: Fri, 20 Jun 2025 17:28:46 GMT
+    Content-Type: text/plain
+    Content-Length: 37
+    Connection: keep-alive
+    Front-End-Https: on
+    
+    THM{NmNlZTliNGE1MWU1ZTQzMzgzNmFiNWVk}
+    ```
+
+Trying this as the answer
+#### ✅ Answer
+- `THM{NmNlZTliNGE1MWU1ZTQzMzgzNmFiNWVk}` ✅
