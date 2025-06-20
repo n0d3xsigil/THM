@@ -5,6 +5,7 @@
 - [Environment and Setup](#environment-and-setup)
 - [Gobuster: Introduction](#gobuster-introduction)
 - [Use Case: Directory and File Enumeration](#use-case-directory-and-file-enumeration)
+- [Use Case: Subdomain Enumeration](#use-case-subdomain-enumeration)
 
 
 ## Introduction
@@ -295,3 +296,94 @@ Trying this as the answer
 
 #### ✅ Answer
 - `THM{ReconWasASuccess}` ✅
+
+
+## Use Case: Subdomain Enumeration
+On to DNS mode. Basically it's just as important to check subdmains as the normal domain. There could be vulnerable services in the subdomains just as with the main domain.
+
+Lets get the help `gobuster dns --help`
+
+```shell
+root@ip-10-10-46-45:~# gobuster dns --help
+Uses DNS subdomain enumeration mode
+
+Usage:
+  gobuster dns [flags]
+
+Flags:
+  -d, --domain string      The target domain
+  -h, --help               help for dns
+      --no-fqdn            Do not automatically add a trailing dot to the domain, so the resolver uses the DNS search domain
+  -r, --resolver string    Use custom DNS server (format server.com or server.com:port)
+  -c, --show-cname         Show CNAME records (cannot be used with '-i' option)
+  -i, --show-ips           Show IP addresses
+      --timeout duration   DNS resolver timeout (default 1s)
+      --wildcard           Force continued operation when wildcard found
+
+Global Flags:
+      --debug                 Enable debug output
+      --delay duration        Time each thread waits between requests (e.g. 1500ms)
+      --no-color              Disable color output
+      --no-error              Don't display errors
+  -z, --no-progress           Don't display progress
+  -o, --output string         Output file to write results to (defaults to stdout)
+  -p, --pattern string        File containing replacement patterns
+  -q, --quiet                 Don't print the banner and other noise
+  -t, --threads int           Number of concurrent threads (default 10)
+  -v, --verbose               Verbose output (errors)
+  -w, --wordlist string       Path to the wordlist. Set to - to use STDIN.
+      --wordlist-offset int   Resume from a given position in the wordlist (defaults to 0)
+```
+
+Room example command `gobuster dns -d offensivetools.thm -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt`
+
+### ❓ Question
+> Apart from the dns keyword and the -w flag, which **shorthand flag** is required for the command to work?
+#### 🧪 Process
+you need to pass the domain `-d`
+
+trying this as the answer
+
+#### ✅ Answer
+- `-d` ✅
+
+### ❓ Question
+> Use the commands learned in this task, how many subdomains are configured for the offensivetools.thm domain?
+#### 🧪 Process
+```shell
+root@ip-10-10-46-45:~# gobuster dns -d offensivetools.thm -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt 
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Domain:     offensivetools.thm
+[+] Threads:    10
+[+] Timeout:    1s
+[+] Wordlist:   /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+===============================================================
+Starting gobuster in DNS enumeration mode
+===============================================================
+Found: www.offensivetools.thm
+
+Found: forum.offensivetools.thm
+
+Found: store.offensivetools.thm
+
+Found: WWW.offensivetools.thm
+
+Found: primary.offensivetools.thm
+
+Progress: 4997 / 4998 (99.98%)
+===============================================================
+Finished
+===============================================================
+```
+
+There are 5 results.
+
+Trying this as the answer
+#### ✅ Answer
+- `5`❌
+
+result `www` is duplicated as `WWW`. Web addresses are not case sensitive.
+- `4` ✅
