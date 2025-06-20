@@ -13,6 +13,7 @@
 - [Site Map and Issue Definitions](#site-map-and-issue-definitions)
 - [The Burp Suite Browser](#the-burp-suite-browser)
 - [Scoping and Targeting](#scoping-and-targeting)
+- [Proxying HTTPS](proxying-https)
 
 
 ## 📘Introduction
@@ -329,3 +330,11 @@ Just goes over what I already mentioned in step 2 above. No question here.
 ## Scoping and Targeting
 Again, scoping allows you to filter the traffic you do or do not want. 
 ![image](https://github.com/user-attachments/assets/849766a8-d000-4c5a-80cd-8c93f6554329)
+
+
+## Proxying HTTPS
+This task talks through exporting the CA certificate from Burp and installing it in in the browser. This then enables intercepting https traffic with out errors. 
+
+However I have come across mismatched cert errors on some sites previously.
+
+Again, no question for this task
