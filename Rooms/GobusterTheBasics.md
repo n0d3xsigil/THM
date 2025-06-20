@@ -6,6 +6,7 @@
 - [Gobuster: Introduction](#gobuster-introduction)
 - [Use Case: Directory and File Enumeration](#use-case-directory-and-file-enumeration)
 - [Use Case: Subdomain Enumeration](#use-case-subdomain-enumeration)
+- [Use Case: Vhost Enumeration](#use-case-vhost-enumeration)
 
 
 ## Introduction
@@ -387,3 +388,94 @@ Trying this as the answer
 
 result `www` is duplicated as `WWW`. Web addresses are not case sensitive.
 - `4` ✅
+
+
+## Use Case: Vhost Enumeration
+Vhost help (`gobuster vhost --help`).
+
+```shell
+root@ip-10-10-46-45:~# gobuster vhost --help
+Uses VHOST enumeration mode (you most probably want to use the IP address as the URL parameter)
+
+Usage:
+  gobuster vhost [flags]
+
+Flags:
+      --append-domain                     Append main domain from URL to words from wordlist. Otherwise the fully qualified domains need to be specified in the wordlist.
+      --client-cert-p12 string            a p12 file to use for options TLS client certificates
+      --client-cert-p12-password string   the password to the p12 file
+      --client-cert-pem string            public key in PEM format for optional TLS client certificates
+      --client-cert-pem-key string        private key in PEM format for optional TLS client certificates (this key needs to have no password)
+  -c, --cookies string                    Cookies to use for the requests
+      --domain string                     the domain to append when using an IP address as URL. If left empty and you specify a domain based URL the hostname from the URL is extracted
+      --exclude-length string             exclude the following content lengths (completely ignores the status). You can separate multiple lengths by comma and it also supports ranges like 203-206
+  -r, --follow-redirect                   Follow redirects
+  -H, --headers stringArray               Specify HTTP headers, -H 'Header1: val1' -H 'Header2: val2'
+  -h, --help                              help for vhost
+  -m, --method string                     Use the following HTTP method (default "GET")
+      --no-canonicalize-headers           Do not canonicalize HTTP header names. If set header names are sent as is.
+  -k, --no-tls-validation                 Skip TLS certificate verification
+  -P, --password string                   Password for Basic Auth
+      --proxy string                      Proxy to use for requests [http(s)://host:port] or [socks5://host:port]
+      --random-agent                      Use a random User-Agent string
+      --retry                             Should retry on request timeout
+      --retry-attempts int                Times to retry on request timeout (default 3)
+      --timeout duration                  HTTP Timeout (default 10s)
+  -u, --url string                        The target URL
+  -a, --useragent string                  Set the User-Agent string (default "gobuster/3.6")
+  -U, --username string                   Username for Basic Auth
+
+Global Flags:
+      --debug                 Enable debug output
+      --delay duration        Time each thread waits between requests (e.g. 1500ms)
+      --no-color              Disable color output
+      --no-error              Don't display errors
+  -z, --no-progress           Don't display progress
+  -o, --output string         Output file to write results to (defaults to stdout)
+  -p, --pattern string        File containing replacement patterns
+  -q, --quiet                 Don't print the banner and other noise
+  -t, --threads int           Number of concurrent threads (default 10)
+  -v, --verbose               Verbose output (errors)
+  -w, --wordlist string       Path to the wordlist. Set to - to use STDIN.
+      --wordlist-offset int   Resume from a given position in the wordlist (defaults to 0)
+```
+
+Section example
+`gobuster vhost -u "http://10.10.202.144" --domain offensivetools.thm -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain --exclude-length 250-320 `
+
+### ❓ Question
+> Use the commands learned in this task to answer the following question: How many vhosts on the offensivetools.thm domain reply with a status code 200?
+#### 🧪 Process
+```shell
+root@ip-10-10-46-45:~# gobuster vhost -u http://10.10.202.144 --domain offensivetools.thm -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain --exclude-length 250-320
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:              http://10.10.202.144
+[+] Method:           GET
+[+] Threads:          10
+[+] Wordlist:         /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+[+] User Agent:       gobuster/3.6
+[+] Timeout:          10s
+[+] Append Domain:    true
+[+] Exclude Length:   258,281,297,316,261,264,267,272,276,290,254,265,270,273,287,279,305,309,320,293,295,303,250,257,269,280,286,310,319,262,296,298,304,314,253,255,302,307,268,288,294,299,278,289,291,318,292,306,266,277,300,311,259,252,271,282,313,315,308,312,256,260,275,284,285,251,274,301,317,263,283
+===============================================================
+Starting gobuster in VHOST enumeration mode
+===============================================================
+Found: forum.offensivetools.thm Status: 200 [Size: 2635]
+Found: store.offensivetools.thm Status: 200 [Size: 3014]
+Found: www.offensivetools.thm Status: 200 [Size: 8806]
+Found: WWW.offensivetools.thm Status: 200 [Size: 8806]
+Found: secret.offensivetools.thm Status: 200 [Size: 1550]
+Progress: 4997 / 4998 (99.98%)
+===============================================================
+Finished
+===============================================================
+```
+ 5x codes of `200`
+
+ Trying this as the answer, but remember the 2x `www`'s
+
+#### ✅ Answer
+- `4`
