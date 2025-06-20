@@ -77,8 +77,8 @@ My discoveries from THM
 - ❓ OWASP Top 10 - 2021
 ### Offensive Seucrity Tooling
 - ❓ Hydra
-- ⚠️ [Gobuster: The Basics](Rooms/GobusterTheBasics.md)
-- ❌ [Shells Overview](Rooms/ShellsOverview.md)
+- ✅ [Gobuster: The Basics](Rooms/GobusterTheBasics.md)
+- ⚠️ [Shells Overview](Rooms/ShellsOverview.md)
 - ❌ [SQLMap: The Basics](Rooms/SQLMapTheBasics.md)
 ### Defensive Security
 ### Security Solutions
