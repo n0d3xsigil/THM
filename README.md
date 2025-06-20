@@ -73,7 +73,7 @@ My discoveries from THM
 - ✅ [Web Application Basics](Rooms/WebApplicationBasics.md)
 - ✅ [JavaScript Essentials](Rooms/JavaScriptEssentials.md)
 - ✅ [SQL Fundamentals](Rooms/SQLFundamentals.md)
-- ⚠️ [Burp Suite: The Basics](Rooms/BurpSuiteTheBasics.md)
+- ✅ [Burp Suite: The Basics](Rooms/BurpSuiteTheBasics.md)
 - ❓ OWASP Top 10 - 2021
 ### Offensive Seucrity Tooling
 ### Defensive Security
