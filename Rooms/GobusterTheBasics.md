@@ -8,3 +8,10 @@
 GoBuster, a tool to resolve directories, sub domains and virutal hosts/
 
 No question for this section.
+
+
+## Environment and Setup
+add target as nameserver for dns.
+restart dns service
+
+No question for task
