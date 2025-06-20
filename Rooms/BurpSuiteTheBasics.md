@@ -317,3 +317,7 @@ Sets the scope of targets for the proxy thus avoids capturing everything!
 Trying this as the answer
 #### ✅ Answer
 - `THM{NmNlZTliNGE1MWU1ZTQzMzgzNmFiNWVk}` ✅
+
+
+## The Burp Suite Browser
+Just goes over what I already mentioned in step 2 above. No question here.
