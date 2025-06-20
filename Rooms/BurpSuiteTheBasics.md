@@ -10,6 +10,9 @@
 - [Options](#options)
 - [Introduction to the Burp Proxy](#introduction-to-the-burp-proxy)
 - [Connecting through the Proxy (FoxyProxy)](#connecting-through-the-proxy-foxyproxy)
+- [Site Map and Issue Definitions](#site-map-and-issue-definitions)
+- [The Burp Suite Browser](#the-burp-suite-browser)
+- [Scoping and Targeting](#scoping-and-targeting)
 
 
 ## 📘Introduction
@@ -321,3 +324,8 @@ Trying this as the answer
 
 ## The Burp Suite Browser
 Just goes over what I already mentioned in step 2 above. No question here.
+
+
+## Scoping and Targeting
+Again, scoping allows you to filter the traffic you do or do not want. 
+![image](https://github.com/user-attachments/assets/849766a8-d000-4c5a-80cd-8c93f6554329)
