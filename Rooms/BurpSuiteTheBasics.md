@@ -14,6 +14,8 @@
 - [The Burp Suite Browser](#the-burp-suite-browser)
 - [Scoping and Targeting](#scoping-and-targeting)
 - [Proxying HTTPS](proxying-https)
+- [Example Attack](#example-attack)
+- [Conclusion](#conclusion)
 
 
 ## 📘Introduction
@@ -342,3 +344,9 @@ Again, no question for this task
 
 ## Example Attack
 Performed the test, not sure why you had to code. but it worked none the lestt.
+
+No question on task
+
+
+## Conclusion
+Recommends next room as [Burp Suite: Repeater](https://tryhackme.com/room/burpsuiterepeater)
