@@ -4,6 +4,7 @@
 - [Introduction](#introduction)
 - [Environment and Setup](#environment-and-setup)
 - [Gobuster: Introduction](#gobuster-introduction)
+- [Use Case: Directory and File Enumeration](#use-case-directory-and-file-enumeration)
 
 
 ## Introduction
@@ -176,3 +177,121 @@ In the help file above we can see `dns (Uses DNS subdomain enumeration mode)`
 Trying this as the answer
 #### ✅ Answer
 - `dns` ✅
+
+
+## Use Case: Directory and File Enumeration
+So, I'm kinda skip this one because I reviewed most of it as part of the previous question.
+
+Let's skip to the questins
+
+### ❓ Question
+> Which flag do we have to add to our command to skip the TLS verification? Enter the long flag notation.
+#### 🧪 Process
+According to the help file abouve we have ``  -k, --no-tls-validation (Skip TLS certificate verification)
+
+The question stipulates the long flag notation, so `--no-tls-validation`.
+
+Trying this as the answer
+
+#### ✅ Answer
+- `--no-tls-validation` ✅
+
+### ❓ Question
+> Enumerate the directories of www.offensivetools.thm. Which directory catches your attention?
+#### 🧪 Process
+I am going with the example and using `gobuster dir -u "http://www.offensivetools.thm" -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt`
+
+```shell
+root@ip-10-10-46-45:~# gobuster dir -u "http://www.offensivetools.thm" -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt 
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://www.offensivetools.thm
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/images               (Status: 301) [Size: 333] [--> http://www.offensivetools.thm/images/]
+/home                 (Status: 200) [Size: 8818]
+/media                (Status: 301) [Size: 332] [--> http://www.offensivetools.thm/media/]
+/templates            (Status: 301) [Size: 336] [--> http://www.offensivetools.thm/templates/]
+/modules              (Status: 301) [Size: 334] [--> http://www.offensivetools.thm/modules/]
+/plugins              (Status: 301) [Size: 334] [--> http://www.offensivetools.thm/plugins/]
+/includes             (Status: 301) [Size: 335] [--> http://www.offensivetools.thm/includes/]
+/language             (Status: 301) [Size: 335] [--> http://www.offensivetools.thm/language/]
+/components           (Status: 301) [Size: 337] [--> http://www.offensivetools.thm/components/]
+/api                  (Status: 301) [Size: 330] [--> http://www.offensivetools.thm/api/]
+/cache                (Status: 301) [Size: 332] [--> http://www.offensivetools.thm/cache/]
+/libraries            (Status: 403) [Size: 287]
+/tmp                  (Status: 301) [Size: 330] [--> http://www.offensivetools.thm/tmp/]
+/layouts              (Status: 301) [Size: 334] [--> http://www.offensivetools.thm/layouts/]
+/secret               (Status: 301) [Size: 333] [--> http://www.offensivetools.thm/secret/]
+/administrator        (Status: 301) [Size: 340] [--> http://www.offensivetools.thm/administrator/]
+Progress: 13166 / 218276 (6.03%)^C
+[!] Keyboard interrupt detected, terminating.
+Progress: 13167 / 218276 (6.03%)
+===============================================================
+Finished
+===============================================================
+```
+
+So its still scanning its at 3%, I think the likely target here is `secret` so...
+
+Trying this as the answer
+#### ✅ Answer
+- `secret` ✅
+
+### ❓ Question
+> Continue enumerating the directory found in question 2. You will find an interesting file there with a .js extension. What is the flag found in this file?
+#### 🧪 Process
+Going with `gobuster dir -u "http://www.offensivetools.thm/secret" -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x .js`.
+
+```shell
+root@ip-10-10-46-45:~# gobuster dir -u "http://www.offensivetools.thm/secret" -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x .js
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://www.offensivetools.thm/secret
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Extensions:              js
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/content              (Status: 301) [Size: 341] [--> http://www.offensivetools.thm/secret/content/]
+/uploads              (Status: 301) [Size: 341] [--> http://www.offensivetools.thm/secret/uploads/]
+/flag.js              (Status: 200) [Size: 22]
+Progress: 4014 / 436552 (0.92%)^C
+[!] Keyboard interrupt detected, terminating.
+Progress: 4014 / 436552 (0.92%)
+===============================================================
+Finished
+===============================================================
+```
+
+Oh looksie here. flag.js. I wonder if this will contain the flag...
+
+Let's find out with `curl`
+
+```shell
+root@ip-10-10-46-45:~# curl http://www.offensivetools.thm/secret/flag.js
+THM{ReconWasASuccess}
+```
+
+There we are!
+
+Trying this as the answer
+
+#### ✅ Answer
+- `THM{ReconWasASuccess}` ✅
