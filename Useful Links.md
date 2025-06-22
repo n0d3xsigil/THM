@@ -7,6 +7,10 @@ This is a page just for quick notes, links etc.
 	- JavaScript
 		- https://codebeautify.org/javascript-obfuscator
 		- https://obf-io.deobfuscate.io/
+- SQL Injection
+	- SQLMap
+		- https://github.com/sqlmapproject/sqlmap
+		- 
 
 ## Question format
 ### ❓ Question
