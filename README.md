@@ -79,7 +79,7 @@ My discoveries from THM
 - ❓ Hydra
 - ✅ [Gobuster: The Basics](Rooms/GobusterTheBasics.md)
 - ✅ [Shells Overview](Rooms/ShellsOverview.md)
-- ⚠️ [SQLMap: The Basics](Rooms/SQLMapTheBasics.md)
+- ✅ [SQLMap: The Basics](Rooms/SQLMapTheBasics.md)
 ### Defensive Security
 ### Security Solutions
 ### Defensive Seucirty Tooling
