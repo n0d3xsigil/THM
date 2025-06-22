@@ -78,8 +78,8 @@ My discoveries from THM
 ### Offensive Seucrity Tooling
 - ❓ Hydra
 - ✅ [Gobuster: The Basics](Rooms/GobusterTheBasics.md)
-- ⚠️ [Shells Overview](Rooms/ShellsOverview.md)
-- ❌ [SQLMap: The Basics](Rooms/SQLMapTheBasics.md)
+- ✅ [Shells Overview](Rooms/ShellsOverview.md)
+- ⚠️ [SQLMap: The Basics](Rooms/SQLMapTheBasics.md)
 ### Defensive Security
 ### Security Solutions
 ### Defensive Seucirty Tooling
