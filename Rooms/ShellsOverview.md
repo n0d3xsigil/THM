@@ -2,7 +2,10 @@
 
 ## Contents
 - [Room Introduction](#room-introduction)
+- [Shell Overview](#shell-overview)
 - [Reverse Shell](#reverse-shell)
+- [Bind Shell](#bind-shell)
+- [Shell Listeners](#shell-listeners)
 
 
 ## Room Introduction
@@ -183,3 +186,63 @@ Oh I missed this, so apparently ports below **`1024`** require elevated privileg
 Trying this as the answer
 #### ✅ Answer
 - `8080`
+
+## Shell Listeners
+Apparently _`nc`_ isn't the only cat in town. 
+
+There is **Rlwrap** which adds functionality to Netcat such as editing history, using arrow keys etc.
+
+```shell
+attacker@kali:~$ rlwrap nc -lvnp 443
+listening on [any] 443 ...
+```
+
+Then there is **Ncat** which has extra security like SSL encryption#```shell-session
+```shell
+attacker@kali:~$ ncat -lvnp 4444
+Ncat: Version 7.94SVN ( https://nmap.org/ncat )
+Ncat: Listening on [::]:443
+Ncat: Listening on 0.0.0.0:443
+```
+setting up use with **SSL**
+```shell
+attacker@kali:~$ ncat --ssl -lvnp 4444
+Ncat: Version 7.94SVN ( https://nmap.org/ncat )
+Ncat: Generating a temporary 2048-bit RSA key. Use --ssl-key and --ssl-cert to use a permanent one.
+Ncat: SHA-1 fingerprint: B7AC F999 7FB0 9FF9 14F5 5F12 6A17 B0DC B094 AB7F
+Ncat: Listening on [::]:443
+Ncat: Listening on 0.0.0.0:443
+```
+
+Finally, these examples there is **Socat** which allows creating connections between two sources. 
+```shell
+attacker@kali:~$ socat -d -d TCP-LISTEN:443 STDOUT
+2024/09/23 15:44:38 socat[41135] N listening on AF=2 0.0.0.0:443
+```
+
+### ❓ Question
+> Which flexible networking tool allows you to create a socket connection between two data sources?
+#### 🧪 Process
+This was **Socat**.
+
+Trying this as the answer
+#### ✅ Answer
+- `Socat` ✅
+
+### ❓ Question
+> Which command-line utility provides readline-style editing and command history for programs that lack it, enhancing the interaction with a shell listener?
+#### 🧪 Process
+This was **Rlwrap**
+
+Trying this as the answer
+#### ✅ Answer
+- `Rlwrap`
+
+### ❓ Question
+> What is the improved version of Netcat distributed with the Nmap project that offers additional features like SSL support for listening to encrypted shells?
+#### 🧪 Process
+This was **Ncat**
+
+Trying this as the answer
+#### ✅ Answer
+- `Ncat`
