@@ -9,6 +9,7 @@
 - [Shell Payloads](#shell-payloads)
 - [Web Shell](#web-shell)
 - [Practical Task](#practical-task)
+- [Conclusion](#conclusion)
 
 
 ## Room Introduction
@@ -480,3 +481,14 @@ Let's `cat` the flag.
 Trying this as the answer
 #### ✅ Answer
 - `THM{202bb14ed12120b31300cfbbbdd35998786b44e5}` ✅
+
+
+## Conclusion
+> **Reverse Shells**
+> establish a connection from a compromised machine back to an attacker's system.
+
+> **Bind Shells**
+> Listen for incoming connections on a compromised machine
+
+> **Web Shells**
+> offer attackers a unique avenue for exploiting vulnerabilities in web applications.
