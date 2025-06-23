@@ -3,6 +3,7 @@
 ## Contents
 - [Introduction to SOC](#introduction-to-soc)
 - [Purpose and Components](#purpose-and-components)
+- [People](#people)
 
 
 ## Introduction to SOC
@@ -58,3 +59,50 @@ The three pillars
 3) Technology
 #### ✅ Answer
 - `People, Process, Technology`
+
+
+## People
+![](Images/Pasted%20image%2020250623202817.png)
+
+
+#### SOC Analyst (Level 1)
+Analysts use security solutions to to detect threats. The _SOC Analyst (Level 1)_ would be the first point of response. They would triage the detection to determine if it was harmful. They would report detection's as per SOC procedures.
+
+This could be considered a parallel to IT End User support where Level one would be the service desk, they will triage incoming incidents and forward them on to the correct team for the reported incident.
+
+#### SOC Analyst (Level 2)
+A _SOC Analyst (Level 2)_ would be responsible for investigating threats that that have been triaged by _Level 1_ but still need further analysis. They may access to additional experience and tools to allow a more thorougher  analysis. 
+
+In my IT support example, this could be considered a Level 2 support agent, Whether that be a Desk Side support technician or a Network engineer, or even a software engineer, the level two agent will process the incident in accordance with their experience and speciality. 
+
+#### SOC Analyst (Level 3)
+Finally in the analyst role we have the _SOC Analyst (Level 3)_. The are proactive investigators, their experience allows them to look for threat indicators support response activities, will often handle critical severity detections which need swift responses, containment, eradication, and recovery.
+
+In the IT end user support world, the 3rd line support would likely be Subject Matter Experts (SME) and will have the experience and expertise to support incidents and problems that 1st & 2nd line where unable to resolve. 
+
+#### Security Engineer
+The _Security Engineer_ would be responsible for deploying, configuring and maintaining the security solutions that the _SOC Analysts_ use to perform their investigations. It is their responsibility to ensure smooth operation of the solutions.
+
+#### Detection Engineer
+The security solutions need logic in order to detect malicious behaviours. The _Detection Engineer_  works with the analysts to implement the detection rules.
+
+#### SOC Manager
+At the top of the team we have the _SOC Manager_. They are responsible for the overall operation of the SOC by maintaining the processes and supporting the team. The _SOC Manager_ is also responsible for reporting to the CISO. 
+
+### ❓ Question
+> Alert triage and reporting is the responsibility of?
+#### 🧪 Process
+The triage is the responsibility of `Level 1`
+
+Trying this as the answer
+#### ✅ Answer
+- `SOC Analyst (Level 1)` ✅
+
+### ❓ Question
+> Which role in the SOC team allows you to work dedicatedly on establishing rules for alerting security solutions?
+#### 🧪 Process
+The responsibility of tooling is that of the `Detection Engineer`
+
+Trying this as the answer
+#### ✅ Answer
+- `Detection Engineer` ✅
