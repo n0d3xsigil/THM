@@ -4,6 +4,7 @@
 - [Introduction to SOC](#introduction-to-soc)
 - [Purpose and Components](#purpose-and-components)
 - [People](#people)
+- [Process](#process)
 
 
 ## Introduction to SOC
@@ -106,3 +107,47 @@ The responsibility of tooling is that of the `Detection Engineer`
 Trying this as the answer
 #### ✅ Answer
 - `Detection Engineer` ✅
+
+
+## Process
+### Alert Triage
+![](Images/Pasted%20image%2020250623213458.png)
+The first function of the SOC team is triage. An alert will come in, the analyst determines the severity which in turn prioritises it. 
+
+The `5w's` will help with this, using the example **Alert**: Malware detected on Host: `GEORGE PC`
+
+|  `5 Ws`  | Answer                                                             |  
+|----------|--------------------------------------------------------------------| 
+| `What?`  | A malicious file was detected                                      |
+| `When?`  | The file was detected at 13:20 on June 5, 2024                     |
+| `Where?` | The file was detected  in the directory of the host `GEORGE PC`    |
+| `Who?`   | The file was detected for the user George                          |
+| `Why?`   | After the investigation, it was found that the file was downloaded |
+|          | from a pirated software-selling website. The investigation with    |
+|          | the user revealed that they downloaded the file as they wanted to  |
+|          | use a software for free.                                           |
+
+### Reporting
+Malicious reports must be escalated to the next level analyst in a "_timely_" manor, often as incidents or tickets. The report should include details of all 5Ws including thorough analysis with screenshots as evidence.
+
+### Incident Response and Forensics
+**Reference Room**: [Incident Response Fundamentals](https://tryhackme.com/room/incidentresponsefundamentals)
+Should the incident indicate a detection of "_highly malicious_" activity of a critical nature, high level teams will start an incident response. In such cases a detailed forensics activity will be performed which will determine the root cause.
+
+### ❓ Question
+> At the end of the investigation, the SOC team found that John had attempted to steal the system's data. Which 'W' from the 5 Ws does this answer?
+#### 🧪 Process
+This would be `who`. John had attempted an action.
+
+Trying this as the answer
+#### ✅ Answer
+- `who` ✅
+
+### ❓ Question
+> The SOC team detected a large amount of data exfiltration. Which 'W' from the 5 Ws does this answer?
+#### 🧪 Process
+Data exfiltration is the process of moving data off of the network. This would be a `what` is happening kinda scinario.
+
+Trying this as the answer
+#### ✅ Answer
+- `What` ✅
