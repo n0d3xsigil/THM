@@ -6,6 +6,7 @@
 - [People](#people)
 - [Process](#process)
 - [Technology](#technology)
+- [Practical Exercise of SOC](#practical-exercise-of-soc)
 
 
 ## 📘Introduction to SOC
@@ -123,10 +124,7 @@ The `5w's` will help with this, using the example **Alert**: Malware detected on
 | `When?`  | The file was detected at 13:20 on June 5, 2024                     |
 | `Where?` | The file was detected  in the directory of the host `GEORGE PC`    |
 | `Who?`   | The file was detected for the user George                          |
-| `Why?`   | After the investigation, it was found that the file was downloaded |
-|          | from a pirated software-selling website. The investigation with    |
-|          | the user revealed that they downloaded the file as they wanted to  |
-|          | use a software for free.                                           |
+| `Why?`   | <p> After the investigation, it was found that the file was downloaded from a pirated software-selling website. The investigation with the user revealed that they downloaded the file as they wanted to use a software for free.</p> |
 
 ### Reporting
 Malicious reports must be escalated to the next level analyst in a "_timely_" manor, often as incidents or tickets. The report should include details of all 5Ws including thorough analysis with screenshots as evidence.
@@ -189,3 +187,102 @@ Trying this as the answer
 #### ✅ Answer
 - `Yea` ✅
 
+
+## 📘Practical Exercise of SOC
+The first time I walked through this segment I got it all wrong because I throught that each alert would be a question. But no, of course the purpose is to go over the 5W's :)
+
+So pay attention [aimed at me]
+
+### ❓ Question 1
+> What: Activity that triggered the alert?
+#### 🧪 Process
+We're looking at Alert #167. Description Port Scanning activity detected...
+![image](https://github.com/user-attachments/assets/3bbe1c8a-0eaa-4db9-aa27-4a6bcc799dca)
+
+So that is the answer to this question `Port Scan`
+
+Trying this as the answer
+#### ✅ Answer
+- `Port scan` ✅
+
+### ❓ Question 2
+> When: Time of the activity? 
+#### 🧪 Process
+Before `acknowledging the alert, what else can I identify from this screen. 
+![image](https://github.com/user-attachments/assets/3bbe1c8a-0eaa-4db9-aa27-4a6bcc799dca)
+
+We have a date / time `June 12, 2024 17:24`
+
+Trying this as the answer
+#### ✅ Answer
+- `June 12, 2024 17:24` ✅
+
+### ❓ Question 3 
+> Where: Destination host IP? 
+#### 🧪 Process
+Moving on, we don't have a target IP, so lets acknowledge the alert and see what we can find.
+![image](https://github.com/user-attachments/assets/f431335d-0c95-41df-b782-c6f49b9fa3fa)
+
+Okay, we can click **Investigate in SIEM**.
+
+Now we have more information
+![image](https://github.com/user-attachments/assets/af15a8a4-a65c-489c-b151-50da75df9884)
+
+This shows a destination IP of `10.0.0.3`
+
+Trying this as the answer#### ✅ Answer
+- `10.0.0.3` ✅
+
+### ❓ Question 4
+> Who: Source host name?
+#### 🧪 Process
+![image](https://github.com/user-attachments/assets/af15a8a4-a65c-489c-b151-50da75df9884)
+
+We can see the source hostname is `NESSUS`
+
+Trying this as the answer
+#### ✅ Answer
+- `NESSUS` ✅
+
+### ❓ Question 5
+> Why: Reason for the activity? Intended/Malicious
+#### 🧪 Process
+![image](https://github.com/user-attachments/assets/af15a8a4-a65c-489c-b151-50da75df9884)
+Again, looking at the above screen shot, we can see that `NESSUS`, is performing a port scan on an end client. This behaviour is likely to be `Intended`
+
+Trying this as the answer
+#### ✅ Answer
+- `Intended` ✅
+
+### ❓ Question 6
+> Additional Investigation Notes: Has any response been sent back to the port scanner IP? (yea/nay)
+#### 🧪 Process
+![image](https://github.com/user-attachments/assets/af41671c-005b-45a2-a9cc-e9bba5b37019)
+Scrolling down the list of activitiy, we can see that port 22 did respond. 
+
+Trying this as the answer
+#### ✅ Answer
+- `Yea`
+
+### ❓ Question 7
+> What is the flag found after closing the alert
+#### 🧪 Process
+![image](https://github.com/user-attachments/assets/eb57f48a-3dc5-40d7-b9aa-75e962dbe1d2)
+Let's close this one out by clicking **Complete Investigation**
+
+We have another question, is this **Option A: True Positive** or **Option B: False Positive**.
+![image](https://github.com/user-attachments/assets/e30c8cdc-8f09-465e-8061-9842967a7cf3)
+
+Well, we expect that `NESSUS` was performing a scheduled scan of the end client. So we can say this is a `False Positive`
+![image](https://github.com/user-attachments/assets/2d13eba3-fcf9-4ec0-afe3-83ddd1085e8e)
+Click **Go To Alerts Dashboard**
+
+![image](https://github.com/user-attachments/assets/79c318aa-3768-4498-8f2a-a280d41de562)
+Click **Close Alert**
+
+![image](https://github.com/user-attachments/assets/1933bab1-2b4b-4f5c-96bd-fff685867866)
+And we have our flag `THM{000_INTRO_TO_SOC}`
+
+Trying this as the answer
+#### ✅ Answer
+- `THM{000_INTRO_TO_SOC}`
