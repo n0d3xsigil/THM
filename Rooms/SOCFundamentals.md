@@ -5,9 +5,10 @@
 - [Purpose and Components](#purpose-and-components)
 - [People](#people)
 - [Process](#process)
+- [Technology](#technology)
 
 
-## Introduction to SOC
+## 📘Introduction to SOC
 A **Security Operations Centre** is a team who specialise in security. They monitor the organisation network and resources 24/7. with a view to identify suspicious activities.
 
 ### ❓ Question
@@ -18,7 +19,7 @@ My first line, `Security Operations Centre`
 - `Security Operations Center`
 
 
-## Purpose and Components
+## 📘Purpose and Components
 ![](Images/Pasted%20image%2020250622202510.png)
 
 ### Detection
@@ -62,7 +63,7 @@ The three pillars
 - `People, Process, Technology`
 
 
-## People
+## 📘People
 ![](Images/Pasted%20image%2020250623202817.png)
 
 
@@ -109,7 +110,7 @@ Trying this as the answer
 - `Detection Engineer` ✅
 
 
-## Process
+## 📘Process
 ### Alert Triage
 ![](Images/Pasted%20image%2020250623213458.png)
 The first function of the SOC team is triage. An alert will come in, the analyst determines the severity which in turn prioritises it. 
@@ -151,3 +152,40 @@ Data exfiltration is the process of moving data off of the network. This would b
 Trying this as the answer
 #### ✅ Answer
 - `What` ✅
+
+
+## 📘Technology
+The third pillar of the SOC is _Technology_. We've spoken of the _technology_ already in terms of the _security solutions_. The _security solutions_ can be summarised as follows;
+
+### SIEM
+A _**S**ecurity **I**nformation_ and _**E**vent **M**anagement_ is a common solution used in the vast majority of SOCs. It collects logs from networked devices across the organisation. 
+
+The SIEM solution will have been configured with logic to identify suspicious activity within the environment. The SIEM will log the detetions after verifying them across multiple sources (including logs, alerts etc) and should any match with the relevent rules will present alerts.
+
+It isn't unusual for detections to be enhanced and processed with the aid of Machine Learning on more modern instances of SIEM installations.
+
+### EDR
+The _**E**ndpoint **D*etection_ and _**R*esponse_ provides detailed visability of networked devices activies, both in real-time and historical. The **EDR** is run on the endpoint (Users equipment) and can handle automated responses. It also has extensive capabiltiy for detections allowing for efficient processing.
+
+### Firewall
+The _firewall_ is a form of security (software or hardware) that acts as a barrier between the interior and exterior of a system, whether  that be an entire network or a single host. The _firewall_ can be configured with detection rules to help identify and if nessecary block suspicious traffic before entering the system.
+
+
+### ❓ Question 1
+> Which security solution monitors the incoming and outgoing traffic of the network?
+#### 🧪 Process
+The firewall is responsible for monitoring the traversal of traffic
+
+Trying this as the answer
+#### ✅ Answer
+- `Firewall` ✅
+
+### ❓ Question 2
+> Do SIEM solutions primarily focus on detecting and alerting about security incidents? (yea/nay)
+#### 🧪 Process
+That is the primary function of the SIEM
+
+Trying this as the answer
+#### ✅ Answer
+- `Yea` ✅
+
