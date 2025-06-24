@@ -234,7 +234,8 @@ Now we have more information
 
 This shows a destination IP of `10.0.0.3`
 
-Trying this as the answer#### ✅ Answer
+Trying this as the answer
+#### ✅ Answer
 - `10.0.0.3` ✅
 
 ### ❓ Question 4
