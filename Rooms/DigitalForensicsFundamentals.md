@@ -6,6 +6,7 @@
 - [Introduction to Digital Forensics](#introduction-to-digital-forensics)
 - [Digital Forensics Methodology](#digital-forensics-methodology)
 - [Evidence Acquisition](#evidence-acquisition)
+- [Windows Forensics](#windows-forensics)
 
 
 ## 📘Introduction to Digital Forensics
@@ -113,7 +114,7 @@ Trying this as the answer
 - `Examination` ✅
 
 
-## Evidence Acquisition
+## 📘Evidence Acquisition
 Acquisition of evidence is critical part of the process. The forensics team must ensure all evidence is collected whilst preserving integrity. 
 
 There are general practices that must be followed as part of the evidence acquisition.
@@ -137,7 +138,7 @@ NIST have a good example CoC document.
 ### Use of Write Blockers
 A write blocker prevents the operating system from writing files back to the evidence potentially corrupting data, modifying timestamps, or creating unwanted files. 
 
-### ❓ Question
+### ❓ Question 1
 > Which tool is used to ensure data integrity during the collection?
 #### 🧪 Process
 We want to use a write blocker to prevent modification of the evidence.
@@ -146,7 +147,7 @@ Trying this as the answer
 #### ✅ Answer
 - `write blocker`
 
-### ❓ Question
+### ❓ Question 2
 > What is the name of the document that has all the details of the collected digital evidence?
 #### 🧪 Process
 The whole process is chain of custody
@@ -154,3 +155,6 @@ The whole process is chain of custody
 Trying this as the answer
 #### ✅ Answer
 - `chain of custody`
+
+
+### Windows Forensics
