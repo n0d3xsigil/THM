@@ -5,6 +5,7 @@
 ## Contents
 - [Introduction to Digital Forensics](#introduction-to-digital-forensics)
 - [Digital Forensics Methodology](#digital-forensics-methodology)
+- [Evidence Acquisition](#evidence-acquisition)
 
 
 ## 📘Introduction to Digital Forensics
@@ -112,3 +113,44 @@ Trying this as the answer
 - `Examination` ✅
 
 
+## Evidence Acquisition
+Acquisition of evidence is critical part of the process. The forensics team must ensure all evidence is collected whilst preserving integrity. 
+
+There are general practices that must be followed as part of the evidence acquisition.
+
+### Proper Authorization
+Forensics teams must have authorisation of the relevant authorities prior to the collection of any evidence. This may be known as a search warrant.
+
+### Chain of Custody
+The chain of custody is essential for the preservation of evidence by documenting who has had involvement with the evidence. The chain of custody is a document which records key information about the piece of evidence such as:
+- Name and type of evidence
+- Individual who collected evidence
+- Date and time of collection
+- location of evidence
+- Access record.
+
+This helps create an audit trail of the evidence and who has been involved in the process. 
+
+NIST have a good example CoC document. 
+- https://www.nist.gov/document/sample-chain-custody-formdocx
+
+### Use of Write Blockers
+A write blocker prevents the operating system from writing files back to the evidence potentially corrupting data, modifying timestamps, or creating unwanted files. 
+
+### ❓ Question
+> Which tool is used to ensure data integrity during the collection?
+#### 🧪 Process
+We want to use a write blocker to prevent modification of the evidence.
+
+Trying this as the answer
+#### ✅ Answer
+- `write blocker`
+
+### ❓ Question
+> What is the name of the document that has all the details of the collected digital evidence?
+#### 🧪 Process
+The whole process is chain of custody
+
+Trying this as the answer
+#### ✅ Answer
+- `chain of custody`
