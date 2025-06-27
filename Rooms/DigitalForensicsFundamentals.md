@@ -145,22 +145,72 @@ We want to use a write blocker to prevent modification of the evidence.
 
 Trying this as the answer
 #### ✅ Answer
+
 - `write blocker`
 
 ### ❓ Question 2
+
 > What is the name of the document that has all the details of the collected digital evidence?
+
 #### 🧪 Process
+
 The whole process is chain of custody
 
 Trying this as the answer
+
 #### ✅ Answer
+
 - `chain of custody`
 
 
 ### Windows Forensics
-Evidence captured from personal computers are most commong types of evidence. Devices may have different operating systems, think Windows, MacOS, Linux, Android etc...) the most common however is Windows.
 
-> As part of the data collection phase, forensic images of the Windows operating system are taken. These forensic images are bit-by-bit copies of the whole operating system. Two different categories of forensic images are taken from a Windows operating system.
+Evidence captured from personal computers are most commong types of evidence. Devices may have different operating systems, think Windows, MacOS, Linux, Android etc...) the most common however is Windows. We can can take forensic images of the **Windows Operating System** as part of the data caollection phase. These images are essentially bit-for-bit copies. There are two types of forensic image we can obtain.
+
+#### Disk Image
+
+This is arguabliy the easier form of image to capture. A disk image is a bit-for-bit copy of the disk, saved to a disk, generally not the disk being captured for obvious reasons. Since it is an image of the disk it will contain everything that is on that disk, including deleted items.
+
+#### Memory Image
+
+The memory is a little more critical. Where as with Disk the sotrage is no volatile, memeory is. A capture must occour without allowing the system to loose power and as such, we should prioritise taking a mMemory image over the disk. 
 
 
+#### Tools
 
+##### FTK Imager
+
+FTK imager, very popular for imaging Windows Operating Systems. GUI led and able to mount images for review. Capable of capture and review.
+
+##### Autopsy
+
+**Web Link**: [Autopsy](https://www.autopsy.com/)
+
+Popular and open-source. Great for image review including searching, deleted file recoverymeta data, extension mistmatch etc.
+
+##### DumpIt
+
+**Web Link**: [DumpIt](https://www.toolwar.com/2014/01/dumpit-memory-dump-tools.html)
+
+Captures memory images from Windows Operating Systems. CLI based and the image can be saved in vairous formats.
+
+##### Volatility
+
+**Web Link**: [Volatility](https://volatilityfoundation.org/)
+
+Open source tool for analysing Memory Images. Extensible via plugins, Supports various operating systems.
+
+
+### ❓ Question
+
+> Which type of forensic image is taken to collect the volatile data from the operating system?
+
+#### 🧪 Process
+
+Non volatile would be the disks whilst RAM is volatile. 
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Memory Image` ✅
