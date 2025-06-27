@@ -158,3 +158,9 @@ Trying this as the answer
 
 
 ### Windows Forensics
+Evidence captured from personal computers are most commong types of evidence. Devices may have different operating systems, think Windows, MacOS, Linux, Android etc...) the most common however is Windows.
+
+> As part of the data collection phase, forensic images of the Windows operating system are taken. These forensic images are bit-by-bit copies of the whole operating system. Two different categories of forensic images are taken from a Windows operating system.
+
+
+
