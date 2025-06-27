@@ -84,7 +84,7 @@ My discoveries from THM
 - ❓ Defensive Security Intro
 - ✅[SOC Fundamentals](Rooms/SOCFundamentals.md)
 - ✅[Digital Forensics Fundamentals](Rooms/DigitalForensicsFundamentals.md)
-- [Incident Response Fundamentals](Rooms/IncidentResponseFundamentals.md)
+- ⚠️[Incident Response Fundamentals](Rooms/IncidentResponseFundamentals.md)
 - [Logs Fundamentals](Rooms/LogsFundamentals.md)
 ### Security Solutions
 ### Defensive Seucirty Tooling
