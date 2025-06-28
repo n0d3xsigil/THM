@@ -12,3 +12,4 @@
 ### ❓[Defensive Security Intro](DefensiveSecurityIntro.md)
 
 ## 📘Introduction to Incident Response
+The purosed of an Incident response is to handle an incident from beginning to end. From detection, resolution and prevention. 
