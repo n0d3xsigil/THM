@@ -13,9 +13,17 @@ This is a page just for quick notes, links etc.
 		- 
 
 ## Question format
+
 ### ❓ Question
+
 > Question
+> 
 #### 🧪 Process
+
 _process_
+
 #### ✅ Answer
+
 - `answer`
+
+
