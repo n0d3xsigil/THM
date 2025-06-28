@@ -17,7 +17,7 @@ This is a page just for quick notes, links etc.
 ### ❓ Question
 
 > Question
-> 
+
 #### 🧪 Process
 
 _process_
