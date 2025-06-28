@@ -7,6 +7,7 @@
 - [Introduction to Incident Response](#introduction-to-incident-response)
 - [What are Incidents?](#what-are-incidents)
 - [Types of Incidents](#types-of-incidents)
+- [Incident Response Process](#incident-response-process)
 
 
 ## 📘Room Pre-Requisites
@@ -137,6 +138,45 @@ Trying this as the answer
 
 - `Denial of Service` ✅
 
+
+## 📘Incident Response Process
+![image](https://github.com/user-attachments/assets/111893fc-790f-49e5-b0a3-e61423e097f6)
+
+![image](https://github.com/user-attachments/assets/517ba57e-b135-46b7-88f5-1fb02556a7d7)
+
+
+
+
+
+
+
+
+
+
+### ❓ Question 1
+
+> The Security team disables a machine's internet connection after an incident. Which phase of the SANS IR lifecycle is followed here?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `answer`
+
+
+### ❓ Question 2
+
+> Which phase of NIST corresponds with the lessons learned phase of the SANS IR lifecycle?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `answer`
 
 
 
