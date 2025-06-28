@@ -6,6 +6,7 @@
 - [Room Pre-Requisites](#room-pre-requisites)
 - [Introduction to Incident Response](#introduction-to-incident-response)
 - [What are Incidents?](#what-are-incidents)
+- [Types of Incidents](#types-of-incidents)
 
 
 ## 📘Room Pre-Requisites
@@ -81,6 +82,60 @@ Trying this as the answer
 #### ✅ Answer
 
 - `False positive` ✅
+
+
+
+## 📘Types of Incidents
+
+### 🦠 Malware Infections
+
+A malware infection is a result of a malicious application or peice of software that has been downloaded on the machine. Untill Recently it was thought that you would have to 'click' something in order to infect a machine, however this is not nessecarily the case any more. The purpose of malware is to often obtain information from the machine, or perhaps cause disruption to the machine or event the wider network.
+
+### 🔓 Security Breaches
+
+A security breach is when as it sounds, the security of a system is circumvented. An attacker has gained access where they should not have. The end result could be the same as with a malware infection. Access to confidential information, cause disruption etc.
+
+### 🩸 Data Leaks
+
+A data leak is interesting, whilst as before with a _malware infection_ and _security breach_ a **data leak** could possibly be an inadvertant action, such as human error, or misconfiguration.
+
+### 🕵️‍♂️ Insider Attacks
+
+An insider threat could be considered as any individual who has internal access to the network. Again my or may not be deliberatly malicious.
+
+### 🌐 Denial Of Service Attacks
+
+DoS is the act of an attacker making a service appear to be unavailable by sending large quantities of data to a target whelming its capability to accept and respont to queries. Since availability is a key tennant of cyber seucirty.
+
+
+### ❓ Question 1
+
+> A user's system got compromised after downloading a file attachment from an email. What type of incident is this?
+
+#### 🧪 Process
+
+Downloaded malware, that would be a `Malware Infection`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Malware Infection` ✅
+
+
+### ❓ Question 2
+
+> What type of incident aims to disrupt the availability of an application?
+
+#### 🧪 Process
+
+Availablilty `Denial of Service`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Denial of Service` ✅
 
 
 
