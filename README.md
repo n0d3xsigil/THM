@@ -82,10 +82,10 @@ My discoveries from THM
 - ✅ [SQLMap: The Basics](Rooms/SQLMapTheBasics.md)
 ### Defensive Security
 - ❓ Defensive Security Intro
-- ✅[SOC Fundamentals](Rooms/SOCFundamentals.md)
-- ✅[Digital Forensics Fundamentals](Rooms/DigitalForensicsFundamentals.md)
-- ✅[Incident Response Fundamentals](Rooms/IncidentResponseFundamentals.md)
-- ⚠️[Logs Fundamentals](Rooms/LogsFundamentals.md)
+- ✅ [SOC Fundamentals](Rooms/SOCFundamentals.md)
+- ✅ [Digital Forensics Fundamentals](Rooms/DigitalForensicsFundamentals.md)
+- ✅ [Incident Response Fundamentals](Rooms/IncidentResponseFundamentals.md)
+- ⚠️ [Logs Fundamentals](Rooms/LogsFundamentals.md)
 ### Security Solutions
 ### Defensive Seucirty Tooling
 ### Build Your Cyber Security Career
