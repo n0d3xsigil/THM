@@ -8,6 +8,8 @@
 - [What are Incidents?](#what-are-incidents)
 - [Types of Incidents](#types-of-incidents)
 - [Incident Response Process](#incident-response-process)
+- [Incident Response Techniques](#incident-respons-techniques)
+
 
 
 ## 📘Room Pre-Requisites
@@ -15,9 +17,11 @@
 ### ❓[Defensive Security Intro](DefensiveSecurityIntro.md)
 
 
+
 ## 📘Introduction to Incident Response
 
 The purosed of an Incident response is to handle an incident from beginning to end. From detection, resolution and prevention. 
+
 
 
 ## 📘What are Incidents?
@@ -139,6 +143,7 @@ Trying this as the answer
 - `Denial of Service` ✅
 
 
+
 ## 📘Incident Response Process
 
 We can use _Incident Response_ frameworks to ensure effective responses to incidents. The two of the common frameworks are **SANS** and **NIST**.
@@ -203,4 +208,32 @@ Trying this as the answer
 - `Post Incident Activity` ✅
 
 
+
+## 📘Incident Response Techniques
+
+Identification (**SANS**) and (**Detection and Analysis**) is a difficult process to handle manually without tools. Think of trying to sift thought hundreds fo thousands, or even millions of records to find a few malicious activities.
+
+Thankfully as part of the _security solution_ we have some tools on our side.
+- **SIEM**
+    Collects logs and correlates them in a central location and identifies incidents
+- **AV**
+    Activly scans an endpoint for malicious files.
+- **EDR**
+    Protects against some advanced threats. May also _Contain and eradicate_ threats
+
+Once an incident is identfied, procedures must be followed including investigation the extent of the attack and making sure steps are taen to prevent further exposure and damage buy eleminating it.
+
+There may be may different procedures for different attacks, but we call these Playbooks. There is another book to be mindfull of and that is Runbooks. These are the details steps required for each category of attack.
+
+### ❓ Question
+
+> Step-by-step comprehensive guidelines for incident response are known as?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `Playbooks` ✅
 
