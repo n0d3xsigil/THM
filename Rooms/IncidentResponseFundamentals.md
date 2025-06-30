@@ -9,6 +9,7 @@
 - [Types of Incidents](#types-of-incidents)
 - [Incident Response Process](#incident-response-process)
 - [Incident Response Techniques](#incident-respons-techniques)
+- [Lab Work Incident Response](#lab-work-incident-response)
 
 
 
@@ -237,3 +238,100 @@ _process_
 
 - `Playbooks` ✅
 
+
+
+## 📘Lab Work Incident Response
+
+This time I am going to read and understand the questions before answering them all on the first step ;).
+
+### ❓ Question 1
+
+> What was the name of the malicious email sender? 
+
+#### 🧪 Process
+
+01. Opening the site by clicking **View Site**
+02. Find and click on the email from **Jeff Johnson**
+03. Oh look, no personalisation, formatting errors and hitting you hard on the pay.
+
+We already have our answer here `Jeff Johnson`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Jeff Johnson` ✅
+
+
+### ❓ Question 2
+
+> What was the threat vector?
+
+#### 🧪 Process
+
+04. Click the attachment **Payslip.pdf**
+
+We have an `Email attachment`. Is this our answer?
+
+Trying this as the answer
+
+
+#### ✅ Answer
+
+- `Email attachment` ✅
+
+
+### ❓ Question 3
+
+> How many devices downloaded the email attachment?
+
+#### 🧪 Process
+
+05. Uhoh! _**Malware detected on the host!**_. Quick click **Take Actions**
+06. We have 3 hosts with this file, `HOST-ATYU`,`HOST-IOPE`, and `HOST-HKNV`.
+
+With this in mind, it looks asthough we have our answer, `3`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `3` ✅
+
+
+### ❓ Question 4
+
+> How many devices executed the file?
+
+#### 🧪 Process
+
+
+07. On the line `31/05/2025, 22:25` click **Quarantine**
+08. On the line `08/06/2025, 11:18` click **Quarantine**
+09. We have a client (`1`) that has _Executed_ the file.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `1` ✅
+
+
+### ❓ Question 5
+
+> What is the flag found at the end of the exercise? 
+
+#### 🧪 Process
+
+10. Let's start our investigation bu clicking **Investigate** on `HOST-IOPE`
+11. We need to **Isolate The Host**
+12. Lets **View Process Timeline**
+13. We can see the file (`Payslip.pdf`) was downloaded which executed `Powershell.exe` and initate a `Malicious DNS Query`. Naughty.
+14. Click **Finish Case** to get our flag.
+15. Bask in the glory of our flag (`THM{My_First_Incident_Response}`).
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `THM{My_First_Incident_Response}` ✅
