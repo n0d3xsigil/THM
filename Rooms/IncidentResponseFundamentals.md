@@ -140,17 +140,37 @@ Trying this as the answer
 
 
 ## 📘Incident Response Process
+
+We can use _Incident Response_ frameworks to ensure effective responses to incidents. The two of the common frameworks are **SANS** and **NIST**.
+
+_However_ since I am based in the UK. I also would like to bare in mind the regional specific frameworks such as:
+- NCSC
+- CREST Framework
+- ISO/IEC 27035
+
+Let's continue to focus on the THM perspective first.
+
+Both SANS and NIST contribute to cyber security, SANs has lots of courses and certfication. NIST has been key in developing standards for cyber security. 
+
+Focusing on SANS a moment, there are 6 phases to the response framework. PICERL:
+
 ![image](https://github.com/user-attachments/assets/111893fc-790f-49e5-b0a3-e61423e097f6)
+
+|      Phase      |                 Explanation                 |                 Example                 |
+|-----------------|---------------------------------------------|-----------------------------------------|
+| Preparation     | First phase building tools and teams        | Awareness training etc                  |
+| Identification  | Highlight abnormal behaviours using tools   | Data exfiltration, indicates compromise |
+| Containment     | Isolate target, disable accounts etc        | Disable user access to machine          |
+| Eradication     | Removal of threat, ensure clean environment | Deep malware scan                       |
+| Recovery        | rebuilding targets                          | Compromised host rebuild for backup     |
+| Lessons Learned | Document, close gaps                        | post incident review and documentation  |
+
+Whilst the NIST response is simplified to just 4 steps.
 
 ![image](https://github.com/user-attachments/assets/517ba57e-b135-46b7-88f5-1fb02556a7d7)
 
-
-
-
-
-
-
-
+As a comparison, Containment, Eradication and Recovery are combined as one phase in NIST compaired with SANS
+![image](https://github.com/user-attachments/assets/edae8556-4294-4e36-839e-71c545cfdb90)
 
 
 ### ❓ Question 1
@@ -159,11 +179,13 @@ Trying this as the answer
 
 #### 🧪 Process
 
-_process_
+In this step we are contianing the it the incident
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `Containment` ✅
 
 
 ### ❓ Question 2
@@ -172,11 +194,13 @@ _process_
 
 #### 🧪 Process
 
-_process_
+In NIST, the last step is Post Incident Activity.
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `Post Incident Activity` ✅
 
 
 
