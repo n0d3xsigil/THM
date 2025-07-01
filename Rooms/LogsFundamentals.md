@@ -121,6 +121,89 @@ Trying this as the answer
 
 ## 📘Windows Event Logs Analysis
 
+I am quite familiar windows event logs so I won't go in to too much detail with this section. 
+
+Use **Event ID**'s
+
+| Event ID |                    Description                     |
+|----------|----------------------------------------------------|
+| 4624     | A user account successfully logged in              |
+| 4625     | A user account failed to login                     |
+| 4634     | A user account successfully logged off             |
+| 4720     | A user account was created                         |
+| 4724     | An attempt was made to reset an account’s password |
+| 4722     | A user account was enabled                         |
+| 4725     | A user account was disabled                        |
+| 4726     | A user account was deleted                         |
+
+### ❓ Question 1
+
+> What is the name of the last user account created on this system?
+
+#### 🧪 Process
+
+01. Click **Start Machine**
+02. In the machine, click **Start** and type `eventvwr.msc`
+03. Expand **Windows Logs**
+04. Click **Security**
+05. Once within the _Security_ event logs click **Filter Current Log...**
+06. Paste `4720` in _`<All Event IDs>`_ and click **OK**
+07. The most recent account creation was on the 6th July 2024 at 12:56:27.
+08. **Account Name:** `hacked`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `hacked` ✅
+
+
+### ❓ Question 2
+
+> Which user account created the above account?
+
+#### 🧪 Process
+
+09. We can see the account making the change was `Administrator`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Administrator` ✅
+
+
+### ❓ Question 3
+
+> On what date was this user account enabled? Format: M/D/YYYY
+
+#### 🧪 Process
+
+10. Okay, so I assumed it was D/M/YYYY so its 7th June 2024
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `6/7/2024` ✅
+
+
+### ❓ Question 4
+
+> Did this account undergo a password reset as well? Format: Yes/No
+
+#### 🧪 Process
+
+11. Click **Filter Current Log...**
+12. Paste `4724` in _`<All Event IDs>`_ and click **OK**
+13. 2 entried suggest and attempt was made
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Yes` ✅
+
 
 
 
