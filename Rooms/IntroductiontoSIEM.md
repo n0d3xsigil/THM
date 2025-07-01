@@ -7,6 +7,8 @@
 - [Network Visibility through SIEM](#network-visibility-through-siem)
 - [Log Sources and Log Ingestion](#log-sources-and-log-ingestion)
 - [Why SIEM](#Why-siem)
+- [Analysing Logs and Alerts](#analysing-logs-and-alerts)
+- [Lab Work](#lab-work)
 
 
 ## 📘Introduction
@@ -181,3 +183,175 @@ Responsibilities include:
 - Tuning Rules which are causing the noise or False positives
 - Reporting and Compliance
 - Identifying blind spots in the network visibility and covering them
+
+
+
+## 📘Analysing Logs and Alerts
+
+### Dashboard
+
+![image](https://github.com/user-attachments/assets/52d00dca-7fae-4285-b531-4d9564ceded5)
+_Example dashboard from [IBM's Qradar SIEM](https://www.ibm.com/products/qradar)_
+
+A SIEM dashboard, as with many dashboards shows key information at a glance. It will likely show:
+- Alert Highlights
+- System Notification
+- Health Alert
+- List of Failed Login Attempts
+- Events Ingested Count
+- Rules triggered
+- Top Domains Visited
+
+
+### Correlation Rules
+
+A correlation rules are logial expressions which will trigger an alert should the rules be met
+
+- **Brute Force**: Multiple attempts of password in short succession
+- **Successful Brute Force**: Successfull login after mutiple attempts
+- **Potentail Exfiltration attempt**: Mass storage device plugged in
+- **Potentail Exfiltration attempt**: Large quantity of date being uploaded to cloud provider
+
+### How a correlation rule is created
+
+
+Attackers often remove logs during post-exploitation to try to eliminate traces of their tracks.
+
+In Windows an Event ID of 104 indicates an attempt to clear the log. We could set a rule in the SIEM where by `<Source>:_WinEventLog_ && <EventID>:_104_,<Trigger>:Alert('Event Log Cleared')`.
+
+
+### Alert Investigation
+
+The majority of the analysts time is spent on the dashboard. Some common actions for analysts are
+- Tweaking alerts / rules for `False Positives`
+- Investigating `True Positives`
+- Working with asset owners
+- Suspicious activity, isolation of host.
+- Block suspicious IPs'
+
+### ❓ Question 1
+
+> Which Event ID is generated when event logs are removed?
+
+#### 🧪 Process
+
+Event `104`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `104` ✅
+
+
+### ❓ Question 2
+
+> What type of alert may require tuning?
+
+#### 🧪 Process
+
+We want to tune `False Alarm`, if it was accurate we wouldn't worry
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `False Alarm` ✅
+
+
+## 📘Lab Work
+
+
+### ❓ Question 1
+
+> Click on Start Suspicious Activity, which process caused the alert?
+
+#### 🧪 Process
+
+`Cudominer.exe`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Cudominer.exe` ✅
+
+
+### ❓ Question 2
+
+> Find the event that caused the alert, which user was responsible for the process execution?
+
+#### 🧪 Process
+
+`Chris.fort`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Chris.fort` ✅
+
+
+### ❓ Question 3
+
+> What is the hostname of the suspect user?
+
+#### 🧪 Process
+
+`HR_02`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `HR_02`
+
+
+### ❓ Question 4
+
+> Examine the rule and the suspicious process; which term matched the rule that caused the alert?
+
+#### 🧪 Process
+
+`miner`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `miner` ✅
+
+
+### ❓ Question 5
+
+> What is the best option that represents the event? Choose from the following:
+>
+> - False-Positive
+>
+> - True-Positive
+
+#### 🧪 Process
+
+`True-positive`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `True-positive` ✅
+
+
+### ❓ Question 6
+
+> Selecting the right ACTION will display the FLAG. What is the FLAG?
+
+#### 🧪 Process
+
+`THM{000_SIEM_INTRO}`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `THM{000_SIEM_INTRO}` ✅
+
