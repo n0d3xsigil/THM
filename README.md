@@ -85,7 +85,7 @@ My discoveries from THM
 - ✅ [SOC Fundamentals](Rooms/SOCFundamentals.md)
 - ✅ [Digital Forensics Fundamentals](Rooms/DigitalForensicsFundamentals.md)
 - ✅ [Incident Response Fundamentals](Rooms/IncidentResponseFundamentals.md)
-- ⚠️ [Logs Fundamentals](Rooms/LogsFundamentals.md)
+- ✅ [Logs Fundamentals](Rooms/LogsFundamentals.md)
 ### Security Solutions
 ### Defensive Seucirty Tooling
 ### Build Your Cyber Security Career
