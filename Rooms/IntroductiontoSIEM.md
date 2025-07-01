@@ -6,6 +6,7 @@
 - [Introduction](#introduction)
 - [Network Visibility through SIEM](#network-visibility-through-siem)
 - [Log Sources and Log Ingestion](#log-sources-and-log-ingestion)
+- [Why SIEM](#Why-siem)
 
 
 ## 📘Introduction
@@ -149,3 +150,34 @@ Trying this as the answer
 #### ✅ Answer
 
 - `/var/log/httpd` ✅
+
+
+
+## 📘Why SIEM
+
+Without centralising the logs it would be impossible to make informed decisions about acitivies within the environment, malicious or otherwise.
+
+Using a SIEM allows you to detect and protect against threats in the Cyber Security function
+
+
+### SIEM Capabilities
+
+A major component of a SOC, it collects logs and examines comparing aginst rules, trigging events if required
+
+Common capabilities:
+- Correlation of events between sources
+- Visability across host and network centric events
+- enable efficent investigation of latest threats
+- Discover events not detected by rules
+
+
+### SOC Analyst Responsibilities
+
+Analysts use SIEM solutions for better visability of events across the environment
+
+Responsibilities include:
+- Monitoring and Investigating
+- Identifying False positives
+- Tuning Rules which are causing the noise or False positives
+- Reporting and Compliance
+- Identifying blind spots in the network visibility and covering them
