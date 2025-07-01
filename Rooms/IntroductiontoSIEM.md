@@ -12,7 +12,7 @@
 - [Conclusion](#conclusion)
 
 
-## 📘Introduction
+## 📘 Introduction
 In this section we learned that _SIEM_ stands for  **Security Information and Event Management system**.
 
 ### ❓ Question
