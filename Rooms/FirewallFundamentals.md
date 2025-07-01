@@ -7,6 +7,7 @@
 - [Types of Firewalls](#types-of-firewalls)
 - [Rules in Firewalls](#rules-in-firewalls)
 - [Windows Defender Firewall](#windows-defender-firewall)
+- [Linux iptables Firewall](#linux-iptables-firewall)
 
 
 ## 📘What Is the Purpose of a Firewall
@@ -216,3 +217,61 @@ Trying this as the answer
 #### ✅ Answer
 
 - `192.168.13.7` ✅
+
+
+## 📘Linux iptables Firewall
+
+What about Linux firewalls, to be honest I've not really had much experience with Linux Firewalls. So let's have at it.
+
+
+### Netfilter
+
+Netfilter is a framework within Linux. It contains core functionality such as packet filtering, NAT, and connection tracking.
+
+Some common firewall utilities that utilise the _Netfilter_ framework are
+- **iptables**, most common amongst Linux distributions.
+- **nftables** is the successor to _iptables_ with enhances packet filtering and NAT capabilities
+- **firewalld** is a utility that uses the Netfilter frmework and comes with predefiend rules. Has built in network zones
+
+
+### ufw
+
+The _**U**ncomplicated **F**ire**w**all_ aims to reduce the complexity of managing rules. the rules you create here are then added to _iptables_.
+
+Some basic commands
+- `ufw status` will show you the status fo the firewall
+- `ufw enable` will enable the firewall
+- `ufw disable` will disable the firewall
+- `ufw default allow outgoing` will allow all traffic to go out
+- `ufw deny 22/tcp` will deny SSH or traffic on port 22 generally
+- `ufw status numbered` will show you a list of rules in place with an index
+- `ufw delete 3` will allow you to delete the rule index of 3
+
+### ❓ Question 1
+
+> Which Linux firewall utility is considered to be the successor of "iptables"?
+
+#### 🧪 Process
+
+`nftables`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `nftables` ✅
+
+
+### ❓ Question 2
+
+> What rule would you issue with ufw to deny all outgoing traffic from your machine as a default policy? (answer without sudo)
+
+#### 🧪 Process
+
+`ufw default deny outgoing`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `ufw default deny outgoing` ✅
