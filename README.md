@@ -87,5 +87,9 @@ My discoveries from THM
 - ✅ [Incident Response Fundamentals](Rooms/IncidentResponseFundamentals.md)
 - ✅ [Logs Fundamentals](Rooms/LogsFundamentals.md)
 ### Security Solutions
+- ❌ [Introduction to SIEM](Rooms/IntroductiontoSIEM.md)
+- ❌ [Firewall Fundamentals](Rooms/FirewallFundamentals.md)
+- ❌ [IDS Fundamentals](Rooms/IDSFundamentals.md)
+- ❌ [Vulnerability Scanner Overview](Rooms/VulnerabilityScannerOverview.md)
 ### Defensive Seucirty Tooling
 ### Build Your Cyber Security Career
