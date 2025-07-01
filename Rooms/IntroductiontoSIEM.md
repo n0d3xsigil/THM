@@ -9,6 +9,7 @@
 - [Why SIEM](#Why-siem)
 - [Analysing Logs and Alerts](#analysing-logs-and-alerts)
 - [Lab Work](#lab-work)
+- [Conclusion](#conclusion)
 
 
 ## 📘Introduction
@@ -355,3 +356,15 @@ Trying this as the answer
 
 - `THM{000_SIEM_INTRO}` ✅
 
+
+
+## 📘Conclusion
+
+Several Rooms to try:
+- ❓ [Junior Security Analyst Intro](https://tryhackme.com/room/jrsecanalystintrouxo)
+- ❌ [Splunk: Basics](https://tryhackme.com/room/splunk101)
+- ❌ [Incident handling with Splunk](https://tryhackme.com/room/splunk201)
+- ❌ [Benign](https://tryhackme.com/room/benign)
+- ❌ [Investigating with Splunk](https://tryhackme.com/room/investigatingwithsplunk)
+- ❌ [Investigating with ELK 101](https://tryhackme.com/room/investigatingwithelk101)
+- ❌ [ItsyBitsy](https://tryhackme.com/room/itsybitsy)
