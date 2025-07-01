@@ -4,6 +4,7 @@
 
 ## Contents
 - [Introduction](#introduction)
+- [Network Visibility through SIEM](#network-visibility-through-siem)
 
 
 ## 📘Introduction
@@ -23,5 +24,38 @@ I don't think this requires a process 😉
 
 
 
+## 📘Network Visibility through SIEM
+
+The purpose of this section is to just describe how large amounts of data is generated in the forms of logs. Some logs are device specific whilst others may be network or connection specific. 
+
+The SIEM is able to collect this data and present it in one system with a holistic view.
 
 
+### ❓ Question 1
+
+> Is Registry-related activity host-centric or network-centric?
+
+#### 🧪 Process
+
+The registry is on the machine, so this would be a `host-centric` activity.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `host-centric` ✅
+
+
+### ❓ Question 2
+
+> Is VPN related activity host-centric or network-centric?
+
+#### 🧪 Process
+
+A VPN would be an example of where one client connects via another 'clinet' or host. So this would be a `network-centric` activity.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `network-centric` ✅
