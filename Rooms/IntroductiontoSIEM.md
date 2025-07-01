@@ -5,6 +5,7 @@
 ## Contents
 - [Introduction](#introduction)
 - [Network Visibility through SIEM](#network-visibility-through-siem)
+- [Log Sources and Log Ingestion](#log-sources-and-log-ingestion)
 
 
 ## 📘Introduction
@@ -59,3 +60,92 @@ Trying this as the answer
 #### ✅ Answer
 
 - `network-centric` ✅
+
+
+
+## 📘Log Sources and Log Ingestion
+
+Every device on a network will be generating some kind of logging. Let's go over some of the types of devices that may contribute.
+
+### Windows Machine
+
+One of the most common OS's in office environments is _Microsoft Windows_. Expect to see Windows 11 and Windows 10 running supreme, start to be concerned if you still see some Windows 7 machines and please run for the hills if you're still seeing Windows XP.
+
+Windows logs are generally made available via the **Event Viewer** (`eventvwr.msc`). Events are assigned event id's which help with filtering. These logs can then be forwarded to the SIEM.
+
+![image](https://github.com/user-attachments/assets/52d54886-b3e9-4886-a04f-95b70ec75e90)
+
+
+### Linux Workstation
+
+Wouldn't it be great if Linux was more prevelent in the office, well it's not, yet. Maybe this is the year of the Linux Desktop. 
+
+Anyway the logs within Linux usually reside withing `/var/log`. I only have container on my machine with Linux so have a sample of a `pacman` log.
+
+```shell
+[UserID@HostName log]$ cat pacman.log
+[2025-05-01T10:04:03+0000] [ALPM] installed filesystem (2024.11.21-1)
+[2025-05-01T10:04:03+0000] [ALPM] installed linux-api-headers (6.14-1)
+[2025-05-01T10:04:04+0000] [ALPM] installed tzdata (2025b-1)
+[2025-05-01T10:04:05+0000] [ALPM] installed glibc (2.41+r48+g5cb575ca9a3d-1)
+[2025-05-01T10:04:05+0000] [ALPM] installed gcc-libs (15.1.1+r7+gf36ec88aa85a-1)
+[2025-05-01T10:04:07+0000] [ALPM] installed ncurses (6.5-3)
+[2025-05-01T10:04:07+0000] [ALPM] installed readline (8.2.013-1)
+[2025-05-01T10:04:07+0000] [ALPM] installed bash (5.2.037-2)
+[2025-05-01T10:04:07+0000] [ALPM] installed acl (2.3.2-1)
+[2025-05-01T10:04:07+0000] [ALPM] installed attr (2.5.2-1)
+[2025-05-01T10:04:07+0000] [ALPM] installed gmp (6.3.0-2)
+[2025-05-01T10:04:07+0000] [ALPM] installed zlib (1:1.3.1-2)
+[2025-05-01T10:04:07+0000] [ALPM] installed sqlite (3.49.1-1)
+[2025-05-01T10:04:07+0000] [ALPM] installed util-linux-libs (2.41-4)
+[2025-05-01T10:04:07+0000] [ALPM] installed e2fsprogs (1.47.2-2)
+[2025-05-01T10:04:07+0000] [ALPM] installed keyutils (1.6.3-3)
+[2025-05-01T10:04:07+0000] [ALPM] installed gdbm (1.25-1)                
+```
+
+
+### Web Server
+
+Since many _web server_'s are run on Linux the log structure can often be the same (`/var/log/apache` or `/var/log/httpd`). Since I don't have web server running on this machine, you'll just have to take my word.
+
+### Log Ingestion
+
+So how does log ingestion work? It's important that the logs are ingested to provide a much bigger picture of what is happening within the enviroment. Some common ingestion methods are
+
+
+#### Agent / Forwarder
+
+An agent is installed on the client, the agent will then collects the logs and forwards the logs on to the SIEM. 
+
+The term `forwarder` is used by _Splunk_.
+
+
+#### Syslog
+
+A common tool used  for collecting event data or logs is syslog. This is a 3rd party tool that acts as a host service where devices can forward their events to.
+
+
+#### Manual Upload
+
+Let's hope this one isn't a common one, we can ingest bulk data manually, this data then gets 'normalised' and made available for analysis.
+
+
+#### Port-Forwarding
+
+Port-Forwarding is where a port is made available, the SIEM will listen to that port for incomming data. The endpoints will be configured to forward data that host on the specified port.
+
+
+
+### ❓ Question
+
+> In which location within a Linux environment are HTTP logs stored?
+
+#### 🧪 Process
+
+Let's do this one from memory. We'll go for `/var/log/httpd`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `/var/log/httpd` ✅
