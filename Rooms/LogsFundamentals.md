@@ -209,6 +209,194 @@ Trying this as the answer
 
 ## 📘Web Server Access Logs Analysis
 
+When it comes to websites may interactions are logged such as time date, status, agent and pages. Most webpages are hosted on Linux. Thankfully, linux has some tools we can use to parse the logs
+
+we have `cat`, `grep`, and `less` to start. We already know how to use these so let's get on with the questions :)
+
+
+### ❓ Question 1
+
+> What is the IP which made the last GET request to URL: “/contact”?
+
+#### 🧪 Process
+
+Oh crap, I'm on Windows, let's use PowerShell instead... 
+
+ 01. Click **Download Task Files**
+ 02. On the keyboard perform `Win+X` followed by `i` to launch the terminal
+ 03. type `cd .\Downloads\` and press **return** on the keyboard
+
+```PowerShell
+PS C:\Users\UserID> cd .\Downloads\
+PS C:\Users\UserID\Downloads>
+```
+
+04. Type `Get-ChildItem access*.zip` and press **return** on the keyboard
+
+```PowerShell
+PS C:\Users\UserID\Downloads> Get-ChildItem access*.zip
+
+    Directory: C:\Users\UserID\Downloads
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          01/07/2025    15:57           1777 access-1718351133518.log.zip
+```
+
+05. Type the command `Expand-Archive .\access-1718351133518.log.zip` and press **return** on the keyboard
+
+```PowerShell
+PS C:\Users\UserID\Downloads> Expand-Archive .\access-1718351133518.log.zip
+```
+
+06. Type the command `Get-ChildItem access*` and press **return** on the keyboard
+
+```PowerShell
+PS C:\Users\UserID\Downloads> Get-ChildItem access
+
+    Directory: C:\Users\UserID\Downloads
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          01/07/2025    16:05                access-1718351133518.log
+-a---          01/07/2025    15:57           1777 access-1718351133518.log.zip
+```
+
+07. Type the command `Set-Location .\access-1718351133518.log\` and press **return** on the keyboard
+
+```PowerShell
+PS C:\Users\UserID\Downloads> Set-Location .\access-1718351133518.log\
+PS C:\Users\UserID\Downloads\access-1718351133518.log>
+```
+
+In linux we can use the command `cat` to get the content of a file, we have this as an alias in PowerShell, however the command is actually `Get-Content`
+
+```PowerShell
+PS C:\Users\UserID\Downloads\access-1718351133518.log> Get-Alias cat
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Alias           cat -> Get-Content
+```
+
+08. Type the command `Get-Content .\access.log` and press **return** on the keyboard
+
+```PowerShell
+PS C:\Users\UserID\Downloads\access-1718351133518.log> Get-Content .\access.log
+172.16.0.1 - - [06/Jun/2024:13:58:44] "GET /products HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [06/Jun/2024:13:57:44] "GET / HTTP/1.1" 404 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+192.168.1.1 - - [06/Jun/2024:13:56:44] "GET /about HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [06/Jun/2024:13:56:44] "PUT / HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [06/Jun/2024:13:55:44] "POST /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [06/Jun/2024:13:54:44] "GET /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+192.168.1.1 - - [06/Jun/2024:13:53:44] "GET /products HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [06/Jun/2024:13:53:44] "GET /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [06/Jun/2024:13:52:44] "GET /products HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [06/Jun/2024:13:48:44] "GET /about HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+192.168.1.1 - - [06/Jun/2024:13:46:44] "GET /about HTTP/1.1" 200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+[Truncated]
+```
+
+This isn't very helpful, in Linux we would 'pipe' the content into grep. We don't have an alias for grep, but we do have `Select-String`. So let's do this to hopfully expose our first answer.
+
+09. Type the command `Get-Content .\access.log | Select-String "/contact"` and press **return** on the keyboard
+
+```PowerShell
+PS C:\Users\UserID\Downloads\access-1718351133518.log> Get-Content .\access.log | Select-String "/contact"
+
+172.16.0.1 - - [06/Jun/2024:13:55:44] "POST /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [06/Jun/2024:13:54:44] "GET /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [06/Jun/2024:13:53:44] "GET /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [05/Jun/2024:18:58:44] "PUT /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [05/Jun/2024:18:55:44] "POST /contact HTTP/1.1" 200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+192.168.1.1 - - [05/Jun/2024:18:53:44] "POST /contact HTTP/1.1" 200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+192.168.1.1 - - [05/Jun/2024:18:52:44] "POST /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [05/Jun/2024:18:50:44] "PUT /contact HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+192.168.1.1 - - [05/Jun/2024:16:51:44] "GET /contact HTTP/1.1" 200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [05/Jun/2024:16:50:44] "GET /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [05/Jun/2024:15:57:44] "PUT /contact HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [05/Jun/2024:15:52:44] "POST /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [05/Jun/2024:15:33:44] "GET /contact HTTP/1.1" 200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [05/Jun/2024:13:56:44] "PUT /contact HTTP/1.1" 404 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [04/Jun/2024:13:58:44] "PUT /contact HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [04/Jun/2024:13:57:44] "POST /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [04/Jun/2024:13:56:44] "GET /contact HTTP/1.1" 404 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [04/Jun/2024:13:48:44] "GET /contact HTTP/1.1" 200 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+192.168.1.1 - - [04/Jun/2024:13:47:44] "POST /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+10.0.0.1 - - [04/Jun/2024:12:54:44] "GET /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [04/Jun/2024:12:52:44] "PUT /contact HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [04/Jun/2024:11:55:44] "POST /contact HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+192.168.1.1 - - [04/Jun/2024:11:53:44] "GET /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [04/Jun/2024:11:52:44] "POST /contact HTTP/1.1" 200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+192.168.1.1 - - [04/Jun/2024:10:58:44] "PUT /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+```
+
+It looks like the dates are in descending order, as in the first 'GET' entry is the most recent. We can see the IP address is `10.0.0.1`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `10.0.0.1` ✅
+
+
+### ❓ Question 2
+
+> When was the last POST request made by IP: “172.16.0.1”? 
+
+#### 🧪 Process
+
+This time I am going to try to filter on `POST` and then the IP `172.16.0.1` by nesting the `Where-Object` and `Select-String` cmdlets.
+
+10. Type the command ` Get-Content .\access.log | Where-Object { $_ | Select-String "POST" } | Where-Object { $_ | Select-String "172.16.0.1" }` and press **return** on the keyboard
+
+```PowerShell
+PS C:\Users\UserID\Downloads\access-1718351133518.log> Get-Content .\access.log | Where-Object { $_ | Select-String "POST" } | Where-Object { $_ | Select-String "172.16.0.1" }
+172.16.0.1 - - [06/Jun/2024:13:55:44] "POST /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [06/Jun/2024:13:44:44] "POST / HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [06/Jun/2024:13:38:44] "POST /about HTTP/1.1" 200 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [05/Jun/2024:18:55:44] "POST /contact HTTP/1.1" 200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [05/Jun/2024:16:45:44] "POST /about HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [05/Jun/2024:15:52:44] "POST /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [04/Jun/2024:11:55:44] "POST /contact HTTP/1.1" 404 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [04/Jun/2024:11:52:44] "POST /contact HTTP/1.1" 200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [04/Jun/2024:10:56:44] "POST /products HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+172.16.0.1 - - [04/Jun/2024:10:51:44] "POST /about HTTP/1.1" 500 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+```
+
+Again, in descending order. We have a date time of `06/Jun/2024:13:55:44`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `06/Jun/2024:13:55:44` ✅
+
+
+### ❓ Question 3
+
+> Based on the answer from question number 2, to which URL was the POST request made?
+
+#### 🧪 Process
+
+We can pipe the previous command to `Select-String` and suffix the command with `-First 1` to reduce the results to the first line
+
+11. Type the command `Get-Content .\access.log | Where-Object { $_ | Select-String "POST" } | Where-Object { $_ | Select-String "172.16.0.1" } | Select-Object -First 1` and press **return** on the keyboard
+
+```PowerShell
+PS C:\Users\UserID\Downloads\access-1718351133518.log> Get-Content .\access.log | Where-Object { $_ | Select-String "POST" } | Where-Object { $_ | Select-String "172.16.0.1" } | Select-Object -First 1
+172.16.0.1 - - [06/Jun/2024:13:55:44] "POST /contact HTTP/1.1" 500 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+```
+
+We can see the request was posted to `/contact`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `/contact` ✅
+
+
 
 
 
