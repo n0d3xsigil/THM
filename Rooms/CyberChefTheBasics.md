@@ -7,6 +7,7 @@
 - [Accessing the Tool](#accessing-the-tool)
 - [Navigating the Interface](#navigating-the-interface)
 - [Before Anything Else](#before-anything-else)
+- [Practice, Practice, Practice](#practice-practice-practice)
 
 
 ## 📘Introduction
@@ -73,3 +74,126 @@ Trying this as the answer
 
 
 
+## 📘Practice, Practice, Practice
+
+### ❓ Question 1
+
+> What is the hidden email address?
+
+#### 🧪 Process
+
+Import the file
+
+Search for `email`
+
+Drag **Extract email addresses** to the recipe.
+
+Just the one result which is `hidden@hotmail.com`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `hidden@hotmail.com` ✅
+
+
+### ❓ Question 2
+
+> What is the hidden IP address that ends in .232?
+
+#### 🧪 Process
+
+Remove **Extract email addresses** from the recipe.
+
+Search for IP
+
+Drap **Extract IP addresses** to the recipe.
+
+Results in 2 IP Addresses
+- `102.20.11.232`
+- `10.10.2.10`
+
+We're interested in the one ending in `.232` which is `102.20.11.232`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `102.20.11.232` ✅
+
+
+### ❓ Question 3
+
+> Which domain address starts with the letter "T"?
+
+#### 🧪 Process
+
+Remove all items from the recipe.
+
+Search for `domain`
+
+Drag **Extract domains** into the recipe.
+
+Results in 2 domians:
+- `TryHackMe.com`
+- `hotmail.com`
+
+Only one matches the _starts with the letter `T`_ requirement which is `TryHackMe.com`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `TryHackMe.com` ✅
+
+
+### ❓ Question 4
+
+> What is the binary value of the decimal number 78?
+
+#### 🧪 Process
+
+Remove all recipes.
+
+Search for `decimal`
+
+Drag **From Decimal** into the recipe
+
+Search for `binary`
+
+Drag **To Binary** into the recipe
+
+Clear the input file and type `78`.
+
+The result is `01001110`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `01001110` ✅
+
+
+### ❓ Question 5
+
+> What is the URL encoded value of `https://tryhackme.com/r/careers`?
+
+#### 🧪 Process
+
+clear the recipe
+
+Search for URL 
+
+Drag **URL Encode** into the recipe
+
+Click **Encode all special chars**
+
+Paste the url into the input.
+
+The result is `https%3A%2F%2Ftryhackme%2Ecom%2Fr%2Fcareers`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `https%3A%2F%2Ftryhackme%2Ecom%2Fr%2Fcareers` ✅
