@@ -6,6 +6,7 @@
 - [Introduction](#introduction)
 - [Accessing the Tool](#accessing-the-tool)
 - [Navigating the Interface](#navigating-the-interface)
+- [Before Anything Else](#before-anything-else)
 
 
 ## 📘Introduction
@@ -50,3 +51,25 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Recipe` ✅
+
+
+
+## 📘Before Anything Else
+
+![image](https://github.com/user-attachments/assets/360ba99a-f45d-46c2-bd1f-a8cda4adf621)
+
+### ❓ Question
+
+> At which step would you determine, "What do I want to accomplish?
+
+#### 🧪 Process
+
+The fundamental rule. Always know what you want to accomplish as the first step `1`
+
+Trying this as the answer
+#### ✅ Answer
+
+- `1` ✅
+
+
+
