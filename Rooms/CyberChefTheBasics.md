@@ -8,6 +8,7 @@
 - [Navigating the Interface](#navigating-the-interface)
 - [Before Anything Else](#before-anything-else)
 - [Practice, Practice, Practice](#practice-practice-practice)
+- [Your First Official Cook](#your-first-official-cook)
 
 
 ## 📘Introduction
@@ -197,3 +198,119 @@ Trying this as the answer
 #### ✅ Answer
 
 - `https%3A%2F%2Ftryhackme%2Ecom%2Fr%2Fcareers` ✅
+
+
+## 📘Your First Official Cook
+
+I'm going to skip straight to the questions.
+
+### ❓ Question 1
+
+> Using the file you downloaded in Task 5, which IP starts and ends with "10"?
+
+#### 🧪 Process
+
+Click **Open file as input** and select target file
+
+Search for `IP`
+
+Drag **Extract IP addresses** into the recipe
+
+Results in 2 results. Only 1 matching the `10` criteria (``)
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `10.10.2.10` ✅
+
+
+### ❓ Question 2
+
+> What is the base64 encoded value of the string "**Nice Room!**"?
+
+#### 🧪 Process
+
+Clear the _recipe_ and the _input_
+
+Search for `base64`
+
+drag **To Base64** into the recipe
+
+Type `Nice Room!` into the input
+
+Result `TmljZSBSb29tIQ==`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `TmljZSBSb29tIQ==` ✅
+
+
+### ❓ Question 3
+
+> What is the URL decoded value for `https%3A%2F%2Ftryhackme%2Ecom%2Fr%2Froom%2Fcyberchefbasics`?
+
+#### 🧪 Process
+Clear the _recipe_ and _input_
+
+Search for `URL`
+
+Drag **URL Decode** into the recipe
+
+Type (_or paste_) `https%3A%2F%2Ftryhackme%2Ecom%2Fr%2Froom%2Fcyberchefbasics` into the input
+
+The result is `https://tryhackme.com/r/room/cyberchefbasics`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `https://tryhackme.com/r/room/cyberchefbasics` ✅
+
+
+### ❓ Question 4
+
+> What is the datetime string for the Unix timestamp `1725151258`?
+
+#### 🧪 Process
+
+Clear the _recipe_ and _input_
+
+Search for `UNIX`
+
+Drag **From UNIX Timestamp** into the recipe
+
+Type `1725151258` into the input
+
+The result is `Sun 1 September 2024 00:40:58 UTC`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Sun 1 September 2024 00:40:58 UTC` ✅
+
+
+### ❓ Question 5
+
+>  What is the Base85 decoded string of the value `<+oue+DGm>Ap%u7`?
+
+#### 🧪 Process
+
+Clear the _recipe_ and _input_
+
+Search for `Base85`
+
+Drag **From Base85** into the recipe
+
+Type (_or paste_) `<+oue+DGm>Ap%u7` into the input
+
+The result is `This is fun!`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `This is fun!` ✅
