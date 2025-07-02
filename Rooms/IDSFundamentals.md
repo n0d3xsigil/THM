@@ -7,6 +7,7 @@
 - [Types of IDS](#types-of-ids)
 - [IDS Example: Snort](#ids-example-snort)
 - [Snort Usage](#snort-usage)
+- [Practical Lab](#practical-lab)
 
 
 
@@ -433,3 +434,98 @@ Trying this as the answer
 #### ✅ Answer
 
 - `local.rules` ✅
+
+
+
+## 📘Practical Lab
+
+Now time for play time. Apparently the _PCAP_ file is under `/etc/snort/` and you're supposed to cd into that directory to run snort.
+
+Let's try my way anyway.
+
+```Shell
+ubuntu@tryhackme:~$ sudo snort -q -l /var/log/snort -r /etc/snort/Intro_to_IDS.pcap -A console -c /etc/snort/snort.conf
+07/18-12:52:59.337559  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+07/18-12:52:59.510662  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+07/18-12:52:59.510663  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+07/18-12:52:59.693619  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+07/18-12:52:59.696547  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+07/18-12:52:59.696584  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+07/18-12:52:59.867507  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+[Truncated]
+```
+
+'parrentlynot.
+
+
+
+
+### ❓ Question 1
+
+> What is the IP address of the machine that tried to connect to the subject machine using SSH?
+
+#### 🧪 Process
+
+Okay I started by running the previous command and grepped it. but that made no difference. Looking at the log it is one IP spamming our SSH server.
+
+I'll pipe into `head -n 5` for a better view
+
+```Shell
+ubuntu@tryhackme:~$ sudo snort -q -l /var/log/snort -r /etc/snort/Intro_to_IDS.pcap -A console -c /etc/snort/snort.conf | head -n 5 
+07/18-12:52:59.337559  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+07/18-12:52:59.510662  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+07/18-12:52:59.510663  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+07/18-12:52:59.693619  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+07/18-12:52:59.696547  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22
+```
+
+So the source looks to be `10.11.90.211`
+
+Trying this as the answer
+
+
+#### ✅ Answer
+
+- `10.11.90.211` ✅
+
+
+### ❓ Question 2
+
+> What other rule message besides the SSH message is detected in the PCAP file? 
+
+#### 🧪 Process
+
+The _PCAP_ file had alot of SSH results, so how about we filter those out using `grep -v SSH`
+
+```Shell
+ubuntu@tryhackme:~$ sudo snort -q -l /var/log/snort -r /etc/snort/Intro_to_IDS.pcap -A console -c /etc/snort/snort.conf | grep -v SSH
+07/18-12:53:16.954348  [**] [1:1000001:1] Ping Detected [**] [Priority: 0] {ICMP} 10.11.90.211 -> 10.10.161.151
+07/18-12:53:17.956812  [**] [1:1000001:1] Ping Detected [**] [Priority: 0] {ICMP} 10.11.90.211 -> 10.10.161.151
+07/18-12:53:18.972925  [**] [1:1000001:1] Ping Detected [**] [Priority: 0] {ICMP} 10.11.90.211 -> 10.10.161.151
+```
+
+Oh we have `Ping Detected`. 
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Ping Detected` ✅
+
+
+### ❓ Question 3
+
+> What is the sid of the rule that detects SSH?
+
+#### 🧪 Process
+
+> `07/18-12:52:59.337559  [**] [1:1000002:1] SSH Connection Detected [**] [Priority: 0] {TCP} 10.11.90.211:54334 -> 10.10.161.151:22`
+
+
+I would say `1000002`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `1000002` ✅
