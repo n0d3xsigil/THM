@@ -5,6 +5,7 @@
 ## Contents
 - [What Is an IDS](#what-is-an-ids)
 - [Types of IDS](#types-of-ids)
+- [IDS Example: Snort](#ids-example-snort)
 
 
 
@@ -88,3 +89,59 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Hybrid IDS` ✅
+
+
+
+## 📘IDS Example: Snort
+
+Snort is a popular open source IDS. It is a hybrid type IDS where in it will use signature based detections in addition to anomaly to identify potential threats. These definitions are rules in the snort too. The tool comes with built in rules but you can customise to suite the environment.
+
+There are 3 mods that the tool uses
+
+### Packet sniffer mode
+
+The _PS_ mode allows for packets reviewed, however they do not get analysed. It does however allow for troubleshooting and udnerstanding the flow of trafic.
+
+For example, a netops team identfied a performance issue, they use the traffic data that was captured using sort to identify causes.
+
+### Packet logging mode
+
+The _PL_ mode performs detection on realtime traffic and provides alerts on detections at the console. If for some reason the traffic is of some interest we can use the _PL_ mode to log the traffic (PCAP) for later investigations.
+
+For example, the secops team need to perform a forensic investigation. They can use the file captured to perform the forensic analysis
+
+### Network Intrusion Detection System mode
+
+The primary mode for the Snort NIDS and monitors in real time ot idenfity known patterns and log new attacks as signatures. Matches are generated as alerts.
+
+For exmaple, The secops team proactivly monitors the environment to detect potential threats. Snort's NIDS will achieve this.
+
+
+### ❓ Question 1
+
+> Which mode of Snort helps us to log the network traffic in a PCAP file?
+
+#### 🧪 Process
+
+The `Packet Logging mode` will achive this by taking the packets captured with the _packet sniffer mode_ and saving them as a **PCAP** file.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Packet Logging mode` ✅
+
+
+### ❓ Question 2
+
+> What is the primary mode of Snort called?
+
+#### 🧪 Process
+
+The primary mode is called the `Network Intrusion Detection System mode`. It is the primary function of Snort as in NIDS.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Network Intrusion Detection System mode` ✅
