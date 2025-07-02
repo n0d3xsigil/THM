@@ -92,7 +92,7 @@ My discoveries from THM
 - ✅ [IDS Fundamentals](Rooms/IDSFundamentals.md)
 - ✅ [Vulnerability Scanner Overview](Rooms/VulnerabilityScannerOverview.md)
 ### Defensive Security Tooling
-- ⚠️ [CyberChef: The Basics](Rooms/CyberChefTheBasics.md)
+- ✅ [CyberChef: The Basics](Rooms/CyberChefTheBasics.md)
 - ❌ [CAPA: The Basics](Rooms/CAPATheBasics.md)
 - ❌ [REMnux: Getting Started](Rooms/REMnuxGettingStarted.md)
 - ❌ [FlareVM: Arsenal of Tools](Rooms/REMnuxGettingStarted.md)
