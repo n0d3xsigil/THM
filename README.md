@@ -75,7 +75,7 @@ My discoveries from THM
 - ✅ [SQL Fundamentals](Rooms/SQLFundamentals.md)
 - ✅ [Burp Suite: The Basics](Rooms/BurpSuiteTheBasics.md)
 - ❓ OWASP Top 10 - 2021
-### Offensive Seucrity Tooling
+### Offensive Security Tooling
 - ❓ Hydra
 - ✅ [Gobuster: The Basics](Rooms/GobusterTheBasics.md)
 - ✅ [Shells Overview](Rooms/ShellsOverview.md)
@@ -91,5 +91,5 @@ My discoveries from THM
 - ✅ [Firewall Fundamentals](Rooms/FirewallFundamentals.md)
 - ✅ [IDS Fundamentals](Rooms/IDSFundamentals.md)
 - ✅ [Vulnerability Scanner Overview](Rooms/VulnerabilityScannerOverview.md)
-### Defensive Seucirty Tooling
+### Defensive Security Tooling
 ### Build Your Cyber Security Career
