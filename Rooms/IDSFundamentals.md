@@ -6,6 +6,7 @@
 - [What Is an IDS](#what-is-an-ids)
 - [Types of IDS](#types-of-ids)
 - [IDS Example: Snort](#ids-example-snort)
+- [Snort Usage](#snort-usage)
 
 
 
@@ -145,3 +146,290 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Network Intrusion Detection System mode` ✅
+
+
+
+## 📘Snort Usage
+
+In order for Snort to operate as a NIDS. You must install Snort on a device that has a NIC that is compatible with promiscous mode. 
+
+I have started the VM and it has loaded So I will step throught the section as though I am doing the walk through.
+
+Show the rules by running `ls` against `/etc/snort/rules`
+```Shell
+ubuntu@tryhackme:~$ ls /etc/snort/rules
+attack-responses.rules         community-web-dos.rules   policy.rules
+backdoor.rules                 community-web-iis.rules   pop2.rules
+bad-traffic.rules              community-web-misc.rules  pop3.rules
+chat.rules                     community-web-php.rules   porn.rules
+community-bot.rules            ddos.rules                rpc.rules
+community-deleted.rules        deleted.rules             rservices.rules
+community-dos.rules            dns.rules                 scan.rules
+community-exploit.rules        dos.rules                 shellcode.rules
+community-ftp.rules            experimental.rules        smtp.rules
+community-game.rules           exploit.rules             snmp.rules
+community-icmp.rules           finger.rules              sql.rules
+community-imap.rules           ftp.rules                 telnet.rules
+community-inappropriate.rules  icmp-info.rules           tftp.rules
+community-mail-client.rules    icmp.rules                virus.rules
+community-misc.rules           imap.rules                web-attacks.rules
+community-nntp.rules           info.rules                web-cgi.rules
+community-oracle.rules         local.rules               web-client.rules
+community-policy.rules         misc.rules                web-coldfusion.rules
+community-sip.rules            multimedia.rules          web-frontpage.rules
+community-smtp.rules           mysql.rules               web-iis.rules
+community-sql-injection.rules  netbios.rules             web-misc.rules
+community-virus.rules          nntp.rules                web-php.rules
+community-web-attacks.rules    oracle.rules              x11.rules
+community-web-cgi.rules        other-ids.rules
+community-web-client.rules     p2p.rules
+```
+
+I wonder what the files look like inside. I don't want a massive file so I would like to list all, sort in ascending order of size and then only show the first 4 or 5 resuls. 
+
+We can do this by using `ls -la`**`Sr`** and then piping to `head -n5`
+
+```Shell
+ubuntu@tryhackme:~$ ls -laSr /etc/snort/rules/ | head -n5
+total 1608
+-rw-r--r-- 1 root root    249 Apr  3  2018 community-ftp.rules
+-rw-r--r-- 1 root root    254 Apr  3  2018 community-web-dos.rules
+-rw-r--r-- 1 root root    257 Apr  3  2018 community-mail-client.rules
+-rw-r--r-- 1 root root    365 Jul 18  2024 local.rules
+```
+
+Perfect, we can see that actually `community-ftp.rules` is only 249 bytes. This should do. Lets `cat` it out and see what we have
+
+```Shell
+ubuntu@tryhackme:~$ cat /etc/snort/rules/community-ftp.rules 
+# Copyright 2005 Sourcefire, Inc. All Rights Reserved.
+# These rules are licensed under the GNU General Public License.
+# Please see the file LICENSE in this directory for more details.
+# $Id: community-ftp.rules,v 1.6 2005/03/08 14:41:42 bmc Exp $
+```
+
+okay, so maybe that was a bad example going specifically for the shortest file. Let's expand it to 14 results and see what is there
+
+```Shell
+ubuntu@tryhackme:~$ ls -laSr /etc/snort/rules/ | head -n15
+total 1608
+-rw-r--r-- 1 root root    249 Apr  3  2018 community-ftp.rules
+-rw-r--r-- 1 root root    254 Apr  3  2018 community-web-dos.rules
+-rw-r--r-- 1 root root    257 Apr  3  2018 community-mail-client.rules
+-rw-r--r-- 1 root root    365 Jul 18  2024 local.rules
+-rw-r--r-- 1 root root    621 Apr  3  2018 community-nntp.rules
+-rw-r--r-- 1 root root    689 Apr  3  2018 community-icmp.rules
+-rw-r--r-- 1 root root    775 Apr  3  2018 community-oracle.rules
+-rw-r--r-- 1 root root    948 Apr  3  2018 community-inappropriate.rules
+-rw-r--r-- 1 root root   1223 Apr  3  2018 community-deleted.rules
+-rw-r--r-- 1 root root   1335 Apr  3  2018 experimental.rules
+-rw-r--r-- 1 root root   1376 Apr  3  2018 community-game.rules
+-rw-r--r-- 1 root root   1437 Apr  3  2018 x11.rules
+-rw-r--r-- 1 root root   1473 Apr  3  2018 community-web-iis.rules
+-rw-r--r-- 1 root root   1621 Apr  3  2018 community-policy.rules
+```
+
+Okay, lets try and `cat` out  `community-nntp.rules` this time.
+```Shell
+ubuntu@tryhackme:~$ cat /etc/snort/rules/community-nntp.rules    
+# Copyright 2005 Sourcefire, Inc. All Rights Reserved.
+# These rules are licensed under the GNU General Public License.
+# Please see the file LICENSE in this directory for more details.
+# $Id: community-nntp.rules,v 1.3 2006/02/16 15:51:19 akirk Exp $
+
+alert tcp $EXTERNAL_NET 119 -> $HOME_NET any (msg:"COMMUNITY NNTP Lynx overflow attempt"; flow:to_server,established; content:"Subject"; nocase; pcre:"/^Subject\x3a[^\r\n]{100,}/smi"; reference:cve,2005-3120; reference:bugtraq,15117; reference:url,www.osvdb.org/displayvuln.php?osvdb_id=20019; reference:nessus,20035; classtype:attempted-admin; sid:100000172; rev:2;)
+```
+
+We have a string of interest below, I will try and break this out to make some sense
+```text
+alert tcp $EXTERNAL_NET 119 -> $HOME_NET any (msg:"COMMUNITY NNTP Lynx overflow attempt"; flow:to_server,established; content:"Subject"; nocase; pcre:"/^Subject\x3a[^\r\n]{100,}/smi"; reference:cve,2005-3120; reference:bugtraq,15117; reference:url,www.osvdb.org/displayvuln.php?osvdb_id=20019; reference:nessus,20035; classtype:attempted-admin; sid:100000172; rev:2;)
+```
+
+The formatting isn't great, but it gives a bit more context.
+
+| Description           | Item                     | Meta           | 
+|-----------------------|--------------------------|----------------|
+| **Action**:           | alert                    |                |
+| **Protocol**:         | tcp                      |                |
+| **Source IP**:        | $EXTERNAL_NET            |                |
+| **Source Port**:      | 119                      |                |
+| **Direction**:        | ->                       |                |
+| **Destination IP**:   | $HOME_NET                |                |
+| **Destination Port**: | any                      |                |
+| **Rule Metadata**:    | **Message (msg)**:       | (msg:"COMMUNITY NNTP Lynx overflow attempt"; flow:to_server,established; content:"Subject"; nocase; pcre:"/^Subject\x3a[^\r\n]{100,}/smi"; reference:cve,2005-3120; reference:bugtraq,15117; reference:url,www.osvdb.org/displayvuln.php?osvdb_id=20019; reference:nessus,20035; classtype:attempted-admin; |
+|                       | **Signature ID (sid)**:  | sid:100000172; |
+|                       | **Rule Revision (Rev)**: | rev:2;)        |
+
+
+
+- **Action** Specifices the action to take
+- **Protocol** Protocl we're looking for, in this example `tcp`
+- **Source IP** Where the IP is coming from
+- **Source port** The specific source port 
+- **Destination IP** The destination IP
+- **Destination port** The destination port
+- **Rule metadata** The real rule stuff
+    - **Message (msg)** Describes the message displayed if triggered and what type of activity has occoured
+    - **Signature ID (sid)** The unique identifier for this rule
+    - **Rule revision (rev)** The revision of the rule
+
+
+Okay, so that kind of makes sense, the message is I guess an experience thing. The next task is to create a sample rule.
+
+Issue command `sudo vim /etc/snort/rules/local.rules`. 
+
+The local rule definition already has 2 rules.
+
+```text
+alert icmp any any -> $HOME_NET any (msg:"Ping Detected"; sid:1000001; rev:1;)
+alert tcp any any -> $HOME_NET 22 (msg:"SSH Connection Detected"; sid:1000002; rev:1;)
+```
+
+We're going to enter a new one as per below
+
+```text
+alert icmp any any -> 127.0.0.1 any (msg:"Loopback Ping Detected"; sid:10003; rev:1;)
+```
+
+Enter insert mode in vim by typing `i` and navigate to the last character of the last line and press return. Then **Shift**+**Ctrl**+**v** to paste.
+
+The new line will have now appeared and you can press **Esc** to leave _insert_ mode and type `:x` to _Save and Exit_ vim.
+
+We can `cat` the rule to ensure that actually, it has saved and is valid text.
+
+```Shell
+ubuntu@tryhackme:~$ cat /etc/snort/rules/local.rules 
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# ----------------
+# LOCAL RULES
+# ----------------
+# This file intentionally does not come with signatures.  Put your local
+# additions here.
+alert icmp any any -> $HOME_NET any (msg:"Ping Detected"; sid:1000001; rev:1;)
+alert tcp any any -> $HOME_NET 22 (msg:"SSH Connection Detected"; sid:1000002; rev:1;)
+alert icmp any any -> 127.0.0.1 any (msg:"Loopback Ping Detected"; sid:10003; rev:1;)
+```
+
+Great, there is our rule at the end with _sid_ `10003`.
+
+Next we want to test the rules. First start Snort by issuing the command `sudo snort -q -l /var/log/snort -i lo -A console -c /etc/snort/snort.conf`.
+
+```Shell
+ubuntu@tryhackme:~$ sudo snort -q -l /var/log/snort -i lo -A console -c /etc/snort/snort.conf 
+▮
+```
+
+Next we can issue the `ping` command, I'm using `-A` to be adaptave, quicker, and -`c 1` to limit the count to 1 ping. 
+
+```Shell
+ubuntu@tryhackme:~$ ping -A -c 1 127.0.0.1
+PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.014 ms
+
+--- 127.0.0.1 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.014/0.014/0.014/0.000 ms
+```
+
+As we can see, `1 packets transmitted, 1 received` means it was sucessfull. Lets now take a look at the snort output.
+
+```Shell
+07/02-14:06:01.415068  [**] [1:10003:1] Loopback Ping Detected [**] [Priority: 0] {ICMP} 127.0.0.1 -> 127.0.0.1
+07/02-14:06:01.415074  [**] [1:10003:1] Loopback Ping Detected [**] [Priority: 0] {ICMP} 127.0.0.1 -> 127.0.0.1
+```
+
+I'm wondering why there are 2 'hits'. I'm guessing it is the request and the response. That would work. I wonder if I can prove it. What if I was to test on a differnt loop back address. 
+
+Let's try again this time targeting `127.0.0.127`.
+
+```Shell
+ubuntu@tryhackme:~$ ping -A -c 1 127.0.0.127
+PING 127.0.0.127 (127.0.0.127) 56(84) bytes of data.
+64 bytes from 127.0.0.127: icmp_seq=1 ttl=64 time=0.016 ms
+
+--- 127.0.0.127 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.016/0.016/0.016/0.000 ms
+```
+
+Okay so that worked, 1 out 1 in, success. What does snort say?
+
+```Shell
+07/02-14:09:42.440841  [**] [1:10003:1] Loopback Ping Detected [**] [Priority: 0] {ICMP} 127.0.0.127 -> 127.0.0.1
+```
+
+Okay so that makes sense, the source was `127.0.0.1`, that is the address of adapter 'lo'. I pinged `127.0.0.127`.  However the alert triggered because of the return traffic to the source `127.0.0.1 `. 
+
+_**Fun fact**_: You can ping any address from `127.0.0.1` though `127.255.255.254` to get a loop back response.
+
+We can also run snort against a **PCAP** file for forensic analysis by issuing the command `sudo snort -q -l /var/log/snort -r Task.pcap -A console -c /etc/snort/snort.conf`
+
+I did try this in the terminal but the **PCAP** file didn't exist and I wasn't too bothered about hunting for one.
+
+```Shell
+ubuntu@tryhackme:~$ sudo snort -q -l /var/log/snort -r Task.pcap -A console -c /etc/snort/snort.conf
+Error getting stat on pcap file: Task.pcap: No such file or directory
+ERROR: Error getting pcaps.
+Fatal Error, Quitting..
+```
+
+
+
+### ❓ Question 1
+
+> Where is the main directory of Snort that stores its files?
+
+#### 🧪 Process
+
+The files are saved within `/etc/snort`. such as `/etc/snort/rules`. 
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `/etc/snort` ✅
+
+
+### ❓ Question 2
+
+> Which field in the Snort rule indicates the revision number of the rule?
+
+#### 🧪 Process
+
+The `rev` short for _revision_.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `rev` ✅
+
+
+### ❓ Question 3
+
+> Which protocol is defined in the sample rule created in the task?
+
+#### 🧪 Process
+
+We used ping, which issues `ICMP` packets/
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `ICMP` ✅
+
+
+### ❓ Question 4
+
+> What is the file name that contains custom rules for Snort?
+
+#### 🧪 Process
+
+We updated the the `local.rules` file. Is this standard? I would have thought we could create any file then have it pull everything within the `/etc/snort/rules' directory.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `local.rules` ✅
