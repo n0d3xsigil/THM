@@ -6,6 +6,7 @@
 - [Introduction](#introduction)
 - [Tool Overview: How CAPA Works](#tool-overview-how-capa-works)
 - [Dissecting CAPA Results Part 1: General Information, MITRE and MAEC](#dissecting-capa-results-part-1-general-information-mitre-and-maec)
+- [Dissecting CAPA Results Part 2: Malware Behavior Catalogue](#dissecting-capa-results-part-2-malware-behavior-catalogue)
 
 
 ## 📘Introduction
@@ -379,3 +380,45 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Downloader` ✅
+
+
+
+## 📘Dissecting CAPA Results Part 2: Malware Behavior Catalogue
+
+Here we have the next block
+
+```text
+ ------------------------+------------------------------------------------------------------------------------
+¦ MBC Objective               ¦ MBC Behavior                                                                  ¦
+ ------------------------+------------------------------------------------------------------------------------
+¦ ANTI-BEHAVIORAL ANALYSIS    ¦ Virtual Machine Detection [B0009]                                             ¦
++-----------------------------+-------------------------------------------------------------------------------¦
+¦ ANTI-STATIC ANALYSIS        ¦ Executable Code Obfuscation::Argument Obfuscation [B0032.020]                 ¦
+¦                             ¦ Executable Code Obfuscation::Stack Strings [B0032.017]                        ¦
++-----------------------------+-------------------------------------------------------------------------------¦
+¦ COMMUNICATION               ¦ HTTP Communication [C0002]                                                    ¦
+¦                             ¦ HTTP Communication::Read Header [C0002.014]                                   ¦
++-----------------------------+-------------------------------------------------------------------------------¦
+¦ DATA                        ¦ Check String [C0019]                                                          ¦
+¦                             ¦ Encode Data::Base64 [C0026.001]                                               ¦
+¦                             ¦ Encode Data::XOR [C0026.002]                                                  ¦
++-----------------------------+-------------------------------------------------------------------------------¦
+¦ DEFENSE EVASION             ¦ Obfuscated Files or Information::Encoding-Standard Algorithm [E1027.m02]      ¦
++-----------------------------+-------------------------------------------------------------------------------¦
+¦ DISCOVERY                   ¦ File and Directory Discovery [E1083]                                          ¦
++-----------------------------+-------------------------------------------------------------------------------¦
+¦ EXECUTION                   ¦ Command and Scripting Interpreter [E1059]                                     ¦
++-----------------------------+-------------------------------------------------------------------------------¦
+¦ FILE SYSTEM                 ¦ Create Directory [C0046]                                                      ¦
+¦                             ¦ Delete File [C0047]                                                           ¦
+¦                             ¦ Read File [C0051]                                                             ¦
+¦                             ¦ Writes File [C0052]                                                           ¦
++-----------------------------+-------------------------------------------------------------------------------¦
+¦ MEMORY                      ¦ Allocate Memory [C0007]                                                       ¦
++-----------------------------+-------------------------------------------------------------------------------¦
+¦ PROCESS                     ¦ Create Process [C0017]                                                        ¦
+ ------------------------+------------------------------------------------------------------------------------
+```
+
+### Malware Behavior Catalogue (MBC)
+
