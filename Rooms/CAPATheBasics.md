@@ -5,6 +5,7 @@
 ## Contents
 - [Introduction](#introduction)
 - [Tool Overview: How CAPA Works](#tool-overview-how-capa-works)
+- [Dissecting CAPA Results Part 1: General Information, MITRE and MAEC](#dissecting-capa-results-part-1-general-information-mitre-and-maec)
 
 
 ## 📘Introduction
@@ -201,3 +202,180 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Get-Content` ✅
+
+
+## 📘Dissecting CAPA Results Part 1: General Information, MITRE and MAEC
+
+In this section, we pull the report apart and discuss it.
+
+### Basic information
+
+Here we can see the hashes (**md5**, **sha1**, and **sha256**) and the type of **analysis**, the **OS**, the binary **format**, **arch**itecture and finally the **path** of the binary
+```text
+ -----------------------+-------------------------------------------------------------------------------------
+¦ md5                    ¦ 3b9d26d2e7433749f2c32edb13a2b0a2                                                   ¦
+¦ sha1                   ¦ 969437df8f4ad08542ce8fc9831fc49a7765b7c5                                           ¦
+¦ sha256                 ¦ ae7bc6b6f6ecb206a7b957e4bb86e0d11845c5b2d9f7a00a482bef63b567ce4c                   ¦
+¦ analysis               ¦ static                                                                             ¦
+¦ os                     ¦ windows                                                                            ¦
+¦ format                 ¦ pe                                                                                 ¦
+¦ arch                   ¦ i386                                                                               ¦
+¦ path                   ¦ C:\Users\Administrator\Desktop\capa                                                ¦
+ ------------------------+------------------------------------------------------------------------------------
+```
+### MITRE ATT&CK
+
+MITRE is just the company, not an acronym whilst `ATT&CT` stands for **Adversarial Tactics, Techniques, and Common Knowledge**.
+
+The ATT&CK framework is a representation of global knowledge that is documented tatics and techniques that is deployed by treat actors at each stage of an attack. 
+
+Below we can see 
+
+```text
+ ------------------------+------------------------------------------------------------------------------------
+¦ ATT&CK Tactic          ¦ ATT&CK Technique                                                                   ¦
+ ------------------------+------------------------------------------------------------------------------------
+¦ DEFENSE EVASION        ¦ Obfuscated Files or Information T1027                                              ¦
+¦                        ¦ Obfuscated Files or Information::Indicator Removal from Tools T1027.005            ¦
+¦                        ¦ Virtualization/Sandbox Evasion::System Checks T1497.001                            ¦
++------------------------+------------------------------------------------------------------------------------¦
+¦ DISCOVERY              ¦ File and Directory Discovery T1083                                                 ¦
++------------------------+------------------------------------------------------------------------------------¦
+¦ EXECUTION              ¦ Command and Scripting Interpreter::PowerShell T1059.001                            ¦
+¦                        ¦ Shared Modules T1129                                                               ¦
++------------------------+------------------------------------------------------------------------------------¦
+¦ IMPACT                 ¦ Resource Hijacking T1496                                                           ¦
++------------------------+------------------------------------------------------------------------------------¦
+¦ PERSISTENCE            ¦ Scheduled Task/Job::At T1053.002                                                   ¦
+¦                        ¦ Scheduled Task/Job::Scheduled Task T1053.005                                       ¦
+ ------------------------+------------------------------------------------------------------------------------
+```
+
+The tactic can be used to filter the technique.
+
+So for example **`EXECUTION`** → **`Command and Scripting Interpreter`** [[T1059](https://attack.mitre.org/techniques/T1059/)]
+
+![image](https://github.com/user-attachments/assets/08dc6e93-5967-4461-9349-5f761e588a53)
+
+Can lead us to **`PowerShell`** [[001](https://attack.mitre.org/techniques/T1059/001/)]
+
+![image](https://github.com/user-attachments/assets/22fa070d-bf0e-43bb-90f7-51f0569bcecc)
+
+### MAEC
+
+MAEC stands for **Malware Attribute Enumeration and Characterization**. It's a way of describing how the malware behaves.
+
+```text
+ ------------------------+------------------------------------------------------------------------------------
+¦ MAEC Category               ¦ MAEC Value                                                                    ¦
+ ------------------------+------------------------------------------------------------------------------------
+¦ malware-category            ¦ launcher                                                                      ¦
+ ------------------------+------------------------------------------------------------------------------------
+```
+CAPA has catagorised this as `launcher`. SO it is anticipated that it may:
+- Dropping additional payloads
+- Activating persistence mechanisms
+- Connecting to command-and-control (C2) servers
+- Executing specific functions
+
+Useful links:
+- [Malware Behavior Catalog](https://github.com/MBCProject/mbc-markdown)
+- [Malware Behavior Catalog Matrix](https://maecproject.github.io/ema/)
+    - [MAEC Core Specification, Version 5.0](https://maecproject.github.io/releases/5.0/MAEC_Core_Specification.pdf)
+    - [MAEC Vocabularies Specification, Version 5.0
+](https://maecproject.github.io/releases/5.0/MAEC_Vocabularies_Specification.pdf)
+
+
+### ❓ Question 1
+
+> What is the sha256 of cryptbot.bin?
+
+#### 🧪 Process
+
+We can find this in our basic information
+
+```text
+│ sha256      │ ae7bc6b6f6ecb206a7b957e4bb86e0d11845c5b2d9f7a00a482bef63b567ce4c                   │
+```
+Result = `ae7bc6b6f6ecb206a7b957e4bb86e0d11845c5b2d9f7a00a482bef63b567ce4c`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `ae7bc6b6f6ecb206a7b957e4bb86e0d11845c5b2d9f7a00a482bef63b567ce4c` ✅
+
+
+### ❓ Question 2
+
+> What is the **Technique** Identifier of **Obfuscated Files or Information**?
+
+#### 🧪 Process
+
+Visit the [MITRE ATT&CK](https://attack.mitre.org/) site and look under **Defense Evasion**.
+
+Scroll down and find **Obfuscated Files or Information**. 
+
+Here we can find information on _Obfuscated Files or Information_.
+
+![image](https://github.com/user-attachments/assets/dd324845-d19d-4e57-9d8f-3c267d3186be)
+
+As we can see from the above screenshot the ID is `T1027`. 
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `T1027` ✅
+
+
+### ❓ Question 3
+
+> What is the **Sub-Technique** Identifier of **Obfuscated Files or Information::Indicator Removal from Tools**?
+
+#### 🧪 Process
+
+Since we're already in the correct page, we need to find _Indicator Removal from Tools_ and click
+![image](https://github.com/user-attachments/assets/3c073426-0001-43da-9329-429130f6637a)
+
+Now we can see the Technique and sub technique ID. 
+![image](https://github.com/user-attachments/assets/6045e637-d571-4bf1-a83e-68cbb18298e2)
+
+Our result is `T1027.005`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `T1027.005` ✅
+
+
+### ❓ Question 4
+
+> When CAPA tags a file with this MAEC value, it indicates that it demonstrates behaviour similar to, but not limited to, **Activating persistence mechanisms**?
+
+
+#### 🧪 Process
+
+The event `Activating persistence mechanisms` is under `launcher`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `launcher` ✅
+
+
+### ❓ Question 5
+
+> When CAPA tags a file with this MAEC value, it indicates that the file demonstrates behaviour similar to, but not limited to, **Fetching additional payloads or resources from the internet**?
+
+#### 🧪 Process
+
+`Fetching additional payloads` would fall under `Downloader`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Downloader` ✅
