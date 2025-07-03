@@ -422,3 +422,128 @@ Here we have the next block
 
 ### Malware Behavior Catalogue (MBC)
 
+The MBC is like a library of malware behaviours. I it can describe behaviours and report findings in a standardised way. Often ties in with the MITRE **ATT&CK** framework, but not a copy. 
+
+**Reference**: [Malware Behavior Catalog v3.1](https://github.com/MBCProject/mbc-markdown)
+
+### Objective
+
+**See**: [Malware Objectives](https://github.com/MBCProject/mbc-markdown/blob/main/mbc_summary.md#malware-objectives)
+
+MBC malware objectives are based on MITRE ATT&CK tactics but tailored for malware analysis. It also adds two unique objectives not found in ATT&CK: Anti-Behavioral Analysis and Anti-Static Analysis, which focus on evading analysis techniques.
+
+
+### Micro-Objective
+
+MBC includes micro-behaviors that are low-level actions like creating sockets or checking strings. Often aren't malicious but commonly appear in malware and support higher-level objectives almost like signatures.
+
+
+### MBC Behaviors
+
+**See**: [Malware Behaviors](https://github.com/MBCProject/mbc-markdown/blob/main/mbc_summary.md#malware-behaviors)
+
+MBC lists behaviors under each objective, linking to MITRE ATT&CK where relevant but not duplicating its content. The behavior names may differ, and MBC is meant to complement ATT&CK by adding extra detail specific to malware analysis.
+
+
+### Micro-Behavior
+
+**See**: [Malware Micro-behaviors](https://github.com/MBCProject/mbc-markdown/blob/main/mbc_summary.md#malware-micro-behaviors)
+
+MBC captures low-level behaviors such as creating sockets or checking strings that aren't always malicious but are commonly seen in malware and support broader objectives.
+
+
+### Methods
+
+Methods in MBC are tied to behaviors, they either refine the behavior or show how it’s implemented. They’re similar to ATT&CK sub-techniques, but a method can’t exist on its own without being linked to a behavior.
+
+
+### ❓ Question 1
+
+> What serves as a catalogue of malware objectives and behaviours?
+
+#### 🧪 Process
+
+The `Malware Behavior Catalog`,
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Malware Behavior Catalogue` ✅
+
+_**Note:** the spelling difference of `Catalog` and `Catalogue`._
+
+
+### ❓ Question 2
+
+>  Which field is based on ATT&CK tactics in the context of malware behaviour?
+
+#### 🧪 Process
+
+> _`objectives` are based on MITRE ATT&CK tactics_
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `objectives` ✅
+
+
+### ❓ Question 3
+
+> What is the Identifier of "**Create Process**" micro-behavior?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `answer`
+
+
+### ❓ Question 4
+
+> What is the behaviour with an Identifier of **B0009**?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `answer`
+
+
+### ❓ Question 5
+
+> Malware can be used to obfuscate data using base64 and XOR. What is the related **micro-behavior** for this?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `answer`
+
+
+### ❓ Question 6
+
+> Which micro-behavior refers to "**Malware is capable of initiating HTTP communications**"?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `answer`
+
+
+
+
+
+
+
+
