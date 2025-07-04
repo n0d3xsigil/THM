@@ -7,6 +7,7 @@
 - [Tool Overview: How CAPA Works](#tool-overview-how-capa-works)
 - [Dissecting CAPA Results Part 1: General Information, MITRE and MAEC](#dissecting-capa-results-part-1-general-information-mitre-and-maec)
 - [Dissecting CAPA Results Part 2: Malware Behavior Catalogue](#dissecting-capa-results-part-2-malware-behavior-catalogue)
+- [Dissecting CAPA Results Part 3: Namespaces](#dissecting-capa-results-part-3-namespaces)
 
 
 ## 📘Introduction
@@ -576,3 +577,163 @@ Trying this as the answer
 #### ✅ Answer
 
 - `HTTP Communication` ✅
+
+
+
+## 📘Dissecting CAPA Results Part 3: Namespaces
+
+Below is the final section of the report
+
+```text
+ ------------------------+------------------------------------------------------------------------------------
+¦ Capability                                           ¦ Namespace                                            ¦
+ ------------------------+------------------------------------------------------------------------------------
+¦ reference anti-VM strings                            ¦ **anti-analysis/anti-vm/vm-detection****                   ¦
+¦ reference anti-VM strings targeting VMWare           ¦ **anti-analysis/anti-vm/vm-detection**                   ¦
+¦ reference anti-VM strings targeting VirtualBox       ¦ **anti-analysis/anti-vm/vm-detection**                   ¦
+¦ contain obfuscated stackstrings (2 matches)          ¦ **anti-analysis/obfuscation/string/stackstring**         ¦
+¦ reference HTTP User-Agent string                     ¦ **communication/http                                   **¦
+¦ check HTTP status code                               ¦ **communication/http/client                            **¦
+¦ reference Base64 string                              ¦ **data-manipulation/encoding/base64                    **¦
+¦ encode data using XOR                                ¦ **data-manipulation/encoding/xor**                       ¦
+¦ contain a thread local storage (.tls) section        ¦ **executable/pe/section/tls**                            ¦
+¦ get common file path                                 ¦ **host-interaction/file-system**                         ¦
+¦ create directory                                     ¦ **host-interaction/file-system/create**                  ¦
+¦ delete file                                          ¦ host-interaction/file-system/delete                  ¦
+¦ read file on Windows (4 matches)                     ¦ host-interaction/file-system/read                    ¦
+¦ write file on Windows (5 matches)                    ¦ host-interaction/file-system/write                   ¦
+¦ get thread local storage value                       ¦ host-interaction/process                             ¦
+¦ create process on Windows                            ¦ host-interaction/process/create                      ¦
+¦ allocate or change RWX memory                        ¦ host-interaction/process/inject                      ¦
+¦ reference cryptocurrency strings                     ¦ impact/cryptocurrency                                ¦
+¦ link function at runtime on Windows (5 matches)      ¦ linking/runtime-linking                              ¦
+¦ parse PE header (4 matches)                          ¦ load-code/pe                                         ¦
+¦ resolve function by parsing PE exports (186 matches) ¦ load-code/pe                                         ¦
+¦ run PowerShell expression                            ¦ load-code/powershell/                                ¦
+¦ schedule task via at                                 ¦ persistence/scheduled-tasks                          ¦
+¦ schedule task via schtasks                           ¦ persistence/scheduled-tasks                          ¦
+ ------------------------+------------------------------------------------------------------------------------
+```
+
+This section focuses on the Namespaces.
+
+### Namespaces
+
+```mermaid
+---
+config:
+    theme: neo
+---
+flowchart LR;
+    A(["Top-Level Namespace"])
+    A --> B(["Namespace 1"])
+    A --> C(["Namespace 2"])
+    B --> D["rule-1.yml"]
+    B --> E["rule-2.yml"]
+    B --> F["rule-3.yml"]
+    B --> G["rule-4.yml"]
+    C --> H["rule-1.yml"]
+    C --> I["rule-2.yml"]
+    C --> J["rule-3.yml"]
+    C --> K["rule-4.yml"]
+```
+
+A list of the namespaces can be found [CAPA GitHub](https://github.com/mandiant/capa-rules?tab=readme-ov-file#namespace-organization).
+
+#### Top level namespaces
+
+|                                         Namespace                                         |                              Short description                              |
+|-------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| [anti-analysis](https://github.com/mandiant/capa-rules/blob/master/anti-analysis)         | packing, obfuscation, anti-X, etc.                                          |
+| [collection](https://github.com/mandiant/capa-rules/blob/master/collection)               | data that may be enumerated and collected for exfiltration                  |
+| [communication](https://github.com/mandiant/capa-rules/blob/master/communication)         | HTTP, TCP, command and control (C2) traffic, etc.                           |
+| [compiler](https://github.com/mandiant/capa-rules/blob/master/compiler)                   | detection of build environments, such as MSVC, Delphi, or AutoIT            |
+| [data-manipulation](https://github.com/mandiant/capa-rules/blob/master/data-manipulation) | encryption, hashing, etc.                                                   |
+
+
+
+
+|                                         Namespace                                         |                              Short description                              |
+|-------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| [executable](https://github.com/mandiant/capa-rules/blob/master/executable)               | characteristics of the executable, such as PE sections or debug info        |
+| [host-interaction](https://github.com/mandiant/capa-rules/blob/master/host-interaction)   | access or manipulation of system resources, like processes or the Registry  |
+| [impact](https://github.com/mandiant/capa-rules/blob/master/impact)                       | end goal                                                                    |
+| [internal](https://github.com/mandiant/capa-rules/blob/master/internal)                   | used internally by capa to guide analysis                                   |
+| [lib](https://github.com/mandiant/capa-rules/blob/master/lib)                             | building blocks to create other rules                                       |
+| [linking](https://github.com/mandiant/capa-rules/blob/master/linking)                     | detection of dependencies, such as OpenSSL or Zlib                          |
+| [load-code](https://github.com/mandiant/capa-rules/blob/master/load-code)                 | runtime load and execution of code, such as embedded PE or shellcode        |
+| [malware-family](https://github.com/mandiant/capa-rules/blob/master/malware-family)       | detection of malware families                                               |
+| [nursery](https://github.com/mandiant/capa-rules/blob/master/nursery)                     | staging ground for rules that are not quite polished                        |
+| [persistence](https://github.com/mandiant/capa-rules/blob/master/persistence)             | all sorts of ways to maintain access                                        |
+| [runtime](https://github.com/mandiant/capa-rules/blob/master/runtime)                     | detection of language runtimes, such as the .NET platform or Go             |
+| [targeting](https://github.com/mandiant/capa-rules/blob/master/targeting)                 | special handling of systems, such as ATM machines                           |
+
+
+
+
+
+### ❓ Question 1
+
+> Which top-level Namespace contains a set of rules specifically designed to detect behaviours, including obfuscation, packing, and anti-debugging techniques **exhibited by malware to evade analysis**?
+
+#### 🧪 Process
+
+Really there is only one top level 
+
+#### ✅ Answer
+
+- `Anti-Analysis`
+
+
+### ❓ Question 2
+
+> Which namespace contains rules to **detect virtual machine (VM) environments**? Note that this is not the TLN or Top-Level Namespace.
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `anti-vm/vm-detection`
+
+
+### ❓ Question 3
+
+> Which Top-Level Namespace contains rules related to **behaviours associated with maintaining access or persistence within a compromised system**? This namespace is focused on understanding how malware can establish and maintain a presence within a compromised environment, allowing it to persist and carry out malicious activities over an extended period.
+
+#### 🧪 Process
+
+- https://github.com/mandiant/capa-rules/tree/master/persistence
+
+#### ✅ Answer
+
+- `persistence`
+
+
+### ❓ Question 4
+
+> Which namespace addresses techniques such as **String Encryption, Code Obfuscation, Packing, and Anti-Debugging Tricks**, which conceal or obscure the true purpose of the code?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `obfuscation`
+
+
+### ❓ Question 5
+
+> Which Top-Level Namespace Is a **staging ground** for rules that are not quite polished?
+
+#### 🧪 Process
+
+https://github.com/mandiant/capa-rules/tree/master/nursery
+
+#### ✅ Answer
+
+- `nursery`
+
+
