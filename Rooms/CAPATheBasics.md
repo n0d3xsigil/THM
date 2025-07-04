@@ -495,11 +495,17 @@ Trying this as the answer
 
 #### 🧪 Process
 
-_process_
+Navigate to [#malware-micro-behaviors](https://github.com/MBCProject/mbc-markdown/blob/main/mbc_summary.md#malware-micro-behaviors)
+Scroll down to **create process**
+![image](https://github.com/user-attachments/assets/1dfadba0-7955-4773-b403-4ef61a3b7548)
+
+Noice the identifyer of `C0017`. 
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `C0017` ✅
 
 
 ### ❓ Question 4
@@ -508,11 +514,20 @@ _process_
 
 #### 🧪 Process
 
-_process_
+Navigate to [MBC Summary](https://github.com/MBCProject/mbc-markdown/blob/main/mbc_summary.md)
+Perform a search for `B0009`
+![image](https://github.com/user-attachments/assets/a80d352e-f8a6-4a43-9964-18e9044b1d01)
+
+This is not the result you are looking for. Hit **F3** to find the next result
+![image](https://github.com/user-attachments/assets/a620af83-00aa-4870-b59c-5abec61eabb4)
+
+This is the result we are looking for (`Virtual Machine Detection`)
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `Virtual Machine Detection`✅
 
 
 ### ❓ Question 5
@@ -521,11 +536,21 @@ _process_
 
 #### 🧪 Process
 
-_process_
+Navigate to [#malware-micro-behaviors](https://github.com/MBCProject/mbc-markdown/blob/main/mbc_summary.md#malware-micro-behaviors
+
+If I remember correctly that was "Encode Data". Lets see if that is there, Press **F3** to search and type "Encode Data" followed by enter.
+![image](https://github.com/user-attachments/assets/824bf45b-d8ff-481b-beff-03c442f3b55d)
+
+Great, that is just the one result, so probably on the right track, let's validate by clicking on the [`Encode Data`](https://github.com/MBCProject/mbc-markdown/blob/main/micro-behaviors/data/encode-data.md) link
+![image](https://github.com/user-attachments/assets/63d7c430-dac5-4b47-8024-a1697fc991e2)
+
+Perfect, it looks like `Encode Data` is what we're after
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `Encode Data` ✅
 
 
 ### ❓ Question 6
@@ -534,16 +559,20 @@ _process_
 
 #### 🧪 Process
 
-_process_
+Again, let's Navigate to [#malware-micro-behaviors](https://github.com/MBCProject/mbc-markdown/blob/main/mbc_summary.md#malware-micro-behaviors)
+
+I'm not 100% sure, but lets hit **F3** and type "HTTP comm" followed by return to find the first result.
+![image](https://github.com/user-attachments/assets/35ba828a-e4e4-4eec-9e4a-f5e3f4d03221)
+
+Again, there is just the one result. I would be fairly confident in using this as the answer, however lets click that [`HTTP Communication`](https://github.com/MBCProject/mbc-markdown/blob/main/micro-behaviors/communication/http-communication.md) link and validate.
+![image](https://github.com/user-attachments/assets/ab23a8ba-c8f2-4065-82cc-b685f790664a)
+
+I won't go over everything here butterms such as "_connects to HTTP server_", "_creates request_", "_downloads URL to file_" all indicate HTTP communications initiated by the malware if desired.
+
+The micro-behaviour in question looks to be `HTTP Communication`.
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
-
-
-
-
-
-
-
-
+- `HTTP Communication` ✅
