@@ -9,6 +9,7 @@
 - [Dissecting CAPA Results Part 2: Malware Behavior Catalogue](#dissecting-capa-results-part-2-malware-behavior-catalogue)
 - [Dissecting CAPA Results Part 3: Namespaces](#dissecting-capa-results-part-3-namespaces)
 - [Dissecting CAPA Results Part 4: Capability](#dissecting-capa-results-part-4-capability)
+- [More Information, more fun!](#more-information-more-fun)
 
 
 ## 📘Introduction
@@ -827,3 +828,52 @@ Trying this as the answer
 #### ✅ Answer
 
 - `RegOpenKeyEx` ✅
+
+
+
+## 📘More Information, more fun!
+
+### ❓ Question 1
+
+> Which parameter allows you to output the result of CAPA into a .json file?
+
+#### 🧪 Process
+
+- `-j`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `-j` ✅
+
+Trying this as the answer
+
+### ❓ Question 2
+
+> What tool allows you to interactively explore CAPA results in your web browser?
+
+#### 🧪 Process
+
+- `capa Explorer Web`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `CAPA Web Explorer` ✅
+
+
+### ❓ Question 3
+
+> Which feature of this CAPA Web Explorer allows you to filter options or results?
+
+#### 🧪 Process
+
+- `Global Search Box`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Global Search Box` ✅
