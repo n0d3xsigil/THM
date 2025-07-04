@@ -650,8 +650,7 @@ A list of the namespaces can be found [CAPA GitHub](https://github.com/mandiant/
 | [compiler](https://github.com/mandiant/capa-rules/blob/master/compiler)                   | detection of build environments, such as MSVC, Delphi, or AutoIT            |
 | [data-manipulation](https://github.com/mandiant/capa-rules/blob/master/data-manipulation) | encryption, hashing, etc.                                                   |
 
-
-
+### Namespaces
 
 |                                         Namespace                                         |                              Short description                              |
 |-------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
@@ -669,20 +668,24 @@ A list of the namespaces can be found [CAPA GitHub](https://github.com/mandiant/
 | [targeting](https://github.com/mandiant/capa-rules/blob/master/targeting)                 | special handling of systems, such as ATM machines                           |
 
 
-
-
-
 ### ❓ Question 1
 
 > Which top-level Namespace contains a set of rules specifically designed to detect behaviours, including obfuscation, packing, and anti-debugging techniques **exhibited by malware to evade analysis**?
 
 #### 🧪 Process
 
-Really there is only one top level 
+As per the namespace short description we have anti-analysis (packing, obfuscation, anti-X, etc.).
+
+Lets navigate to [`anti-analysis`](https://github.com/mandiant/capa-rules/blob/master/anti-analysis)
+![image](https://github.com/user-attachments/assets/29f8f0fe-0096-4577-87a3-7f800fd2f7a8)
+
+Result, we have all three of the mentioned rules.
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `Anti-Analysis`
+- `Anti-Analysis` ✅
 
 
 ### ❓ Question 2
@@ -691,11 +694,13 @@ Really there is only one top level
 
 #### 🧪 Process
 
-_process_
+I did notice that actually, within `anti-analysis there was **`anti-vm/vm-detection`**. 
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `anti-vm/vm-detection`
+- `anti-vm/vm-detection` ✅
 
 
 ### ❓ Question 3
@@ -704,11 +709,16 @@ _process_
 
 #### 🧪 Process
 
-- https://github.com/mandiant/capa-rules/tree/master/persistence
+Navigate to [Namespace Organization](https://github.com/mandiant/capa-rules/tree/master#namespace-organization)
+
+Since we are looking at maintaining a foothold, or persistence. It stands to reason it would be `persistence`.
+![image](https://github.com/user-attachments/assets/de577e99-64e3-48fa-86b6-437909755dc9)
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `persistence`
+- `persistence` ✅
 
 
 ### ❓ Question 4
@@ -717,11 +727,16 @@ _process_
 
 #### 🧪 Process
 
-_process_
+Navigate to [Namespace Organization](https://github.com/mandiant/capa-rules/tree/master#namespace-organization)
+![image](https://github.com/user-attachments/assets/74584e57-de41-4ce2-9237-7ca8af94a3f5)
+
+Straight away we see that [`anti-analysis`](https://github.com/mandiant/capa-rules/tree/master/anti-analysis) mentions `obfuscation`
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `obfuscation`
+- `obfuscation` ✅
 
 
 ### ❓ Question 5
@@ -730,10 +745,13 @@ _process_
 
 #### 🧪 Process
 
-https://github.com/mandiant/capa-rules/tree/master/nursery
+Navigate to [Namespace Organization](https://github.com/mandiant/capa-rules/tree/master#namespace-organization)
+![image](https://github.com/user-attachments/assets/66d593c4-37af-4da8-9ef6-c3d0d0134a28)
+
+Say no more,
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `nursery`
-
-
+- `nursery` ✅
