@@ -8,6 +8,7 @@
 - [Dissecting CAPA Results Part 1: General Information, MITRE and MAEC](#dissecting-capa-results-part-1-general-information-mitre-and-maec)
 - [Dissecting CAPA Results Part 2: Malware Behavior Catalogue](#dissecting-capa-results-part-2-malware-behavior-catalogue)
 - [Dissecting CAPA Results Part 3: Namespaces](#dissecting-capa-results-part-3-namespaces)
+- [Dissecting CAPA Results Part 4: Capability](#dissecting-capa-results-part-4-capability)
 
 
 ## 📘Introduction
@@ -755,3 +756,74 @@ Trying this as the answer
 #### ✅ Answer
 
 - `nursery` ✅
+
+
+
+## 📘Dissecting CAPA Results Part 4: Capability
+
+### ❓ Question 1
+
+> What **rule yaml file** was matched if the Capability or rule name is **check HTTP status code**?
+
+#### 🧪 Process
+
+![image](https://github.com/user-attachments/assets/92456802-31ea-4939-8e87-987a441d77cf)
+
+#### ✅ Answer
+
+- `check-http-status-code.yml` ✅
+
+
+### ❓ Question 2
+
+> What is the **name of the Capability** if the rule YAML file is `reference-anti-vm-strings.yml`?
+
+#### 🧪 Process
+
+Navigate to [`reference-anti-vm-strings.yml`](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings.yml)
+![image](https://github.com/user-attachments/assets/69655dce-3a8b-46ef-895a-d7a1b12d9d71)
+
+**Name:**: `reference anti-VM strings`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `reference anti-VM strings` ✅
+
+
+### ❓ Question 3
+
+> Which **TLN** or Top-Level Namespace includes the Capability or rule name **run PowerShell expression**?
+
+#### 🧪 Process
+
+In the end I did a search for powershell and found the following link
+
+[run-powershell-expression.yml](https://github.com/mandiant/capa-rules/blob/master/load-code/powershell/run-powershell-expression.yml).
+
+In here we can see that namespace is `load-code/powershell/` so the tln will be `load-code`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `load-code` ✅
+
+
+### ❓ Question 4
+
+> Check the conditions inside the `check-for-windows-sandbox-via-registry.yml` rule file from this [link](https://github.com/MBCProject/capa-rules-1/blob/master/anti-analysis/anti-vm/vm-detection/check-for-windows-sandbox-via-registry.yml). What is the **value of the API** that ends in `Ex` is it looking for?
+
+#### 🧪 Process
+
+![image](https://github.com/user-attachments/assets/9a836d23-70a9-408b-96a8-7bbdbcb604e0)
+
+- **api**: `RegOpenKeyEx`
+
+Trying this as the answer
+
+
+#### ✅ Answer
+
+- `RegOpenKeyEx` ✅
