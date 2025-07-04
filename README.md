@@ -94,7 +94,7 @@ My discoveries from THM
 ### Defensive Security Tooling
 - ✅ [CyberChef: The Basics](Rooms/CyberChefTheBasics.md)
 - ✅ [CAPA: The Basics](Rooms/CAPATheBasics.md)
-- ❌ [REMnux: Getting Started](Rooms/REMnuxGettingStarted.md)
+- ⚠️ [REMnux: Getting Started](Rooms/REMnuxGettingStarted.md)
 - ❌ [FlareVM: Arsenal of Tools](Rooms/REMnuxGettingStarted.md)
 ### Build Your Cyber Security Career
 
