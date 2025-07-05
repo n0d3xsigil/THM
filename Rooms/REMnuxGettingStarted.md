@@ -4,6 +4,7 @@
 
 ## Contents
 - [Introduction](#introduction)
+- [Machine Access](#machine-access)
 
 
 ## 📘Introduction
@@ -14,3 +15,11 @@ Remnux is a specialist Linux disto, built specifically for analysing malware. It
 - Wireshark
 - oledump
 - INetSim
+
+
+
+## 📘Machine Access
+
+Not much to say here, start the machine and have at it.
+
+Files can be found under `~/Desktop/tasks`
