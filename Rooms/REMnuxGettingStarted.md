@@ -7,3 +7,10 @@
 
 
 ## 📘Introduction
+
+Remnux is a specialist Linux disto, built specifically for analysing malware. It includes tools, not limited to:
+- Volatility
+- YARA
+- Wireshark
+- oledump
+- INetSim
