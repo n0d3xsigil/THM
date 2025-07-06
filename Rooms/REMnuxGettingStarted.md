@@ -6,6 +6,7 @@
 - [Introduction](#introduction)
 - [Machine Access](#machine-access)
 - [File Analysis](#file-analysis)
+- [Fake Network to Aid Analysis](#fake-network-to-aid-analysis)
 
 
 ## 📘Introduction
@@ -300,3 +301,314 @@ Trying this as the answer
 #### ✅ Answer
 
 - `8` ✅
+
+
+
+## 📘Fake Network to Aid Analysis
+
+So we have downloaded some malware we want to analyse, we could just do this in our Windows box and hope we have some safeguards in place. Or we can use REMnux to help us out. The REMux VM has a tool called **INetSim: Internet Services Simulation Suite!**
+
+
+
+### INetSim
+
+First we need to update the `inetsim.conf` file with the current IP of the **`REMnux_gettingstarted_v7`** VM
+
+Fire up the **Terminal Emulator** 
+
+Take note of the IP address.
+
+```Shell
+ubuntu@ip-10-10-161-121:~$ 
+```
+
+So we know our IP is `10.10.161.121`. Lets fire up the config file.
+
+```Shell
+ubuntu@ip-10-10-161-121:~$ sudo vim /etc/inetsim/inetsim.conf 
+```
+
+Tap `/` followed by `dns_default` and press **Return**
+
+drop down to `#dns_default_ip...`
+
+Remove the `#` and update the IP address with the correct ip. the line should look like.
+
+_**Note**: You'll need to tap `i` to enter insert mode_
+
+```shell
+dns_default_ip 10.10.161.121
+```
+
+Press **Esc** and type `:x` to save and exit
+
+Next we want to grep the file to make sure it has saved and is the correct IP
+
+```Shell
+ubuntu@ip-10-10-161-121:~$ cat /etc/inetsim/inetsim.conf | grep dns_default_ip
+# dns_default_ip
+# Syntax: dns_default_ip <IP address>
+dns_default_ip 10.10.161.121	 
+```
+
+Now we can start _INetSim_ by issuing `sudo inetsim`
+
+```Shell
+ubuntu@ip-10-10-161-121:~$ sudo inetsim
+INetSim 1.3.2 (2020-05-19) by Matthias Eckert & Thomas Hungenberg
+Using log directory:      /var/log/inetsim/
+Using data directory:     /var/lib/inetsim/
+Using report directory:   /var/log/inetsim/report/
+Using configuration file: /etc/inetsim/inetsim.conf
+Parsing configuration file.
+Warning: Unknown option '/var/log/inetsim/report/report.104162.txt#start_service' in configuration file '/etc/inetsim/inetsim.conf' line 43
+Configuration file parsed successfully.
+=== INetSim main process started (PID 2259) ===
+Session ID:     2259
+Listening on:   0.0.0.0
+Real Date/Time: 2025-07-06 20:16:26
+Fake Date/Time: 2025-07-06 20:16:26 (Delta: 0 seconds)
+ Forking services...
+Couldn't create UDP socket: Address already in use at /usr/share/perl5/INetSim/DNS.pm line 36.
+  * dns_53_tcp_udp - started (PID 2264)
+  * smtp_25_tcp - started (PID 2267)
+  * smtps_465_tcp - started (PID 2268)
+  * ftp_21_tcp - started (PID 2271)
+  * pop3_110_tcp - started (PID 2269)
+  * pop3s_995_tcp - started (PID 2270)
+  * ftps_990_tcp - started (PID 2272)
+  * https_443_tcp - started (PID 2266)
+  * http_80_tcp - failed!
+ done.
+Simulation running.
+```
+
+We can ignore the **`failed!`** under **`http_80_tcp`**.
+
+Let's head over to the other VM.
+
+Fire up **FireFox**
+
+Navigate to the IP of the _REMux VM_ (https://10.10.161.121)
+
+We'll need to click **Advanced...** followed by **Accept the Risk and Continue**.
+
+We're met with a note about the default HTML page etc.
+
+We're told to try and download `second_payload.zip`.
+
+```Shell
+root@ip-10-10-182-45:~# sudo wget https://10.10.161.121/second_payload.zip --no-check-certificate
+--2025-07-06 21:36:47--  https://10.10.161.121/second_payload.zip
+Connecting to 10.10.161.121:443... connected.
+WARNING: cannot verify 10.10.161.121's certificate, issued by \u2018CN=inetsim.org,OU=Internet Simulation services,O=INetSim\u2019:
+  Self-signed certificate encountered.
+    WARNING: certificate common name \u2018inetsim.org\u2019 doesn't match requested host name \u201810.10.161.121\u2019.
+HTTP request sent, awaiting response... 200 OK
+Length: 258 [text/html]
+Saving to: \u2018second_payload.zip\u2019
+
+second_payload.zip         100%[======================================>]     258  --.-KB/s    in 0s      
+
+2025-07-06 21:36:47 (10.7 MB/s) - \u2018second_payload.zip\u2019 saved [258/258]
+```
+
+Let's try another file, `second_payload.ps1`
+
+```Shell
+root@ip-10-10-182-45:~# sudo wget https://10.10.161.121/second_payload.ps1 --no-check-certificate
+--2025-07-06 21:42:06--  https://10.10.161.121/second_payload.ps1
+Connecting to 10.10.161.121:443... connected.
+WARNING: cannot verify 10.10.161.121's certificate, issued by \u2018CN=inetsim.org,OU=Internet Simulation services,O=INetSim\u2019:
+  Self-signed certificate encountered.
+    WARNING: certificate common name \u2018inetsim.org\u2019 doesn't match requested host name \u201810.10.161.121\u2019.
+HTTP request sent, awaiting response... 200 OK
+Length: 258 [text/html]
+Saving to: \u2018second_payload.ps1\u2019
+
+second_payload.ps1         100%[======================================>]     258  --.-KB/s    in 0s      
+
+2025-07-06 21:42:06 (2.35 MB/s) - \u2018second_payload.ps1\u2019 saved [258/258]
+```
+
+Interesting if we cat the file, what do we see here...
+
+```Shell
+root@ip-10-10-182-45:~# cat second_payload.ps1 
+<html>
+  <head>
+    <title>INetSim default HTML page</title>
+  </head>
+  <body>
+    <p></p>
+    <p align="center">This is the default HTML page for INetSim HTTP server fake mode.</p>
+    <p align="center">This file is an HTML document.</p>
+  </body>
+</html>
+```
+
+I think it is safe to say it will be the same for the `second_payload.zip` file we downlaoded downloaded earlier.
+
+```Shell
+root@ip-10-10-182-45:~# cat second_payload.zip 
+<html>
+  <head>
+    <title>INetSim default HTML page</title>
+  </head>
+  <body>
+    <p></p>
+    <p align="center">This is the default HTML page for INetSim HTTP server fake mode.</p>
+    <p align="center">This file is an HTML document.</p>
+  </body>
+</html>
+```
+
+I'm curious, what if I give the `wget` a different `random.file` name.
+
+```Shell
+root@ip-10-10-182-45:~# sudo wget https://10.10.161.121/random.file --no-check-certificate
+--2025-07-06 21:46:40--  https://10.10.161.121/random.file
+Connecting to 10.10.161.121:443... connected.
+WARNING: cannot verify 10.10.161.121's certificate, issued by \u2018CN=inetsim.org,OU=Internet Simulation services,O=INetSim\u2019:
+  Self-signed certificate encountered.
+    WARNING: certificate common name \u2018inetsim.org\u2019 doesn't match requested host name \u201810.10.161.121\u2019.
+HTTP request sent, awaiting response... 200 OK
+Length: 258 [text/html]
+Saving to: \u2018random.file\u2019
+
+random.file                100%[======================================>]     258  --.-KB/s    in 0s      
+
+2025-07-06 21:46:40 (11.0 MB/s) - \u2018random.file\u2019 saved [258/258]
+```
+
+When we `cat` it, we alread know the result
+
+```Shell
+root@ip-10-10-182-45:~# cat random.file 
+<html>
+  <head>
+    <title>INetSim default HTML page</title>
+  </head>
+  <body>
+    <p></p>
+    <p align="center">This is the default HTML page for INetSim HTTP server fake mode.</p>
+    <p align="center">This file is an HTML document.</p>
+  </body>
+</html>
+```
+
+So we know what is happening now, what ever we `wget` we are served the home page in what ever format is provided.
+
+Let's drop back to the **REMnux[...]** VM.
+
+Fire up a new **Terminal Emulator**
+
+We want to `cat` the _inetsim_ log. 
+
+Well it looks like the logs are not being updated correctly. So here is a sample from THM.
+
+```Shell
+ubuntu@10.10.161.121:~$ sudo cat /var/log/inetsim/report/report.2594.txt
+=== Report for session '2594' ===
+
+Real start date            : 2024-09-22 21:04:42
+Simulated start date       : 2024-09-22 21:04:42
+Time difference on startup : none
+
+2024-09-22 21:04:53  First simulated date in log file
+2024-09-22 21:04:53  HTTPS connection, method: GET, URL: https://10.10.161.121/, file name: /var/lib/inetsim/http/fakefiles/sample.html
+2024-09-22 21:16:07  HTTPS connection, method: GET, URL: https://10.10.161.121/test.exe, file name: /var/lib/inetsim/http/fakefiles/sample_gui.exe
+2024-09-22 21:18:37  HTTPS connection, method: GET, URL: https://10.10.161.121/second_payload.ps1, file name: /var/lib/inetsim/http/fakefiles/sample.html
+2024-09-22 21:18:49  HTTPS connection, method: GET, URL: https://10.10.161.121/second_payload.zip, file name: /var/lib/inetsim/http/fakefiles/sample.html
+2024-09-22 21:18:49  Last simulated date in log file
+===
+```
+
+
+### ❓ Question 1
+
+> Download and scan the file named **flag.txt** from the terminal using the command `sudo wget https://10.10.161.121/flag.txt --no-check-certificate`. What is the flag?
+
+#### 🧪 Process
+
+Back on the AttackBox
+
+We need to `wget` the flag.
+
+```Shell
+root@ip-10-10-182-45:~# sudo wget https://10.10.161.121/flag.txt --no-check-certificate; cat flag.txt
+--2025-07-06 22:03:02--  https://10.10.161.121/flag.txt
+Connecting to 10.10.161.121:443... connected.
+WARNING: cannot verify 10.10.161.121's certificate, issued by \u2018CN=inetsim.org,OU=Internet Simulation services,O=INetSim\u2019:
+  Self-signed certificate encountered.
+    WARNING: certificate common name \u2018inetsim.org\u2019 doesn't match requested host name \u201810.10.161.121\u2019.
+HTTP request sent, awaiting response... 200 OK
+Length: 151 [text/plain]
+Saving to: \u2018flag.txt\u2019
+
+flag.txt                   100%[======================================>]     151  --.-KB/s    in 0s      
+
+2025-07-06 22:03:02 (7.01 MB/s) - \u2018flag.txt\u2019 saved [151/151]
+
+
+This is the default text document for INetSim HTTP server fake mode.
+
+This file is plain text.
+
+You found it! The flag is = Tryhackme{remnux_edition}
+```
+
+We've got `Tryhackme{remnux_edition}`
+
+Trying this as the answer
+
+
+#### ✅ Answer
+
+- `Tryhackme{remnux_edition}` ✅
+
+
+
+### ❓ Question 2
+
+> After stopping the inetsim, read the generated report. Based on the report, what URL Method was used to get the file flag.txt?
+
+#### 🧪 Process
+
+Oh, I see, I didn't realise it was generated post exit. 
+
+```Shell
+Simulation stopped.
+ Report written to '/var/log/inetsim/report/report.2259.txt' (16 lines)
+=== INetSim main process stopped (PID 2259) ===
+```
+
+Lets cat out '/var/log/inetsim/report/report.2259.txt'
+
+```Shell
+ubuntu@ip-10-10-161-121:~$ sudo cat /var/log/inetsim/report/report.2259.txt 
+=== Report for session '2259' ===
+
+Real start date            : 2025-07-06 20:16:26
+Simulated start date       : 2025-07-06 20:16:26
+Time difference on startup : none
+
+2025-07-06 20:22:11  First simulated date in log file
+2025-07-06 20:22:11  HTTPS connection, method: GET, URL: https://10.10.161.121/, file name: /var/lib/inetsim/http/fakefiles/sample.html
+2025-07-06 20:22:12  HTTPS connection, method: GET, URL: https://10.10.161.121/favicon.ico, file name: /var/lib/inetsim/http/fakefiles/favicon.ico
+2025-07-06 20:36:46  HTTPS connection, method: GET, URL: https://10.10.161.121/second_payload.zip, file name: /var/lib/inetsim/http/fakefiles/sample.html
+2025-07-06 20:42:06  HTTPS connection, method: GET, URL: https://10.10.161.121/second_payload.ps1, file name: /var/lib/inetsim/http/fakefiles/sample.html
+2025-07-06 20:46:39  HTTPS connection, method: GET, URL: https://10.10.161.121/random.file, file name: /var/lib/inetsim/http/fakefiles/sample.html
+2025-07-06 21:03:01  HTTPS connection, method: GET, URL: https://10.10.161.121/flag.txt, file name: /var/lib/inetsim/http/fakefiles/sample.txt
+2025-07-06 21:03:01  Last simulated date in log file
+
+===
+```
+
+The method was `GET`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `GET` ✅
