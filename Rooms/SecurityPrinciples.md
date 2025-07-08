@@ -9,13 +9,13 @@
 
 
 
-## 📘 Introduction
+## 📘Introduction
 
 This room discusses the throughts behind implementing security considerations suitable for the environment and potential threat actors.
 
 
 
-## 📘 CIA
+## 📘CIA
 
 The CIA Triad
 
@@ -74,4 +74,4 @@ Just a Q&A, but be careful. There's a timer.
 
 
 
-### 📘 DAD
+### 📘DAD
