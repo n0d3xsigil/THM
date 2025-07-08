@@ -6,6 +6,7 @@
 - [Introduction](#introduction)
 - [CIA](#cia)
 - [DAD](#dad)
+- [Fundamental Concepts of Security Models](#fundamental-concepts-of-security-models)
 
 
 
@@ -114,3 +115,87 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Destruction/Denial` ✅
+
+
+
+## 📘Fundamental Concepts of Security Models
+
+In this section we will review 3 foundational security models
+
+- Bell-LaPadula Model
+- The Biba Integrity Model
+- The Clark-Wilson Model
+
+
+### Bell-LaPadula Model
+
+Primary focus is **confidentiality**, acheived by specifying 3 simple rules:
+
+- **Simple Security Property**
+    - The "no read up" property, no member should be able to read the the level above their own, preventing access to confidential information not authorised to view.
+- **Star Security Property**
+    - The "no write down" property, no member should be able to write the level below their own, preventing accidentally making confidential information available to those of a lower authorisation.
+- **Discretionary-Security Property**
+    - An access matrix to enable read/write operations.
+
+**_Example access matrix_**
+
+|  Subjects  |  Object A  |  Object B  |
+|------------|------------|------------|
+| Subject 1  | Write      | No Access  |
+| Subject 2  | Read/Write | Read       |
+
+We can look at this as "write up, read down". This will allow a security clearence to provide information to a higher level and allow that higher level to read information from a lower level. This model does not work well for file sharing scenarios. 
+
+
+### Biba Integrity Model
+
+Primary focus is **Integrity**, acheived by specifiying 2 main rules:
+
+
+- **Simple Integrity Property**
+    - The "no read down" property, the subject can't read from a lower level than their own
+- **Star Integrity Property**
+    - The "no write up" property, the subject can't write to a lever higher than their own
+
+We can look at this as "read up, write down". The rule is the oposite of the Bell-LaPadula model where the focus is confidentiality. This model has a few down sides, one of which is that it does handle insider threats.
+
+### Clark-Wilson Model
+
+Primary focus is **integrity**. This model uses 4 concepts
+
+
+- **Constrained Data Item (CDI)**
+    - The data type requiring preservation of integrity
+- **Unconstrained Data Item (UDI)**
+    - Data type outside of CDI 
+- **Transformation Procedures (TPs)**
+    - Programmed operations that maintain integrity of CDIs
+- **Integrity Verification Procedures (IVPs)**
+    - Checks validity of CDIs
+ 
+
+### Other models
+
+There are many other security models. Take a look at:
+
+
+- Brewer and Nash model
+- Goguen-Meseguer model
+- Sutherland model
+- Graham-Denning model
+- Harrison-Ruzzo-Ullman model
+
+
+
+### ❓ Question
+
+> Click on "View Site" and answer the four questions. What is the flag that you obtained at the end?
+
+#### 🧪 Process
+
+Basic Q&A
+
+#### ✅ Answer
+
+- `THM{SECURITY_MODELS}`
