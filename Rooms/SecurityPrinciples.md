@@ -7,6 +7,7 @@
 - [CIA](#cia)
 - [DAD](#dad)
 - [Fundamental Concepts of Security Models](#fundamental-concepts-of-security-models)
+- [Defence-in-Depth](#defence-in-depth)
 
 
 
@@ -199,3 +200,9 @@ Basic Q&A
 #### ✅ Answer
 
 - `THM{SECURITY_MODELS}`
+
+
+
+## 📘Defence-in-Depth
+
+Defence in depth can be considered layers of security, think, a building with doors, we could add locks or a form of access control. Next we could add an alarm system to detect movement when the building is secured or broken in to. We could add a Security guard to act as a deterent and to monitor the building. We could add CCTV to allow us to capture events that the security guard missed. All of these on their own, may be enough. But evertying together provides defence in depth.
