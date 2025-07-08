@@ -75,3 +75,42 @@ Just a Q&A, but be careful. There's a timer.
 
 
 ### 📘DAD
+
+In the scenario where an malicious actor manages to compomise a system we need to use the **DAD Triad**.
+
+Within the triad we have **Disclosure**, **Alteration**, and **Destruction/Denial**. It is literally the oposite of the CIA triad.
+
+- **Disclosure** of information after a breach, such as credit card inforamtion being leaked after a security breach on a website.
+- **Alteration** of medical data after a breach that means patients medical records have been compromised putting the patients safety at risk.
+- **Destruction** of data after a breack could mean that confidential data is erased
+- **Denial** of a service after a denial of service attack.
+
+
+### ❓ Question 1
+
+> The attacker managed to gain access to customer records and dumped them online. What is this attack?
+
+#### 🧪 Process
+
+If data is made public, the personal data is subject to a `Disclosure`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Disclosure` ✅
+
+
+### ❓ Question 2
+
+> A group of attackers were able to locate both the main and the backup power supply systems and switch them off. As a result, the whole network was shut down. What is this attack?
+
+#### 🧪 Process
+
+This would be `Destruction` of property and `Denial` of service.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Destruction/Denial` ✅
