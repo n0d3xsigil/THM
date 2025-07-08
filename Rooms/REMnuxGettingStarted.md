@@ -8,6 +8,7 @@
 - [File Analysis](#file-analysis)
 - [Fake Network to Aid Analysis](#fake-network-to-aid-analysis)
 - [Memory Investigation: Evidence Preprocessing](#memory-investigation-evidence-preprocessing)
+- [Analyzing Malicious Files!](#analyzing-malicious-files)
 
 ## 📘Introduction
 
@@ -3823,3 +3824,374 @@ Trying this as the answer
 #### ✅ Answer
 
 - `C:\Intel\ivecuqmanpnirkt615` ✅
+
+
+
+## 📘Analyzing Malicious Files!
+
+This one is a practical. 
+
+A user downloaded what they thought was an upgraded version of windows. The potentially malicious file `windows.exe` has been mvoed to the **`Desktop\Sample`** folder.
+
+### PEStudio
+
+First lets use **PEStudio** to review the file
+
+Double click **`pestudio`** on the desktop
+![image](https://github.com/user-attachments/assets/a1ee5b3e-6476-416d-84e8-6ac256ecf82c)
+
+Click **file** followed by **open file**
+![image](https://github.com/user-attachments/assets/3f8c53d9-dd4d-4e44-a2e6-93115b7182b6)
+
+In my instancethe folder defaulted to _`Sample`_, you may have to navigate to `C:\Users\Administrator\Desktop\Sample`.
+
+Then click **`Windows.exe`** followed by **Open**
+![image](https://github.com/user-attachments/assets/a98c8949-5316-4100-ac75-15a9f99fad38)
+
+The file may take a few seconds to process.
+
+In the first screen we are presented with we can see we have some hashes (`md5`, `sha1`, and `sha256`). 
+![image](https://github.com/user-attachments/assets/cb5b71bd-3210-468f-a494-8c948bfb312b)
+
+Remember, we can right click each hash and click **copy value(s)**. We can also perform a right click and click **check Virustotal**
+
+- MD5: `9FDD4767DE5AEC8E577C1916ECC3E1D6`
+- SHA1: `A1BC55A7931BFCD24651357829C460FD3DC4828F`
+- SHA265 `E9627EBAAC562067759681DCEBA8DDE8D83B1D813AF8181948C549E342F67C0E`
+
+Lets check manually with Virus total. Navigate to [Virustotal](https://www.virustotal.com/).
+
+In the search bar paste in the `MD5` value of `9FDD4767DE5AEC8E577C1916ECC3E1D6`
+![image](https://github.com/user-attachments/assets/36242ef2-4a55-41e3-af2a-41f705f52ac0)
+
+Press **Return** on the keyboard
+
+Interestingly we are redirected to the `SHA256` version of the page. 
+![image](https://github.com/user-attachments/assets/c041d47b-d9b2-45d0-99d1-469318406231)
+
+We can see that the common threat label is trojan.msil/barys, so we know that actually this is likely to be malicious.
+
+How about we compare this against a known good executable, my go to `notepad.exe` from `C:\Windows\System32\`.
+![image](https://github.com/user-attachments/assets/273b1011-01f9-42e6-b587-2f6e0c91db85)
+
+Here I am only really interested in the hashes, and confirming theat the description is what I expect, and it is "Notepad".
+
+Let's check [VirusTotal](https://www.virustotal.com/gui/file/2CC3EC4F97E1A018B2F5A92E088775214AA2B0ABF2814DCA8242414FA2A88718) with the `SHA256`.
+![image](https://github.com/user-attachments/assets/764fafa1-5668-4fe4-bb84-559312cf614c)
+
+As expected, notepad is not malicious, 
+
+Let's go back to our `windows.exe` malicious file.
+
+In our first screen, along with the Hashes, we can see that the first bytes start with `4D 5A` which indicates an executable, so we know if we double click this, Windows will run it. I guess that is a given being a `.exe`. But what is interesting, is that this file is claiming to be `REGEDIT`, see _description_. 
+![image](https://github.com/user-attachments/assets/d300003b-1c69-4476-a911-2b59b9870b48)
+
+Moving over to the `version`
+![image](https://github.com/user-attachments/assets/7f4246fe-a579-4806-ba7e-d53c59a4dcb7)
+
+We can see there are several concerning elements. 
+
+**Comments** - `Редактор реестра`
+ - Translated: _Registry Editor_
+![image](https://github.com/user-attachments/assets/6852a788-a9a5-4bdc-8e24-e526e2f5f56e)
+
+**CompanyName** - `Операционная система Microsoft® Windows®`
+ - Translate: _Microsoft® Windows® operating system_
+ ![image](https://github.com/user-attachments/assets/73c1fe7e-8272-4572-a9ac-ac2b1169d5f4)
+
+
+**LegalCopyright** - `© Корпорация Майкрософт. Все права защищены.`
+- Translate: _© Microsoft Corporation. All rights reserved._
+![image](https://github.com/user-attachments/assets/aa560e0c-a6ca-44f0-894c-c42090a36500)
+
+I've never seen Microsoft use local langauages for their metadata. It is always in US English.
+
+Apparently the absance of a rich header is an inidication of obfuscated code, in order to evade etection. 
+![image](https://github.com/user-attachments/assets/a1623603-020e-416d-adff-c881b326ba3d)
+
+Where as compaired with notepad.exe there is plenty of info under the rich header
+![image](https://github.com/user-attachments/assets/9147b6b3-ac60-46b6-b09e-ed16bbbd6e5e)
+
+Moving on to the functions, we can see 102 functions, THM mentions a few such as `set_UseShellExecute` (which is blacklisted), `CreateDecryptor`, `CryptoStream`, `RijndaelManaged`, and `CipherMode`. These items look like they would be involved in ransomware. 
+
+
+Moving on to Floss...
+
+
+### Analysis using FLOSS
+
+Fire up PowerShell by double clicking **Windows PowerShell** on the desktop.
+![image](https://github.com/user-attachments/assets/03dd8b64-7618-4c49-8583-2ae958bc67e3)
+
+The PowerShell profile takes some time to load, about 35 seconds. Be patient, it will work.
+![image](https://github.com/user-attachments/assets/84f4784a-1975-419d-9daa-b7cdba0101b2)
+
+Next change directory to `C:\Users\Administrator\Desktop\Sample`
+![image](https://github.com/user-attachments/assets/ed1673a4-bb1c-4e14-b7f8-16be219f6b23)
+
+We'll run **`FLOSS`** but output it to a file, first I want to make sure the file doesnt exist.
+![image](https://github.com/user-attachments/assets/b5888d0d-5487-41e1-8ede-91765c5789e6)
+
+I'm going to output to `floss-windows.txt`, so the above search wouldn't have worked 😉. However I did check again before running the command `FLOSS.exe .\windows.exe > floss-windows.txt`
+![image](https://github.com/user-attachments/assets/068fe98e-1c6c-48e7-857f-8d03684fbeb9)
+
+Now we can either, open the open `floss-windows.txt` in notepad, or we can get issue `Get-Content .\floss-windows.txt`
+
+Though, it looks like the `floss-windows.txt` file has over 24k lines, not great for reviewing manually.
+![image](https://github.com/user-attachments/assets/cc28a7a3-86d1-4e7e-891c-5186cb2c4d03)
+
+
+So instead I've opened it in notepad...
+![image](https://github.com/user-attachments/assets/3237d841-0d4a-41dd-aa96-f6ddb3e78309)
+
+The vast majority of the file looks like this...
+![image](https://github.com/user-attachments/assets/d590338b-7be3-46bc-a364-3e12c389e5b5)
+
+The following indicators mentioned in _PEStudio_ can be found near the bottom of the file
+![image](https://github.com/user-attachments/assets/54d49735-a6d8-466c-890f-0993867307ca)
+
+Next, we are moving on to **Process Explorer** and **Process Monitor**
+
+### Analyze with Process Explorer and Process Monitor
+
+It sounds like we're going to deliberatly run `cobaltstrike.exe` from `C:\Users\Administrator\Desktop\Sample`. This doesn't fit well with me, however it is fine as we are in an VM. 
+
+First I want to look the malware up. So From the Desktop double click **pestudio**
+![image](https://github.com/user-attachments/assets/a1ee5b3e-6476-416d-84e8-6ac256ecf82c)
+
+Click **file** followed by **open file**
+![image](https://github.com/user-attachments/assets/3f8c53d9-dd4d-4e44-a2e6-93115b7182b6)
+
+In my instancethe folder defaulted to _`Sample`_, you may have to navigate to `C:\Users\Administrator\Desktop\Sample`.
+
+Either double click **cobaltstrike.exe** _or_ click **cobaltstrike.exe** followed by Open
+![image](https://github.com/user-attachments/assets/df0bcbf0-5b05-4a57-9f64-d88eb6807c48)
+
+We're interested in the `sha256` hash. Copy that by right clicking `sha256` and click **copy value(s)**
+![image](https://github.com/user-attachments/assets/81acd27d-6134-464f-8c5b-9ac9f57c8012)
+
+Navigate to [VirusTotal](https://www.virustotal.com/gui/file/F08A5AE5278948BA547E5C694F207BC60C66C12B260BC62A8DBFAF8A8578CD4C)
+![image](https://github.com/user-attachments/assets/10d24a31-8b29-49db-b562-d247e521ddc8)
+
+We can see for sure that this is vulnerable. Let's close VirusTotal and **PEStudio**
+
+Double click the **Sample** folder on the Desktop
+![image](https://github.com/user-attachments/assets/64226374-2d4d-468c-94e1-1930d7e96ab0)
+
+This doesn't come easy to me, double click **cobaltstrike.exe**
+
+Double click **procexp** on the desktop
+![image](https://github.com/user-attachments/assets/a455c8b1-cf80-43d5-bd79-2f41071b2121)
+
+Since we have executed _cobalstrike.exe_ from Explorer we need to find `explorer.exe`, probably at the bottom. 
+![image](https://github.com/user-attachments/assets/db2e07c7-1c83-45fb-857b-2e3a190befd0)
+
+Right click **`cobaltstrike.exe`** and click **Properties**
+![image](https://github.com/user-attachments/assets/a2e424fb-fda8-4b9b-85e6-ec63ee3e8f1f)
+
+Click the **TCP/IP** tab and monitor for activity
+![image](https://github.com/user-attachments/assets/36fc1f64-316f-4d83-92b5-fe24d90c7e99)
+
+We can see it is trying to reach `47.120.46.210`
+
+Next we should verify with another tool 
+
+On the desktop, double click **procmon** to open **Process Monitor**
+![image](https://github.com/user-attachments/assets/b8101af6-7b55-4dc8-acbc-91c1c0b88a1a)
+
+As it happens, the process filter is already present, click **OK** to close the filter
+![image](https://github.com/user-attachments/assets/257c94d5-aa03-4b21-b979-3620520e5d9f)
+
+Fire up `cobaltstrike.exe again` and you should start to see activity showing up...
+![image](https://github.com/user-attachments/assets/da747797-24c2-4474-8bef-e009839a5f43)
+
+Loads of it, remember what I said earlier, we'll neeed to filter due to the shear number of results here...
+
+Click the **Filter** button
+![image](https://github.com/user-attachments/assets/86666f2d-d98d-4317-be14-8c64ddea7f7f)
+
+Drop down the **Architecture** and click **Operation**
+![image](https://github.com/user-attachments/assets/b52f4430-bc89-4caa-a438-b62cc63ec52b)
+
+Drop down the **is** selection and click **begins with**
+![image](https://github.com/user-attachments/assets/d7732a34-a5b6-4056-b469-0d403b0f8d68)
+
+Enter `TCP` followed by **Add** and **OK** to filter the results
+![image](https://github.com/user-attachments/assets/6a565403-39f6-4d7a-b87e-65550405b22d)
+
+Here we can see confirmation of attempts to connect to `47.120.46.210`
+![image](https://github.com/user-attachments/assets/48aef254-3c72-4569-a057-07f0bb980ad3)
+
+Nice.
+
+Now for some questions. 
+
+
+
+### ❓ Question 01
+
+> Using PEStudio, open the file windows.exe. What is the **entropy value** of the file windows.exe?
+
+#### 🧪 Process
+
+Going forward let's assume we know how to open the application and navigate it...
+
+Under `dos-header (64 bytes)` we see the `entropy` value of `3.669`
+
+![image](https://github.com/user-attachments/assets/551ae537-6005-4094-98b5-760658d5d8ba)
+
+Trying this as the answer
+
+
+#### ✅ Answer
+
+- `3.669` ❌
+
+I'm confused. It looks like I jumped the gun, let's actually look ath the entropy of the file as a whole...
+
+Returning to the top level, there is an `entropy` there too. I guess it would make more sense to use that.
+
+This result is `7.999`
+![image](https://github.com/user-attachments/assets/682e4db6-85dd-42f6-997b-b77b3443dc28)
+
+Trying this as the answer instead
+
+- `7.999` ✅
+
+
+### ❓ Question 02
+
+> Using PEStudio, open the file windows.exe, then go to manifest (administrator section). What is the value under **requestedExecutionLevel**?
+
+#### 🧪 Process
+
+Click **`manifest (administrator)`**, the format is xml so you'll have to look for it, but the result we're looking for is `<requestedExecutionLevel level="requireAdministrator" uiAccess="false" />`.
+![image](https://github.com/user-attachments/assets/5ecdb682-ba06-4c60-8da7-9d5b23a8f762)
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `requireAdministrator` ✅
+
+
+### ❓ Question 03
+
+> Which function allows the process to use the operating system's shell to execute other processes?
+
+#### 🧪 Process
+
+Click **`functions (102)`** look for 'Shell' and something meaning run / start etc.
+![image](https://github.com/user-attachments/assets/a1764e16-aae6-4d1f-a7ac-22b44e414758)
+
+I like the look of `set_UseShellExecute`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `set_UseShellExecute` ✅
+
+
+### ❓ Question 04
+
+> Which API starts with R and indicates that the executable uses cryptographic functions?
+
+#### 🧪 Process
+
+This was our encryption standard, click **`functions (102)`** if not already there. Look for `RijndaelManaged`.
+![image](https://github.com/user-attachments/assets/462d6a5e-c918-48b0-a906-04f4ff1741f9)
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `RijndaelManaged` ✅
+
+
+### ❓ Question 05
+
+> What is the Imphash of cobaltstrike.exe?
+
+#### 🧪 Process
+
+I found implash on **[`VirusTotal`]([https://www.virustotal.com/gui/file/f08a5ae5278948ba547e5c694f207bc60c66c12b260bc62a8dbfaf8a8578cd4c](https://www.virustotal.com/gui/file/e9627ebaac562067759681dceba8dde8d83b1d813af8181948c549e342f67c0e)** under **[`Details`]([https://www.virustotal.com/gui/file/f08a5ae5278948ba547e5c694f207bc60c66c12b260bc62a8dbfaf8a8578cd4c/details](https://www.virustotal.com/gui/file/e9627ebaac562067759681dceba8dde8d83b1d813af8181948c549e342f67c0e/details))**
+
+It shows a value of `17b461a082950fc6332228572138b80c`
+![image](https://github.com/user-attachments/assets/5d001f80-b621-40e9-9bf7-57e82550fc21)
+
+But let's try and find the same in `PEStudio`
+![image](https://github.com/user-attachments/assets/52c67bbf-858a-4d71-90af-98f7dd6294d4)
+
+So this has a different _`imphash`_ of `92EEF189FB188C541CBD83AC8BA4ACF5` **I need to work on my understanding here**
+
+I'm going to try `PEStudio`'s result as I expect that is what they are after
+
+
+#### ✅ Answer
+
+- `92EEF189FB188C541CBD83AC8BA4ACF5` ✅
+
+
+### ❓ Question 06
+
+> What is the defanged IP address to which the process cobaltstrike.exe is connecting?
+
+#### 🧪 Process
+
+I don't recall this being discussed in the room at all. In my mind defanged means the IP has been taken over 'taking the sting out'. The internal tools all only look at the IP its targeting..
+
+So I had to look at the hint for this, the hint is.
+> _You need to provide the IP address in a defanged format, such as 192[.]168[.]3[.]77._
+
+But this didn't really hit home for me, so I looked it up, a good site was [GeeksForGeeks](https://www.geeksforgeeks.org/dsa/defanged-version-of-internet-protocol-address/).
+
+Essentially we wrap each period/dot in a square bracket so `.` becomes `[.]`, or `127.0.0.1` becomes `127[.]0[.]0[.]1`. This way it is easy to delebratly decode, but can't be accessed / ran by mistake.
+
+Putting this newly found knowledge in to practice
+
+- **Original IP**: `47.120.46.210`
+- **Defanged IP**: `47[.]120[.]46[.]210`
+
+This explains why we have segments of 3, 5, 4, 4. That made no sense to me originally. 
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `47[.]120[.]46[.]210` ✅
+
+
+### ❓ Question 07
+
+> What is the destination port number used by cobaltstrike.exe when connecting to its C2 IP Address?
+
+#### 🧪 Process
+
+I did wonder this earlier, there is a file `cobaltstrike_capture.pcapng` under `Sample`. Let's crack this open and see what we find...
+
+Once in Wireshark we can filter _IP_'s by using the filter `ip.addr`, combnied with `==` and the IP of interest we should get some results.
+
+Now we have a bunch of packets outbound to port `81`
+![image](https://github.com/user-attachments/assets/31f551b3-42cd-4418-972b-d4bd67ee9ce4)
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `81` ✅
+
+
+### ❓ Question 08
+
+> During our analysis, we found a process called cobaltstrike.exe. What is the parent process of cobaltstrike.exe?
+
+#### 🧪 Process
+
+This was `explorer.exe`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `explorer.exe` ✅
