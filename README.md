@@ -97,6 +97,6 @@ My discoveries from THM
 - ✅ [REMnux: Getting Started](Rooms/REMnuxGettingStarted.md)
 - ✅ [FlareVM: Arsenal of Tools](Rooms/REMnuxGettingStarted.md)
 ### Build Your Cyber Security Career
-- ❌ [Security Principles](Rooms/SecurityPrinciples.md)
+- ⚠️ [Security Principles](Rooms/SecurityPrinciples.md)
 - ❓ [Careers in Cyber](Rooms/CareersinCyber.md)
 - ❌ [Training Impact on Teams](Rooms/TrainingImpactonTeams.md)
