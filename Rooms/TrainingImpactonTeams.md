@@ -3,9 +3,10 @@
 # Training Impact on Teams
 
 ## Contents
-- [Understanding the Impact of Cyber Security Training](#Understanding the Impact of Cyber Security Training)
+- [Understanding the Impact of Cyber Security Training](#understanding-the-impact-of-cyber-security-training)
 - [Cyber Security Training for Large Organisations](#cyber-security-training-for-large-organisations)
 - [Write a Cyber Security Training Investment Proposal](#write-a-cyber-security-training-investment-proposal)
+- [Vendor Selection](#vendor-selection)
 
 
 
@@ -26,6 +27,7 @@ Trying this as the answer
 - `Training` ✅
 
 
+
 ## 📘Cyber Security Training for Large Organisations
 
 ### ❓ Question
@@ -41,6 +43,7 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Content Studio` ✅
+
 
 
 ## 📘Write a Cyber Security Training Investment Proposal
@@ -97,3 +100,7 @@ Trying this as the answer
 #### ✅ Answer
 
 - `400%` ✅
+
+
+
+## 📘Vendor Selection
