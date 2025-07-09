@@ -8,6 +8,7 @@
 - [DAD](#dad)
 - [Fundamental Concepts of Security Models](#fundamental-concepts-of-security-models)
 - [Defence-in-Depth](#defence-in-depth)
+- [ISO/IEC 19249](#isoiec-19249)
 
 
 
@@ -206,3 +207,33 @@ Basic Q&A
 ## 📘Defence-in-Depth
 
 Defence in depth can be considered layers of security, think, a building with doors, we could add locks or a form of access control. Next we could add an alarm system to detect movement when the building is secured or broken in to. We could add a Security guard to act as a deterent and to monitor the building. We could add CCTV to allow us to capture events that the security guard missed. All of these on their own, may be enough. But evertying together provides defence in depth.
+
+
+
+## 📘ISO/IEC 19249
+
+The **[`International Organization for Standardization`](https://www.iso.org/home.html)** and the **[`International Electrotechnical Commission`](https://www.iec.ch/homepage)** joined forces to create the ISO/IEC 19249, or "_Information technology - Security techniques - Catalogue of architectural and design principles for secure products, systems and applications_".
+
+You can buy it of 132 CEF don't you know (~$166 / £122).
+
+We can split the standard into two areas of principles, _architectural_ and _design_.
+
+### Architectural
+
+- **Domain Seperation**
+
+> Every set of related components is grouped as a single entity; components can be applications, data, or other resources.
+>
+> Each entity will have its own domain and be assigned a common set of security attributes.
+>
+> For example, consider the x86 processor privilege levels: the operating system kernel can run in ring 0 (the most privileged level). In contrast, user-mode applications can run in ring 3 (the least privileged level). Domain separation is included in the Goguen-Meseguer Model.
+
+- **Layering**
+
+- 
+- **Encapsulaton**
+- **Redundancy**
+- **Virtualisation**
+
+
+
