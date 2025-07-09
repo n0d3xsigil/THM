@@ -9,6 +9,7 @@
 - [Fundamental Concepts of Security Models](#fundamental-concepts-of-security-models)
 - [Defence-in-Depth](#defence-in-depth)
 - [ISO/IEC 19249](#isoiec-19249)
+- [Zero Trust versus Trust but Verify](#zero-trust-versus-trust-but-verify)
 
 
 
@@ -279,3 +280,9 @@ Trying this as the answer
 
 
 
+## 📘Zero Trust versus Trust but Verify
+
+While we rely on trust to function, such as trusting a laptop or its vendor, unchecked trust can be dangerous. If that trust is broken, people may rebuild systems or abandon products entirely. In business, trust decisions become even more complex, which is why strong security principles are essential to guide how and where trust is placed.
+
+- **Trust but Verify** is the principle of allowing trust in systems or individuals, but only with ongoing oversight and checks in place. It recognises that trust is necessary, but it must be continuously validated to prevent misuse or compromise.
+- **Zero Trust** is the principle of assuming no implicit trust, whether inside or outside the network. Every user, device, and system must continuously prove its identity and legitimacy before being granted access, regardless of location or prior approval.
