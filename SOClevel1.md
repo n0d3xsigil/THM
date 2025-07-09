@@ -18,13 +18,13 @@
 
 ## Cyber Defence Frameworks
 
-- [Junior Security Analyst Intro](Rooms/JuniorSecurityAnalystIntro.md)
-- [Pyramid Of Pain](Rooms/PyramidOfPain.md)
-- [Cyber Kill Chain](Rooms/CyberKillChain.md)
-- [Diamond Model](Rooms/DiamondModel.md)
-- [MITRE](Rooms/MITRE.md)
-- [Summit](Rooms/Summit.md)
-- [Eviction](Rooms/Eviction.md)
+- ❓ Junior Security Analyst Intro
+- ❓ Pyramid Of Pain
+- ❌ [Cyber Kill Chain](Rooms/CyberKillChain.md)
+- ❌ [Diamond Model](Rooms/DiamondModel.md)
+- ❓ MITRE
+- ❌ [Summit](Rooms/Summit.md)
+- ❌ [Eviction](Rooms/Eviction.md)
 
 
 ## Cyber Threat Intelligence
