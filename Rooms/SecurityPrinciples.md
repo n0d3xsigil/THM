@@ -220,20 +220,62 @@ We can split the standard into two areas of principles, _architectural_ and _des
 
 ### Architectural
 
-- **Domain Seperation**
+- **Domain Seperation** is the principle of isolating different parts of a system so that actions in one domain (e.g., user space, admin space, or different applications) don’t affect others unless explicitly allowed. It limits the impact of failures or breaches by enforcing strict boundaries between components.
+- **Layering** is the principle of using multiple levels of defense so that if one layer fails, others still provide protection. It works by building security in depth, where each layer restricts access or limits damage and makes it harder for an attacker to reach critical assets.
+- **Encapsulaton**is the principle of hiding the internal workings of a component and exposing only what is necessary for its use. This reduces complexity, limits unintended interactions, and protects internal data from unauthorized access or modification.
+- **Redundancy** is the principle of including extra components or capabilities so that if one part fails, the system can continue to function. It improves reliability and resilience by ensuring there is no single point of failure.
+- **Virtualisation** is the principle of creating virtual versions of resources such as operating systems, servers, or networks to isolate environments and control interactions. It enhances security by separating workloads, limiting the spread of compromise, and enabling better resource management.
 
-> Every set of related components is grouped as a single entity; components can be applications, data, or other resources.
->
-> Each entity will have its own domain and be assigned a common set of security attributes.
->
-> For example, consider the x86 processor privilege levels: the operating system kernel can run in ring 0 (the most privileged level). In contrast, user-mode applications can run in ring 3 (the least privileged level). Domain separation is included in the Goguen-Meseguer Model.
+  
+### Design
 
-- **Layering**
+- **Least Privilege** is the principle of giving users, processes, or systems only the access they need to perform their specific tasks. This reduces the risk of misuse, errors, or exploitation by limiting what each entity can do.
+- **Attack Surface Minimisation** is the principle of reducing the number of ways an attacker can interact with or exploit a system. By limiting exposed services, interfaces, and code, the system becomes harder to attack and easier to defend.
+- **Centralized Parameter Validation** is the principle of validating all input in a single, consistent location within the system. This helps ensure that checks are applied uniformly, reducing the risk of overlooked or inconsistent validation that could lead to vulnerabilities.
+- **Centralized General Security Services** is the principle of handling core security functions like authentication, logging, and encryption through shared, centralized components. This ensures consistency, simplifies management, and reduces the chance of security flaws being introduced through duplicated or ad-hoc implementations.
+- **Preparing for Error and Exception Handling** is the principle of designing systems to handle unexpected conditions safely and securely. This includes anticipating failures, validating error states, and avoiding the leakage of sensitive information through error messages or logs.
 
-- 
-- **Encapsulaton**
-- **Redundancy**
-- **Virtualisation**
+
+### ❓ Question 1
+
+> Which principle are you applying when you turn off an insecure server that is not critical to the business?
+
+#### 🧪 Process
+
+> 2. Attack Surface Minimisation: Every system has vulnerabilities that an attacker might use to compromise a system. Some vulnerabilities are known, while others are yet to be discovered. These vulnerabilities represent risks that we should aim to minimize. For example, in one of the steps to harden a Linux system, we would disable any service we don’t need.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `2` ✅
+
+
+### ❓ Question 2
+
+> Your company hired a new sales representative. Which principle are they applying when they tell you to give them access only to the company products and prices?
+
+#### 🧪 Process
+
+> 1. **Least Privilege**: You can also phrase it informally as “need-to basis” or “need-to-know basis” as you answer the question, “who can access what?” The principle of least privilege teaches that you should provide the least amount of permissions for someone to carry out their task and nothing more. For example, if a user needs to be able to view a document, you should give them read rights without write rights.
+
+
+#### ✅ Answer
+
+- `1` ✅
+
+
+### ❓ Question 3
+
+> While reading the code of an ATM, you noticed a huge chunk of code to handle unexpected situations such as network disconnection and power failure. Which principle are they applying?
+
+#### 🧪 Process
+
+> 5. **Preparing for Error and Exception Handling**: Whenever we build a system, we should take into account that errors and exceptions do and will occur. For instance, in a shopping application, a customer might try to place an order for an out-of-stock item. A database might get overloaded and stop responding to a web application. This principle teaches that the systems should be designed to fail safe; for example, if a firewall crashes, it should block all traffic instead of allowing all traffic. Moreover, we should be careful that error messages don’t leak information that we consider confidential, such as dumping memory content that contains information related to other customers.
+
+#### ✅ Answer
+
+- `5` ✅
 
 
 
