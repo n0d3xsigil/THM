@@ -4,6 +4,7 @@
 
 ## Contents
 - [Understanding the Impact of Cyber Security Training](#Understanding the Impact of Cyber Security Training)
+- [Cyber Security Training for Large Organisations](#cyber-security-training-for-large-organisations)
 
 
 
@@ -22,3 +23,22 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Training` ✅
+
+
+## 📘Cyber Security Training for Large Organisations
+
+### ❓ Question
+
+> What is the name of the dashboard that TryHackMe offers for companies to create customised training paths?
+
+#### 🧪 Process
+
+The `Content Studio` is the company training portal.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Content Studio` ✅
+
+
