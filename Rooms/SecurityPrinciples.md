@@ -10,6 +10,7 @@
 - [Defence-in-Depth](#defence-in-depth)
 - [ISO/IEC 19249](#isoiec-19249)
 - [Zero Trust versus Trust but Verify](#zero-trust-versus-trust-but-verify)
+- [Threat versus Risk](#threat-versus-risk)
 
 
 
@@ -286,3 +287,10 @@ While we rely on trust to function, such as trusting a laptop or its vendor, unc
 
 - **Trust but Verify** is the principle of allowing trust in systems or individuals, but only with ongoing oversight and checks in place. It recognises that trust is necessary, but it must be continuously validated to prevent misuse or compromise.
 - **Zero Trust** is the principle of assuming no implicit trust, whether inside or outside the network. Every user, device, and system must continuously prove its identity and legitimacy before being granted access, regardless of location or prior approval.
+
+
+
+## 📘Threat versus Risk
+
+- **Threat** refers to a potential cause of harm. It could be a person, event, or condition that has the capability to exploit a vulnerability. For example, a hacker, a natural disaster, or a software flaw could all be considered threats.
+- **Risk** is the likelihood that a threat will actually exploit a vulnerability and cause damage, along with the potential impact of that event.
