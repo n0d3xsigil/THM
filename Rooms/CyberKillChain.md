@@ -127,3 +127,44 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Watering Hole Attack` ✅
+
+
+
+## 📘Exploitation
+
+
+- In this phase, the attacker **activates the malicious payload** to exploit a vulnerability and gain access to the system.
+- Example tactics include:
+  - Sending **phishing emails** with:
+    - A link to a **fake login page** (e.g., mimicking Office 365).
+    - A **malicious attachment** (e.g., a macro-enabled file that executes ransomware).
+  - Victims trigger the exploit by **clicking links** or **opening attachments**.
+
+- Once access is gained, the attacker may:
+  - **Exploit software, system, or server vulnerabilities** to escalate privileges or move laterally within the network.
+  - Use **[lateral movement](https://www.crowdstrike.com/en-us/cybersecurity-101/cyberattacks/lateral-movement/) techniques** to access deeper parts of the network and extract sensitive data.
+
+- The attacker might also use a **[zero-day exploit](https://www.trellix.com/security-awareness/cybersecurity/what-is-a-zero-day-exploit/)**, which:
+  - Targets unknown vulnerabilities.
+  - Offers **no initial detection opportunity**, making it especially dangerous.
+
+- Common exploitation methods:
+  - Triggering exploits via **email links or attachments**.
+  - Leveraging **zero-day vulnerabilities**.
+  - Exploiting **software, hardware, or human weaknesses**.
+  - Attacking **server-based vulnerabilities** directly.
+
+
+### ❓ Question
+
+> Can you provide the name for a cyberattack targeting a software vulnerability that is unknown to the antivirus or software vendors?
+
+#### 🧪 Process
+
+If it's not known it is a `Zero-day`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Zero-day` ✅
