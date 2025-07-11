@@ -9,6 +9,7 @@
 - [Weaponization](#weaponization)
 - [Delivery](#delivery)
 - [Installation](#installation)
+- [Command & Control](#commandcontrol)
 
 
 
@@ -234,3 +235,37 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Web shell` ✅
+
+
+
+5## 📘Command & Control
+
+- After establishing persistence and executing malware, the attacker sets up a **Command and Control (C2)** channel to remotely manage the compromised system.
+- This communication is often referred to as **C2 beaconing**, where the infected host regularly contacts the attacker's server.
+- **Purpose of C2**:
+  - Allows the attacker to **maintain control**, issue commands, and potentially deliver additional payloads.
+  - Ensures continued access even after initial compromise.
+- **How it works**:
+  - The infected machine communicates with an **external server** controlled by the attacker.
+  - Once connected, the attacker gains **full remote access** to the system.
+- **Common C2 communication methods**
+  - **HTTP (port 80)** and **HTTPS (port 443)**
+    - Blends malicious traffic with normal web traffic to **evade detection**.
+  - **DNS tunneling**
+    - The infected host sends **frequent DNS requests** to a domain controlled by the attacker.
+    - Used to **bypass firewalls** and maintain stealth.
+  - **Note**
+    - The C2 infrastructure may be operated by the attacker directly or by another **compromised system** acting as a relay.
+
+
+### ❓ Question 1
+
+> What is the C2 communication where the victim makes regular DNS requests to a DNS server and domain which belong to an attacker. 
+
+#### 🧪 Process
+
+I wanted to say this was 'DNS Poisining', however I remembered we didn't cover that! So it's `DNS Tunneling`
+
+#### ✅ Answer
+
+- `DNS Tunneling` ✅
