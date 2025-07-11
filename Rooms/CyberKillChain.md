@@ -10,6 +10,7 @@
 - [Delivery](#delivery)
 - [Installation](#installation)
 - [Command & Control](#commandcontrol)
+- [Practice Analysis](#practice-analysis)
 
 
 
@@ -238,7 +239,7 @@ Trying this as the answer
 
 
 
-5## 📘Command & Control
+## 📘Command & Control
 
 - After establishing persistence and executing malware, the attacker sets up a **Command and Control (C2)** channel to remotely manage the compromised system.
 - This communication is often referred to as **C2 beaconing**, where the infected host regularly contacts the attacker's server.
@@ -269,3 +270,43 @@ I wanted to say this was 'DNS Poisining', however I remembered we didn't cover t
 #### ✅ Answer
 
 - `DNS Tunneling` ✅
+
+
+
+## 📘Practice Analysis
+
+**Our options are**
+- `exploit public-facing application`
+- `data from local system`
+- `powershell`
+- `dynamic linker hijacking`
+- `spearphishing attachment`
+- `fallback channels`
+
+- **Reconnaissance**
+  - We only have 6 options rather than 7, so we can assume they already used the `OSINT Framework` ;)
+- **Weaponization**
+  - `powershell` would be the method of weaponisation. 
+- **Delivery**
+  - Which means `spearphishing attachment` is our delivery method.
+- **Exploitation**
+  - Lets pop our `exploit public-facing application`, as an easy win.
+- **Installation**
+  - `dynamic linker hijacking` would allow us to exploit DLL's.
+- **Command & Control**
+  - `fallback channels` would enable C2.
+- **Exfiltration**
+  - `data from local system` is the name of the game.
+
+
+### ❓ Question
+
+> What is the flag after you complete the static site?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `THM{7HR347_1N73L_12_4w35om3}`
