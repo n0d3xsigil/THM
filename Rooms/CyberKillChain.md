@@ -8,6 +8,7 @@
 - [Reconnaissance](#reconnaissance)
 - [Weaponization](#weaponization)
 - [Delivery](#delivery)
+- [Installation](#installation)
 
 
 
@@ -168,3 +169,68 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Zero-day` ✅
+
+
+
+## 📘Installation
+
+**Links**
+- [Persistent Backdoors](https://www.offsec.com/metasploit-unleashed/persistent-backdoors/)
+- ❌ [Windows Local Persistence](Rooms/WindowsLocalPersistence.md)
+  - [https://tryhackme.com/room/windowslocalpersistence](https://tryhackme.com/room/windowslocalpersistence)
+- [Web shell attacks continue to rise](https://www.microsoft.com/en-us/security/blog/2021/02/11/web-shell-attacks-continue-to-rise/)
+- [Meterpreter Backdoor](https://www.offsec.com/metasploit-unleashed/meterpreter-backdoor/)
+- [T1543.003](https://attack.mitre.org/techniques/T1543/003/)
+- [Reg](https://attack.mitre.org/software/S0075/)
+- [Masquerading](https://attack.mitre.org/techniques/T1036/)
+- [T1547.001](https://attack.mitre.org/techniques/T1547/001/)
+- [Timestomp](https://attack.mitre.org/techniques/T1070/006/)
+
+- After gaining access, the attacker aims to **maintain long-term access** to the compromised system, even if the initial entry point is removed or patched.
+- This is achieved by installing a **persistent backdoor**, also known as an **access point**, which allows re-entry without re-exploitation.
+- Common persistence techniques include:
+  - **Web Shells**:
+    - Malicious scripts (e.g., `.php`, `.asp`, `.jsp`) installed on web servers.
+    - Allow remote access and are often hard to detect due to their simplicity and file format.
+  - **Backdoors on Victim Machines**:
+    - Tools like **Meterpreter** (from Metasploit) provide an interactive shell for remote control and code execution.
+  - **Modifying or Creating Windows Services**:
+    - Known as technique **T1543.003** in MITRE ATT&CK.
+    - Attackers use tools like `sc.exe` and `reg` to configure services that run malicious payloads.
+    - Services may be disguised with legitimate-sounding names.
+  - **Registry Run Keys / Startup Folder Entries**:
+    - Malicious payloads are set to execute at user login.
+    - Can be configured for individual users or system-wide execution.
+- Additional stealth technique:
+  - **Timestomping**:
+    - Alters file timestamps (created, modified, accessed) to blend malware with legitimate files and evade forensic detection.
+
+
+### ❓ Question 1
+
+> Can you provide the technique used to modify file time attributes to hide new or changes to existing files?
+
+#### 🧪 Process
+
+This is `timestomping`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Timestomping` ✅
+
+
+### ❓ Question 2
+
+> Can you name the malicious script planted by an attacker on the webserver to maintain access to the compromised system and enables the webserver to be accessed remotely?
+
+#### 🧪 Process
+
+I had to read that a few times, _webserver_ should tell you all you need to know. It's a `Web shell`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Web shell` ✅
