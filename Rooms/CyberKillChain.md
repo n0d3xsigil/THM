@@ -94,3 +94,36 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Macro` ✅
+
+
+
+## 📘Delivery
+
+- **Phishing Emails**
+  - Crafted to appear legitimate and target specific individuals (spearphishing) or broader groups.
+  - May impersonate trusted contacts and include malicious attachments or links.
+  - Example tactic: mimicking a known contact’s email to send a fake invoice containing malware.
+- **Infected USB Drives**
+  - Left in public places (e.g., coffee shops, parking lots) or mailed to targets.
+  - May be branded with company logos to appear trustworthy.
+  - Once plugged in, the USB executes the malicious payload.
+- **Watering Hole Attacks**
+  - The attacker compromises a website frequently visited by the target group.
+  - Victims are redirected to a malicious site or prompted to download malware.
+  - Often involves exploiting known website vulnerabilities.
+  - May include drive-by downloads, such as fake browser extension pop-ups.
+
+
+### ❓ Question
+
+> What is the name of the attack when it is performed against a specific group of people, and the attacker seeks to infect the website that the mentioned group of people is constantly visiting.
+
+#### 🧪 Process
+
+This is a `Watering Hole Attack`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Watering Hole Attack` ✅
