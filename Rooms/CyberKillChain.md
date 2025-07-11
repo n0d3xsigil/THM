@@ -13,7 +13,7 @@
 
 ## 📘Introduction
 
-The Cyber Kill Chain©️ framework, deveopled by Lockheed Martin in 2011 based on the millitary concept.
+The Cyber Kill Chain© framework, deveopled by Lockheed Martin in 2011 based on the millitary concept.
 
 In order for an adversary to suceed in defeating the defenses they will need to beat every phase of the Kill Chain.
 
