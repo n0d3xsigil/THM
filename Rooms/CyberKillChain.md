@@ -66,3 +66,31 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Email Harvesting` ✅
+
+
+
+## 📘Weaponization
+
+- After initial reconnaissance, the attacker enters the **weaponization phase**.
+- The goal is to prepare a **malicious payload** that exploits system vulnerabilities.
+- Instead of developing custom malware, the attacker may **purchase pre-made payloads** from underground sources to save time.
+- Common weaponization methods include:
+  - Embedding malware and exploits into **infected documents** (e.g., with malicious macros or scripts).
+  - Distributing **USB drives** containing worms or other malicious code.
+- The attacker also selects:
+  - Command and Control (**C2**) techniques to remotely execute commands or deliver additional payloads.
+  - **Backdoor implants** to maintain unauthorized access to the target system.
+
+### ❓ Question
+
+> This term is referred to as a group of commands that perform a specific task. You can think of them as subroutines or functions that contain the code that most users use to automate routine tasks. But malicious actors tend to use them for malicious purposes and include them in Microsoft Office documents. Can you provide the term for it?
+
+#### 🧪 Process
+
+I use these every day to automate processes in documents. Usually Excel and I would call it a VBA `Macro`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Macro` ✅
