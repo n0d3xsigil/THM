@@ -7,6 +7,8 @@
 - [Introduction](#introduction)
 - [What is a "Kill Chain"](#what-is-a-kill-chain)
 - [What is "Threat Modelling"](#what-is-threat-modelling)
+- [Introducing the Unified Kill Chain](#introducing-the-unified-kill-chain)
+
 
 
 ## 📘Introduction
@@ -67,3 +69,10 @@ Trying this as the answer
 #### ✅ Answer
 
 - `asset` ✅
+
+
+
+## 📘Introducing the Unified Kill Chain
+
+**Useful Link**: [The Unified Kill Chain](https://www.unifiedkillchain.com/assets/The-Unified-Kill-Chain.pdf)
+
