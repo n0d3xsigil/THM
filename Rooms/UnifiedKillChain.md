@@ -6,7 +6,7 @@
 
 - [Introduction](#introduction)
 - [What is a "Kill Chain"](#what-is-a-kill-chain)
-
+- [What is "Threat Modelling"](#what-is-threat-modelling)
 
 
 ## 📘Introduction
@@ -40,3 +40,30 @@ Trying this as the answer
 
 
 
+  ## 📘What is "Threat Modelling"
+
+- **Threat modelling** is a structured process to identify and reduce risks in systems or applications.
+- Key steps include
+  - Identifying **critical systems/assets** and their roles (e.g. store sensitive data or support operations).
+  - Assessing **vulnerabilities** and how they could be exploited.
+  - Developing an **action plan** to secure those systems.
+  - Implementing **preventive measures** (e.g. secure development practices, staff training)
+- It provides a **high-level view of IT assets** and outlines how to resolve weaknesses.
+- The **Unified Kill Chain supports threat modelling** by highlighting likely attack paths and exploitable surfaces.
+- Common threat modelling frameworks: **STRIDE**, **DREAD**, **CVSS**.
+- For more, explore the **“Principles of Security”** room on TryHackMe.
+
+
+### ❓ Question 1
+
+> What is the technical term for a piece of software or hardware in IT (Information Technology?)
+
+#### 🧪 Process
+
+An `asset`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `asset` ✅
