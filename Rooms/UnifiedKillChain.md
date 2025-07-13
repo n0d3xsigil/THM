@@ -76,3 +76,87 @@ Trying this as the answer
 
 **Useful Link**: [The Unified Kill Chain](https://www.unifiedkillchain.com/assets/The-Unified-Kill-Chain.pdf)
 
+- **Paul Pols' Unified Kill Chain (UKC)** was introduced in **2017** to **complement**, not replace, existing models like **Lockheed Martin’s Kill Chain** and **MITRE ATT\&CK**.
+- It defines **18 detailed attack phases**, covering the full scope of an attack — from **reconnaissance to motivation**.
+- For simplicity, this room groups those phases into broader focus areas.
+
+### ✅ **Benefits of the UKC over other frameworks**
+- **Modern & Updated**: Released in **2017**, updated in **2022** — reflects today’s threat landscape.
+- **Extensive Detail**: Contains **18 phases**, while others may only have a few.
+- **Full Attack Coverage**: Includes **pre-attack, post-exploitation**, and **attacker motives**.
+- **Realistic Attack Flow**: Recognizes attackers **loop between phases** (e.g. re-running recon after gaining access).
+
+
+### ❓ Question 1
+
+> In what year was the Unified Kill Chain framework released?
+
+#### 🧪 Process
+
+> **Unified Kill Chain (UKC)** was introduced in **`2017`**
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `2017` ✅
+
+
+### ❓ Question 2
+
+> According to the Unified Kill Chain, how many phases are there to an attack?
+
+#### 🧪 Process
+
+See the page, there are `18` phases.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `18` ✅
+
+
+### ❓ Question 3
+
+> What is the name of the attack phase where an attacker employs techniques to evade detection?
+
+#### 🧪 Process
+
+You'll need to see the page, see phase 7, `Defense Evasion`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Defense Evasion` ✅
+
+
+### ❓ Question 4
+
+> What is the name of the attack phase where an attacker employs techniques to remove data from a network?
+
+#### 🧪 Process
+
+Again, you'll need to see the page, phase 16, `Exfiltration`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Exfiltration` ✅
+
+
+### ❓ Question 5
+
+> What is the name of the attack phase where an attacker achieves their objectives?
+
+#### 🧪 Process
+
+See Phase 18, `Objectives`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Objectives` ✅
