@@ -8,7 +8,7 @@
 - [What is a "Kill Chain"](#what-is-a-kill-chain)
 - [What is "Threat Modelling"](#what-is-threat-modelling)
 - [Introducing the Unified Kill Chain](#introducing-the-unified-kill-chain)
-
+- [Phase: In (Initial Foothold)](#phase-in-initial-foothold)
 
 
 ## 📘Introduction
@@ -160,3 +160,150 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Objectives` ✅
+
+
+
+## 📘Phase: In (Initial Foothold)
+
+Certainly! Here's a clean, bullet-point summary of that section, grouped by phase, and tied into the **Unified Kill Chain (UKC)** context:
+
+### 🔐 **UKC Phases: Gaining and Maintaining Initial Access**
+
+**📌 Focus**: These phases describe how attackers **gain a foothold**, **maintain persistence**, and **prepare for lateral movement** within a system or network.
+
+**Reconnaissance** (MITRE [TA0043](https://attack.mitre.org/tactics/TA0043/))
+- Adversary gathers info to support later phases.
+- Techniques include **active and passive scanning**.
+- May collect
+  - Open ports/services.
+  - Employee or contact lists (useful for phishing/social engineering).
+  - Leaked credentials.
+  - Network topology and connected systems.
+**Weaponization** (MITRE [TA0001](https://attack.mitre.org/tactics/TA0001/))
+- Attacker prepares infrastructure and payloads.
+- Examples
+  - Setting up **Command & Control (C2)** servers.
+  - Creating malware or exploit tools for delivery.
+**Social Engineering** (MITRE [TA0001](https://attack.mitre.org/tactics/TA0001/))
+- Manipulating people to help compromise systems.
+- Examples:
+  - Convincing a user to open a malicious attachment.
+  - Credential harvesting via fake websites.
+  - Impersonating trusted individuals (e.g. utility engineers, IT staff).
+**Exploitation** (MITRE [TA0002](https://attack.mitre.org/tactics/TA0002/))
+- Execution of payloads to exploit vulnerabilities.
+- Examples
+  - Uploading a **reverse shell**.
+  - Exploiting a vulnerable **script or web app**.
+  - Triggering code execution via weak configurations.
+**Persistence** (MITRE [TA0003](https://attack.mitre.org/tactics/TA0003/))
+- Ensures ongoing access to compromised systems.
+- Examples:
+  - Installing a **backdoor or startup service**.
+  - Registering the system with a **C2 server**.
+  - Triggers that run on specific actions (e.g. admin login).
+**Defence Evasion** (MITRE [TA0005](https://attack.mitre.org/tactics/TA0005/))
+- Avoiding detection by security tools.
+- Examples:
+  - Evading **WAFs, firewalls, antivirus, IDS/IPS**.
+  - Critical for understanding how attackers bypass defences and **improving future resilience**.
+**Command & Control (C2)** (MITRE [TA0011](https://attack.mitre.org/tactics/TA0011/))
+- Establishes communication with the compromised host.
+- Enables:
+  - Remote command execution.
+  - Data theft or credential harvesting.
+  - **Pivoting** to other network systems.
+**Pivoting** (MITRE [TA0008](https://attack.mitre.org/tactics/TA0008/))
+- Moving laterally to reach internal systems.
+- Example:
+  - Attacker compromises a **public web server**, then uses it to access **internal-only systems** that are otherwise unreachable.
+
+
+### ❓ Question 1
+
+> What is an example of a tactic to gain a foothold using emails?
+
+#### 🧪 Process
+
+We would use `Phishing` to gain a foothold.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Phishing` ✅
+
+
+### ❓ Question 2
+
+> Impersonating an employee to request a password reset is a form of what?
+
+#### 🧪 Process
+
+This is an example of `Social Engineering`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Social Engineering` ✅
+
+
+### ❓ Question 3
+
+> An adversary setting up the Command & Control server infrastructure is what phase of the Unified Kill Chain?
+
+#### 🧪 Process
+
+This would fall under `Weaponization`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Weaponization` ✅
+
+
+### ❓ Question 4
+
+> Exploiting a vulnerability present on a system is what phase of the Unified Kill Chain?
+
+#### 🧪 Process
+
+It's in the name, `Exploitation`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Exploitation` ✅
+
+
+### ❓ Question 5
+
+> Moving from one system to another is an example of?
+
+#### 🧪 Process
+
+We would perform `Pivoting` from one system to another.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Pivoting` ✅
+
+
+### ❓ Question 6
+
+> Leaving behind a malicious service that allows the adversary to log back into the target is what?
+
+#### 🧪 Process
+
+We would persist to have `Persistence`. ;)
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Persistence` ✅
