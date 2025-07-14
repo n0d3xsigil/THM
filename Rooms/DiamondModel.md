@@ -7,6 +7,7 @@
 - [Adversary](#adversary)
 - [Victim](#victim)
 - [Capability](#capability)
+- [Infrastructure](#infrastructure)
 
 
 
@@ -222,3 +223,62 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Adversary Arsenal` ✅
+
+
+
+## 📘Infrastructure
+
+**Infrastructure – Core Concept**
+- Refers to the **physical or logical interconnections** used by the adversary.
+- Supports the **delivery and control** of capabilities.
+- Can include both **hardware and software** components.
+
+**Examples of Infrastructure**
+- **Command and Control (C2) centers**
+- **IP addresses**, **domain names**, **email addresses**
+- **Malicious USB devices** or other physical media
+
+**Types of Infrastructure**
+- **Type 1 Infrastructure**
+  - **Owned or directly controlled** by the adversary.
+- **Type 2 Infrastructure**
+  - **Controlled by an intermediary**, who may or may not be aware.
+  - Used to **obfuscate the source** and **hide attribution**.
+  - Examples: malware staging servers, malicious domains, compromised email accounts.
+
+**Service Providers**
+- Organizations that **enable or support** adversary infrastructure.
+- Examples
+  - **Internet Service Providers (ISPs)**
+  - **Domain registrars**
+  - **Webmail providers**
+- Critical for the **availability and operation** of both Type 1 and Type 2 infrastructures.
+
+### ❓ Question 1
+
+> To which type of infrastructure do malicious domains and compromised email accounts belong?
+
+#### 🧪 Process
+
+> **`Type 2 Infrastructure`**
+> - **Controlled by an intermediary**, who may or may not be aware.
+
+#### ✅ Answer
+
+- `Type 2 Infrastructure` ✅
+
+
+### ❓ Question 2
+
+> What type of infrastructure is most likely owned by an adversary? 
+
+#### 🧪 Process
+
+> **`Type 1 Infrastructure`**
+> - **Owned or directly controlled** by the adversary.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Type 1 Infrastructure` ✅
