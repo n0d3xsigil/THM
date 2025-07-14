@@ -1,10 +1,9 @@
-| [Home](../README.md) | [Cyber Security 101](../README.md#cyber-security-101) | **Unified Kill Chain** |
+| [Home](../README.md) | [SOC Level 1](../SOClevel1.md) | **Unified Kill Chain** |
 
 # Unified Kill Chain
 
 ## Contents
 
-- [Introduction](#introduction)
 - [What is a "Kill Chain"](#what-is-a-kill-chain)
 - [What is "Threat Modelling"](#what-is-threat-modelling)
 - [Introducing the Unified Kill Chain](#introducing-the-unified-kill-chain)
@@ -12,17 +11,6 @@
 - [Phase: Through (Network Propagation)](#phasethroughnetworkpropagation)
 - [Phase: Out (Action on Objectives)](#phaseoutactiononobjectives)
 - [Practical](#practical)
-
-
-
-
-
-
-
-
-
-
-## 📘Introduction
 
 
 ## 📘What is a "Kill Chain"
