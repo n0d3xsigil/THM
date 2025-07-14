@@ -9,7 +9,7 @@
 - [What is "Threat Modelling"](#what-is-threat-modelling)
 - [Introducing the Unified Kill Chain](#introducing-the-unified-kill-chain)
 - [Phase: In (Initial Foothold)](#phase-in-initial-foothold)
-
+- [Phase: Through (Network Propagation)](#phasethroughnetworkpropagation)
 
 ## 📘Introduction
 
@@ -307,3 +307,78 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Persistence` ✅
+
+
+
+## 📘Phase: Through (Network Propagation)
+
+**Post-Foothold Phase Overview**
+- After gaining initial access, the attacker aims to expand control and access within the network.
+- A compromised system is used as a **pivot point** to explore and exploit the internal network.
+**Pivoting (MITRE Tactic [TA0008](https://attack.mitre.org/tactics/TA0008/))**
+- The compromised system becomes a **staging site** and **tunnel** for attacker operations.
+- Used to **distribute malware and backdoors** across the network.
+**Discovery (MITRE Tactic [TA0007](https://attack.mitre.org/tactics/TA0007/))**
+- The attacker gathers intelligence on:
+  - **User accounts** and their permissions.
+  - **Installed applications and software**.
+  - **Web browser activity**.
+  - **Files, directories, and network shares**.
+  - **System configurations**.
+**Privilege Escalation (MITRE Tactic [TA0004](https://attack.mitre.org/tactics/TA0004/))**
+- The attacker attempts to gain higher-level access using:
+  - **Vulnerabilities** and **misconfigurations**.
+- Target privilege levels include:
+  - **SYSTEM/ROOT**.
+  - **Local Administrator**.
+  - **Admin-like user accounts**.
+  - **Users with specific access or functions**.
+**Execution (MITRE Tactic [TA0002](https://attack.mitre.org/tactics/TA0002/))**
+- Malicious code is deployed via the pivot system.
+- Techniques include:
+  - **Remote trojans**.
+  - **Command and Control (C2) scripts**.
+  - **Malicious links**.
+  - **Scheduled tasks** for persistence.
+**Credential Access (MITRE Tactic [TA0006](https://attack.mitre.org/tactics/TA0006/))**
+- The attacker steals credentials using:
+  - **Keylogging**.
+  - **Credential dumping**.
+- Enables stealthier movement using **legitimate credentials**.
+**Lateral Movement (MITRE Tactic [TA0008](https://attack.mitre.org/tactics/TA0008/))**
+- With elevated privileges and credentials, the attacker:
+  - **Moves across the network** to other systems.
+  - Uses **stealthy techniques** to avoid detection.
+
+
+### ❓ Question 1
+
+> As a SOC analyst, you pick up numerous alerts pointing to failed login attempts from an administrator account. What stage of the kill chain would an attacker be seeking to achieve?
+
+#### 🧪 Process
+
+> **`Privilege Escalation` (MITRE Tactic [TA0004](https://attack.mitre.org/tactics/TA0004/))**
+> - The attacker attempts to gain higher-level access
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Privilege Escalation` ✅
+
+
+### ❓ Question 2
+
+> Mimikatz, a known post-exploitation tool, was recently detected running on the IT Manager’s computer. Security logs show that Mimikatz attempted to access memory spaces typically used by Windows to store user authentication secrets. Considering the usual capabilities and purpose of Mimikatz, what is the primary objective of this tool in such an attack scenario?
+
+#### 🧪 Process
+
+> The attacker steals credentials using:
+> - **Keylogging**.
+> - **`Credential dumping`**
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Credential dumping` ✅
