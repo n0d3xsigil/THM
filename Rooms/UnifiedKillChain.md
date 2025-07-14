@@ -11,7 +11,7 @@
 - [Phase: In (Initial Foothold)](#phase-in-initial-foothold)
 - [Phase: Through (Network Propagation)](#phasethroughnetworkpropagation)
 - [Phase: Out (Action on Objectives)](#phaseoutactiononobjectives)
-
+- [Practical](#practical)
 
 
 
@@ -456,3 +456,19 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Confidentiality` ✅
+
+
+
+## 📘Practical
+
+### ❓ Question
+
+> Match the scenario prompt to the correct phase of the Unified Kill Chain to reveal the flag at the end. What is the flag?
+
+#### 🧪 Process
+
+See the page on THM to fin the answers you are looking for
+
+#### ✅ Answer
+
+- `THM{UKC_SCENARIO}` ✅
