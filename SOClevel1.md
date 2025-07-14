@@ -21,7 +21,7 @@
 - ❓ Junior Security Analyst Intro
 - ❓ Pyramid Of Pain
 - ✅ [Cyber Kill Chain](Rooms/CyberKillChain.md)
-- [Unified Kill Chain](Rooms/UnifiedKillChain.md)
+- ✅ [Unified Kill Chain](Rooms/UnifiedKillChain.md)
 - ❌ [Diamond Model](Rooms/DiamondModel.md)
 - ❓ MITRE
 - ❌ [Summit](Rooms/Summit.md)
