@@ -6,6 +6,7 @@
 - [Introduction](#introduction)
 - [Adversary](#adversary)
 - [Victim](#victim)
+- [Capability](#capability)
 
 
 
@@ -178,3 +179,46 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Victim Personae` ✅
+
+
+
+## 📘Capability
+
+**Capability – Core Concept**
+- Refers to the **skills, tools, and techniques** used by the adversary.
+- Represents the adversary’s **Tactics, Techniques, and Procedures (TTPs)**.
+
+**Range of Techniques**
+- Can include
+  - **Basic methods** like manual password guessing.
+  - **Advanced techniques** such as custom malware development or use of malicious tools.
+
+**Key Terms**
+- **Capability Capacity**
+  - The **vulnerabilities and exposures** that a specific capability can exploit.
+- **Adversary Arsenal**
+  - The **collection of capabilities** an adversary possesses.
+  - The **combined capacity** of these capabilities defines the **arsenal’s strength**.
+
+**Access to Capabilities**
+- Adversaries must **possess or have access to** the required capabilities.
+- These can include
+  - Skills like **malware or phishing email development**.
+  - Access to **capabilities-as-a-service**, such as **malware or ransomware for hire**.
+
+
+### ❓ Question
+
+> Provide the term for the set of tools or capabilities that belong to an adversary.
+
+#### 🧪 Process
+
+> **`Adversary Arsenal`**
+>  - The **collection of capabilities** an adversary possesses.
+>  - The **combined capacity** of these capabilities defines the **arsenal’s strength**.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Adversary Arsenal` ✅
