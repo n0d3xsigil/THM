@@ -8,7 +8,7 @@
 - [Victim](#victim)
 - [Capability](#capability)
 - [Infrastructure](#infrastructure)
-
+- [Event Meta Features](#eventmetafeatures)
 
 
 
@@ -282,3 +282,125 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Type 1 Infrastructure` ✅
+
+
+
+## 📘Event Meta Features
+
+**Meta-Features – Overview**
+- **Optional** enhancements to the core Diamond Model.
+- Provide **additional intelligence** and **context** to intrusion analysis.
+- Six commonly used meta-features
+
+1. **Timestamp**
+- Records the **date and time** of the event.
+- Can include **start and end times**.
+- Helps identify **patterns**, **correlate events**, and **infer time zones** or **geographic origins** of attacks.
+
+2. **Phase**
+- Represents the **stage** of the intrusion or attack.
+- Based on **Axiom 4**: every malicious activity has **two or more sequential phases**.
+- Often aligned with the **Cyber Kill Chain**
+  1. Reconnaissance  
+  2. Weaponization  
+  3. Delivery  
+  4. Exploitation  
+  5. Installation  
+  6. Command & Control  
+  7. Actions on Objective  
+- Helps track the **progression** of an attack.
+
+3. **Result**
+- Captures the **outcome** or **post-condition** of the event.
+- Can be labeled as
+  - **Success**
+  - **Failure**
+  - **Unknown**
+- May also reflect impact on the **CIA Triad**
+  - **Confidentiality Compromised**
+  - **Integrity Compromised**
+  - **Availability Compromised**
+- Useful for documenting **what was achieved** or **exfiltrated**.
+
+4. **Direction**
+- Describes the **flow of the attack** (host-based or network-based).
+- Seven possible values
+  - Victim-to-Infrastructure  
+  - Infrastructure-to-Victim  
+  - Infrastructure-to-Infrastructure  
+  - Adversary-to-Infrastructure  
+  - Infrastructure-to-Adversary  
+  - Bidirectional  
+  - Unknown
+
+5. **Methodology**
+- Describes the **general classification** of the intrusion.
+- Examples
+  - **Phishing**
+  - **DDoS**
+  - **Breach**
+  - **Port scan**
+- Helps categorize and **compare attack types**.
+
+6. **Resources**
+- External **requirements** needed for the intrusion to succeed.
+- Can include
+  - **Software** (e.g., Metasploit, OS)
+  - **Knowledge** (e.g., how to use tools)
+  - **Information** (e.g., credentials)
+  - **Hardware** (e.g., servers, routers)
+  - **Funds** (e.g., to buy domains)
+  - **Facilities** (e.g., electricity, shelter)
+  - **Access** (e.g., network paths, ISP access)
+
+
+### ❓ Question
+
+> What meta-feature does the axiom "Every malicious activity contains two or more phases which must be successfully executed in succession to achieve the desired result" belong to? 
+
+#### 🧪 Process
+
+> 2. **`Phase`**
+> - Represents the **stage** of the intrusion or attack.
+> - Based on **Axiom 4**: every malicious activity has **two or more sequential phases**.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Phase` ✅
+
+
+### ❓ Question
+
+> You can label the event results as "success", "failure", and "unknown". What meta-feature is this related to? 
+
+#### 🧪 Process
+
+> 3. **`Result`**
+> [...]
+> - **Success**
+> - **Failure**
+> - **Unknown**
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Result` ✅
+
+
+### ❓ Question
+
+> To what meta-feature is this phrase applicable "Every intrusion event requires one or more external resources to be satisfied prior to success"? 
+
+#### 🧪 Process
+
+> 6. **`Resources`**
+> - External **requirements** needed for the intrusion to succeed.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Resources` ✅
