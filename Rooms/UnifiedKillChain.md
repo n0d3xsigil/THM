@@ -10,6 +10,17 @@
 - [Introducing the Unified Kill Chain](#introducing-the-unified-kill-chain)
 - [Phase: In (Initial Foothold)](#phase-in-initial-foothold)
 - [Phase: Through (Network Propagation)](#phasethroughnetworkpropagation)
+- [Phase: Out (Action on Objectives)](#phaseoutactiononobjectives)
+
+
+
+
+
+
+
+
+
+
 
 ## 📘Introduction
 
@@ -382,3 +393,66 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Credential dumping` ✅
+
+
+
+## 📘Phase: Out (Action on Objectives)
+
+**Final Phase Overview**
+- The attacker has achieved deep access to critical assets.
+- Their actions now focus on fulfilling their **strategic goals**, often targeting the **CIA triad**:
+  - **Confidentiality**
+  - **Integrity**
+  - **Availability**
+**Collection (MITRE Tactic [TA0009](https://attack.mitre.org/tactics/TA0009/))**
+- The attacker gathers valuable data from:
+  - **Drives**
+  - **Browsers**
+  - **Audio/Video**
+  - **Emails**
+- This compromises **confidentiality** and prepares for **exfiltration**.
+**Exfiltration (MITRE Tactic [TA0010](https://attack.mitre.org/tactics/TA0010/))**
+- Data is **stolen** and **extracted** from the environment.
+- Techniques include:
+  - **Encryption and compression** to evade detection.
+  - Use of **C2 channels and tunnels** established earlier.
+**Impact (MITRE Tactic [TA0040](https://attack.mitre.org/tactics/TA0040/))**
+- The attacker disrupts **integrity** and **availability** by:
+  - **Manipulating, deleting, or encrypting data**.
+  - **Removing access**, **wiping disks**, or launching:
+    - **Ransomware**
+    - **Defacement**
+    - **Denial of Service (DoS)** attacks
+**Objectives**
+- The attacker executes their **strategic intent**, such as:
+  - **Financial gain** (e.g., ransomware for payment).
+  - **Reputation damage** (e.g., leaking confidential data).
+
+### ❓ Question
+
+> While monitoring the network as a SOC analyst, you realise that there is a spike in the network activity, and all the traffic is outbound to an unknown IP address. What stage could describe this activity?
+
+#### 🧪 Process
+
+A spike in traffic could mean that more data than usual is traversing the network, since the traffic is outbount, we could be whitnesing `Exfiltration`.
+
+Trying this as your answer
+
+#### ✅ Answer
+
+- `Exfiltration` ✅
+
+
+### ❓ Question
+
+> Personally identifiable information (PII) has been released to the public by an adversary, and your organisation is facing scrutiny for the breach. What part of the CIA triad would be affected by this action?
+
+#### 🧪 Process
+
+If PII has been released to the public, this would be a breach of `Confidentiality`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Confidentiality` ✅
