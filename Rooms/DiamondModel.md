@@ -4,6 +4,7 @@
 
 ## Contents
 - [Introduction](#introduction)
+- [Adversary](#adversary)
 
 
 
@@ -46,3 +47,74 @@
 - Assists in creating a Diamond Model for incidents like breaches or attacks.
 - Useful for analyzing **Advanced Persistent Threats (APTs)**.
 - Aids in explaining incidents to **non-technical audiences**.
+
+
+
+## 📘Adversary
+
+**Adversary – Core Concept**
+- Also referred to as: **attacker**, **enemy**, **cyber threat actor**, or **hacker**.
+- The **adversary** is the individual or group **behind a cyberattack**, which could be an **intrusion** or a **breach**.
+
+**Definition (per Diamond Model creators)**
+- An **adversary** is an **actor or organization** that uses a **capability** against a **victim** to achieve their **intent**.
+- Often, adversary details are **unknown or unclear** at the time of discovery.
+
+**Adversary Roles**
+- **Adversary Operator**
+  - The **person(s)** actively conducting the intrusion.
+  - Often the “hacker” in action.
+- **Adversary Customer**
+  - The **entity benefiting** from the intrusion.
+  - May be the same as the operator or a **separate person/group**.
+  - Can **control multiple operators** with different capabilities and infrastructure.
+
+**Why the Distinction Matters**
+- Helps in understanding
+  - **Intent** behind the attack.
+  - **Attribution** of the threat.
+  - **Adaptability** and **persistence** of the adversary.
+  - The **relationship** between adversary and victim.
+
+**Challenges in Identification**
+- Adversaries are **hard to identify early** in an attack.
+- Clues can be gathered from
+  - Incident data.
+  - Breach signatures.
+  - Other relevant intelligence.
+ 
+
+### ❓ Question 1
+
+> What is the term for a person/group that has the intention to perform malicious actions against cyber resources?
+
+#### 🧪 Process
+
+> **Adversary Operator**
+> - The **person(s)** actively conducting the intrusion.
+> - Often the “hacker” in action.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Adversary Operator` ✅
+
+
+### ❓ Question 2
+
+> What is the term of the person or a group that will receive the benefits from the cyberattacks?
+
+#### 🧪 Process
+
+
+> **`Adversary Customer`**
+> - The **entity benefiting** from the intrusion.
+> - May be the same as the operator or a **separate person/group**.
+> - Can **control multiple operators** with different capabilities and infrastructure.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Adversary Customer` ✅
