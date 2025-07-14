@@ -5,6 +5,10 @@
 ## Contents
 - [Introduction](#introduction)
 - [Adversary](#adversary)
+- [Victim](#victim)
+
+
+
 
 
 
@@ -90,7 +94,7 @@
 
 #### 🧪 Process
 
-> **Adversary Operator**
+> **`Adversary Operator`**
 > - The **person(s)** actively conducting the intrusion.
 > - Often the “hacker” in action.
 
@@ -118,3 +122,59 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Adversary Customer` ✅
+
+
+
+## 📘Victim
+
+**Victim – Core Concept**
+- The **victim** is the **target** of the adversary.
+- Can be
+  - An **organization**
+  - A **person**
+  - A **targeted email address**, **IP address**, **domain**, etc.
+- There is **always a victim** in every cyberattack.
+
+**Victim as an Entry Point**
+- Victims often serve as **initial footholds** for attackers to infiltrate larger targets.
+- Example: A **spear-phishing email** sent to a company; the person who clicks the link is the **victim**.
+
+**Victim Categories**
+- **Victim Personae**
+  - The **people or organizations** being targeted.
+  - Includes:
+    - Organization names
+    - Individual names
+    - Industries
+    - Job roles
+    - Interests
+- **Victim Assets**
+  - The **attack surface** targeted by the adversary.
+  - Includes:
+    - Systems
+    - Networks
+    - Email addresses
+    - Hosts
+    - IP addresses
+    - Social media accounts
+
+**Why the Distinction Matters**
+- **Victim Personae** help understand **who** is being targeted.
+- **Victim Assets** help identify **what** is being attacked.
+- Both serve **different analytical purposes** in intrusion analysis.
+
+
+### ❓ Question
+
+> What is the term that applies to the Diamond Model for organizations or people that are being targeted?
+
+#### 🧪 Process
+
+> **`Victim Personae`**
+> - The **people or organizations** being targeted.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Victim Personae` ✅
