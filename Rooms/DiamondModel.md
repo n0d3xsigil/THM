@@ -9,6 +9,9 @@
 
 ## 📘Introduction
 
+<img width="1013" height="832" alt="image" src="https://github.com/user-attachments/assets/b71b5969-d820-49fd-874c-7e91f397f3e5" />
+
+
 **Origin**
 - Developed in 2013 by Sergio Caltagirone, Andrew Pendergast, and Christopher Betz.
 - See [`diamond.pdf`](https://www.activeresponse.org/wp-content/uploads/2013/07/diamond.pdf) for the full documentation.
