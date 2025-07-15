@@ -22,7 +22,7 @@
 - ❓ Pyramid Of Pain
 - ✅ [Cyber Kill Chain](Rooms/CyberKillChain.md)
 - ✅ [Unified Kill Chain](Rooms/UnifiedKillChain.md)
-- ❌ [Diamond Model](Rooms/DiamondModel.md)
+- ⚠️ [Diamond Model](Rooms/DiamondModel.md)
 - ❓ MITRE
 - ❌ [Summit](Rooms/Summit.md)
 - ❌ [Eviction](Rooms/Eviction.md)
