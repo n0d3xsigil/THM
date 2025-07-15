@@ -11,7 +11,7 @@
 - [Event Meta Features](#eventmetafeatures)
 - [Social-Political Component](#socialpoliticalcomponent)
 - [Technology Component](#technologycomponent)
-
+- [Practice Analysis](#practiceanalysis)
 
 
 ## 📘Introduction
@@ -453,3 +453,22 @@ Trying this as the answer
 **Analytical Value**
 - Reveals **technical dependencies** between adversary actions.
 - Supports detection and mitigation by identifying **common patterns** in tools and infrastructure use.
+
+
+
+## 📘Practice Analysis
+
+
+### ❓ Question
+
+> Ensure you have deployed the static site attached to this task. To complete the static site, you will need to click on each triangular section of the diamond until you have completed all eight areas of the diamond
+>
+> **Complete all eight areas of the diamond**. What is the flag that is displayed to you?
+
+#### 🧪 Process
+
+You'll have to review the room to perform practical. It is basic Q&A.
+
+#### ✅ Answer
+
+- `THM{DIAMOND_MODEL_ATTACK_CHAIN}` ✅
