@@ -9,7 +9,7 @@
 - [Capability](#capability)
 - [Infrastructure](#infrastructure)
 - [Event Meta Features](#eventmetafeatures)
-
+- [Social-Political Component](#socialpoliticalcomponent)
 
 
 
@@ -404,3 +404,30 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Resources` ✅
+
+
+
+## 📘Social-Political Component
+
+**Social-Political Component – Core Concept**
+- Describes the **intentions and motivations** behind the adversary’s actions.
+- Focuses on the **“why”** of the intrusion.
+
+**Common Adversary Motivations**
+- **Financial gain** (e.g., stealing data, crypto mining)
+- **Reputation building** (e.g., gaining status in hacker communities)
+- **Hacktivism** (e.g., politically or socially motivated attacks)
+- **Espionage** (e.g., state-sponsored intelligence gathering)
+
+**Adversary-Victim Relationship**
+- The **victim provides a “product”** (e.g., computing resources, bandwidth).
+- The **adversary consumes** this product for their **own benefit**.
+  - Example: Using a victim’s machine in a **botnet** for **cryptocurrency mining**.
+
+**Analytical Value**
+- Helps analysts understand
+  - The **strategic goals** of the adversary.
+  - The **broader context** of the attack.
+  - Potential **future targets** or **campaign patterns**.
+
+  
