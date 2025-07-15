@@ -24,7 +24,7 @@
 - ✅ [Unified Kill Chain](Rooms/UnifiedKillChain.md)
 - ✅ [Diamond Model](Rooms/DiamondModel.md)
 - ❓ MITRE
-- ❌ [Summit](Rooms/Summit.md)
+- ⚠️ [Summit](Rooms/Summit.md)
 - ❌ [Eviction](Rooms/Eviction.md)
 
 
