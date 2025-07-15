@@ -10,7 +10,7 @@
 - [Infrastructure](#infrastructure)
 - [Event Meta Features](#eventmetafeatures)
 - [Social-Political Component](#socialpoliticalcomponent)
-
+- [Technology Component](#technologycomponent)
 
 
 
@@ -430,4 +430,26 @@ Trying this as the answer
   - The **broader context** of the attack.
   - Potential **future targets** or **campaign patterns**.
 
+
   
+## 📘Technology Component
+
+**Technology – Core Concept**
+- A **meta-feature** that highlights the **relationship** between
+  - **Capability** (what the adversary can do)
+  - **Infrastructure** (how the adversary delivers or controls it)
+- Focuses on **how the adversary operates and communicates**.
+
+**Purpose**
+- Helps analysts understand the **technical methods** and **channels** used in an attack.
+- Bridges the gap between **tools/skills** and the **systems used to deploy them**.
+
+**Example Scenario**
+- **Watering-hole attack**
+  - The adversary **compromises a legitimate website** frequently visited by the target.
+  - The **infrastructure** is the compromised website.
+  - The **capability** is the malicious code or exploit delivered through it.
+
+**Analytical Value**
+- Reveals **technical dependencies** between adversary actions.
+- Supports detection and mitigation by identifying **common patterns** in tools and infrastructure use.
