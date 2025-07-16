@@ -9,17 +9,25 @@
 
 ## 📘Understand the adversary
 
+We're told to use the MITRE
+
 ### ❓ Question 01
 
 > What is a technique used by the APT to both perform recon and gain initial access?
 
 #### 🧪 Process
 
-_process_
+This took a moment to realise that actually the items that are highlighted are infact the TTP that the APT28 used.
+
+Once I realise that I then compaired common entries between **Reconnaissance** and **Initial Access**.
+
+The only common item was `Spearphishing link`.
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `Spearphishing link`✅
 
 
 ### ❓ Question 02
@@ -28,11 +36,25 @@ _process_
 
 #### 🧪 Process
 
-_process_
+Okay, hopfully I have my swing now...
+
+Looking at **Iniital Access** ➡️ **Valid Accounts** ➡️ `Cloud Accounts`
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `Cloud Accounts` ❌
+
+Okay, rethink time.
+
+> _APT might have moved forward from the recon phase_
+
+What is the next phase? **Resource Development** ➡️ **Compromise Accounts** ➡️ `Email Accounts`
+
+Trying this as the answer
+
+- `Email Accounts` ✅
 
 
 ### ❓ Question 03
@@ -41,11 +63,15 @@ _process_
 
 #### 🧪 Process
 
-_process_
+> _What two techniques of user execution should Sunny look out for?_
+
+So there is no **User Execution** in Initial Access, however under **Execution** we have `Malicious File` and `Malicious Link`
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `Malicious file and malicious link` ✅
 
 
 ### ❓ Question 04
@@ -54,11 +80,19 @@ _process_
 
 #### 🧪 Process
 
-_process_
+> _which scripting interpreters should Sunny search for to identify successful execution_
+
+Key words, "_Scripting Interpreters_" and "_execution_"
+
+Under **Execution** we have "_Command and Scripting Interpreter_" so thats Promising. 
+
+This leaves us with `PowerShell and Windows Command Shell`
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `PowerShell and Windows Command Shell` ✅
 
 
 ### ❓ Question 05
@@ -67,11 +101,18 @@ _process_
 
 #### 🧪 Process
 
-_process_
+I'll just pick out the key words here
+- "**registry**"
+- "**changed**"
+- "**maintaining persistence**"
+
+I'm going to go with **Persistence** ➡️ `Registry Run Keys`.
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `Registry Run Keys` ✅
 
 
 ### ❓ Question 06
@@ -80,11 +121,17 @@ _process_
 
 #### 🧪 Process
 
-_process_
+I'm thinking about:
+- "**Defense evasion**"
+- "**Proxy**"
+
+We've got **Defense Evasion** ➡️ **System Binary Proxy Execution** ➡️ `Rundll32`.
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `Rundll32` ✅
 
 
 ### ❓ Question 07
@@ -93,11 +140,13 @@ _process_
 
 #### 🧪 Process
 
-_process_
+We're going to be moving in to the "_discovery_" phase. TCP Dump is a packet capture tool. I think it's safe to say the technique is `Network Sniffing`.
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `Network sniffing` ✅
 
 
 ### ❓ Question 08
@@ -106,11 +155,15 @@ _process_
 
 #### 🧪 Process
 
-_process_
+So "_Lateral Movement_" or pivoting means to attempt to access another machine. We already know it is likely we are talking about a **Windows** envionment given `powershell` etc.
+
+As we're looking at **Remove Services** it can only be `SMB/Windows Admin Shares`.
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `SMB/Windows Admin Shares` ✅
 
 
 ### ❓ Question 09
@@ -119,7 +172,9 @@ _process_
 
 #### 🧪 Process
 
-_process_
+So we're now in the **collection** phase. I can only see one "_information repository_" and that is `Sharepoint`.
+
+Trying this as the answer
 
 #### ✅ Answer
 
@@ -132,11 +187,13 @@ _process_
 
 #### 🧪 Process
 
-_process_
+Under **Command and Control** we have two types of "_Proxy_"'s `External Proxy` and `Multi-hop Proxy`. 
+
+Trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `External Proxy and Multi-hop Proxy` ✅
 
 
 ### ❓ Question 11
@@ -145,8 +202,10 @@ _process_
 
 #### 🧪 Process
 
-_process_
+I didn't realise this wasn't a question ``.
+
+Not trying this as the answer
 
 #### ✅ Answer
 
-- `answer`
+- `` 😉
