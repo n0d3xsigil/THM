@@ -25,7 +25,7 @@
 - ✅ [Diamond Model](Rooms/DiamondModel.md)
 - ❓ MITRE
 - ✅ [Summit](Rooms/Summit.md)
-- ❌ [Eviction](Rooms/Eviction.md)
+- ⚠️ [Eviction](Rooms/Eviction.md)
 
 
 ## Cyber Threat Intelligence
