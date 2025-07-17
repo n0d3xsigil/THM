@@ -5,6 +5,8 @@
 ## Contents
 - [Introduction](#introduction)
 - [Cyber Threat Intelligence](#cyberthreatintelligence)
+- [CTI Lifecycle](#ctilifecycle)
+
 
 
 ## 📘Introduction
@@ -77,3 +79,42 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Technical Intel` ✅
+
+
+
+## 📘CTI Lifecycle
+
+### 1. Direction
+### 2. Collection
+### 3. Processing
+### 4. Analysis
+### 5. Dissemination
+### 6. Feedback
+
+
+### ❓ Question 1
+
+> At which phase of the CTI lifecycle is data converted into usable formats through sorting, organising, correlation and presentation?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+ 
+- `Processing` ✅
+
+
+### ❓ Question
+
+> During which phase do security analysts get the chance to define the questions to investigate incidents?
+
+#### 🧪 Process
+
+_process_
+
+#### ✅ Answer
+
+- `answer`
+
+
