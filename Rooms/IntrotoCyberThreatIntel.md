@@ -7,6 +7,7 @@
 - [Cyber Threat Intelligence](#cyberthreatintelligence)
 - [CTI Lifecycle](#ctilifecycle)
 - [CTI Standards & Frameworks](#cti-standards--frameworks)
+- [Practical Analysis](#practical-analysis)
 
 
 
@@ -269,3 +270,46 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Actions on Objectives`
+
+
+
+## 📘Practical Analysis
+
+
+### ❓ Question 1
+
+> What was the source email address?
+
+#### 🧪 Process
+
+It is fiarly straight forward. But you will need to see the site
+
+#### ✅ Answer
+
+- `vipivillain@badbank.com` ✅
+
+
+### ❓ Question 2
+
+> What was the name of the file downloaded?
+
+#### 🧪 Process
+
+It is fiarly straight forward. But you will need to see the site
+
+#### ✅ Answer
+
+- `flbpfuh.exe` ✅
+
+
+### ❓ Question 3
+
+> After building the threat profile, what message do you receive?
+
+#### 🧪 Process
+
+It is fiarly straight forward. But you will need to see the site
+
+#### ✅ Answer
+
+- `THM{NOW_I_CAN_CTI}` ✅
