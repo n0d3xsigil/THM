@@ -30,7 +30,7 @@
 
 ## Cyber Threat Intelligence
 
-- ⚠️ [Intro to Cyber Threat Intel](Rooms/IntrotoCyberThreatIntel.md)
+- ✅ [Intro to Cyber Threat Intel](Rooms/IntrotoCyberThreatIntel.md)
 - ❌ [Threat Intelligence Tools](Rooms/ThreatIntelligenceTools.md)
 - ❌ [Yara](Rooms/Yara.md)
 - ❌ [OpenCTI](Rooms/OpenCTI.md)
