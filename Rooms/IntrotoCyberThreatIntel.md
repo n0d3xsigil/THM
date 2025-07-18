@@ -6,6 +6,7 @@
 - [Introduction](#introduction)
 - [Cyber Threat Intelligence](#cyberthreatintelligence)
 - [CTI Lifecycle](#ctilifecycle)
+- [CTI Standards & Frameworks](#cti-standards--frameworks)
 
 
 
@@ -166,3 +167,105 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Direction` ✅
+
+
+
+## 📘CTI Standards & Frameworks
+
+Standards and frameworks **standardise threat intel sharing**, **enable collaboration**, and ensure **consistent terminology** across the cybersecurity industry. Below are key ones to know:
+
+
+### MITRE ATT&CK
+
+- A **knowledge base of adversary behaviour**, tactics, and techniques
+- Helps analysts
+  - Investigate attacks thoroughly
+  - Track and understand adversarial behaviour
+- Organised by **tactics** (the "why") and **techniques** (the "how")
+
+
+### TAXII
+
+The **T**rusted **A**utomated E**x**change of **I**ndicator **I**nformation framework
+
+- A **protocol** for securely sharing threat intelligence
+- Enables **near real-time** detection and response
+- Supports two sharing models
+  - **Collection**: Users pull intel from a server (request-response)
+  - **Channel**: Server pushes intel to subscribers (publish-subscribe)
+
+
+### STIX
+
+The **S**tructured **T**hreat **I**nformation E**x**pression framework
+
+- A **standard language** for representing cyber threat intel
+- Allows consistent structuring of
+  - Observables
+  - Indicators
+  - TTPs (Tactics, Techniques, and Procedures)
+  - Attack campaigns and related threat data
+- Enables better **interoperability** and **automation** of threat intel sharing.
+
+
+### Cyber Kill Chain
+
+- Breaks down cyber attacks into **seven sequential phases** to aid detection and defence:
+
+| Phase                      | Purpose                                       | Examples                                 |
+| -------------------------- | --------------------------------------------- | ---------------------------------------- |
+| **Reconnaissance**         | Gather info about target                      | OSINT, network scans, social media       |
+| **Weaponisation**          | Create attack tools tailored to the objective | Exploit kits, backdoors, malicious docs  |
+| **Delivery**               | Transmit attack payload to victim             | Phishing emails, infected USBs           |
+| **Exploitation**           | Execute code on the victim’s system           | EternalBlue, Zero-Logon                  |
+| **Installation**           | Deploy malware and tools                      | RATs, credential dumpers                 |
+| **Command & Control (C2)** | Remote control, lateral movement, escalation  | Cobalt Strike, Empire                    |
+| **Actions on Objectives**  | Achieve attacker’s end goals                  | Data exfiltration, ransomware, espionage |
+
+- Often **combined with ATT&CK** in modern analysis via the **Unified Kill Chain**.
+
+
+### Diamond Model of Intrusion Analysis
+
+- A framework for understanding and **pivoting between key elements** of an intrusion
+  - **Adversary**: Who is conducting the attack? What’s their motive?
+  - **Victim**: Who or what is being targeted?
+  - **Infrastructure**: What systems or tools are used in the attack?
+  - **Capabilities**: What TTPs and methods are being employed?
+- Promotes **correlation of indicators** and **holistic attack understanding** over time.
+
+
+### ❓ Question 1
+
+> What sharing models are supported by TAXII?
+
+#### 🧪 Process
+
+> - Supports two sharing models
+>   - **Collection**: Users pull intel from a server (request-response)
+>   - **Channel**: Server pushes intel to subscribers (publish-subscribe)
+
+So combining these we have `Collection and Channel`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Collection and Channel` ✅
+
+
+### ❓ Question 2
+
+> When an adversary has obtained access to a network and is extracting data, what phase of the kill chain are they on?
+
+#### 🧪 Process
+
+> **`Actions on Objectives`**
+> - Achieve attacker’s end goals
+> - Data exfiltration, ransomware, espionage
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Actions on Objectives`
