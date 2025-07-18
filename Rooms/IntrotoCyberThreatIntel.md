@@ -85,12 +85,56 @@ Trying this as the answer
 ## 📘CTI Lifecycle
 
 ### 1. Direction
+
+Define objectives and goals for the threat intelligence program.
+
+- Critical information assets and business processes
+- Potential impacts of losing assets or disrupting processes
+- Data and intelligence sources for protection
+- Tools and resources needed for defence
+- Analysts also formulate key investigative questions during this phase.
+
 ### 2. Collection
+
+Gather relevant data based on the defined objectives.
+
+- Commercial sources
+- Private feeds
+- Open-source intelligence (OSINT)
+
+Due to high data volumes, automation is recommended to free up analyst time for triage.
+
 ### 3. Processing
+
+Standardise and structure diverse raw data (e.g., logs, malware, traffic).
+
+- Extracting, sorting, tagging, and visualising data.
+- Correlating and formatting for analyst use.
+- SIEM tools are commonly used to support this stage.
+
 ### 4. Analysis
+
+Analysts interpret the processed data to draw meaningful conclusions.
+
+- Investigate threats using indicators and attack patterns
+- Create defensive action plans
+- Strengthen existing controls or justify further investment
+
 ### 5. Dissemination
+
+Share intelligence with stakeholders in tailored formats:
+
+- Executives: High-level summaries, trends, financial risks, strategic advice
+- Technical teams: Detailed IOCs, TTPs, and tactical actions
+
 ### 6. Feedback
 
+Stakeholders provide input to refine the intelligence cycle.
+
+- Improving intelligence quality
+- Enhancing security control implementation
+
+Continuous communication between teams is essential to keep the cycle effective.
 
 ### ❓ Question 1
 
@@ -98,7 +142,11 @@ Trying this as the answer
 
 #### 🧪 Process
 
-_process_
+> ### 3. `Processing`
+> 
+> Standardise and structure diverse raw data (e.g., logs, malware, traffic).
+
+Trying this as the answer
 
 #### ✅ Answer
  
@@ -111,10 +159,10 @@ _process_
 
 #### 🧪 Process
 
-_process_
+> ### 1. Direction
+> [...]
+> - Analysts also formulate key investigative questions during this phase.
 
 #### ✅ Answer
 
-- `answer`
-
-
+- `Direction` ✅
