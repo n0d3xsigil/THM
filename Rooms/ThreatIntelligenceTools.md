@@ -6,6 +6,7 @@
 - [Room Outline](#room-outline)
 - [Threat Intelligence](#threat-intelligence)
 - [UrlScan.io](#urlscanio)
+- [Abuse.ch](#abusech)
 
 
 
@@ -95,3 +96,9 @@ _process_
 #### ✅ Answer
 
 - `2606:4700:10::ac43:1b0a` ✅
+
+
+
+## 📘Abuse.ch
+
+The next tool is [Abuse.ch](https://abuse.ch/). A 
