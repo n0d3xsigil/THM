@@ -3,3 +3,15 @@
 # Threat Intelligence Tools
 
 ## Contents
+- [Room Outline](#room-outline)
+
+
+
+## 📘Room Outline
+
+This room covers
+- Threat intelligence and classifications
+- UrlScan.io (Malicious URLs)
+- Abuse.ch (Malware and botnets)
+- PhishTool
+- Talos Intelligence
