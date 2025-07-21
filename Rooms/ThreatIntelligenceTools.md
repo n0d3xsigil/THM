@@ -101,4 +101,105 @@ _process_
 
 ## 📘Abuse.ch
 
-The next tool is [Abuse.ch](https://abuse.ch/). A 
+The next tool is [Abuse.ch](https://abuse.ch/). A research project of Bern University of Applied Sciences.
+
+Made up of multiple as documented below
+
+- **MalwareBazaar**
+  - Find it at [https://bazaar.abuse.ch/](https://bazaar.abuse.ch/).
+  - Upload samples for analysis and help build out the intelligence database (API also available)
+  - Hunt for samples through alerts using tags, signatures, YARA rules etc
+
+- **FeodoTracker**
+  - Find it at [https://feodotracker.abuse.ch/](https://feodotracker.abuse.ch/)
+  - Shares information on botnet C2 servers (Dridex, Emotes (aka Heodo), TrickBot, QakBot and BazarLoader/BazarBackdoor)
+  - Shares IP's for look ups against IOC.
+ 
+- **SSL Back List**
+  - Find it at [https://sslbl.abuse.ch/](https://sslbl.abuse.ch/).
+  - Identifies malicious SSL connections.
+  - Uses JA3 fingerprints
+    - See [https://github.com/salesforce/ja3](https://github.com/salesforce/ja3)
+
+- **URLhaus**
+  - Find it at [https://urlhaus.abuse.ch/](https://urlhaus.abuse.ch/).
+  - Focuses on sharing URLs used for malware distribution.
+  - Can be used to search domains, urls, hashes and filetypes
+
+- **ThreatFox**
+  - Find it at [https://threatfox.abuse.ch/](https://threatfox.abuse.ch/).
+  - Share and export IOC associated with malware.
+  - Exportable in various formats
+
+
+### ❓ Question 1
+
+> The IOC **212.192.246.30:5555** is identified under which malware alias name on ThreatFox?
+
+#### 🧪 Process
+
+In the search bar search `ioc:212.192.246.30:5555`
+
+Click the IOC link (212.192.246.30:5555)
+
+We can see the alias is `Katana`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Katana` ✅
+
+
+### ❓ Question 2
+
+> Which malware is associated with the JA3 Fingerprint **51c64c77e60f3980eea90869b68c58a8** on SSL Blacklist?
+
+#### 🧪 Process
+
+Navigate to [https://sslbl.abuse.ch/](https://sslbl.abuse.ch/)
+Click **View details >>** under _JA3 Fingerprints_
+Paste `51c64c77e60f3980eea90869b68c58a8` into the **Search:** box
+We have one result, listing reason `Dridex`.
+Click the fingerprint to see more
+Sure enough the Malware is `Dridex`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Dridex` ✅
+
+
+### ❓ Question 3
+
+> From the statistics page on URLHaus, what malware-hosting network has the ASN number **AS14061**? 
+
+#### 🧪 Process
+
+Navigate to [https://urlhaus.abuse.ch/asn/14061/](https://urlhaus.abuse.ch/asn/14061/).
+AS name is `DIGITALOCEAN-ASN`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `DIGITALOCEAN-ASN` ✅
+
+
+### ❓ Question 4
+
+> Which country is the botnet IP address **178.134.47.166** associated with according to FeodoTracker?
+
+#### 🧪 Process
+
+Navigate to [https://feodotracker.abuse.ch/](https://feodotracker.abuse.ch/).
+Click **Browse** along the top bar
+Paste the IP _`178.134.47.166`_ into the search box and press return to serch
+We can see our country is GE. GE is `GEorgia`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Georgia` ✅
