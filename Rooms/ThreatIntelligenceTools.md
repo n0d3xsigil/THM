@@ -1,4 +1,4 @@
-| [Home](../README.md) | [SOC Level 1](../SOClevel1.md) | **Threat Intelligence Tools** |
+<img width="1910" height="380" alt="image" src="https://github.com/user-attachments/assets/5063d9c0-9519-48e2-9844-dd64311e708e" />| [Home](../README.md) | [SOC Level 1](../SOClevel1.md) | **Threat Intelligence Tools** |
 
 # Threat Intelligence Tools
 
@@ -213,6 +213,135 @@ In this task we are looking at a tool called **PhishTool**, you can find it here
 
 Phishing is the most common form of cyber attach. It is used to trick people in to providing sensitive information in the aims to be able to use the information in gaining access to a system of some kind.
 
-See the Phishing rooms under [Rooms of interest](../RoomsOfInterest.md#p)
+See the Phishing rooms under [Rooms of interest](../RoomsOfInterest.md#p) for more information.
+
+There are two versions of PhishTool, Community and Enterprise. You can create a community account by navigating to [https://app.phishtool.com/sign-up/community](https://app.phishtool.com/sign-up/community).
+
+The core features are **perform email analysis**, **heuristic intelligence**, and **classification and reporting**.
+
+When you log in you are presented with the dashboard, a history of your submissions
+<img width="1910" height="936" alt="image" src="https://github.com/user-attachments/assets/e7a2fe32-1a73-4584-9cf3-10e32eab60f7" />
+
+If you click **Analyse** you are presented with the following view
+<img width="1910" height="936" alt="image" src="https://github.com/user-attachments/assets/306a5ad7-a0da-498d-a28b-86fea5faba2a" />
+
+Once uploaded you'll see detailed information under **headers**, **received lines**. **X-headers**, **Security**, **Attachments**, **Message URLs**.
+
+## Scenario
+You are a SOC Analyst and have been tasked to analyse a suspicious email, Email1.eml. To solve the task, open the email using Thunderbird on the attached VM, analyse it and answer the questions below.
+
+### ❓ Question 1
+
+> What social media platform is the attacker trying to pose as in the email?
+
+#### 🧪 Process
+
+On the desktop double click the **Emails** folder
+
+  <img width="1910" height="935" alt="image" src="https://github.com/user-attachments/assets/c448c9c0-a17f-4175-9d4a-f7171759b055" />
 
 
+Double click **Email1.eml** to open the email in _Thunderbird Mail_
+
+  <img width="1910" height="935" alt="image" src="https://github.com/user-attachments/assets/61732041-82c8-42d9-ae9f-ecfd4ce169ca" />
+
+
+The email will open up, if other windows open in front, just minimise / close them
+
+  <img width="1910" height="936" alt="image" src="https://github.com/user-attachments/assets/77167fc9-5411-4a22-869a-bc1e8eed5221" />
+
+
+The question is around the _social media platform_. We can see that actually there are a couple pointers
+
+  <img width="1910" height="936" alt="image" src="https://github.com/user-attachments/assets/598e9198-edad-420b-9737-9dbe2aaecf86" />
+
+So our answer is `LinkedIn`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `LinkedIn` ✅
+
+
+### ❓ Question 2
+
+> What is the senders email address?
+
+#### 🧪 Process
+
+We can see the senders name is **Patrick Cook** and below that the address of `darkabutla@sc500.whpservers.com`.
+
+  <img width="1910" height="221" alt="image" src="https://github.com/user-attachments/assets/b2e94d1e-d709-4fb4-8a18-773070496123" />
+
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `darkabutla@sc500.whpservers.com` ✅
+
+
+### ❓ Question 3
+
+> What is the recipient's email address?
+
+#### 🧪 Process
+
+Below the senders name and address we can see the recipients email address of `cabbagecare@hotsmail.com`
+
+  <img width="1910" height="221" alt="image" src="https://github.com/user-attachments/assets/77cd9a27-9626-43bd-ace1-f419402915b9" />
+
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `cabbagecare@hotsmail.com` ✅
+
+
+### ❓ Question 4
+
+> What is the Originating IP address? Defang the IP address.
+
+#### 🧪 Process
+
+In the email window, click **View** (1), followed by **Headers** (2), followed by **All** (3) to show the full headers
+
+  <img width="1910" height="326" alt="image" src="https://github.com/user-attachments/assets/a3cd4d75-365c-4316-930c-239a2b5d876e" />
+
+
+You will see the headers are now showing
+
+  <img width="1910" height="398" alt="image" src="https://github.com/user-attachments/assets/097a16f1-63fa-4b39-a787-b24daf46a7d2" />
+
+
+Now scroll down untill you see **Authentication-Results**. This contains the _sender IP_. In this case it's `204.93.183.11`
+
+  <img width="1910" height="380" alt="image" src="https://github.com/user-attachments/assets/40b92190-fa83-4e0e-b041-923a9de88da4" />
+
+
+We're asked to defang the IP address, this means replacing "." with "[.]". to prevent accidental handling of the IP address. 
+
+So `204.93.183.11` becomes `204[.]93[.]183[.]11`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `204[.]93[.]183[.]11` ✅
+
+
+### ❓ Question 5
+
+> How many hops did the email go through to get to the recipient?
+
+#### 🧪 Process
+
+To find this, see how many different **Received** entries there are. In this case `4`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `4` ✅
