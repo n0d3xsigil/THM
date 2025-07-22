@@ -7,7 +7,7 @@
 - [Threat Intelligence](#threat-intelligence)
 - [UrlScan.io](#urlscanio)
 - [Abuse.ch](#abusech)
-
+- [PhishTool](#phishtool)
 
 
 ## 📘Room Outline
@@ -203,3 +203,16 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Georgia` ✅
+
+
+
+
+## 📘PhishTool
+
+In this task we are looking at a tool called **PhishTool**, you can find it here ([https://www.phishtool.com/](https://www.phishtool.com/)).
+
+Phishing is the most common form of cyber attach. It is used to trick people in to providing sensitive information in the aims to be able to use the information in gaining access to a system of some kind.
+
+See the Phishing rooms under [Rooms of interest](../RoomsOfInterest.md#p)
+
+
