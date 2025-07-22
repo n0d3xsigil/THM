@@ -1,4 +1,4 @@
-<img width="1910" height="380" alt="image" src="https://github.com/user-attachments/assets/5063d9c0-9519-48e2-9844-dd64311e708e" />| [Home](../README.md) | [SOC Level 1](../SOClevel1.md) | **Threat Intelligence Tools** |
+| [Home](../README.md) | [SOC Level 1](../SOClevel1.md) | **Threat Intelligence Tools** |
 
 # Threat Intelligence Tools
 
@@ -8,6 +8,9 @@
 - [UrlScan.io](#urlscanio)
 - [Abuse.ch](#abusech)
 - [PhishTool](#phishtool)
+- [Cisco Talos Intelligence](#ciscotalosintelligence)
+
+
 
 
 ## 📘Room Outline
@@ -345,3 +348,13 @@ Trying this as the answer
 #### ✅ Answer
 
 - `4` ✅
+
+
+
+## 📘Cisco Talos Intelligence
+
+This section focuses on **Talos Intelligence** tool which can be found here ([https://talosintelligence.com/](https://talosintelligence.com/)).
+
+The tool is built by Cisco and the data is made available. Teams include **threat Intelligence & Interdiction**, **detection Research**, **engineering & development**, **vulnerability research & discovery**, **communities**, and **global outreach**.
+
+
