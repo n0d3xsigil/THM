@@ -12,6 +12,10 @@ This is a page just for quick notes, links etc.
 		- https://github.com/sqlmapproject/sqlmap
 		- 
 
+
+Phishing
+- https://talosintelligence.com/
+
 ## Question format
 
 ### ❓ Question
