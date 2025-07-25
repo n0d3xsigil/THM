@@ -357,4 +357,35 @@ This section focuses on **Talos Intelligence** tool which can be found here ([ht
 
 The tool is built by Cisco and the data is made available. Teams include **threat Intelligence & Interdiction**, **detection Research**, **engineering & development**, **vulnerability research & discovery**, **communities**, and **global outreach**.
 
+### ❓ Question 1
 
+> What is the listed domain of the IP address from the previous task?
+
+#### 🧪 Process
+
+Navigate to [https://talosintelligence.com/](https://talosintelligence.com/)
+Paste in the relevent IP address
+Note "Domain	`scnet.net`"
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `scnet.net` ✅
+
+
+### ❓ Question 2
+
+> What is the customer name of the IP address?
+
+#### 🧪 Process
+
+Navigate to [https://www.whois.com/whois/204.93.183.11](https://www.whois.com/whois/204.93.183.11)
+
+Scroll down to `customer` and find "Customer:       `Complete Web Reviews` (C05082466)"
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Complete Web Reviews` ✅
