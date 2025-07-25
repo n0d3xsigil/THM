@@ -8,8 +8,8 @@
 - [UrlScan.io](#urlscanio)
 - [Abuse.ch](#abusech)
 - [PhishTool](#phishtool)
-- [Cisco Talos Intelligence](#ciscotalosintelligence)
-
+- [Cisco Talos Intelligence](#cisco-talos-intelligence)
+- [Scenario 1](#scenario-1)
 
 
 
@@ -389,3 +389,48 @@ Trying this as the answer
 #### ✅ Answer
 
 - `Complete Web Reviews` ✅
+
+
+
+## Scenario 1
+
+### ❓ Question 1
+
+> According to Email2.eml, what is the recipient's email address?
+
+#### 🧪 Process
+
+Double click Emails on the desktop
+
+Double click Email2.eml
+
+Take note of the recipients email (`chris.lyons@supercarcenterdetroit.com`)
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `chris.lyons@supercarcenterdetroit.com` ✅
+
+
+### ❓ Question 2
+
+> On VirusTotal, the attached file can also be identified by a Detection Alias, which starts with an H.
+
+#### 🧪 Process
+
+Download the malicious attachment
+
+Grab the hash by running `md5sums`
+
+Head over to VirusTotal and paste the hash into the search
+
+Scroll down untill you find something starting with `H` and has a `/` and a `.` in it.
+
+I've found `HIDDENEXT/Worm.Gen`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `HIDDENEXT/Worm.Gen` ✅
