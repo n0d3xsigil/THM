@@ -10,7 +10,7 @@
 - [PhishTool](#phishtool)
 - [Cisco Talos Intelligence](#cisco-talos-intelligence)
 - [Scenario 1](#scenario-1)
-
+- [Scenario 2](#scenario2)
 
 
 ## 📘Room Outline
@@ -434,3 +434,45 @@ Trying this as the answer
 #### ✅ Answer
 
 - `HIDDENEXT/Worm.Gen` ✅
+
+
+## Scenario 2
+
+### ❓ Question 1
+
+> What is the name of the attachment on **Email3.eml**?
+
+#### 🧪 Process
+
+Double click the Emails folder on the Desktop
+
+Double click Email3.eml
+
+Take note of the attachment name (`Sales_Receipt 5606.xls`)
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Sales_Receipt 5606.xls` ✅
+
+
+### ❓ Question 2
+
+> What malware family is associated with the attachment on **Email3.eml**?
+
+#### 🧪 Process
+
+Again run `md5sums` against the attachment (`Sales_Receipt 5606.xls`)
+
+Copy the hash and paste it into the search box of Virustotal
+
+Look for the malware family
+
+We need something with 6 characters so it looks like `dridex` fits.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `dridex` ✅
