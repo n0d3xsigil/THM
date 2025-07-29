@@ -198,6 +198,27 @@ This is just to deploy the VM.
 
 ## Yara Modules
 
+**YARA can integrate with other tools/libraries** to enhance rule precision and depth of analysis.
+
+
+
+#### Cuckoo Sandbox Module
+
+- **[Cuckoo Sandbox](https://github.com/cuckoosandbox/cuckoo)** is an automated malware analysis system.
+- The YARA module allows you to **generate rules based on dynamic behaviour** (e.g. runtime strings).
+- Useful for detecting malware by how it behaves during execution.
+
+
+
+#### Python PE Module
+
+- Leverages Python's **[PE (Portable Executable) module](https://pypi.org/project/pefile/)** to write rules based on Windows file structure.
+- Targets elements within `.exe` and `.dll` files (common for malware).
+- Useful for detecting:
+    - Use of **cryptography libraries**
+    - Signs of **worming or self-replication**
+- Allows rule creation **without needing to run or reverse-engineer** the sample.
+
 
 
 ## Other tools and Yara
