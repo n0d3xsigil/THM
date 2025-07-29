@@ -83,13 +83,44 @@ Trying this as as the answer
 
 ## Deploy
 
+This is just to deploy the VM.
 
 
 ## Introduction to Yara Rules
 
 
+### Your First YARA Rule – Summary
+
+- **YARA rules** are written in a simple proprietary language easy to start, harder to master.
+    - To **run YARA**, you need:
+      1. A `.yar` rule file
+      2. A target (file, directory, or process ID)
+        - Example: `yara myrule.yar somedirectory`
+
+
+### Basic Rule Creation Steps
+
+1. **Create a test file** `touch somefile`
+2. **Create a rule file** `touch myfirstrule.yar`
+3. **Edit the rule file with this content**
+   ```yara
+   rule example_rule {
+       condition: true
+   }
+   ```
+   - `example_rule` = name of the rule
+   - `condition: true` = always matches if the file existsatlantis2k
+4. **Run the rule**
+   ```bash
+   yara myfirstrule.yar somefile
+   ```
+   - If `somefile` exists, you'll see `examplerule somefile`
+   - If it doesn't, you'll get an error (e.g. "could not open file")
+
+
 
 ## Expanding on Yara Rules
+
 
 
 
