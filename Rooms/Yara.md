@@ -12,6 +12,8 @@
 - [Other tools and Yara](#other-tools-and-yara)
 - [Using LOKI and its Yara rule set](#using-loki-and-its-yara-rule-set)
 
+
+
 ## Introduction
 
 YARA the pattern recognition tool to aid security personnel analyse potential malware and categorise within a specific rulesets
@@ -283,3 +285,12 @@ This is just to deploy the VM.
 
 
 ## Using LOKI and its Yara rule set
+
+- **LOKI** is a threat-hunting tool that combines built-in YARA rules and IOCs to scan for known malicious activity.
+- It's ideal for **threat intelligence-based detection** and **incident response**, especially when:
+    - You gather new IOCs from reports or blogs.
+    - Your current security tools fail to detect something suspicious.
+
+
+
+We'll come back to this.
