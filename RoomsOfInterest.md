@@ -5,10 +5,16 @@ This page has been created because there are often links from one room to anothe
 The rooms are in alphabetical order for ease of navigation
 
 ## Index
-| A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | [P](#p) | Q | R | S | T | U | V | W | X | Y | Z |
+| A | B | C | D | E | F | G | H | I | J | K | L | [M](#m) | N | O | [P](#p) | Q | R | S | T | U | V | W | X | Y | Z |
 
+## M
+
+- [ ] [MAL: Malware Introductory](Rooms/MALMalwareIntroductory.md)
+  - [https://tryhackme.com/room/malmalintroductory](https://tryhackme.com/room/malmalintroductory)
+  - This introduction explores the fundamentals of malware analysis as both an incident response measure and a way to understand malware behaviour, focusing on entry points, indicators of compromise, and methods for detection and prevention.
 
 ## P
+
 - [ ] [Phishing Analysis Fundamentals](Rooms/PhishingAnalysisFundamentals.md)
   - Link [https://tryhackme.com/room/phishingemails1tryoe](https://tryhackme.com/room/phishingemails1tryoe)
   - This room focuses on understanding and analyzing email-based spam and phishing attacks, teaching how to identify malicious emails and interpret email headers to strengthen an organization’s email security defenses.
