@@ -201,4 +201,64 @@ This is just to deploy the VM.
 
 
 ## Other tools and Yara
+
+**You don't need to write every rule yourself** — many open-source tools and public YARA rule sets exist to speed up detection and threat hunting.
+
+**Download**: [https://github.com/InQuest/awesome-yara](https://github.com/InQuest/awesome-yara)
+
+
+
+#### LOKI
+
+- A **free IOC scanner** by Florian Roth.
+- Uses multiple detection methods:
+    - Filename IOC
+    - **YARA rule checks**
+    - Hash comparisons
+    - C2 backconnect checks
+- Cross-platform (Windows & Linux).
+- CLI-based, with many scan options and flags.
+- Ideal for incident response and lightweight scanning.
+
+**Download**: [https://github.com/Neo23x0/Loki](https://github.com/Neo23x0/Loki)
+
+
+
+#### THOR Lite
+
+- A **multi-platform IOC and YARA scanner** (free version of THOR).
+- Offers **precompiled binaries** for Windows, Linux, macOS.
+- Features **CPU-friendly scan throttling**.
+- Requires email sign-up for download.
+- Targeted at corporate environments but accessible for individuals via THOR Lite.
+
+**Download**: [https://www.nextron-systems.com/thor-lite/](https://www.nextron-systems.com/thor-lite/).
+
+
+
+#### FENRIR
+
+- A **simple Bash script IOC checker** by the same author (Florian Roth).
+- Runs on **any system with Bash** (Linux, macOS, Windows WSL).
+- No dependencies or setup required.
+- Good for quick, portable IOC scans.
+
+**Download**: [https://github.com/Neo23x0/Fenrir](https://github.com/Neo23x0/Fenrir).
+
+
+
+#### YAYA (Yet Another Yara Automaton)
+
+- Created by the **Electronic Frontier Foundation (EFF)**.
+- Helps manage and run multiple **YARA rulesets**.
+- Features:
+    - Import existing rulesets
+    - Add/remove custom rules
+    - Run scans on directories
+**Linux-only** at present.
+
+**Download**: [https://github.com/EFForg/yaya](https://github.com/EFForg/yaya)
+
+
+
 ## Using LOKI and its Yara rule set
