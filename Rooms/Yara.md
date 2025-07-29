@@ -123,6 +123,78 @@ This is just to deploy the VM.
 
 
 
+### YARA Conditions & Rule Structure – Summary
+
+* **Basic Structure** of a YARA rule includes:
+
+  * `meta` - Optional. Used for descriptive info like `desc = "Detects Hello World string"`.
+  * `strings` - Defines patterns to search (e.g. text, hex) using variables like `$varname`.
+  * `condition` - Required. Logic that determines when the rule triggers.
+
+
+
+### String Matching Examples
+
+- **Single string match**:
+  ```yara
+  rule helloworld_checker {
+    strings:
+      $hello_world = "Hello World!"
+    condition:
+      $hello_world
+  }
+  ```
+  - Matches only exact string: `"Hello World!"`
+
+- **Multiple case-insensitive matches**:
+  ```yara
+  rule helloworld_checker {
+    strings:
+      $a = "Hello World!"
+      $b = "hello world"
+      $c = "HELLO WORLD"
+    condition:
+      any of them
+  }
+  ```
+  - Triggers if *any* of the defined strings are found.
+
+
+
+### Using Operators & File Properties
+- Example with **occurrence count**:
+  ```yara
+  rule count_limiter {
+    strings:
+      $a = "Hello World!"
+    condition:
+      #a <= 10
+  }
+  ```
+  - Only matches if `"Hello World!"` appears 10 times or fewer.
+
+- Example with **combined conditions**:
+  ```yara
+  rule size_and_string_check {
+    strings:
+      $a = "Hello World!"
+    condition:
+      $a and filesize < 10KB
+  }
+  ```
+  - Matches only if the file has `"Hello World!"` *and* is smaller than 10KB.
+
+
+
+### Tips
+
+- Combine conditions using logical operators: `and`, `or`, `not`.
+- Use **`any of them`** or **`all of them`** to simplify matching multiple strings.
+- Refer to the **fr0gger\_ YARA cheatsheet** for a visual breakdown of rule components.
+
+<img width="875" height="1212" alt="image" src="https://github.com/user-attachments/assets/1c10fd4a-80f9-4f8f-aa39-7dc5c68e89cf" />
+
+
 
 ## Yara Modules
 
