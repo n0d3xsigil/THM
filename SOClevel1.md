@@ -32,8 +32,7 @@
 
 - ✅ [Intro to Cyber Threat Intel](Rooms/IntrotoCyberThreatIntel.md)
 - ✅ [Threat Intelligence Tools](Rooms/ThreatIntelligenceTools.md)
-- ❌ [Yara](Rooms/Yara.md)
-  - Working on Yara. Will update shortly.
+- ⚠️ [Yara](Rooms/Yara.md)
 - ❌ [OpenCTI](Rooms/OpenCTI.md)
 - ❓ MISP
 - ❌ [Friday Overtime](Rooms/FridayOvertime.md)
