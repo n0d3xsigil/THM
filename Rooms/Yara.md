@@ -12,7 +12,7 @@
 - [Other tools and Yara](#other-tools-and-yara)
 - [Using LOKI and its Yara rule set](#using-loki-and-its-yara-rule-set)
 - [Creating Yara rules with yarGen](#creating-yara-rules-with-yargen)
-
+- [Valhalla](#valhalla)
 
 
 ## 📘Introduction
@@ -1523,3 +1523,210 @@ Trying this as the answer
 #### ✅ Answer
 
 - `700kb` ✅
+
+
+## 📘Valhalla
+
+- **[Valhalla](https://www.nextron-systems.com/valhalla/)** is an **online YARA rule feed** created by **Florian Roth** (Nextron Systems).
+- It provides **thousands of high-quality, hand-crafted YARA rules** to boost detection capabilities.
+- You can **search rules** by:
+    - **Keyword**
+    - **Tag**
+    - **MITRE ATT&CK technique**
+    - **SHA256 hash**
+    - **Rule name**
+
+- Each rule entry typically includes:
+  - **Rule name**
+  - **Description**
+  - **Reference link**
+  - **Submission date**
+
+- The best way to learn Valhalla is to **explore the rules directly** and see how they’re structured and used.
+
+### Scenario Context
+
+- You’ve identified **two suspicious files** using **Loki**.
+- You **believe they’re malicious**, even if not definitively flagged.
+- You created a **custom YARA rule using yarGen** to detect them elsewhere.
+- Now, you need to **research further** (e.g., using Valhalla) to **justify eradication** of the files, especially if you're not confident in reading or writing code.
+
+### ❓ Question 1
+
+> Enter the SHA256 hash of file 1 into Valhalla. Is this file attributed to an APT group? (Yay/Nay)
+
+#### 🧪 Process
+
+Grab the hash of file1
+
+```bash
+cmnatic@ip-10-10-24-160:~$ sha256sum ~/suspicious-files/file1/ind3x.php 
+5479f8cd1375364770df36e5a18262480a8f9d311e8eedb2c2390ecb233852ad  /home/cmnatic/suspicious-files/file1/ind3x.php
+```
+
+Grab the hash (`5479f8cd1375364770df36e5a18262480a8f9d311e8eedb2c2390ecb233852ad`) and navigate to [https://valhalla.nextron-systems.com/](https://valhalla.nextron-systems.com/)
+
+Paste the hash into the query search box and click **Search**
+<img width="1912" height="920" alt="image" src="https://github.com/user-attachments/assets/01383523-5bb5-44b6-b5ce-e3368c59e6a6" />
+
+If we remember, the rule name was "`Webshell_metaslsoft`" which we can see at the bottom. Click the info button
+<img width="1912" height="920" alt="image" src="https://github.com/user-attachments/assets/98369006-50d2-40df-a067-e21457d9d4c6" />
+
+So I'll be honest, I can't find anything here that specifies anything to do with an APT. 
+<img width="1912" height="920" alt="image" src="https://github.com/user-attachments/assets/894cde4d-3d64-4256-8ff5-408cf5dd05e7" />
+
+That is not to say it's not there, I'm just drawn to it. 
+
+After several minutes I've come to the conclusion that the question is a poorly worded question. Rather than linking this webshell to a specific APT group, I think its safe to say that webshells in general are used by APT groups in order to to gain persistance. SO my answer is `Yay`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Yay` ✅
+
+
+### ❓ Question 2
+
+> Do the same for file 2. What is the name of the first Yara rule to detect file 2?
+
+#### 🧪 Process
+
+So grab the hash
+
+```bash
+cmnatic@ip-10-10-24-160:~$ sha256sum ~/suspicious-files/file2/1ndex.php 
+53fe44b4753874f079a936325d1fdc9b1691956a29c3aaf8643cdbd49f5984bf  /home/cmnatic/suspicious-files/file2/1ndex.php
+```
+
+Paste the hash into the query and click **Search**
+<img width="1912" height="920" alt="image" src="https://github.com/user-attachments/assets/2c469415-3475-44d8-b37e-26f418ea949e" />    
+
+The reults will be displayed with our first Yara rule is `WebshellRepo_convert`
+<img width="1911" height="483" alt="image" src="https://github.com/user-attachments/assets/e2d14394-a91d-4298-8021-ce0bb2dab59e" />
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Webshell_b374k_rule1` ❌
+
+Okay, not what I expected, however I've noticed the result is not in date order, so trying the first rule by date `Webshell_b374k_rule1`.
+
+- `Webshell_b374k_rule1` ✅
+
+
+### ❓ Question 3
+
+> Examine the information for file 2 from Virus Total (VT). The Yara Signature Match is from what scanner?
+
+#### 🧪 Process
+
+We already have the hash for file, copy it to the clipboard and navigate to VirusTotal [search](https://www.virustotal.com/gui/home/search).
+
+
+Paste the hash in and click **Search**
+<img width="1912" height="920" alt="image" src="https://github.com/user-attachments/assets/3a3aa9fe-1754-4537-9850-3bec4ab9dbd6" />
+
+Click the **COMMUNITY** button
+<img width="1912" height="507" alt="image" src="https://github.com/user-attachments/assets/11f16ca1-cd0d-410e-8910-dcfe63aa0df2" />
+
+Scroll down to the **Comments** section. 
+<img width="1912" height="861" alt="image" src="https://github.com/user-attachments/assets/7fc1a6ae-0586-4994-85fb-8bc28f66d008" />
+
+Here we find the signature match `THOR APT Scanner`
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `THOR APT Scanner` ✅
+
+
+### ❓ Question 4
+
+> Enter the SHA256 hash of file 2 into Virus Total. Did every AV detect this as malicious? (Yay/Nay)
+
+#### 🧪 Process
+
+Scroll down to the section named **Security vendors' analysis**
+<img width="1912" height="920" alt="image" src="https://github.com/user-attachments/assets/cf2d44c5-3f17-48c7-9a12-9bdbaa9a5412" />
+
+We can clearly see `Nay` not every AV detects it as malicious.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Nay`
+
+
+### ❓ Question 5
+
+> Besides .PHP, what other extension is recorded for this file?
+
+#### 🧪 Process
+
+Click the **DETAILS** tab.
+<img width="1911" height="409" alt="image" src="https://github.com/user-attachments/assets/1e3e59cb-1a6c-4535-8efb-11a24bda3818" />
+
+Scroll down to the secion named **Names**
+<img width="1912" height="920" alt="image" src="https://github.com/user-attachments/assets/50102c82-ab57-4f7d-9b66-2d93a09ae179" />
+
+Here we find the following extensions:
+- php
+- apk
+- csv
+- sys
+- txt
+- php5
+- html
+- exe
+
+The answer expects 3 caracters. Lets go with `exe`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `exe` ✅
+
+
+### ❓ Question 6
+
+> What JavaScript library is used by file 2?
+
+#### 🧪 Process
+
+So for this one, head back to [Valhalla](https://valhalla.nextron-systems.com/), paste the hash into the query, and click **Search**
+<img width="1912" height="920" alt="image" src="https://github.com/user-attachments/assets/2c469415-3475-44d8-b37e-26f418ea949e" />
+
+Click one of the b374k links
+<img width="1912" height="521" alt="image" src="https://github.com/user-attachments/assets/48fd8931-b2d9-4bdc-99ef-374b96fb159f" />
+
+Click `index.php`
+<img width="1911" height="614" alt="image" src="https://github.com/user-attachments/assets/e3c93cc9-de76-42a1-a86d-26f9d5b839df" />
+
+Press **Ctrl+F** to start a search and type in `java`. The result was 2 in, `Zepto`.
+<img width="1912" height="667" alt="image" src="https://github.com/user-attachments/assets/f72472dc-f761-42da-8727-ee71157f5353" />
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Zepto` ✅
+
+
+### ❓ Question 7
+
+> Is this Yara rule in the default Yara file Loki uses to detect these type of hack tools? (Yay/Nay)
+
+#### 🧪 Process
+
+`Nay`, because we had to create it with `yarGen.py` remember.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `Nay` ✅
