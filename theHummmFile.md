@@ -1,0 +1,2 @@
+- [ ] `Malware detonation`
+- [ ] Checking memory for artifacts using **Volatility**
