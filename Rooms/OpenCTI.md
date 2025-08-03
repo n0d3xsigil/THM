@@ -7,6 +7,7 @@
 - [Introduction to OpenCTI](#introduction-to-opencti)
 - [OpenCTI Data Model](#opencti-data-model)
 - [OpenCTI Dashboard 1](#opencti-dashboard-1)
+- [OpenCTI Dashboard 2](#opencti-dashboard-2)
 
 ## 📘Room Overview
 
@@ -176,3 +177,100 @@ _process_
 #### ✅ Answer
 
 - `Observations` ✅
+
+
+
+## 📘OpenCTI Dashboard 2
+
+
+
+### Overview
+
+- Shows the entity’s **ID**, **confidence level**, **description**, and **relationships**
+- Lists related **threat actors**, **intrusion sets**, **attack patterns**, and **reports**
+- Displays any external references
+
+
+
+### Knowledge
+
+- Visualises how the entity is connected to others
+- Includes:
+  - Linked **reports**, **indicators**, and **attack pattern timelines**
+  - Details on **threats**, **vectors**, **events**, and **observables** (in right-hand pane)
+
+
+
+### Analysis
+
+- Lists reports where this entity appears
+- Helps analysts understand the context and plan investigations
+
+
+
+### Indicators
+
+- Displays **Indicators of Compromise (IOCs)** tied to this entity
+
+
+
+### Data
+
+- Contains related **uploaded or exportable files**
+- Useful for both technical and non-technical communication
+
+
+
+### History
+
+- Tracks all **changes** made to the entity’s attributes and relationships
+
+> These tabs help analysts move from **raw data** to **actionable threat insight** by showing how each entity fits into the broader threat landscape.
+
+
+
+### ❓ Question
+
+> What Intrusion sets are associated with the Cobalt Strike malware with a Good confidence level? (Intrusion1, Intrusion2)
+
+#### 🧪 Process
+
+Search for **`Cobalt Strike`**
+Within the results click **Intrusion sets**
+Nothing outwardly indicates a confidence level, so let's open each one up in a new tab and see what we have.
+Nope, nope nope nope, thinking about this all wrong. 
+Let's try again
+Click **Arsenal**
+In the _arsenal_ section search **`Cobalt Strike`**
+Click **Cobalt Strike**
+Click the **Knowledge** tab
+Click **Intrusion sets** on the right hand side
+Click **Confidence** twice to reveal our answer
+- `CopyKittens` and `FIN7`
+
+
+Trying this as our answer
+
+
+
+#### ✅ Answer
+
+- `CopyKittens, FIN7` ✅
+
+
+
+### ❓ Question
+
+> Who is the author of the entity?
+
+#### 🧪 Process
+
+The answer for both entities is `The mitre corporation`.
+
+Trying this as the answer
+
+#### ✅ Answer
+
+- `The mitre corporation` ✅
+
+
